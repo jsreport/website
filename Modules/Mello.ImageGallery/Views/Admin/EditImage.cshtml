@@ -1,0 +1,49 @@
+﻿@model Mello.ImageGallery.ViewModels.ImageEditViewModel
+@using Orchard.Media.Extensions           
+@{ Style.Require("ImageGalleryAdmin"); }
+           
+@{ Layout.Title = T("Edit Image - {0}", Model.Image.Name).ToString(); }
+
+<div class="sections clearBoth">
+    <div class="primary">
+        <div>
+            <img alt="@Model.Image.Caption" src="@Model.Image.PublicUrl" class="previewImage"/>
+        </div>
+
+        @* todo: make these real (including markup) *@
+        <div>
+        @* <label>@T("Dimensions: <span>500 x 375 pixels</span>")</label> *@
+
+        <label>@T("Size: <span>{0}</span>", Model.Image.Size.ToFriendlySizeString())</label>
+               
+        <label>@T("Added on <span>{0}</span>", Model.Image.LastUpdated)</label>
+        </div>
+
+        <div>
+            <label for="embedPath">@T("Embed:")</label>
+            <input id="embedPath" class="textLarge" name="embedPath" type="text" readonly="readonly" value="&lt;img src=&quot;@Model.Image.PublicUrl&quot /&gt;" />
+            <span class="hint">@T("Copy this html to add this image to your site.")</span>
+        </div>
+
+        @using (Html.BeginFormAntiForgeryPost())
+        {
+            @Html.ValidationSummary()   
+    
+            <fieldset>
+                <label for="Title">@T("Title")</label>
+                @Html.TextBoxFor(o => o.Image.Title, new { Class = "textLarge" })
+                            
+                <label for="Caption">@T("Description")</label>
+                @Html.TextBoxFor(o => o.Image.Caption, new { Class = "textLarge" })
+
+                @Html.HiddenFor(o => o.ImageGalleryName)
+                @Html.HiddenFor(o => o.Image.Name)
+            </fieldset>            
+            <fieldset>
+                <button class="primaryAction" type="submit" name="submit.Save" value="@T("Save")">@T("Save")</button>
+                <button type="submit" name="submit.DeleteImage" value="@T("Delete")">@T("Delete")</button>
+                @Html.ActionLink("Back", "Images", new { imageGalleryName = Model.ImageGalleryName }, new { Class = "button"})
+            </fieldset>        
+        }
+    </div>
+</div>

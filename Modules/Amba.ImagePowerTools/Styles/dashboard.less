@@ -1,0 +1,113 @@
+﻿.table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    display: table-cell;
+}
+
+.upload-wrapper {
+    padding:1px;
+    border:1px solid #fff;
+    margin-top:8px;
+    margin-bottom:8px;
+}
+
+.dragon {
+    border:1px solid yellow;    
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.upload-list {
+    .upload-item {
+
+        border: 1px solid #EAEAEA !important;
+        background-color: white;
+        
+        .upload-progress {
+            height:50px;
+            width:100px;
+            font-size:32px;
+            text-align:center;
+            vertical-align:middle;
+        }
+
+        .upload-file {
+            vertical-align:middle;
+            font-size:32px;
+        }
+
+        .cancel-button {
+            vertical-align:top;
+            text-align:right;
+            padding-right: 8px;
+            padding-top: 4px;
+            
+        }
+    }
+}
+
+.image-list {
+
+    .empty-list {
+        height: 100px;
+        border: 1px solid #EAEAEA !important;
+        background-color: white;
+
+        .upload-message {
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+
+    .image-item {
+        border: 1px solid #EAEAEA !important;
+        background-color: white;
+
+        .image-preview {
+            vertical-align: middle;
+            text-align: center;
+            padding: 4px;
+
+            img {
+                display: block;
+            }
+            img:hover {
+                cursor:move;
+            }
+        }
+
+        .image-fields {
+            vertical-align: top;
+            text-align: left;
+            padding: 4px;
+            width: 100%;
+
+            .filepath {
+                width: 100%;
+                display: inline-block;
+            }
+            .desc-textarea {                
+                min-height: 2em;
+            }
+            .descr-text {
+                width:99%;
+            }
+        }
+
+        .image-buttons {
+            vertical-align: top;
+            text-align: right;
+            padding-right: 8px;
+            padding-top: 4px;
+            width: 50px;
+        }
+    }
+}

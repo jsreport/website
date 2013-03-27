@@ -1,0 +1,27 @@
+﻿@model Mello.ImageGallery.Models.ImageGalleryPart
+@using Mello.ImageGallery.Extensions
+           
+@{ Script.Include("Editor/ImageGallery.js"); }
+
+<fieldset>
+    <legend>@T("Image Gallery")</legend>
+    
+    @Html.CheckBoxFor(o => o.DisplayImageGallery) 
+    @Html.LabelFor(o => o.DisplayImageGallery, @T("Display image gallery"), new { @class = "forcheckbox" }) 
+
+    <div id="imageGalleryProperties">
+            <div>@Html.LabelFor(o => o.ImageGalleryName, @T("Image gallery"))</div>
+
+            @if (!Model.HasAvailableGalleries)
+            {        
+            <div>@T("You need first to create an image gallery on Image Gallery menu")</div>
+            }
+            else
+            {            
+            <div>@Html.DropDownListFor(o => o.SelectedGallery, Model.AvailableGalleries)</div>
+         
+            <div>@Html.LabelFor(o => o.SelectedPlugin, @T("Image gallery plugin"))</div>
+            <div>@Html.DropDownListFor(o => o.SelectedPlugin, Model.AvailablePlugins)</div>
+            }
+     </div>
+</fieldset>

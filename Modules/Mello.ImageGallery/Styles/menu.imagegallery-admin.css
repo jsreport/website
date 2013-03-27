@@ -1,0 +1,6 @@
+﻿.navicon-image-gallery {
+background-image:url(images/menu.imagegallery.png) !important;
+}
+.navicon-image-gallery:hover {
+background-position:0 -30px !important;
+}

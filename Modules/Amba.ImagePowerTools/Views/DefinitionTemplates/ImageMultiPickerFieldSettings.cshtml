@@ -1,0 +1,94 @@
+﻿@model Amba.ImagePowerTools.Settings.ImageMultiPickerFieldSettings
+@{
+    Script.Require("jQueryUI_Sortable").AtHead();
+    Script.Include("angular-last.min.js").AtHead();
+    Script.Include("angular-ui.js").AtHead();
+    Script.Include("AmbaSortableList.js").AtHead();
+    Script.Include("CustomFieldsConfiguration.js").AtHead();
+
+    Style.Include("fields-configuration.css");
+    var id = Guid.NewGuid().ToString("N").Substring(0, 6);
+}
+
+<fieldset>
+    <div>
+        <label for="@Html.FieldIdFor(m => m.PreviewWidth)">@T("Width for image preview")</label>
+        @Html.TextBoxFor(m => m.PreviewWidth)
+    </div>
+</fieldset>
+<div id="app_@(id)">
+    <fieldset data-ng-controller="CustomFieldsConfigurationCtrl">
+        <legend>@T("Custom properties")</legend>
+        <span class="hint">@T("You can add properties to your image like 'title', 'description', 'alt' etc. ")</span>
+        <input type="hidden" name="@Html.NameFor(x => x.CustomFields)" value="{{customFields | json}}"/>
+        <div data-ng-form data-name="form_@(id)"  class="add-custom-field-form" >
+            <div>
+                <label>Unique Property Name:</label>
+                <input type="text" name="fieldName" data-ng-model="fieldName" ui-validate="{'duplicateName' : 'nameIsUniq($value)', 'nameIsFile':'nameIsNotFile($value)', 'isEmpty':'nameIsNotEmpty($value)' }" />
+                <span class="validation-error-message" data-ng-show="form_@(id).fieldName.$error.duplicateName">@T("Name is not unique")</span>
+                <span class="validation-error-message" data-ng-show="form_@(id).fieldName.$error.nameIsFile">@T("Name cannot be 'file'")</span>
+            </div>
+            <div>
+                <label>Display Name:</label>
+                <input type="text" data-ng-model="fieldDisplayName" />
+            </div>
+            <div>
+                <label>Type:</label>
+                <select data-ng-model="fieldType" data-ng-init="fieldType='text'">
+                    <option value="text" selected="selected">Text Line</option>
+                    <option value="textarea">TextArea</option>
+                </select>
+            </div>
+            <div class="add-button">
+                <a class="button" ng-click="addField('form_@(id)')">@T("Add")</a>
+            </div>
+        </div>
+
+        <div class="no-custom-fields" ng-show="customFields.length == 0">
+            @T("No Custom Properties Added")
+        </div>
+
+        <div class="table" ng-model="customFields" data-amba-sortable-list="{ opacity: 0.5 }">
+            <div class="table-row custom-field-row" data-ng-repeat="field in customFields">
+                <div class="table-cell name-cell">
+                    Name: 
+                <span>{{field.name}}</span>
+                </div>
+                <div class="table-cell display-name-cell">
+                    Display Name:
+                <input type="text" ng-model="field.displayName" />
+                </div>
+                <div class="table-cell type-cell">
+                    Type:
+                <select data-ng-model="field.type">
+                    <option value="text" selected="selected">Text Line</option>
+                    <option value="textarea">TextArea</option>
+                </select>
+                </div>
+                <div class="table-cell buttons-cell">
+                    <a href="" ng-click="removeField(field.name)">@T("Delete")</a>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+</div>
+@using (Script.Foot())
+{
+    
+    <script type="text/javascript">
+        angular.module('app_@(id)', ['CustomFieldsConfiguration', 'AmbaSortableList', 'ui'])
+            .value('customFields', @Html.Raw(Model.CustomFields))
+            .value('options', {
+                id: '@(id)'
+            });            
+        angular.bootstrap($('#app_@(id)'), ['app_@(id)']);
+    </script>
+}
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.Hint)">@T("Help text")</label>
+    @Html.TextAreaFor(m => m.Hint, new { @class = "textMedium", rows = "5" })
+    <span class="hint">@T("The help text is written under the field when authors are selecting content items.")</span>
+    @Html.ValidationMessageFor(m => m.Hint)
+</fieldset>

@@ -1,0 +1,33 @@
+﻿@model Mello.ImageGallery.ViewModels.ImageGalleryEditPropertiesViewModel
+@using Mello.ImageGallery.Extensions
+
+@{ Layout.Title = T("Image Gallery Properties").ToString(); }
+
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+
+    <fieldset>
+        @*<h2>@Model.ImageGallery.Name</h2>*@
+        @Html.HiddenFor(o => o.ImageGallery.Name)
+
+        <label for="NewName">@T("Image gallery name")</label>
+        @Html.TextBox("NewName", Model.ImageGallery.Name)
+
+        <label for="ThumbnailWidth">@T("Thumbnail max width")</label>
+        @Html.TextBoxFor(o => o.ImageGallery.ThumbnailWidth)
+
+        <label for="ThumbnailHeight">@T("Thumbnail max height")</label>
+        @Html.TextBoxFor(o => o.ImageGallery.ThumbnailHeight)
+
+        <p>
+            @Html.CheckBoxFor(o => o.ImageGallery.KeepAspectRatio)
+            @Html.LabelFor(o => o.ImageGallery.KeepAspectRatio, T("Keep original image aspect ratio"), new { @class = "forcheckbox" })
+        </p>
+    </fieldset>
+    
+    <fieldset>        
+        <button class="primaryAction" type="submit" name="submit.Save" value="@T("Save")">@T("Save")</button>
+        <button type="submit" name="submit.Delete" value="@T("Delete")">@T("Delete")</button>
+        @Html.ActionLink("Back", "Images", new { imageGalleryName = Model.ImageGallery.Name }, new { Class = "button"})
+    </fieldset>
+}

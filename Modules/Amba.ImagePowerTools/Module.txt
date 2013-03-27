@@ -1,0 +1,13 @@
+﻿Name: Amba.ImagePowerTools
+AntiForgery: disabled
+Author: Alexey V. Ryazhskikh
+Website: http://imagepowertools.codeplex.com
+Version: 2.0.3
+OrchardVersion: 1.6
+Category: Media
+Description: Image tools module for Orchard CMS
+Features:
+    Amba.ImagePowerTools:
+	    Name: Amba.ImagePowerTools
+        Description: The Image Multipicker module provides field to select one or many images from media folders, it can help you to create image gallery or other image list for your site.
+		Category: Media

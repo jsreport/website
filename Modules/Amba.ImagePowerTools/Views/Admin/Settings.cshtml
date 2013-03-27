@@ -1,0 +1,38 @@
+﻿@model Amba.ImagePowerTools.ViewModels.Admin.SettingsViewModel
+@{
+    Layout.Title = T("Image Power Tools");
+}
+
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+
+    <h2>File upload settings</h2>
+    <fieldset>
+        <div>
+            @Html.CheckBoxFor(m => m.EnableContentItemFolderCleanup) 
+            <label for="@Html.IdFor(x => x.EnableContentItemFolderCleanup)" class="forcheckbox">
+                @T("Delete not used files from ContentItem_* folders")
+            </label>
+        </div>
+        <span class="hint">@T("If you upload images by drag-n-drop to field, this images take place in /Amba.ImagePowerTools/ContentItem_* folders. This options allows to delete uselected images.")</span>
+    </fieldset>    
+    
+    
+    <h2>Frontend resizing settings</h2>
+    <p>
+        <span class="hint">@T("Frontend resizer action settings (ex: /ipt/resize/media/default/lolcat.jpg?width=100)")</span>
+    </p>
+    <fieldset>
+        <div>
+            @Html.CheckBoxFor(m => m.EnableFrontendResizeAction) @T("Enable Frontend Resize Action")
+        </div>
+        <span class="hint">@T("Enable this option to get access to /ipt/resize action from site frontend")</span>
+    </fieldset>
+    <fieldset>
+        <label>@T("Maximal Image Width and Height")</label>
+        @Html.TextBoxFor(m => m.MaxImageHeight) x @Html.TextBoxFor(m => m.MaxImageWidth)
+        <span class="hint">@T("This option allows to avoid huge image requests from frontend")</span>
+    </fieldset>
+    <input type="submit" value="@T("Save settings")"/>
+}

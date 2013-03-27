@@ -1,0 +1,28 @@
+﻿@using Mello.ImageGallery.Helpers
+@using System.Web.Mvc.Html
+@{ Style.Require("ImageGallery"); }
+
+@model Mello.ImageGallery.ViewModels.ImageGalleryViewModel
+
+@using (Script.Head()) {
+
+<script type="text/javascript">   
+    $(document).ready(function () {
+        @Html.ImageGalleryScript("#slideshow", Model.ImageGalleryPlugin) 
+    });
+</script>
+    
+}
+
+<div id="slideshow">
+    <ul>
+        @foreach (var image in Model.Images) {
+        <li>           
+            @Html.ImageWithThumbnailSize(image)    
+        </li>       
+        }                     
+    </ul>     
+</div>
+
+
+

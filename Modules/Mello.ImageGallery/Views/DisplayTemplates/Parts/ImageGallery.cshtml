@@ -1,0 +1,31 @@
+﻿@using Mello.ImageGallery.Helpers
+@using System.Web.Mvc.Html
+@{ Style.Require("ImageGallery"); }
+
+@model Mello.ImageGallery.ViewModels.ImageGalleryViewModel
+
+@using (Script.Head()) {
+    
+<script type="text/javascript">    
+    $(document).ready(function () {
+        @Html.ImageGalleryScript(".image-gallery a", Model.ImageGalleryPlugin) 
+    });
+</script>
+    
+}
+
+<div class="image-gallery">
+    <ul>
+        @foreach (var image in Model.Images)
+        {
+        <li>
+            <a href="@image.PublicUrl" title="@image.Title" @Html.ImageGalleryAdditionalAttributes(Model.ImageGalleryPlugin, Model.ImageGalleryName)>
+                @Html.Image(image)
+            </a>            
+        </li>
+        }                     
+    </ul>     
+</div>
+
+
+

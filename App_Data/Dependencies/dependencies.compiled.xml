@@ -1,10 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dependencies>
   <Dependency>
+    <ExtensionId>Amba.ImagePowerTools</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Amba.ImagePowerTools/Amba.ImagePowerTools.csproj</VirtualPath>
+    <Hash>569b1bbe7d0d7c16</Hash>
+  </Dependency>
+  <Dependency>
     <ExtensionId>Markdown</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Markdown/bin/Markdown.dll</VirtualPath>
     <Hash>923a147aba946b7b</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Mello.ImageGallery</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Mello.ImageGallery/Mello.ImageGallery.csproj</VirtualPath>
+    <Hash>5d256868c92126a8</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Orchard.Alias</ExtensionId>
@@ -41,6 +53,12 @@
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Orchard.ContentTypes/bin/Orchard.ContentTypes.dll</VirtualPath>
     <Hash>92620412dbd00f6f</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Orchard.DesignerTools</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Orchard.DesignerTools/Orchard.DesignerTools.csproj</VirtualPath>
+    <Hash>bf3e29748f1442ea</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Orchard.Fields</ExtensionId>
@@ -185,5 +203,11 @@
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/UpgradeTo16/bin/UpgradeTo16.dll</VirtualPath>
     <Hash>e97ed4dbf642df</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Vandelay.Industries</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Vandelay.Industries/Vandelay.Industries.csproj</VirtualPath>
+    <Hash>c0af7478936224a0</Hash>
   </Dependency>
 </Dependencies>

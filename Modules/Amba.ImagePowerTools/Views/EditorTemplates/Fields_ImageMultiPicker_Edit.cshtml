@@ -1,0 +1,98 @@
+﻿@model Amba.ImagePowerTools.ViewModels.ImageMultiPickerFieldEditorViewModel
+@using Amba.ImagePowerTools.Extensions
+@{
+    Script.Include("angular_last.min.js").AtHead();
+    Script.Include("angular-ui.min.js").AtHead();
+    Script.Include("AmbaSortableList.js").AtHead();
+    Script.Include("MultipickerDashboard.js").AtHead();
+    Script.Include("ExtraEvents.js").AtHead();
+    Style.Include("dashboard.css").AtHead();
+
+    Script.Require("jQueryUI_Sortable").AtHead();
+    var pickerId = Guid.NewGuid().ToString("N").Substring(0, 6);
+    var siteRoot = VirtualPathUtility.ToAbsolute("~/").TrimEnd('/');
+
+}
+<fieldset>
+    <label>@Model.Field.DisplayName</label>
+    <div id="app_@(pickerId)">
+        <div data-ng-controller="DashboardCtrl">        
+            <div class="imagemultipicker-dashboard-button-panel">
+                <a class="button" data-ng-click="selectImages()">@T("Select Images")</a>
+                <a class="button" data-ng-click="reset()">@T("Reset")</a>
+                <a class="button" data-ng-click="clear()">@T("Clear")</a>
+            </div>
+            <input name="@Html.NameFor(x => x.Data)" type="hidden" value="{{data|json}}"/>  
+            <div class="upload-wrapper" 
+                data-ng-class="dragonClass"
+                data-ee-dragenter="onDragEnter($event)"
+                data-ee-dragover="onDragOver($event)"
+                data-ee-dragleave="onDragLeave($event)"
+                data-ee-drop="onDrop($event)"
+            >     
+                <ul data-amba-sortable-list="{opacity: 0.5}" data-ng-model="data" class="table image-list">
+                    <li class="table-row image-item" data-ng-repeat="image in data" >
+                        <div class="table-cell image-preview" style="width:@(Model.Settings.PreviewWidth)px;">
+                            <img data-ng-src="@(siteRoot)/ipt/resize{{image.file}}?width=@(Model.Settings.PreviewWidth)" alt="" style="width:@(Model.Settings.PreviewWidth)px;"/>
+                        </div>
+                        <div class="table-cell image-fields">
+                            <a href="@(siteRoot){{image.file}}" target="_blank" title="@T("Open file in new window")">
+                                <span class="filepath">{{image.file | filename}}</span>
+                            </a>                            
+                            @foreach (var customField in Model.Settings.CustomFieldsList)
+                            {
+                                if (!string.IsNullOrWhiteSpace(customField.DisplayName))
+                                {
+                                    <span class="display-name">@(customField.DisplayName)</span>
+                                }
+                                switch (customField.Type)
+                                {
+                                    case "textarea":
+                                        <textarea class="desc-textarea" data-ng-model="image.@(customField.Name)" rows="1"></textarea>
+                                        break;
+                                    case "text":
+                                        <input class="descr-text" type="text" data-ng-model="image.@(customField.Name)"/>
+                                        break;
+                                }
+                            }
+                        </div>
+                        <div class="table-cell image-buttons">
+                            <a href="" ng-click="deleteImage(image.file)">@T("Delete")</a>
+                        </div>
+                    </li>                   
+                    <li data-ng-show="data.length==0 && uploads.length==0" class="empty-list table-row">
+                        <div class="upload-message table-cell">@T("Drop file here to upload")</div>
+                    </li>                
+                </ul>
+                <ul class="upload-list table" data-ng-show="uploads.length > 0">
+                    <li class="table-row upload-item" data-ng-repeat="upload in uploads" >
+                        <div class="table-cell upload-progress">
+                            {{upload.progress}}%
+                        </div>
+                        <div class="table-cell upload-file">
+                            {{upload.file}}
+                        </div>
+                        <div class="table-cell cancel-button">
+                            <a  href="" ng-click="cancelUpload(upload)" >@T("Cancel upload")</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        angular.module('app_@(pickerId)', ['MultipickerDashboard', 'ExtraEvents', 'AmbaSortableList', 'ui'])
+            .value('data', @Html.Raw(Model.Data))
+            .value('options', {
+                id: '@(pickerId)',
+                fieldFolder: "@Html.Raw(Model.FieldFolderName)",
+                pickerWindowUrl: "@Url.Action("Index", "Multipicker", new {area="Amba.ImagePowerTools"})"
+            });
+            
+        angular.bootstrap($('#app_@(pickerId)'), ['app_@(pickerId)']);       
+    </script>
+}

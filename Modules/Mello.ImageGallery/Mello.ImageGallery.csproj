@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EACC1A53-532B-486B-BC51-BA65ACBA2B61}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Mello.ImageGallery</RootNamespace>
+    <AssemblyName>Mello.ImageGallery</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Orchard.Media">
+      <HintPath>lib\Orchard.Media.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\grip.png" />
+    <Content Include="Content\Plugins\SlideViewerPro\Images\svwloader.gif" />
+    <Content Include="Content\Plugins\SlideViewerPro\Scripts\jquery.slideViewerPro.1.0.js" />
+    <Content Include="Content\Plugins\SlideViewerPro\Scripts\jquery.timers-1.2.js" />
+    <Content Include="Content\Plugins\SlideViewerPro\Styles\svwp_style.css" />
+    <Content Include="Placement.info">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Plugins\LightBox\Images\lightbox-blank.gif" />
+    <Content Include="Content\Plugins\LightBox\Images\lightbox-btn-close.gif" />
+    <Content Include="Content\Plugins\LightBox\Images\lightbox-btn-next.gif" />
+    <Content Include="Content\Plugins\LightBox\Images\lightbox-btn-prev.gif" />
+    <Content Include="Content\Plugins\LightBox\Images\lightbox-ico-loading.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\css\prettyPhoto.css" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_rounded\btnNext.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_rounded\btnPrevious.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_rounded\contentPattern.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_rounded\loader.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_rounded\sprite.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_square\btnNext.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_square\btnPrevious.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_square\contentPattern.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_square\default_thumbnail.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_square\loader.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\dark_square\sprite.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\btnNext.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\btnPrevious.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\contentPatternBottom.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\contentPatternLeft.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\contentPatternRight.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\contentPatternTop.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\default_thumbnail.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\loader.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\facebook\sprite.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_rounded\btnNext.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_rounded\btnPrevious.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_rounded\default_thumbnail.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_rounded\loader.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_rounded\sprite.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_square\btnNext.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_square\btnPrevious.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_square\default_thumbnail.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_square\loader.gif" />
+    <Content Include="Content\Plugins\PrettyPhoto\images\prettyPhoto\light_square\sprite.png" />
+    <Content Include="Content\Plugins\PrettyPhoto\js\jquery.prettyPhoto.js" />
+    <Content Include="Content\Plugins\LightBox\Scripts\jquery.lightbox-0.5.min.js" />
+    <Content Include="Scripts\Admin\Images.js" />
+    <Content Include="Scripts\Editor\ImageGallery.js" />
+    <Content Include="Scripts\jquery.MultiFile.pack.js" />
+    <Content Include="Scripts\sortable-interaction-jquery-ui-1.8.10.custom.min.js" />
+    <Content Include="Styles\image-gallery-admin.css" />
+    <Content Include="Content\Plugins\LightBox\Styles\jquery.lightbox-0.5.css" />
+    <None Include="Views\Admin\AddImages.cshtml" />
+    <Content Include="Styles\image-gallery.css" />
+    <Content Include="Styles\menu.imagegallery-admin.css" />
+    <Content Include="Styles\images\menu.imagegallery.png" />
+    <Content Include="Views\Admin\EditProperties.cshtml" />
+    <Content Include="Views\Admin\EditImage.cshtml" />
+    <None Include="Views\Admin\Index.cshtml" />
+    <None Include="Views\Admin\Create.cshtml" />
+    <None Include="Views\Admin\Images.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Module.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Orchard.Core">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Orchard.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Orchard.Framework">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Orchard.Framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Drivers\ImageGalleryDriver.cs" />
+    <Compile Include="Extensions\LabelForExtensions.cs" />
+    <Compile Include="Handlers\ImageGalleryHandler.cs" />
+    <Compile Include="Helpers\ImageGalleryExtensions.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\ImageGallery.cs" />
+    <Compile Include="Models\ImageGalleryImage.cs" />
+    <Compile Include="Models\ImageGalleryImageSettingsRecord.cs" />
+    <Compile Include="Models\ImageGalleryPart.cs" />
+    <Compile Include="Models\ImageGalleryRecord.cs" />
+    <Compile Include="Models\ImageGallerySettingsRecord.cs" />
+    <Compile Include="Models\Plugins\LightBox\LightBoxFactory.cs" />
+    <Compile Include="Models\Plugins\LightBox\LightBoxResourceDescriptor.cs" />
+    <Compile Include="Models\Plugins\LightBox\LightBoxSettings.cs" />
+    <Compile Include="Models\Plugins\ImageGalleryPlugin.cs" />
+    <Compile Include="Models\Plugins\LightBox\LightBox.cs" />
+    <Compile Include="Models\Plugins\PluginFactory.cs" />
+    <Compile Include="Models\Plugins\Plugin.cs" />
+    <Compile Include="Models\Plugins\PluginResourceDescriptor.cs" />
+    <Compile Include="Models\Plugins\PrettyPhoto\PrettyPhoto.cs" />
+    <Compile Include="Models\Plugins\PrettyPhoto\PrettyPhotoFactory.cs" />
+    <Compile Include="Models\Plugins\PrettyPhoto\PrettyPhotoResourceDescriptor.cs" />
+    <Compile Include="Models\Plugins\PrettyPhoto\PrettyPhotoSettings.cs" />
+    <Compile Include="Models\Plugins\SlideViewerPro\SlideViewerPro.cs" />
+    <Compile Include="Models\Plugins\SlideViewerPro\SlideViewerProFactory.cs" />
+    <Compile Include="Models\Plugins\SlideViewerPro\SlideViewerProResourceDescriptor.cs" />
+    <Compile Include="Models\Plugins\SlideViewerPro\SlideViewerProSettings.cs" />
+    <Compile Include="Models\Thumbnail.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="ResourceManifest.cs" />
+    <Compile Include="Services\IImageGalleryService.cs" />
+    <Compile Include="Services\ImageGalleryService.cs" />
+    <Compile Include="Services\IThumbnailService.cs" />
+    <Compile Include="Services\ThumbnailService.cs" />
+    <Compile Include="Utils\JavaScriptHelper.cs" />
+    <Compile Include="Utils\LinkHelper.cs" />
+    <Compile Include="ViewModels\CreateGalleryViewModel.cs" />
+    <Compile Include="ViewModels\ImageAddViewModel.cs" />
+    <Compile Include="ViewModels\ImageEditViewModel.cs" />
+    <Compile Include="ViewModels\ImageGalleryImagesViewModel.cs" />
+    <Compile Include="ViewModels\ImageGalleryEditPropertiesViewModel.cs" />
+    <Compile Include="ViewModels\ImageGalleryIndexViewModel.cs" />
+    <Compile Include="ViewModels\ImageGallerySummaryAdminViewModel.cs" />
+    <Compile Include="ViewModels\ImageGalleryViewModel.cs" />
+    <Compile Include="ViewModels\ImageReorderViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Parts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Web.config" />
+    <Content Include="Views\DisplayTemplates\Parts\ImageGallerySummaryAdmin.cshtml" />
+    <Content Include="Views\DisplayTemplates\Parts\Plugins\SlideViewerPro.cshtml" />
+    <None Include="Views\EditorTemplates\Parts\ImageGallery.cshtml" />
+    <None Include="Views\DisplayTemplates\Parts\ImageGallery.cshtml" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" DependsOnTargets="AfterBuildCompiler">
+    <PropertyGroup>
+      <AreasManifestDir>$(ProjectDir)\..\Manifests</AreasManifestDir>
+    </PropertyGroup>
+    <!-- If this is an area child project, uncomment the following line:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Child" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    -->
+    <!-- If this is an area parent project, uncomment the following lines:
+    <CreateAreaManifest AreaName="$(AssemblyName)" AreaType="Parent" AreaPath="$(ProjectDir)" ManifestPath="$(AreasManifestDir)" ContentFiles="@(Content)" />
+    <CopyAreaManifests ManifestPath="$(AreasManifestDir)" CrossCopy="false" RenameViews="true" />
+    -->
+  </Target>
+  <Target Name="AfterBuildCompiler" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>45979</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

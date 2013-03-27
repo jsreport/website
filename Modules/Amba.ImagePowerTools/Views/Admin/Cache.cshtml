@@ -1,0 +1,36 @@
+﻿@model Amba.ImagePowerTools.ViewModels.Admin.CacheStatisticsViewModel
+@{
+    Layout.Title = T("Image Power Tools");
+}
+<style>
+    .properties-table {
+        border-width: 1px 1px medium;
+        border-style: solid solid none;
+        border-color: #EAEAEA #EAEAEA -moz-use-text-color;
+        margin-bottom: 10px;
+    }
+    .properties-table td {
+        padding: 4px 8px;
+        border-bottom: 1px solid #EAEAEA;
+    }
+</style>
+<h2>@T("Cache")</h2>
+
+    <table class="properties-table">
+        <tr>
+            <td>@T("Files in cache")</td>
+            <td>@Model.FilesCount</td>
+        </tr>
+        <tr>
+            <td>@T("Cache size")</td>
+            <td>@((Model.TotalSize * 1.0 / 1024 / 1024).ToString("0.00")) MB</td>
+        </tr>
+        <tr>
+            <td>@T("Delete old files job last run")</td>
+            <td>@(Model.DeleteOldLastJobRun.HasValue ? Model.DeleteOldLastJobRun.ToString() : T("Never").ToString())</td>
+        </tr>
+    </table>
+@using (Html.BeginFormAntiForgeryPost("ClearCache"))
+{   
+    <input type="submit" value="@T("Clear cache")"/>
+}
