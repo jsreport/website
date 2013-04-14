@@ -13,6 +13,8 @@ TestResults
 *.user
 *.sln.docstates
 
+Dependencies/
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
@@ -42,7 +44,6 @@ ipch/
 *.aps
 *.ncb
 *.opensdf
-*.sdf
 
 # Visual Studio profiler
 *.psess
