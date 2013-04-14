@@ -1,0 +1,14 @@
+﻿@{
+    Layout.Title = "Featured Item Groups";
+}
+
+@if (Model.NumberOfGroups > 0) {
+    using (Html.BeginFormAntiForgeryPost(Url.Action("List", "Admin", new { area = "Contents", id = "" })))
+    {
+        <fieldset class="contentItems bulk-items">
+            @Display(Model.ContentItems)
+        </fieldset>
+    }
+} else {
+    <p>@T("You have not yet created any Groups. Create a") @Html.ActionLink(T("new group").ToString(), "Create", "Admin", new { area = "Contents", id = "FeaturedItemGroup" }, null) @T("now.")</p>
+}

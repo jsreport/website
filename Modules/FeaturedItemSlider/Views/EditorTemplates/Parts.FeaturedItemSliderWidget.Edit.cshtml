@@ -1,0 +1,8 @@
+﻿@model FeaturedItemSlider.Models.FeaturedItemSliderWidgetEditViewModel
+
+<div>
+    <fieldset>
+        <label for="GroupName">Featured Item Group:</label>
+        @Html.DropDownList("GroupName", new SelectList(Model.GroupNames, Model.SelectedGroup))
+    </fieldset>
+</div>

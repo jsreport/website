@@ -1,0 +1,70 @@
+﻿@model FeaturedItemSlider.Models.FeaturedItemEditViewModel
+@using System.Linq;
+@using FeaturedItemSlider.Models
+
+@{
+    Script.Require("jQuery");
+}
+
+<div>
+    <fieldset>
+        <label for="@Html.FieldIdFor(m => m.FeaturedItem.Headline)">Headline:</label>
+        @Html.TextBoxFor(m => m.FeaturedItem.Headline, new { @class = "large text" })
+        <label for="@Html.FieldIdFor(m => m.FeaturedItem.SubHeadline)">Sub-Headline:</label>
+        @Html.TextBoxFor(m => m.FeaturedItem.SubHeadline, new { @class = "large text" })
+        
+        <div style="margin: 10px 0px;">
+            <label for="@Html.FieldIdFor(m => m.FeaturedItem.LinkUrl)">Link URL:</label>
+            @Html.TextBoxFor(m => m.FeaturedItem.LinkUrl, new { @class = "large text" })
+            <span class="hint">@T("Can be an absolute or relative url. The Headline and Image (if any) will be linked, unless the 'Separate Link' option is checked below.")</span>
+            @Html.CheckBoxFor(m => m.FeaturedItem.SeparateLink)
+            <label class="forcheckbox" for="@Html.FieldIdFor(m => m.FeaturedItem.SeparateLink)">@T("Separate Link")</label>
+            <div data-controllerid="@Html.FieldIdFor(m => m.FeaturedItem.SeparateLink)" style="margin-left: 15px;">
+                <label for="@Html.FieldIdFor(m => m.FeaturedItem.LinkText)">Link Text:</label>
+                @Html.TextBoxFor(m => m.FeaturedItem.LinkText, new { @class = "smallText" })
+            </div>
+        </div>
+        <label for="@Html.FieldIdFor(m => m.FeaturedItem.SlideOrder)">Slide Order:</label>
+        @Html.TextBoxFor(m => m.FeaturedItem.SlideOrder, new { @class = "small text" })
+        <span class="hint">@T("Use the Slide Order to control the order in which the slides are loaded into the widget.")</span>
+        <br />
+        <label for="@Html.FieldIdFor(m => m.FeaturedItem.GroupName)">Group:</label>
+        @Html.DropDownList(@Html.FieldNameFor(m => m.FeaturedItem.GroupName), new SelectList(Model.Groups.Select(g => g.Name), Model.FeaturedItem.GroupName))
+    </fieldset>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+    //<![CDATA[
+        var groupImageWidths = {};
+        var groupImageHeights = {};
+        var groupHasImages = {};
+
+        @foreach(var group in Model.Groups) {
+            <text>groupHasImages["@group.Name"] = "@group.IncludeImages"</text>
+            <text>groupImageWidths["@group.Name"] = "@(group.ImageStyle == ImageStyle.Inline ? group.ImageWidth : group.GroupWidth)";</text>
+            <text>groupImageHeights["@group.Name"] = "@(group.ImageStyle == ImageStyle.Inline ? group.ImageHeight : group.GroupHeight)";</text>
+        }
+
+        $(function () {
+            $("#FeaturedItem_GroupName").bind('change', groupChanged);
+            groupChanged();
+        });
+
+        function groupChanged() {
+            var groupName = $("#FeaturedItem_GroupName").val();
+            if (groupName) {
+                if (groupHasImages[groupName] === "True") {
+                    var text1 = '@T("For the group")';
+                    var text2 = '@T("the picture should be")';
+                    $("span.hint:first").text(text1 + " " + groupName + " " + text2 + " " + groupImageWidths[groupName] + " x " + groupImageHeights[groupName]);
+                    $(".edit-item-content fieldset:first").show();
+                } else {
+                    $(".edit-item-content fieldset:first").hide();
+                }
+            }
+        }
+    //]]>
+    </script>
+}

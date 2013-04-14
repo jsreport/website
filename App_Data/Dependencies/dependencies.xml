@@ -59,9 +59,21 @@
     <References />
   </Dependency>
   <Dependency>
+    <ModuleName>FeaturedItemSlider</ModuleName>
+    <VirtualPath>~/Modules/FeaturedItemSlider/FeaturedItemSlider.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
+  <Dependency>
     <ModuleName>Feeds</ModuleName>
     <VirtualPath>~/Core/Feeds</VirtualPath>
     <LoaderName>CoreExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
+  <Dependency>
+    <ModuleName>JsReport</ModuleName>
+    <VirtualPath>~/Theme/JsReport</VirtualPath>
+    <LoaderName>RawThemeExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>

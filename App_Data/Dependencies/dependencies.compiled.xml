@@ -7,6 +7,12 @@
     <Hash>569b1bbe7d0d7c16</Hash>
   </Dependency>
   <Dependency>
+    <ExtensionId>FeaturedItemSlider</ExtensionId>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/FeaturedItemSlider/FeaturedItemSlider.csproj</VirtualPath>
+    <Hash>421cb0f46607b321</Hash>
+  </Dependency>
+  <Dependency>
     <ExtensionId>Markdown</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Markdown/bin/Markdown.dll</VirtualPath>

@@ -1,0 +1,10 @@
+﻿@{
+    string groupName = Model.ContentPart.GroupName;
+}
+
+<ul class="pageStatus">
+    <li>
+        @T("Group"): @Html.ActionLink(groupName, "Edit", "Admin", new { area = "Contents", id = Model.Group.ContentItem.Id }, null) |&nbsp;
+        @T("Slide Order"): @Model.ContentPart.SlideOrder |&nbsp;
+    </li>
+</ul>

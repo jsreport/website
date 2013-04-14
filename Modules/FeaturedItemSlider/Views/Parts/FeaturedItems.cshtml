@@ -1,0 +1,106 @@
+﻿@using FeaturedItemSlider.Models;
+
+@{
+    Script.Require("jQuery_Cycle");
+    if (Model.Group.ImageStyle == ImageStyle.Inline) {
+        Style.Require("FeaturedItems");
+    } else {
+        Style.Require("FeaturedItems_Background");
+    }
+    
+    bool isFirstItem = true;
+    bool useBackgroundImages = Model.Group.ImageStyle == ImageStyle.Background;
+
+    string backgroundColor = String.IsNullOrWhiteSpace(Model.Group.BackgroundColor) ? "transparent" : "#" + Model.Group.BackgroundColor.TrimStart('#');
+    string foregroundColor = "#" + Model.Group.ForegroundColor.TrimStart('#');
+}
+
+@using (Script.Head()) {
+    <style type="text/css">
+        .featureSlider li { height:@(Model.Group.GroupHeight)px; width:@(Model.Group.GroupWidth)px; background-color:@(backgroundColor); }
+        .featureSlider li h2, .featureSlider li h3, .featureSlider li h2 a, .featureSlider l1 p.slideNumbers { color:@(foregroundColor) !important; }
+        .featureSlider li span { width:@(Model.Group.ImageWidth)px; height:@(Model.Group.ImageHeight)px; }
+        .featureSlider li span img, .featureSlider li span a img { width:@(Model.Group.ImageWidth)px; height:@(Model.Group.ImageHeight)px; }
+        div#slideNav a.activeSlide { background-color: @(foregroundColor); }
+        .featureSlider li p { position: relative; top:@(Model.Group.GroupHeight - 25)px; }
+        .headline { padding-top: @(Model.Group.HeadlineOffsetTop)px; }
+        .headline, .headline + h3 { padding-left: @(Model.Group.HeadlineOffsetLeft)px; }
+    </style>
+}
+
+@if (Model.FeaturedItems.Count > 0) 
+{
+    <div id="slideNav"></div>
+    <div class="featureSlider">
+        <ul style="color:@foregroundColor" id="featuresList">
+            @foreach (FeaturedItemViewModel featuredItem in Model.FeaturedItems)
+            {
+                string itemClass = isFirstItem ? "" : "hiddenItem";
+                string headlineClass = useBackgroundImages ? "headline" : "";
+                bool useSeparateLink = featuredItem.SeparateLink;
+                bool hasLink = !String.IsNullOrWhiteSpace(featuredItem.LinkUrl);
+                bool itemIsLinked = hasLink && !useSeparateLink;
+                string backgroundImageStyle = useBackgroundImages ? "background-image:url('" + @Url.Content(featuredItem.ImagePath) +  "');" : "";
+                
+                <li class="@itemClass" style="@backgroundImageStyle">
+                    @if (Model.Group.IncludeImages && Model.Group.ImageStyle == ImageStyle.Inline) {
+                        <span>
+                        @if (itemIsLinked) {
+                            @:<a href="@featuredItem.LinkUrl">
+                        }
+                        @if (!string.IsNullOrWhiteSpace(featuredItem.ImagePath)) {
+                            @Html.Image(featuredItem.ImagePath, "", null)
+                        }
+                        @if (itemIsLinked) {
+                            @:</a>
+                        }
+                        </span>
+                    }
+                    @if (Model.Group.ShowSlideNumbers) {
+                        <p class="slideNumbers">@featuredItem.SlideNumber of @Model.FeaturedItems.Count</p>
+                    }
+                    <h2 class="@headlineClass">
+                    @if (itemIsLinked) {
+                        @:<a href="@featuredItem.LinkUrl">
+                    }
+                    @Html.Raw(featuredItem.Headline)
+                    @if (itemIsLinked) {
+                        @:</a>
+                    }
+                    </h2>
+                    <h3>
+                        @Html.Raw(featuredItem.SubHeadline)
+                    </h3>
+                    @if(hasLink && useSeparateLink) {
+                        <a href="@featuredItem.LinkUrl">@featuredItem.LinkText</a>
+                    }
+                </li>
+                isFirstItem = false;
+            }
+        </ul>
+    </div>
+
+    using (Script.Foot())
+    {
+        if (Model.FeaturedItems.Count > 1)
+        {
+            string pagerElement = Model.Group.ShowPager ? "'#slideNav'" : "null";
+            
+            <script type="text/javascript">
+            //<![CDATA[
+                $(function () {
+                    $("article.widget-featured-item-slider-widget").css({ 'width': '@(Model.Group.GroupWidth)px' }).css({ 'height': '@(Model.Group.GroupHeight)px' });
+                    $("#featuresList").cycle({
+                            fx:      '@Model.Group.TransitionEffect',
+                            speed:   @Model.Group.SlideSpeed,
+                            timeout: @Model.Group.SlidePause,
+                            pause:   1,
+                            pager:   @Html.Raw(pagerElement)
+                        });
+                    $(".featureSlider ul li").removeClass('hiddenItem');
+                });
+            //]]>
+            </script>
+        }
+    }
+}

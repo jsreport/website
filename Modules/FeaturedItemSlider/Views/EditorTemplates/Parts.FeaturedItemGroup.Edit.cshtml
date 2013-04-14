@@ -1,0 +1,136 @@
+﻿@using FeaturedItemSlider.Models
+@model FeaturedItemSlider.Models.FeaturedItemGroupPart
+
+@{
+    Script.Include("colorpicker.js").AtHead();
+    Style.Include("colorpicker.css").AtHead();
+    
+    Script.Require("Slimbox").AtHead();
+    Style.Require("Slimbox").AtHead();
+
+    var effects = new[] {"blindX", "blindY", "blindZ", "cover", "curtainX", "curtainY", "fade", "fadeZoom", "growX", "growY", "scrollUp", "scrollDown", "scrollLeft", "scrollRight", "scrollHorz", "scrollVert", "shuffle", "slideX", "slideY", "toss", "turnUp", "turnDown", "turnLeft", "turnRight", "uncover", "wipe", "zoom"};
+}
+@using (Script.Head()) {
+    <style type="text/css">
+        fieldset.featuredItems { padding:6px 0 6px 10px; margin:10px 0 12px 0; border: 1px solid #dbdbdb; width: 50%; }
+    </style>
+}
+
+<div>
+    <p>@T("A Feature Group is a collection of Feature Items that may be placed in any zone of your site. The settings of your feature group define the width and height of each feature item. You may add as many feature items to a group. Only one feature item will display at a time and a new feature will slide into place every few seconds.")</p>
+    <fieldset class="featuredItems">
+        <legend>@T("Display Properties")</legend>
+        <label for="@Html.FieldIdFor(m=>m.Name)">@T("Name"):</label>
+        @Html.TextBoxFor(m=>m.Name)
+        <label for="@Html.FieldIdFor(m=>m.GroupWidth)">@T("Group Width"):</label>
+        @Html.TextBoxFor(m => m.GroupWidth, new { maxlength = "5" })
+        <span class="hint">@T("This is the overall width of one slide in the widget")</span>
+        <label for="@Html.FieldIdFor(m=>m.GroupHeight)">@T("Group Height"):</label>
+        @Html.TextBoxFor(m => m.GroupHeight, new { maxlength = "5" })
+        <span class="hint">@T("This is the overall height of one slide in the widget")</span>
+        
+        <div style="margin: 10px 0px;">
+            @Html.CheckBoxFor(m => m.IncludeImages)
+            <label class="forcheckbox" for="@Html.FieldIdFor(m => m.IncludeImages)">@T("Include images in the slider")</label>
+            <div data-controllerid="@Html.FieldIdFor(m => m.IncludeImages)" style="margin-left: 15px;">
+                @Html.DropDownListFor(m => m.ImageStyle, new SelectList(new [] { ImageStyle.Inline, ImageStyle.Background}, Model.ImageStyle))
+                <a id="InlineImageExample" style="display: none;" href="@Href("~/Modules/FeaturedItemSlider/Content/Admin/images/InlineSample.PNG")" rel="lightbox" title="@T("Example of a slider using Inline images")">@T("Example")</a>
+                <a id="BackgroundImageExample" style="display: none;" href="@Href("~/Modules/FeaturedItemSlider/Content/Admin/images/BackgroundSample.PNG")" rel="lightbox" title="@T("Example of a slider using Background images")">@T("Example")</a>
+                <span class="hint" id="imageStyleHint"></span>
+                <div id="InlineImageOptions" style="display:none;">
+                    <label for="@Html.FieldIdFor(m=>m.ImageWidth)">@T("Image Width"):</label>
+                    @Html.TextBoxFor(m => m.ImageWidth, new { maxlength = "5" })
+                    <span class="hint">@T("This is the width for the image portion of a slide (should not be greater than the Group Width)")</span>
+                    <label for="@Html.FieldIdFor(m=>m.ImageHeight)">@T("Image Height"):</label>
+                    @Html.TextBoxFor(m => m.ImageHeight, new { maxlength = "5" })
+                    <span class="hint">@T("This is the height for the image portion of a slide (should not be greater than the Group Height)")</span>
+                </div>
+                <div id="BackgroundImageOptions" style="display:none;">
+                    <label for="@Html.FieldIdFor(m => m.HeadlineOffsetTop)">@T("Text Offset - Top")</label>
+                    @Html.TextBoxFor(m => m.HeadlineOffsetTop, new { maxlength = "5" })
+                    <span class="hint">@T("This is the number of pixels of padding the text area (headline/subheadline) will have from the Top of the slide")</span>
+                    <label for="@Html.FieldIdFor(m => m.HeadlineOffsetLeft)">@T("Text Offset - Left")</label>
+                    @Html.TextBoxFor(m => m.HeadlineOffsetLeft, new { maxlength = "5" })
+                    <span class="hint">@T("This is the number of pixels of padding the text area (headline/subheadline) will have from the Left side of the slide")</span>
+                </div>
+            </div>
+        </div>
+
+        <label for="@Html.FieldIdFor(m=>m.BackgroundColor)">@T("Text Area Background Color"):</label>
+        @Html.TextBoxFor(m => m.BackgroundColor, new { maxlength = "7" })
+        <span class="hint">@T("Enter a hex code or use the color picker. Leave empty for a transparent background.")</span>
+        <label for="@Html.FieldIdFor(m=>m.ForegroundColor)">@T("Text Foreground Color"):</label>
+        @Html.TextBoxFor(m => m.ForegroundColor, new { maxlength = "7" })
+        <span class="hint">@T("Enter a hex code or use the color picker.")</span>
+    </fieldset>
+    <fieldset class="featuredItems">
+        <legend>@T("Slide Behavior")</legend>
+        <label for="@Html.FieldIdFor(m=>m.TransitionEffect)">@T("Transition Effect"):</label>
+        @Html.DropDownListFor(m=>m.TransitionEffect, new SelectList(effects, Model.TransitionEffect))
+        <span class="hint">@T("The effects are provided by the jQuery Cycle plugin. The available effects can be seen at"): <a href="http://jquery.malsup.com/cycle/browser.html" target="_new">http://jquery.malsup.com/cycle/browser.html</a></span>
+        <label for="@Html.FieldIdFor(m=>m.SlideSpeed)">@T("Slide Speed"):</label>
+        @Html.TextBoxFor(m => m.SlideSpeed, new { maxlength = "9" })
+        <span class="hint">@T("This is the number of milliseconds it will take for one slide to transition to the next")</span>
+        <label for="@Html.FieldIdFor(m=>m.SlidePause)">@T("Slide Pause"):</label>
+        @Html.TextBoxFor(m => m.SlidePause, new { maxlength = "9" })
+        <span class="hint">@T("This is the number of milliseconds a slide will be diplayed")</span>
+        @Html.CheckBoxFor(m => m.ShowPager)
+        <label for="@Html.FieldIdFor(m => m.ShowPager)" class="forcheckbox">@T("Show pager")</label>
+        <span class="hint">@T("This option will display pager controls superimposed over the text area of the slides")</span>
+        @Html.CheckBoxFor(m => m.ShowSlideNumbers)
+        <label for="@Html.FieldIdFor(m => m.ShowSlideNumbers)" class="forcheckbox">@T("Show slide numbers")</label>
+        <span class="hint">@T("This determines if the slide number and total slides are displayed on each slide (e.g. 1 of 5)")</span>
+        <span class="hint" style="display: none;" id="SlideNumberBackgroundImageNote">@T("<strong>Note:</strong> This will result in a 25px gap from the top of the slide to the starting position of the text area. Adjust the Text Offset - Top setting accordingly.")</span>
+    </fieldset>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+    //<![CDATA[
+        $(function () {
+            $("#BackgroundColor, #ForegroundColor").ColorPicker({
+                onBeforeShow: function () {
+                    $(this).ColorPickerSetColor(this.value);
+                },
+                onShow: function (colpkr) {
+                    $(colpkr).fadeIn(300);
+                    return false;
+                },
+                onSubmit: function (hsb, hex, rgb, el) {
+                    $(el).val(hex);
+                    $(el).ColorPickerHide();
+                },
+                onHide: function (colpkr) {
+                    $(colpkr).fadeOut(300);
+                    return false;
+                }
+            });
+
+            var $imageStyleDropdown = $('#@Html.FieldIdFor(m => m.ImageStyle)');
+            $imageStyleDropdown.change(function () {
+                SelectImageStyle($(this));
+            });
+            SelectImageStyle($imageStyleDropdown);
+        });
+        
+        function SelectImageStyle(imageStyleDropdown) {
+            if (imageStyleDropdown.val() === "Inline") {
+                $("#imageStyleHint").text("The images will be displayed within an <img> tag in each slide, next to the text area.");
+                $("#InlineImageOptions").show();
+                $("#BackgroundImageOptions").hide();
+                $("#InlineImageExample").show();
+                $("#BackgroundImageExample").hide();
+                $("#SlideNumberBackgroundImageNote").hide();
+            } else {
+                $("#imageStyleHint").text("The images will be used as a CSS background-image for each slide.");
+                $("#BackgroundImageOptions").show();
+                $("#InlineImageOptions").hide();
+                $("#BackgroundImageExample").show();
+                $("#InlineImageExample").hide();
+                $("#SlideNumberBackgroundImageNote").show();
+            }
+        }
+    //]]>
+    </script>
+}

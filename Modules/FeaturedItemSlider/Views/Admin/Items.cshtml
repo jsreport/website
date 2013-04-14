@@ -1,0 +1,14 @@
+﻿@{
+    Layout.Title = T("Featured Items");
+}
+
+@if (Model.NumberOfItems > 0) {
+    using (Html.BeginFormAntiForgeryPost(Url.Action("List", "Admin", new { area = "Contents", id = "" })))
+    {
+        <fieldset class="contentItems bulk-items">
+            @Display(Model.ContentItems)
+        </fieldset>
+    }
+} else {
+    <p>@T("You have not yet created any featured items. Create a") @Html.ActionLink(T("new featured item").ToString(), "Create", "Admin", new { area = "Contents", id = "FeaturedItem" }, null) @T("now.")</p>
+}

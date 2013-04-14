@@ -1,0 +1,61 @@
+﻿/* Featured Items Slider Widget */
+.zone-featured .widget-featured-item-slider-widget { margin: 17px 0px 0px; }
+div#slideNav {
+        float: right;
+        list-style-type: none;
+        position: relative;
+        right: 0;
+        top: 7px;
+        height: 0px;
+        margin: 0px !important;
+        z-index: 99;
+    }
+    div#slideNav a {
+        display: block;
+        float: left;
+        margin-right: 5px;
+        height: 8px !important;
+        background-color: #b3b3b3;
+        height: 8px;
+        width: 8px;
+        text-indent: -9999px;
+        display: block;
+    }
+.featureSlider ul { 
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+    .featureSlider ul li { 
+        display: block;
+    }
+        .featureSlider ul li h2 {
+            text-transform: uppercase;
+            font-size: 35px;
+            margin: 0px 0px 15px;
+            line-height: .75em;
+            font-weight: normal !important;
+        }
+        .featureSlider ul li h2 a 
+        {
+            text-decoration: none;
+        }
+        .featureSlider ul li h3 { margin: 0px; font-size: 1.328em !important; font-weight: normal !important; }
+        .featureSlider ul li p { 
+            font-size: 9px;
+            margin-top: 10px;
+            opacity:0.5;
+            filter:alpha(opacity=50);
+            text-align: right; 
+            padding: 0px 10px 0px 0px;
+            margin: 0px;
+        }
+    .featureSlider ul li span { 
+        float: left;
+        margin-right: 20px;
+        display: block;
+    }
+    
+.hiddenItem {
+    display:none !important;
+}
