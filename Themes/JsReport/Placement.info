@@ -1,6 +1,12 @@
 ﻿<Placement>
   <!-- Customize where the shapes are rendered -->
 
+  <Match ContentType="Documentation">
+      <Place Parts_Common_Body_Summary="-"
+             Parts_Common_Metadata_Summary="-"
+             Parts_Comments_Count="-"/>    
+  </Match>
+   
   <!-- 
   <Place Parts_Blogs_BlogArchives="Content:before"/>
   <Place Parts_Blogs_RecentBlogPosts="Content:after"/>
