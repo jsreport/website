@@ -1,0 +1,7 @@
+﻿@if(Model.ImageUrl != null && !string.IsNullOrEmpty(Model.ImageUrl)) {
+    <img src="@Model.ImageUrl" />
+}
+<div class="productMeta">
+    <div class="description">@Model.Description</div>
+    <div class="price">$@Model.Price</div>
+</div>

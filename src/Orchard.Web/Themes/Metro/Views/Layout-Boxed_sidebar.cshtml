@@ -1,0 +1,201 @@
+@functions {
+    // To support the layout classifaction below. Implementing as a razor function because we can, could otherwise be a Func<string[], string, string> in the code block following.
+    string CalcuClassify(string[] zoneNames, string classNamePrefix) {
+        var zoneCounter = 0;
+        var zoneNumsFilled = string.Join("", zoneNames.Select(zoneName => { ++zoneCounter; return Model[zoneName] != null ? zoneCounter.ToString() : "";}).ToArray());
+        return HasText(zoneNumsFilled) ? classNamePrefix + zoneNumsFilled : "";
+    }
+}
+@{
+    /* Global includes for the theme
+    ***************************************************************/
+
+    Style.Include("site.css");
+    
+
+    /* Some useful shortcuts or settings
+    ***************************************************************/
+
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+
+	
+    /* Last bit of code to prep the layout wrapper
+    ***************************************************************/
+    
+    Model.Id = "layout-wrapper";
+    var tag = Tag(Model, "div"); // using Tag so the layout div gets the classes, id and other attributes added to the Model
+}	<!-- BindTuning head elements-->
+	<script type="text/javascript">
+	    if (typeof jQuery == 'undefined') {
+	       if (window.location.protocol != "https:") {
+	           document.write("<script type='text/javascript' src='//code.jquery.com/jquery.min.js'><" + "/script>");
+	           document.write("<script type='text/javascript'>window.jQuery || document.write(\"<script type='text/javascript' src='@Href("~/Themes/Metro/js/jquery.min.js")'><\" + \"/script>\");<" + "/script>");
+	       } else { document.write("<script type='text/javascript' src='@Href("~/Themes/Metro/js/jquery.min.js")'><" + "/script>"); }
+	    }
+	</script>
+	<script type="text/javascript">
+		$('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">');
+	</script>
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+	<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-transition.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-alert.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-modal.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-dropdown.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-scrollspy.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-tab.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-tooltip.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-popover.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-button.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-collapse.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-carousel.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-typeahead.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/bootstrap-affix.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/BindMENU.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/fix-responsive-WP8.js")"></script>
+<script type="text/javascript" src="@Href("~/Themes/Metro/js/populateSelectNav.js")"></script>
+
+
+	<!--Apply class to body with browser version-->
+	<script type="text/javascript">
+		var nVer = navigator.appVersion; var nAgt = navigator.userAgent; var bN = navigator.appName; var fullV = "" + parseFloat(navigator.appVersion); var majorV = parseInt(navigator.appVersion, 10); var nameOffset, verOffset, ix; if ((verOffset = nAgt.indexOf("Opera")) !== -1) { bN = "Opera"; fullV = nAgt.substring(verOffset + 6); if ((verOffset = nAgt.indexOf("Version")) !== -1) { fullV = nAgt.substring(verOffset + 8) } } else { if ((verOffset = nAgt.indexOf("MSIE")) !== -1) { bN = "IE"; fullV = nAgt.substring(verOffset + 5) } else { if ((verOffset = nAgt.indexOf("Chrome")) !== -1) { bN = "Chrome"; fullV = nAgt.substring(verOffset + 7) } else { if ((verOffset = nAgt.indexOf("Safari")) !== -1) { bN = "Safari"; fullV = nAgt.substring(verOffset + 7); if ((verOffset = nAgt.indexOf("Version")) !== -1) { fullV = nAgt.substring(verOffset + 8) } } else { if ((verOffset = nAgt.indexOf("Firefox")) !== -1) { bN = "Firefox"; fullV = nAgt.substring(verOffset + 8) } else { if ((nameOffset = nAgt.lastIndexOf(" ") + 1) < (verOffset = nAgt.lastIndexOf("/"))) { bN = nAgt.substring(nameOffset, verOffset); fullV = nAgt.substring(verOffset + 1); if (bN.toLowerCase() == bN.toUpperCase()) { bN = navigator.appName } } } } } } } if ((ix = fullV.indexOf(";")) !== -1) { fullV = fullV.substring(0, ix) } if ((ix = fullV.indexOf(" ")) !== -1) { fullV = fullV.substring(0, ix) } majorV = parseInt("" + fullV, 10); if (isNaN(majorV)) { fullV = "" + parseFloat(navigator.appVersion); majorV = parseInt(navigator.appVersion, 10) } 
+		document.getElementsByTagName("body")[0].className += " " +  bN + " " +  bN + majorV + " cmsORX cmsORX1";
+	</script>
+<!--[if lte IE 7]>
+<link rel="stylesheet" href="@Href("~/Themes/Metro/Styles/css/ie7.css")" type="text/css"/>
+<![endif]-->
+
+<div class="container">
+	<header class="boxed">
+		<div class="row-fluid">
+			<div id="Logo" class="span6"><h1><a href="/" title="Go to Home">@WorkContext.CurrentSite.SiteName</a></h1></div>
+			<div id="NavAux" class="span6">
+				<div id="Cart"></div>
+				<div id="Login">@if (Request.IsAuthenticated) {
+		<span class="user-actions">
+			@Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })
+			@Html.ActionLink("Dashboard", "Index", new { Area = "Dashboard", Controller = "Admin" })
+		</span>
+} else {
+		<span class="user-actions">@Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })</span>
+}</div>
+				<div id="User">@if (Request.IsAuthenticated) {
+	<span class="welcome">@if(WorkContext.CurrentUser != null){@T("<strong>{0}</strong>", new HtmlString(Html.ActionLink( WorkContext.CurrentUser.UserName, "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" }).ToString()))}</span>
+}</div>
+				<div id="Language"></div>
+			</div>
+		</div>
+		<nav class="row-fluid">
+			<div class="span9" id="MenuH">@if (Model.Navigation != null) {@Display(Model.Navigation)}</div>
+			<div class="span3" id="Search"><div id="SearchBar">@using (Html.BeginForm("index", "search", new { area = "Orchard.Search" }, FormMethod.Get, new { @class = "search-form" })){<fieldset><input type="text" value="" name="q" id="q"><button type="submit"></button></fieldset>}</div></div>
+		</nav>
+		@if (Model.Header != null){<div id="Header" class="BannerZone"><div class="C00_Clean container-box">@Display(Model.Header)</div></div>}
+	</header>
+<!---BindTuning HEADER End--->
+
+<!---BindTuning CONTENT Start--->
+	<div id="ContentArea" class="boxed">		
+		<div class="row-fluid">
+			<div class="span3">
+				<div id="MenuV"><div class="navholder"><script type="text/javascript">$("#MenuV .navholder").html($("#MenuH nav").parent().html());</script></div></div>
+				@if (Model.Messages != null){<div id="Messages" class="LeftZone"><div class="C00_Clean container-box">@Display(Model.Messages)</div></div>}
+			</div>
+			<div class="span9">
+				<div class="row-fluid">
+	@if (Model.BeforeMain != null){<div class="pane span12" runat="server" id="BeforeMain">@Display(Model.BeforeMain)</div>}
+</div>
+<div class="row-fluid">
+	@if (Model.BeforeContent != null){<div class="pane span7" runat="server" id="BeforeContent"><div class="C00_Clean container-box">@Display(Model.BeforeContent)</div></div>}
+	@if (Model.AsideFirst != null){<div class="pane span5" runat="server" id="AsideFirst"><div class="C00_Clean container-box">@Display(Model.AsideFirst)</div></div>}
+</div>
+<div class="row-fluid">
+	
+	
+</div>
+<div class="row-fluid">
+	
+	
+</div>
+<div class="row-fluid">
+	@if (Model.Content != null){<div class="pane span12" runat="server" id="Content"><div class="C00_Clean container-box">@Display(Model.Content)</div></div>}
+</div>
+<div class="row-fluid">
+	
+	
+</div>
+<div class="row-fluid">
+	@if (Model.AsideSecond != null){<div class="pane span4" runat="server" id="AsideSecond"><div class="C00_Clean container-box">@Display(Model.AsideSecond)</div></div>}
+	@if (Model.AfterContent != null){<div class="pane span8" runat="server" id="AfterContent"><div class="C00_Clean container-box">@Display(Model.AfterContent)</div></div>}
+</div>
+<div class="row-fluid">
+	
+	
+	
+</div>
+<div class="row-fluid">
+	@if (Model.AfterMain != null){<div class="pane span12" runat="server" id="AfterMain"><div class="C00_Clean container-box">@Display(Model.AfterMain)</div></div>}
+</div>
+<div class="row-fluid">
+	@if (Model.TripelFirst != null){<div class="pane span4" runat="server" id="TripelFirst"><div class="C00_Clean container-box">@Display(Model.TripelFirst)</div></div>}
+	@if (Model.TripelSecond != null){<div class="pane span4" runat="server" id="TripelSecond"><div class="C00_Clean container-box">@Display(Model.TripelSecond)</div></div>}
+	@if (Model.TripelThird != null){<div class="pane span4" runat="server" id="TripelThird"><div class="C00_Clean container-box">@Display(Model.TripelThird)</div></div>}
+</div>
+				<div id="Breadcrumb"></div>
+			</div>
+		</div>
+	</div>
+<!---BindTuning CONTENT End--->
+
+<!---BindTuning FOOTER Start--->
+	<footer class="boxed">
+		<div id="FooterContentArea">
+			<div class="row-fluid">
+				@if (Model.FooterQuadFirst != null){<div id="FooterQuadFirst" class="span3"><div class="C00_Clean container-box">@Display(Model.FooterQuadFirst)</div></div>}
+				@if (Model.FooterQuadSecond != null){<div id="FooterQuadSecond" class="span3"><div class="C00_Clean container-box">@Display(Model.FooterQuadSecond)</div></div>}
+				@if (Model.FooterQuadThird != null){<div id="FooterQuadThird" class="span3"><div class="C00_Clean container-box">@Display(Model.FooterQuadThird)</div></div>}
+				@if (Model.FooterQuadFourth != null){<div id="FooterQuadFourth" class="span3"><div class="C00_Clean container-box">@Display(Model.FooterQuadFourth)</div></div>}
+			</div>
+			<div class="row-fluid">
+				
+			</div>
+		</div>
+		<div id="Footer">
+			<span id="Copyright"><span class="Copyright">&copy; 2013 @WorkContext.CurrentSite.SiteName. All rights reserved.</span></span>
+			<span id="Sitemap"></span>
+			<span id="Privacy"></span>
+			<span id="Terms"></span>
+		</div>    
+	</footer>
+</div>    
+
+	<div id="BgLayer1"></div>
+
+	<script type="text/javascript">
+		(function ($) {
+			$(document).ready(function () {
+				//Carousel
+				$('.carousel').carousel({
+					interval: 5000
+				});
+				$('.carousel').carousel('next');
+
+				//Tooltips
+				$('a[rel=tooltip]').tooltip();
+
+				//Popovers
+				$('a[rel=popover]').popover({
+					trigger: 'hover'
+				});
+			});
+		})(jQuery);
+	</script>
+	<script type="text/javascript" >
+	(function( $ ) {
+		$("#MenuH .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
+		$("#MenuV .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Vertical" });
+	})(jQuery);
+	</script>
+	<!-- powered by BIND TUNING 2013 // http://www.bindtuning.com -->

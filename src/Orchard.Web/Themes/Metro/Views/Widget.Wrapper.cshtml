@@ -1,0 +1,40 @@
+@using Orchard.ContentManagement;
+@using Orchard.Widgets.Models;
+@{
+    var title = ((IContent)Model.ContentItem).As<WidgetPart>().Title;
+    var tag = Tag(Model, "article");
+    bool renderTitle = true;
+    var renderTitleObj = ((IContent)Model.ContentItem).As<WidgetPart>();
+    System.Reflection.PropertyInfo propInfoSrcObj = renderTitleObj.GetType().GetProperty("RenderTitle");
+    if (propInfoSrcObj != null) { renderTitle = Convert.ToBoolean(propInfoSrcObj.GetValue(renderTitleObj, null)); }
+}
+@tag.StartElement
+
+<div class="">
+	<div class="TL">
+		<div class="TR">
+			<div class="TM">
+	<span class="CTitle">	
+		@if ((HasText(title) && renderTitle) || Model.Header != null) {
+			if (HasText(title) && renderTitle) {@title}
+			@Display(Model.Header)
+		}
+	</span>
+	</div>
+		</div>
+	</div>
+	<div class="ML">
+		<div class="MR">
+			<div class="MM">	
+		@Display(Model.Child)
+		@if(Model.Footer != null) {@Display(Model.Footer)}
+	</div>
+		</div>
+	</div>
+	<div class="BL">
+		<div class="BR">
+			<div class="BM"></div>
+		</div>
+	</div>
+</div>
+@tag.EndElement

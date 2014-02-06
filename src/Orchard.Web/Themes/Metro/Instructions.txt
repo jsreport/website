@@ -1,0 +1,21 @@
+/* Bind Custom Theme:Metro */
+
+
+*** SEARCH NOTICE ***
+
+The Metro theme uses a custom Search Form,
+so the Search Feature should be enabled or the search box won't work.
+
+The Search feature can be installed by going to:
+Orchard > Gallery > Modules
+
+and then enabled:
+Orchard > Settings > Features
+
+
+*** ZONES **
+
+The theme uses the same 19 Zones as "TheThemeMachine" Theme.
+
+Regards
+Bind Team

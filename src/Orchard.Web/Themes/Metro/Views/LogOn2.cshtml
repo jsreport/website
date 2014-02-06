@@ -1,0 +1,55 @@
+@using Orchard.ContentManagement;
+<style type="text/css">ol, ol li {list-style-type: none;}</style>
+
+@{
+    var userCanRegister = @WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().UsersCanRegister;
+    var enableLostPassword = @WorkContext.CurrentSite.As<Orchard.Users.Models.RegistrationSettingsPart>().EnableLostPassword;
+}
+<div class="C04 container">
+<article class="widget-html-widget widget">
+	<div class="TL">
+		<div class="TR">
+			<div class="TM"></div>
+		</div>
+	</div>
+	<div class="ML">
+		<div class="MR">
+				<div class="MM">
+					<div class="CTitleBg"><div class="c_head"><span class="c_title"><span class="CTitle">@Html.TitleForPage((string)Model.Title)</span></div></div>
+					<div class="containercontent">
+<p>
+    @T("Please enter your username and password.") 
+    @if(userCanRegister) { @Html.ActionLink(T("Register").Text, "Register") @T(" if you don't have an account.") }
+    @if(enableLostPassword) { @Html.ActionLink(T("Lost your Password?").Text, "RequestLostPassword") }
+</p>
+@Html.ValidationSummary(T("Login was unsuccessful. Please correct the errors and try again.").ToString())
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("LogOn", new { ReturnUrl = Request.QueryString["ReturnUrl"] }))) {
+<fieldset class="login-form group">
+    <legend>@T("Account Information")</legend>
+    <ol>
+    <li>
+        <label for="username-email">@T("Username")</label>
+        @Html.TextBox("userNameOrEmail", "", new { id = "username-email", autofocus = "autofocus" })
+        @Html.ValidationMessage("userNameOrEmail")
+    </li>
+    <li>
+        <label for="password">@T("Password")</label>
+        @Html.Password("password")
+        @Html.ValidationMessage("password")
+    </li>
+    <button class="primaryAction" type="submit">@T("Sign In")</button>
+    </ol>
+</fieldset>
+}
+</div>
+				</div>
+		</div>
+	</div>
+	<div class="BL">
+		<div class="BR">
+			<div class="BM"></div>
+		</div>
+	</div>
+</article>
+</div>
