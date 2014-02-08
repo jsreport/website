@@ -92,6 +92,9 @@
   <ItemGroup>
     <Content Include="Views\Content-JsReportFeatureItem.Summary.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Widget-Name-QuickButtonsWidget.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v11.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
     <VisualStudio>
