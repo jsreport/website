@@ -72,21 +72,6 @@
 		<div class="container">
 			<div class="row-fluid">
 				<div id="Logo" class="span6"><h1><a href="/" title="Go to Home">@WorkContext.CurrentSite.SiteName</a></h1></div>
-				<div id="NavAux" class="span6">
-					<div id="Cart"></div>
-					<div id="Login">@if (Request.IsAuthenticated) {
-		<span class="user-actions">
-			@Html.ActionLink(T("Sign Out").ToString(), "LogOff", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })
-			@Html.ActionLink("Dashboard", "Index", new { Area = "Dashboard", Controller = "Admin" })
-		</span>
-} else {
-		<span class="user-actions">@Html.ActionLink(T("Sign In").ToString(), "LogOn", new { Controller = "Account", Area = "Orchard.Users", ReturnUrl = Context.Request.RawUrl })</span>
-}</div>
-					<div id="User">@if (Request.IsAuthenticated) {
-	<span class="welcome">@if(WorkContext.CurrentUser != null){@T("<strong>{0}</strong>", new HtmlString(Html.ActionLink( WorkContext.CurrentUser.UserName, "ChangePassword", new { Controller = "Account", Area = "Orchard.Users" }).ToString()))}</span>
-}</div>
-					<div id="Language"></div>
-				</div>
 			</div>
 			<nav class="row-fluid">
 				<div class="span9" id="MenuH">@if (Model.Navigation != null) {@Display(Model.Navigation)}</div>
@@ -101,11 +86,8 @@
 	<div class="container">
 		<div id="ContentArea">		
 			<div class="row-fluid">
-				<div class="span3">
-					<div id="MenuV"><div class="navholder"><script type="text/javascript">$("#MenuV .navholder").html($("#MenuH nav").parent().html());</script></div></div>
 					@if (Model.Messages != null){<div id="Messages" class="LeftZone"><div class="C00_Clean container-box">@Display(Model.Messages)</div></div>}
-				</div>
-				<div class="span9">
+				<div class="span12">
 					<div class="row-fluid">
 	@if (Model.BeforeMain != null){<div class="pane span12" runat="server" id="BeforeMain">@Display(Model.BeforeMain)</div>}
 </div>
@@ -195,7 +177,7 @@
 		})(jQuery);
 	</script>
 	<script type="text/javascript" >
-	(function( $ ) {
+	    (function ($) {
 		$("#MenuH .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Horizontal" });
 		$("#MenuV .menu").BindMENU({ MenuStyle: "DefaultMenu", Orientation: "Vertical" });
 	})(jQuery);
