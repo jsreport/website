@@ -1,0 +1,62 @@
+﻿@model Disqus.Comments.ViewModels.DisqusSettingsViewModel
+@using Orchard.Utility.Extensions;
+
+@{ Style.Require("DisqusModule"); }
+
+<h1>@Html.TitleForPage(T("Disqus Settings").ToString())</h1>
+@using (Html.BeginForm("SaveSettings", "Admin", new { area = "Disqus.Comments" }, FormMethod.Post, new { @class = "disqus-settings" }))
+{
+    <fieldset>
+        <label for="ShortName">
+            @T("Website shortname")
+        </label>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortName)
+            @Html.ValidationMessageFor(model => model.ShortName)
+            <span class="hint">@T("Your website shortname is available under Basic Settings on the ")
+                <a href="http://disqus.com/admin/settings/">@T("Disqus settings panel.")</a></span>
+        </div>
+    </fieldset>
+
+    <h2>
+        @T("Comment Synchronization")</h2>
+    <p>
+        @T(@"The Disqus module allows you to synchronize comments from the Disqus service into 
+        your Orchard database. This allows the comments to be displayed if the Disqus module 
+        is disabled. It also allows the comments to be included for search engines to index
+        as part of your site content.")</p>
+    <p>
+        @T(@"You can automatically synchronize your comments at a regular interval, or manually synchronize 
+            comments using the button on the ") @Html.ActionLink(T("Disqus manage page.").Text, "Index")</p>
+       
+    <fieldset>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SyncComments)
+            <label for="SyncComments">
+                Synchronize comments from Disqus</label>
+            @Html.ValidationMessageFor(model => model.SyncComments)
+        </div>
+        <label for="SecretKey">
+            @T("API secret key")
+        </label>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SecretKey)
+            @Html.ValidationMessageFor(model => model.SecretKey)
+            <span class="hint">@T("An API secret key is required to sync comments from Disqus. You can request an API secret key by")
+                <a href="http://disqus.com/api/applications/">@T("registering an application.")</a></span>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SyncInterval)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SyncInterval)
+            @Html.ValidationMessageFor(model => model.SyncInterval)
+            <span class="hint">@T("The time (in minutes) to wait between synchronizing comments.")</span>
+        </div>
+    </fieldset>
+    
+    @Html.Hidden("ReturnUrl", Context.Request.ToUrlString()) 
+    @Html.AntiForgeryTokenOrchard() 
+
+    <button class="primaryAction" type="submit">@T("Save")</button>
+}

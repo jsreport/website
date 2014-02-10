@@ -1,0 +1,12 @@
+Name: Disqus Comments
+AntiForgery: enabled
+Author: Microsoft DPE
+Website: http://disqusorchard.codeplex.com/
+Version: 0.9
+OrchardVersion: 1.0
+Description: Integrates the Disqus commenting system into Orchard.
+Features:
+    Disqus.Comments:
+		Name: Disqus Comments
+        Description: Integrates the Disqus commenting system into Orchard.
+        Category: Social

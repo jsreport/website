@@ -4,10 +4,18 @@
     Model.ContentItems.Classes.Add("list-items");
 }
 
-<div>
-@foreach (dynamic item in items){ 
-    <div class="span4">
-       @Display(item)
-    </div>
-}
+<div class="row">
+    @foreach (dynamic item in items.Take(3)) {
+        <div class="span4">
+            @Display(item)
+        </div>
+    }
+</div>
+
+<div class="row">
+    @foreach (dynamic item in items.Skip(3).Take(3)) {
+        <div class="span4">
+            @Display(item)
+        </div>
+    }
 </div>
