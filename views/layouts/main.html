@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="product" content="jsReport | Cloud reporting services">
+        <meta name="description" content="Cloud reporting services">
+        <meta name="author" content="jsReport">
+        <meta name="keywords" content="js, javascript, css, html, jsreport, template, report, opensource, pdf, cloud">
+
+        <link href="/css/metro-bootstrap.css" rel="stylesheet">
+        <link href="/css/metro-bootstrap-responsive.css" rel="stylesheet">
+        <link href="/css/docs.css" rel="stylesheet">
+        <link href="/js/prettify/prettify.css" rel="stylesheet">
+        <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/css/style.css" rel="stylesheet">
+        <!--<link href="/css/markdown.css" rel="stylesheet">-->
+	
+        <!-- Load JavaScript Libraries -->
+        <script src="/js/jquery/jquery.min.js"> </script>
+        <script src="/js/jquery/jquery.widget.min.js"> </script>
+        <script src="/js/jquery/jquery.mousewheel.js"> </script>
+        <script src="/js/prettify/prettify.js"> </script>
+
+        <!-- Metro UI CSS JavaScript plugins -->
+        <script src="/js/load-metro.js"> </script>
+
+        <!-- Local JavaScript -->
+        <script src="/js/docs.js"> </script>
+        <script src="/js/github.info.js"> </script>
+        <title>jsreport</title>
+    </head>
+
+    <body class="metro">
+        <div id="wrap">
+            <nav class="navigation-bar dark">
+                <nav class="navigation-bar-content container">
+                    <a class="element brand" href="/"><div class="brand-logo"></div></a>
+                    <a class="element brand {{#if home}}fg-blue{{/if}}" href="/">HOME</a>
+                    <a class="element brand {{#if playground}}fg-blue{{/if}}" href="/playground">PLAYGROUND</a>
+                    <a class="element brand {{#if onprem}}fg-blue{{/if}}" href="/on-prem">JSREPORT ON-PREM</a>
+                    <a class="element brand {{#if online}}fg-blue{{/if}}" href="/online">JSREPORT ONLINE</a>
+                    <a class="element brand {{#if learn}}fg-blue{{/if}}" href="/learn">LEARN</a>
+                    <a class="element brand {{#if about}}fg-blue{{/if}}" href="/about">ABOUT</a>
+                    <a class="element brand place-right" href="/" alt="Print"><span class="icon-printer"></span></a>
+                    <span class="element-divider place-right"></span>
+                    <a class="element brand place-right" href="/"><sup>STUDIO</sup></a>
+                    <a class="element brand place-right" href="/"><sup>MY ACCOUNT</sup></a>        
+                </nav>
+            </nav>
+            {{{body}}}
+        </div>
+        <div id="footer" class="bg-dark">
+            <div class="container fg-white">
+                &copy; 2014 <a href="/" class="fg-blue">jsreport</a> All rights reserved.
+                <a class="button info span3 place-right" href="https://github.com/jsreport/jsreport"><i class="icon-github"></i> Github</a>
+            </div>        
+        </div>
+    
+        <!-- /.container -->
+        <!-- JavaScript -->
+        <script src="/js/metro.min.js"> </script>
+    </body>
+</html>
