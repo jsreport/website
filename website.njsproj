@@ -237,6 +237,7 @@
     <Content Include="public\js\prettify\prettify.css" />
     <Content Include="public\min\metro-bootstrap-responsive.min.css" />
     <Content Include="public\min\metro-bootstrap.min.css" />
+    <Content Include="public\screenshots\playground.png" />
     <Content Include="README.md" />
     <Content Include="views\404.html" />
     <Content Include="views\about.html" />
@@ -276,6 +277,7 @@
     <Folder Include="public\js\metro\" />
     <Folder Include="public\js\prettify\" />
     <Folder Include="public\min\" />
+    <Folder Include="public\screenshots\" />
     <Folder Include="views\" />
     <Folder Include="views\layouts\" />
     <Folder Include="views\learn\" />

@@ -4,12 +4,24 @@ var express = require('express'),
     router = require("./router.js"),
     docs = require("./docs.js");
 
-app.engine('.html', exphbs({defaultLayout: 'main', extname: ".html"}));
+var hbs = exphbs.create({
+    defaultLayout: 'main',
+    extname: ".html",
+    helpers: {
+        fixCoding: function(content) {
+            if (content.charAt(0) === '\uFEFF')
+                content = content.substr(1);
+            return content;
+        }
+    }
+});
+
+app.engine('.html', hbs.engine);
 app.set('view engine', '.html');
 app.use(express.static('public/'));
 
-app.get('/', function (req, res) {
-    res.render('home', { home: true});
+app.get('/', function(req, res) {
+    res.render('home', { home: true });
 });
 
 app.get('/learn/:doc', docs.doc);
@@ -19,6 +31,7 @@ app.get('/online', router.online);
 app.get('/playground', router.playground);
 app.get('/on-prem', router.onprem);
 app.get('/about', router.about);
+app.get('/downloads', router.downloads);
 
 app.get('*', function(req, res) {
     res.status(404).render("404");

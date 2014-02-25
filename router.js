@@ -13,3 +13,7 @@ exports.online = function(req, res) {
 exports.about = function(req, res) {
     res.render("about", { about: true});
 };
+
+exports.downloads = function(req, res) {
+    res.render("downloads");
+};
