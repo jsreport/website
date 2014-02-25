@@ -9,18 +9,25 @@ marked.setOptions({
     }
 });
 
-exports.learn = function(req, res) {
-    var items = [];
-    for (var key in docs) {
-        items.push({ title: docs[key], link: key });
-    }
-
-    res.render('learn/learn', {
-        tutorials: items,
-        learn: true
-    });
+exports.extensions = function(req, res) {
+   res.render('learn/extensions', { learn: true });
 };
 
+
+exports.learn = function(req, res) {
+ res.render('learn/learn', { learn: true });
+};
+
+//   var items = [];
+//    for (var key in docs) {
+//        items.push({ title: docs[key], link: key });
+//    }
+
+//    res.render('learn/learn', {
+//        tutorials: items,
+//        learn: true
+//    });
+    
 exports.doc = function(req, res) {
     var filePath = path.join(__dirname, "views", "learn", "docs", req.params.doc + ".md");
     
@@ -40,3 +47,13 @@ exports.doc = function(req, res) {
         });
     });
 };
+
+    //<div>
+
+    //    <ul>
+    //        {{#each tutorials}}
+    //        <li><a href="/learn/{{this.link}}">{{this.title}}</a></li>
+    //        {{/each}}
+    //    </ul>
+        
+    //</div>

@@ -241,6 +241,7 @@
     <Content Include="README.md" />
     <Content Include="views\404.html" />
     <Content Include="views\about.html" />
+    <Content Include="views\downloads.html" />
     <Content Include="views\home.html" />
     <Content Include="views\layouts\main.html" />
     <Content Include="views\learn\doc.html" />
@@ -248,11 +249,13 @@
     <Content Include="views\learn\docs\child-templates.md" />
     <Content Include="views\learn\docs\get-started.md" />
     <Content Include="views\learn\docs\images.md" />
+    <Content Include="views\learn\docs\import-export.md" />
     <Content Include="views\learn\docs\inline-data.md" />
     <Content Include="views\learn\docs\net-client.md" />
     <Content Include="views\learn\docs\phantom-recipe.md" />
     <Content Include="views\learn\docs\reports.md" />
     <Content Include="views\learn\docs\scripts.md" />
+    <Content Include="views\learn\extensions.html" />
     <Content Include="views\learn\learn.html" />
     <Content Include="views\online.html" />
     <Content Include="views\onprem.html" />

@@ -24,8 +24,10 @@ app.get('/', function(req, res) {
     res.render('home', { home: true });
 });
 
+app.get('/learn/extensions', docs.extensions);
 app.get('/learn/:doc', docs.doc);
 app.get('/learn', docs.learn);
+
 
 app.get('/online', router.online);
 app.get('/playground', router.playground);

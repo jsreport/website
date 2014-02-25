@@ -1,0 +1,64 @@
+﻿<div class="bg-cyan no-tablet-portrait no-phone main-title">
+    <div class="container padding20 fg-white">
+        <h1 class="fg-white">
+            <a href="/learn"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
+            jsreport extensions
+        </h1>
+    </div></div>
+<div class="container">
+    
+    <div class="grid fluid">
+        <div class="row">
+            <a href="/learn/inline-data">
+                <div class="tile double button bg-emerald padding20 text-center bg-hover-gray">
+                    <h2 class="fg-white">Inline data</h2>
+                </div>
+            </a>
+        
+    
+            <a href="/learn/images">
+                <div class="tile double button bg-orange padding20 text-center bg-hover-gray">
+                    <h2 class="fg-white">Images</h2>
+                </div>
+            </a>
+        
+            <a href="/learn/scripts">
+                <div class="tile double button bg-magenta padding20 text-center bg-hover-gray">
+                    <h2 class="fg-white">Scripting</h2>
+                </div>
+            </a>
+        </div>
+    
+        <div class="row">
+            <a href="/learn/child-templates">
+                <div class="tile double button bg-lightBlue padding20 text-center bg-hover-gray">
+                    <h2 class="fg-white">Child templates</h2>
+                </div>
+            </a>
+             
+            <a href="/learn/reports">
+                <div class="tile double button bg-lightPink padding20 text-center bg-hover-gray">
+                    <h2 class="fg-white">Reports</h2>
+                </div>
+            </a>
+             
+            <a href="/learn/import-export">
+                <div class="tile double button bg-olive padding20 text-center bg-hover-gray">
+                    <h2 class="fg-white">Import Export</h2>
+                </div>
+            </a>
+        </div>
+         
+    </div>
+
+   
+    <div>
+
+        <ul>
+            {{#each tutorials}}
+            <li><a href="/learn/{{this.link}}">{{this.title}}</a></li>
+            {{/each}}
+        </ul>
+        
+    </div>
+</div>

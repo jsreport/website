@@ -8,4 +8,5 @@
     "API": "API",
     "reports": "Reports extension",
     "net-client": ".NET client",
+    "import-export": "Import Export extension",
 };
