@@ -4,6 +4,5 @@ The input to the report generation process is the report template and some json 
 
 `Inline data` extension allows you to statically define input data directly in jsreport studio and easilly test your templates. The input data are defined using json syntax. You can define single input data and reuse them in many templates in `online` and `on-prem` version where you can use only one data for one template in `playground`.
 
-? screen of inline data ?
 
 

@@ -16,7 +16,7 @@ Everytime you call jsreport API to render report, you will get back stream with 
 
 `Reports` extension also adds several usecases to the jsreport studio in which you can see recently rendered reports and so on.
 
-? screen of the reports in studio ?
+![reports in studio](http://jsreport.net/screenshots/reports.png)
 
 > you can use API and odata endpoint to query or CRUD reports:  https://test.jsreportonline.net/odata/reports
 

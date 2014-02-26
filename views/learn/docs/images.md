@@ -4,10 +4,8 @@
 
 You can easily upload image from the actions menu.
 
-?upload image screenshot? 
+![upload image](http://jsreport.net/screenshots/uploadImage.png)
 
 When you have uploaded image, you can insert it to the any template. The easiest way is to read the instructions that will popup when you will hit `Insert into template` from the toolbar.
 
-?toolbar image screenshot? 
-
-?popup screenshot?
+![insert image](http://jsreport.net/screenshots/insertImage.png)

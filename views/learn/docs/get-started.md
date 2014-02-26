@@ -16,11 +16,11 @@ How to install jsreport on your server or how to register to online version is n
 
 When you have jsreport server you need to create a report template defining how will the report look like and how it will be rendered. The best way to define report template is to use html based studio which is hosted in jsreport server and you can access it using any web browser.
 
-?studio screenshot?
+![jsreport studio](http://jsreport.net/screenshots/studio.png)
 
 Typical scenario is that you will define a report template during design time and call jsreport API in runtime to render reports. The input of rendering process is the report template and some kind of a data report will display. For example if you want a monthly sales report for your company. You will have one report template, but the report data will be different every month.
 
-?schema of architecture, worflow?
+![architecture](http://jsreport.net/screenshots/architecture.png)
 
 ## Report templates
 
@@ -42,12 +42,12 @@ The templates are defined using common javascript templating engines (like [jsre
 
 Every template can use different templating engine. And it's up to you which you will choose. They have very similar feature scope and only use different syntax, but every one has different prefferences.
 
-?specify engine in the studio screen?
+![engine specification](http://jsreport.net/screenshots/engine.png)
 
 ### Recipes
 jsreport is not only great for rendering output formats based on xml like html. It can also easily convert html into pdf using [phantomjs](phantomjs.org). Or even generate precise pdf using [Apache FOP](http://xmlgraphics.apache.org/fop). You can customize the rendering process and output format with specifying report template recipe. 
 
-?specify recipe in the studio screen?
+![recipe specification](http://jsreport.net/screenshots/recipe.png)
 
 Currently there are three recipes you can choose:
 
