@@ -9743,8 +9743,8 @@ a {
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-.metro code :not(.documentation),
-.metro .code :not(.documentation) {
+/*.metro code,
+.metro .code {
   font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-style: normal;
@@ -9761,7 +9761,7 @@ a {
   border: 1px #d4d4d4 solid;
   font-size: 90%;
   line-height: 90%;
-}
+}*/
 .metro .label {
   display: inline-block;
   padding: 3px 5px;

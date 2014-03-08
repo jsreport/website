@@ -115,7 +115,9 @@
     <Compile Include="router.js" />
     <Compile Include="views\learn\docs.js" />
     <Content Include="package.json" />
+    <Content Include="public\css\bootstrap-nonresponsive.css" />
     <Content Include="public\css\docs.css" />
+    <Content Include="public\css\github.css" />
     <Content Include="public\css\less\docs.less" />
     <Content Include="public\css\markdown.css" />
     <Content Include="public\css\metro-bootstrap-responsive.css" />

@@ -43,7 +43,8 @@ exports.doc = function(req, res) {
              content: marked(content),
              url: "http://jsreport.net" + req.url,
              id: req.params.doc,
-             learn: true
+             learn: true,
+             linkDocCss: true
         });
     });
 };
