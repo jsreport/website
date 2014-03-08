@@ -9743,8 +9743,8 @@ a {
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
-.metro code,
-.metro .code {
+.metro code :not(.documentation),
+.metro .code :not(.documentation) {
   font-family: 'Segoe UI_', 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
   font-weight: normal;
   font-style: normal;
