@@ -119,7 +119,6 @@
     <Content Include="public\css\docs.css" />
     <Content Include="public\css\github.css" />
     <Content Include="public\css\less\docs.less" />
-    <Content Include="public\css\markdown.css" />
     <Content Include="public\css\metro-bootstrap-responsive.css" />
     <Content Include="public\css\metro-bootstrap.css" />
     <Content Include="public\css\style.css" />
