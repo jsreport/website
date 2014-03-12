@@ -27,6 +27,9 @@ app.get('/', function(req, res) {
 app.get('/learn/extensions', docs.extensions);
 app.get('/learn/:doc', docs.doc);
 app.get('/learn', docs.learn);
+app.get('/examples/certificates', function(req, res) {
+    return res.render("examples/certificates");
+});
 
 
 app.get('/online', router.online);
@@ -34,6 +37,7 @@ app.get('/playground', router.playground);
 app.get('/on-prem', router.onprem);
 app.get('/about', router.about);
 app.get('/downloads', router.downloads);
+app.get('/embedding', router.embedding);
 
 app.get('*', function(req, res) {
     res.status(404).render("404");

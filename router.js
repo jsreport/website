@@ -17,3 +17,7 @@ exports.about = function(req, res) {
 exports.downloads = function(req, res) {
     res.render("downloads");
 };
+
+exports.embedding = function(req, res) {
+    res.render("embedding");
+};

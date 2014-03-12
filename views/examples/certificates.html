@@ -1,0 +1,60 @@
+﻿<div class="bg-cyan main-title">
+    <div class="container padding20 fg-white">
+        <h1 class="fg-white">
+            <a href="/embedding"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
+            certificates example
+        </h1>
+    </div>
+</div>
+
+<div class="container">
+    
+    <div class="description padding20 bg-grayLighter">
+        <p>
+            This is very simple example of jsreport embedding function. 
+        </p>
+        <p>
+            You can find jsreport template for this example 
+            <a href="https://playground.jsreport.net/#/playground/g1R9YLmgj/3">here</a>
+        </p>
+        <p>
+            You can find sample excel sheet with correct structure 
+            <a href="/examples/certificates.xls">here</a>
+        </p>
+    </div>
+    
+    <div class="description padding20 bg-grayLighter">
+         <p>This is the html5 code anyone can insert into his website</p>
+        <code class="metroCode">
+            &lt;div id=&quot;jsr-root&quot; data-shortid=&quot;g1R9YLmgj&quot; data-version=&quot;3&quot;<br/>
+            data-fileInput=&quot;true&quot; data-dataArea=&quot;true&quot; /&gt;<br/><br/>
+
+            &lt;script&gt;(function (d, s, id) {<br/>
+            var js, fjs = d.getElementsByTagName(s)[0];<br/>
+            if (d.getElementById(id)) return;<br/>
+            js = d.createElement(s); js.id = id;<br/>
+            js.src = &quot;//jsreport.net/js/embed.js&quot;;<br/>
+            fjs.parentNode.insertBefore(js, fjs);<br/>
+            }(document, 'script', 'jsr-embeded'));<br/>
+            &lt;/script&gt; 
+        </code>
+    </div>
+    <div class="description padding20 bg-grayLighter"> 
+        <p>And this will be the result</p>
+        <div id="jsr-root" data-shortid="g1R9YLmgj" data-version="3"
+             data-fileInput="true"></div>
+
+        <script> (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "//jsreport.net/js/embed.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'jsr-embeded')); </script> 
+    </div>
+    
+    <img src="/screenshots/certificates-input.png"/>
+    <img src="/screenshots/certificates-result.png" style="margin-left:30px"/>
+   
+</div>
