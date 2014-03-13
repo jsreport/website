@@ -3,10 +3,9 @@
   <head>                  
     <meta charset="utf-8">             
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">             
-    <meta name="product" content="jsReport | Cloud reporting services">             
-    <meta name="description" content="Cloud reporting services">             
-    <meta name="author" content="jsReport">             
-    <meta name="keywords" content="js, javascript, css, html, jsreport, template, report, opensource, pdf, cloud">             
+      {{#if description}}
+    <meta name="description" content="{{{description}}}">
+    {{/if}}
     <link rel="shortcut icon" href="/img/favicon.ico">             
     <link href="/css/metro-bootstrap.css" rel="stylesheet">             
     <link href="/css/metro-bootstrap-responsive.css" rel="stylesheet">             
@@ -27,8 +26,11 @@
   <!-- Local JavaScript -->           
     <script src="/js/docs.js"> </script>           
     <script src="/js/github.info.js"> </script>               
-    <title>jsreport     
-    </title>       
+    <title>{{#if title}}
+        {{{title}}}
+        {{else}}
+        jsreport: javascript based reporting platform
+    {{/if}}</title>       
   </head>       
   <body class="metro">             
     <div id="wrap">                   

@@ -21,7 +21,11 @@ app.set('view engine', '.html');
 app.use(express.static('public/'));
 
 app.get('/', function(req, res) {
-    res.render('home', { home: true });
+    res.render('home', {
+         home: true, 
+         title: "jsreport - javascript based reporting platform",
+         description: "jsreport is an open source reporting platform where reports are designed using popular javascript templating engines."
+    });
 });
 
 app.get('/learn/extensions', docs.extensions);

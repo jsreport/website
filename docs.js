@@ -15,7 +15,7 @@ exports.extensions = function(req, res) {
 
 
 exports.learn = function(req, res) {
- res.render('learn/learn', { learn: true });
+ res.render('learn/learn', { learn: true, title: "Learn jsreport" });
 };
 
 //   var items = [];

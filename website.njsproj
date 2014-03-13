@@ -240,7 +240,9 @@
     <Content Include="public\js\prettify\prettify.css" />
     <Content Include="public\min\metro-bootstrap-responsive.min.css" />
     <Content Include="public\min\metro-bootstrap.min.css" />
+    <Content Include="public\robots.txt" />
     <Content Include="public\screenshots\playground.png" />
+    <Content Include="public\sitemap.xml" />
     <Content Include="README.md" />
     <Content Include="views\404.html" />
     <Content Include="views\about.html" />
