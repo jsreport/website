@@ -31,6 +31,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="docs.js" />
+    <Compile Include="Gruntfile.js" />
     <Compile Include="public\js\embed.js" />
     <Compile Include="public\js\docs.js" />
     <Compile Include="public\js\github.info.js" />
@@ -116,7 +117,6 @@
     <Compile Include="router.js" />
     <Compile Include="views\learn\docs.js" />
     <Content Include="package.json" />
-    <Content Include="public\css\bootstrap-nonresponsive.css" />
     <Content Include="public\css\docs.css" />
     <Content Include="public\css\github.css" />
     <Content Include="public\css\less\docs.less" />
@@ -124,7 +124,6 @@
     <Content Include="public\css\metro-bootstrap.css" />
     <Content Include="public\css\style.css" />
     <Content Include="public\examples\certificates.xls" />
-    <Content Include="public\font-awesome\css\font-awesome.css" />
     <Content Include="public\font-awesome\css\font-awesome.min.css" />
     <Content Include="public\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="public\font-awesome\fonts\fontawesome-webfont.svg" />
