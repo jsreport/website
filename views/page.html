@@ -1,0 +1,22 @@
+﻿<div class="bg-cyan main-title">
+    <div class="container padding20 fg-white">
+        <h1 class="fg-white">
+            <a href="/"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
+            jsreport blog
+        </h1>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="listview-outlook">
+        {{#each posts}}
+        <a href="{{url}}" class="list marked">
+            <div class="list-content">
+                <span class="list-title">{{title}}</span>
+                <span class="list-remark">{{toLongDate date}}</span>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</div>

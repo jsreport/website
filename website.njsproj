@@ -32,6 +32,7 @@
     <Compile Include="app.js" />
     <Compile Include="docs.js" />
     <Compile Include="Gruntfile.js" />
+    <Compile Include="posts.js" />
     <Compile Include="public\js\embed.js" />
     <Compile Include="public\js\docs.js" />
     <Compile Include="public\js\github.info.js" />
@@ -117,6 +118,8 @@
     <Compile Include="router.js" />
     <Compile Include="views\learn\docs.js" />
     <Content Include="package.json" />
+    <Content Include="public\blog\cesko.png" />
+    <Content Include="public\blog\wtf.png" />
     <Content Include="public\css\docs.css" />
     <Content Include="public\css\github.css" />
     <Content Include="public\css\less\docs.less" />
@@ -265,10 +268,16 @@
     <Content Include="views\learn\learn.html" />
     <Content Include="views\online.html" />
     <Content Include="views\onprem.html" />
+    <Content Include="views\page.html" />
     <Content Include="views\playground.html" />
+    <Content Include="views\post.html" />
     <Content Include="web.config" />
+    <Content Include="_posts\welcome-to-jsreport.md" />
+    <Content Include="_posts\national-characters-in-phantom-pdf.md" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="public\blog\" />
+    <Folder Include="_posts\" />
     <Folder Include="public\" />
     <Folder Include="public\css\" />
     <Folder Include="public\css\less\" />

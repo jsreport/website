@@ -14,7 +14,7 @@ Next two sections are describing these use cases in detail.
 ## Rendering report
 Invoking rendering process is the most common API method you will call. The next snippet shows the service enpoint url as well as the body schema.
 
-> `POST:` https://test.jsreportonline.net/report
+> `POST:` https://test.jsreportonline.net/api/report
 > `BODY:`
 >```js 
    { 
@@ -25,16 +25,16 @@ Invoking rendering process is the most common API method you will call. The next
 >```
 
 In the most typical case, you will just insert your template shortid and input data. The best way to find out shortid and to get other informations is to use API button in the template designer. This button will popup dialog with very usefull informations for the particular template you should have in order to render it using API.
-
-? screen of the api button and dialog ?
-
 Using this dialog is quite important because options you have may be different based on the extensions you have activated. 
+
+![API dialog](http://jsreport.net/screenshots/API.png)
+
 
 > See the POST response headers to get usefull informations about report like content type.
 
 In the advanced scenario where you have some kind of a dynamic template, you can remove `shortid` value from the request and fill template attributes manually as you want. Look at the following snippet rendering simple hello world.
 
-> `POST:` https://test.jsreportonline.net/report
+> `POST:` https://test.jsreportonline.net/api/report
 > `BODY:`
 >```js 
    { 

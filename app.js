@@ -4,6 +4,7 @@ var express = require('express'),
     router = require("./router.js"),
     docs = require("./docs.js");
 
+
 var hbs = exphbs.create({
     defaultLayout: 'main',
     extname: ".html",
@@ -12,6 +13,12 @@ var hbs = exphbs.create({
             if (content.charAt(0) === '\uFEFF')
                 content = content.substr(1);
             return content;
+        },
+        toShortDate: function(date) {
+            return require("moment")(date).format("MM.DD.YYYY");
+        },
+        toLongDate: function(date) {
+            return require("moment")(date).format("MM.DD.YYYY HH:mm");
         }
     }
 });
@@ -22,9 +29,9 @@ app.use(express.static('public/'));
 
 app.get('/', function(req, res) {
     res.render('home', {
-         home: true, 
-         title: "jsreport - javascript based reporting platform",
-         description: "jsreport is an open source reporting platform where reports are designed using popular javascript templating engines."
+        home: true,
+        title: "jsreport - javascript based reporting platform",
+        description: "jsreport is an open source reporting platform where reports are designed using popular javascript templating engines."
     });
 });
 
@@ -43,10 +50,14 @@ app.get('/about', router.about);
 app.get('/downloads', router.downloads);
 app.get('/embedding', router.embedding);
 
-app.get('*', function(req, res) {
-    res.status(404).render("404");
+
+require("./posts.js")(app).then(function() {
+
+    app.get('*', function(req, res) {
+        res.status(404).render("404");
+    });
+
+    app.listen(process.env.PORT);
+
+    console.log('express3-handlebars example server listening on: 3000');
 });
-
-app.listen(process.env.PORT);
-
-console.log('express3-handlebars example server listening on: 3000');
