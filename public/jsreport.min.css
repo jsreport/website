@@ -12283,6 +12283,7 @@ img.profil {
 .top40 {
 display: block;
 margin-top: 40px;
+margin-bottom: 40px;
 }
 
 .center {
@@ -12305,4 +12306,9 @@ margin-top: 10px;
 }
 
 .code-img {margin-top: 5px;}
+
+.listview-outlook {
+margin-top: 20px;
+margin-bottom: 20px;
+}
 

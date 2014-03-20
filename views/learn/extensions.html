@@ -6,59 +6,67 @@
         </h1>
     </div></div>
 <div class="container">
-    
     <div class="grid fluid">
         <div class="row">
+          <div class="span4">
             <a href="/learn/inline-data">
-                <div class="tile double button bg-emerald padding20 text-center bg-hover-gray">
-                    <h2 class="fg-white">Inline data</h2>
-                </div>
+                <button class="span12 bg-magenta padding20 text-center bg-hover-gray">
+						<h2 class="fg-white">Inline Data<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                </button>
             </a>
+          </div>
         
-    
+          <div class="span4">
             <a href="/learn/images">
-                <div class="tile double button bg-orange padding20 text-center bg-hover-gray">
-                    <h2 class="fg-white">Images</h2>
-                </div>
+                <button class="span12 bg-lightBlue padding20 text-center bg-hover-gray">
+						<h2 class="fg-white">Images<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                </button>
             </a>
-        
+          </div>
+
+          <div class="span4">
             <a href="/learn/scripts">
-                <div class="tile double button bg-magenta padding20 text-center bg-hover-gray">
-                    <h2 class="fg-white">Scripting</h2>
-                </div>
+                <button class="span12 bg-orange padding20 text-center bg-hover-gray">
+						<h2 class="fg-white">Scripting<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                </button>
             </a>
+          </div>
         </div>
-    
+        
         <div class="row">
+          <div class="span4">
             <a href="/learn/child-templates">
-                <div class="tile double button bg-lightBlue padding20 text-center bg-hover-gray">
-                    <h2 class="fg-white">Child templates</h2>
-                </div>
+                <button class="span12 bg-magenta padding20 text-center bg-hover-gray">
+						<h2 class="fg-white">Child templates<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                </button>
             </a>
-             
+          </div>
+        
+          <div class="span4">
             <a href="/learn/reports">
-                <div class="tile double button bg-lightPink padding20 text-center bg-hover-gray">
-                    <h2 class="fg-white">Reports</h2>
-                </div>
+                <button class="span12 bg-lightBlue padding20 text-center bg-hover-gray">
+						<h2 class="fg-white">Reports<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                </button>
             </a>
-             
+          </div>
+
+          <div class="span4">
             <a href="/learn/import-export">
-                <div class="tile double button bg-olive padding20 text-center bg-hover-gray">
-                    <h2 class="fg-white">Import Export</h2>
-                </div>
+                <button class="span12 bg-orange padding20 text-center bg-hover-gray">
+						<h2 class="fg-white">Import Export<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                </button>
             </a>
+          </div>
         </div>
-         
+       
     </div>
 
    
-    <div>
-
+    <div>   
         <ul>
             {{#each tutorials}}
             <li><a href="/learn/{{this.link}}">{{this.title}}</a></li>
             {{/each}}
-        </ul>
-        
+        </ul>           
     </div>
 </div>

@@ -113,6 +113,7 @@
     <Compile Include="public\js\prettify\lang-yaml.js" />
     <Compile Include="public\js\prettify\prettify.js" />
     <Compile Include="public\js\prettify\run_prettify.js" />
+    <Compile Include="public\js\print.js" />
     <Compile Include="public\js\start-screen.js" />
     <Compile Include="public\min\metro.min.js" />
     <Compile Include="router.js" />
@@ -272,6 +273,7 @@
     <Content Include="views\playground.html" />
     <Content Include="views\post.html" />
     <Content Include="web.config" />
+    <Content Include="_posts\asp-net-mvc-render-pdf-from-view.md" />
     <Content Include="_posts\welcome-to-jsreport.md" />
     <Content Include="_posts\national-characters-in-phantom-pdf.md" />
   </ItemGroup>
