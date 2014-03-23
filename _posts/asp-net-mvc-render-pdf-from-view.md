@@ -1,11 +1,9 @@
 ﻿{{{
-    "title"    : "jsreport asp.net mvc integration",  
+    "title"    : "Rendering pdf from Asp.Net MVC views",  
     "date"     : "03-20-2014 20:56"
 }}}
 
 
-
-###jsreport asp.net mvc integration###
 We are excited to announce that we have just released [nuget package](https://www.nuget.org/packages/jsreport.MVC) allowing to render pdf from asp.net mvc views using jsreport platform. The idea in behind is very simple. Just grap the html that is rendered by the view, send it to jsreport server and let it transform into pdf using [phantomjs](http://phantomjs.org).
 
 

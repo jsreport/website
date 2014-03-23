@@ -4,18 +4,20 @@
     marked = require("marked");
 
 marked.setOptions({
-    highlight: function(code) {
-        return require('highlight.js').highlightAuto(code).value;
+    highlight: function(code, lang, callback) {
+        require('pygmentize-bundled')({ lang: lang, format: 'html', options: { nowrap: true } }, code, function(err, result) {
+            callback(err, result.toString());
+        });
     }
 });
 
 exports.extensions = function(req, res) {
-   res.render('learn/extensions', { learn: true });
+    res.render('learn/extensions', { learn: true });
 };
 
 
 exports.learn = function(req, res) {
- res.render('learn/learn', { learn: true, title: "Learn jsreport" });
+    res.render('learn/learn', { learn: true, title: "Learn jsreport" });
 };
 
 //   var items = [];
@@ -27,10 +29,10 @@ exports.learn = function(req, res) {
 //        tutorials: items,
 //        learn: true
 //    });
-    
+
 exports.doc = function(req, res) {
     var filePath = path.join(__dirname, "views", "learn", "docs", req.params.doc + ".md");
-    
+
     if (!fs.existsSync(filePath)) {
         return res.status(404).render("404");
     }
@@ -39,12 +41,14 @@ exports.doc = function(req, res) {
         if (content.charAt(0) === '\uFEFF')
             content = content.substr(1);
 
-        res.render('learn/doc', {
-             content: marked(content),
-             url: "http://jsreport.net" + req.url,
-             id: req.params.doc,
-             learn: true,
-             linkDocCss: true
+        marked(content, function(err, renderedContent) {
+            res.render('learn/doc', {
+                content: renderedContent,
+                url: "http://jsreport.net" + req.url,
+                id: req.params.doc,
+                learn: true,
+                linkDocCss: true
+            });
         });
     });
 };

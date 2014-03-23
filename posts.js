@@ -6,14 +6,21 @@
     var marked = require("marked");
 
     marked.setOptions({
-        highlight: function(code) {
-            return require('highlight.js').highlightAuto(code).value;
+        highlight: function (code, lang, callback) {
+            require('pygmentize-bundled')({ lang: lang, format: 'html', options: { nowrap: true }}, code, function (err, result) {
+                callback(err, result.toString());
+            });
         }
     });
 
     poet.addTemplate({
         ext: 'md',
-        fn: function(s) { return marked(s); }
+        fn: function(s, cb) {
+            marked(s, function (err, content) {
+                if (err) return cb(err);
+                cb(null, content);
+            });
+        }
     });
 
     poet.addRoute('/blog/:post', function(req, res, next) {

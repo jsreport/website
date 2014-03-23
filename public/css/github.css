@@ -1,476 +1,104 @@
-/** * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/) * http://cssreset.com */
-
-.documentation html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite,
-code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form,
-label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header,
-hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-        
-        /* HTML5 display-role reset for older browsers */
-
-.documentation article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
-
-body { line-height: 1; }
-
-.documentation ol, ul { list-style: none; }
-
-.documentation blockquote, q { quotes: none; }
-
-.documentation blockquote:before, blockquote:after, q:before, q:after {
-    content: '';
-    content: none;
-}
-
-.documentation table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-.documentation {
-    font-family: Helvetica, arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: white;
-    padding: 30px;
-}
-
-.documentation div,
-span,
-p {
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.documentation p {
-    color: inherit;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-.documentation > *:first-child { margin-top: 0 !important; }
-
-.documentation > *:last-child { margin-bottom: 0 !important; }
-
-.documentation a { color: #4183C4; }
-
-.documentation a.absent { color: #cc0000; }
-
-.documentation a.anchor {
-    display: block;
-    padding-left: 30px;
-    margin-left: -30px;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.documentation h1, h2, h3, h4, h5, h6 {
-    margin: 20px 0 10px;
-    padding: 0;
-    font-weight: bold;
-    -webkit-font-smoothing: antialiased;
-    cursor: text;
-    position: relative;
-}
-
-.documentation h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
-    background: url("../../images/modules/styleguide/para.png") no-repeat 10px center;
-    text-decoration: none;
-}
-
-.documentation h1 tt, h1 code { font-size: inherit; }
-
-.documentation h2 tt, h2 code { font-size: inherit; }
-
-.documentation h3 tt, h3 code { font-size: inherit; }
-
-.documentation h4 tt, h4 code { font-size: inherit; }
-
-.documentation h5 tt, h5 code { font-size: inherit; }
-
-.documentation h6 tt, h6 code { font-size: inherit; }
-
-.documentation h1 {
-    font-size: 28px;
-    color: black;
-}
-
-.documentation h2 {
-    font-size: 24px;
-    border-bottom: 1px solid #cccccc;
-    color: black;
-}
-
-.documentation h3 { font-size: 18px; }
-
-.documentation h4 { font-size: 16px; }
-
-.documentation h5 { font-size: 14px; }
-
-.documentation h6 {
-    color: #777777;
-    font-size: 14px;
-}
-
-.documentation p, blockquote, ul, ol, dl, li, table, pre { margin: 15px 0; }
-
-.documentation hr {
-    background: transparent url("../../images/modules/pulls/dirty-shade.png") repeat-x 0 0;
-    border: 0 none;
-    color: #cccccc;
-    height: 4px;
-    padding: 0;
-}
-
-.documentation body > h2:first-child {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.documentation body > h1:first-child {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.documentation body > h1:first-child + h2 {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.documentation body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.documentation a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-.documentation h1 p, h2 p, h3 p, h4 p, h5 p, h6 p { margin-top: 0; }
-
-.documentation li p.first { display: inline-block; }
-
-.documentation ul, ol { padding-left: 30px; }
-
-.documentation ul :first-child, ol :first-child { margin-top: 0; }
-
-.documentation ul :last-child, ol :last-child { margin-bottom: 0; }
-
-.documentation dl { padding: 0; }
-
-.documentation dl dt {
-    font-size: 14px;
-    font-weight: bold;
-    font-style: italic;
-    padding: 0;
-    margin: 15px 0 5px;
-}
-
-.documentation dl dt:first-child { padding: 0; }
-
-.documentation dl dt > :first-child { margin-top: 0; }
-
-.documentation dl dt > :last-child { margin-bottom: 0; }
-
-.documentation dl dd {
-    margin: 0 0 15px;
-    padding: 0 15px;
-}
-
-.documentation dl dd > :first-child { margin-top: 0; }
-
-.documentation dl dd > :last-child { margin-bottom: 0; }
-
-.documentation blockquote {
-    border-left: 4px solid #dddddd;
-    padding: 0 15px;
-    color: #777777;
-}
-
-.documentation blockquote > :first-child { margin-top: 0; }
-
-.documentation blockquote > :last-child { margin-bottom: 0; }
-
-.documentation table { padding: 0; }
-
-.documentation table tr {
-    border-top: 1px solid #cccccc;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
-.documentation table tr:nth-child(2n) { background-color: #f8f8f8; }
-
-.documentation table tr th {
-    font-weight: bold;
-    border: 1px solid #cccccc;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-}
-
-.documentation table tr td {
-    border: 1px solid #cccccc;
-    text-align: left;
-    margin: 0;
-    padding: 6px 13px;
-}
-
-.documentation table tr th :first-child, table tr td :first-child { margin-top: 0; }
-
-.documentation table tr th :last-child, table tr td :last-child { margin-bottom: 0; }
-
-.documentation img { max-width: 100%; }
-
-.documentation span.frame {
-    display: block;
-    overflow: hidden;
-}
-
-.documentation span.frame > span {
-    border: 1px solid #dddddd;
-    display: block;
-    float: left;
-    overflow: hidden;
-    margin: 13px 0 0;
-    padding: 7px;
-    width: auto;
-}
-
-.documentation span.frame span img {
-    display: block;
-    float: left;
-}
-
-.documentation span.frame span span {
-    clear: both;
-    color: #333333;
-    display: block;
-    padding: 5px 0 0;
-}
-
-.documentation span.align-center {
-    display: block;
-    overflow: hidden;
-    clear: both;
-}
-
-.documentation span.align-center > span {
-    display: block;
-    overflow: hidden;
-    margin: 13px auto 0;
-    text-align: center;
-}
-
-.documentation span.align-center span img {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.documentation span.align-right {
-    display: block;
-    overflow: hidden;
-    clear: both;
-}
-
-.documentation span.align-right > span {
-    display: block;
-    overflow: hidden;
-    margin: 13px 0 0;
-    text-align: right;
-}
-
-.documentation span.align-right span img {
-    margin: 0;
-    text-align: right;
-}
-
-.documentation span.float-left {
-    display: block;
-    margin-right: 13px;
-    overflow: hidden;
-    float: left;
-}
-
-.documentation span.float-left span { margin: 13px 0 0; }
-
-.documentation span.float-right {
-    display: block;
-    margin-left: 13px;
-    overflow: hidden;
-    float: right;
-}
-
-.documentation span.float-right > span {
-    display: block;
-    overflow: hidden;
-    margin: 13px auto 0;
-    text-align: right;
-}
-
-.documentation code, tt {
-    margin: 0 2px;
-    padding: 0 5px;
-    white-space: nowrap;
-    border: 1px solid #eaeaea;
-    background-color: #f8f8f8;
-    border-radius: 3px;
-}
-
-.documentation pre code {
-    margin: 0;
-    padding: 0;
-    white-space: pre;
-    border: none;
-    background: transparent;
-}
-
-.documentation .highlight pre {
-    background-color: #f8f8f8;
-    border: 1px solid #cccccc;
-    font-size: 13px;
-    line-height: 19px;
-    overflow: auto;
-    padding: 6px 10px;
-    border-radius: 3px;
-}
-
-.documentation pre {
-    background-color: #f8f8f8;
-    border: 1px solid #cccccc;
-    font-size: 13px;
-    line-height: 19px;
-    overflow: auto;
-    padding: 6px 10px;
-    border-radius: 3px;
-}
-
-.documentation pre code, pre tt {
-    background-color: transparent;
-    border: none;
-}
-/*
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-
-.documentation .hljs {
-    display: block;
-    padding: 0.5em;
-    color: #333;
-    background: #f8f8f8
-}
-
-.documentation .hljs-comment,
-.documentation .hljs-template_comment,
-.documentation .diff .hljs-header,
-.documentation .hljs-javadoc {
-    color: #998;
-    font-style: italic
-}
-
-.documentation .hljs-keyword,
-.documentation .css .rule .hljs-keyword,
-.documentation .hljs-winutils,
-.documentation .javascript .hljs-title,
-.documentation .nginx .hljs-title,
-.documentation .hljs-subst,
-.documentation .hljs-request,
-.documentation .hljs-status {
-    color: #333;
-    font-weight: bold
-}
-
-.documentation .hljs-number,
-.documentation .hljs-hexcolor,
-.documentation .ruby .hljs-constant { color: #099; }
-
-.documentation .hljs-string,
-.documentation .hljs-tag .hljs-value,
-.documentation .hljs-phpdoc,
-.documentation .tex .hljs-formula { color: #d14 }
-
-.documentation .hljs-title,
-.documentation .hljs-id,
-.documentation .coffeescript .hljs-params,
-.documentation .scss .hljs-preprocessor {
-    color: #900;
-    font-weight: bold
-}
-
-.documentation .javascript .hljs-title,
-.documentation .lisp .hljs-title,
-.documentation .clojure .hljs-title,
-.documentation .hljs-subst { font-weight: normal }
-
-.documentation .hljs-class .hljs-title,
-.documentation .haskell .hljs-type,
-.documentation .vhdl .hljs-literal,
-.documentation .tex .hljs-command {
-    color: #458;
-    font-weight: bold
-}
-
-.documentation .hljs-tag,
-.documentation .hljs-tag .hljs-title,
-.documentation .hljs-rules .hljs-property,
-.documentation .django .hljs-tag .hljs-keyword {
-    color: #000080;
-    font-weight: normal
-}
-
-.documentation .hljs-attribute,
-.documentation .hljs-variable,
-.documentation .lisp .hljs-body { color: #008080 }
-
-.documentation .hljs-regexp { color: #009926 }
-
-.documentation .hljs-symbol,
-.documentation .ruby .hljs-symbol .hljs-string,
-.documentation .lisp .hljs-keyword,
-.documentation .tex .hljs-special,
-.documentation .hljs-prompt { color: #990073 }
-
-.documentation .hljs-built_in,
-.documentation .lisp .hljs-title,
-.documentation .clojure .hljs-built_in { color: #0086b3 }
-
-.documentation .hljs-preprocessor,
-.documentation .hljs-pragma,
-.documentation .hljs-pi,
-.documentation .hljs-doctype,
-.documentation .hljs-shebang,
-.documentation .hljs-cdata {
-    color: #999;
-    font-weight: bold
-}
-
-.documentation .hljs-deletion { background: #fdd }
-
-.documentation .hljs-addition { background: #dfd }
-
-.documentation .diff .hljs-change { background: #0086b3 }
-
-.documentation .hljs-chunk { color: #aaa }
+.documentation pre { padding-bottom: 0px; margin-bottom: 0px}
+
+.documentation hll { background-color: #ffffcc }
+.documentation .c { color: #999988; font-style: italic } /* Comment */
+.documentation .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.documentation .k { color: #000000; font-weight: bold } /* Keyword */
+.documentation .o { color: #000000; font-weight: bold } /* Operator */
+.documentation .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.documentation .cp { color: #999999; font-weight: bold; font-style: italic } /* Comment.Preproc */
+.documentation .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.documentation .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.documentation .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.documentation .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.documentation .gr { color: #aa0000 } /* Generic.Error */
+.documentation .gh { color: #999999 } /* Generic.Heading */
+.documentation .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.documentation .go { color: #888888 } /* Generic.Output */
+.documentation .gp { color: #555555 } /* Generic.Prompt */
+.documentation .gs { font-weight: bold } /* Generic.Strong */
+.documentation .gu { color: #aaaaaa } /* Generic.Subheading */
+.documentation .gt { color: #aa0000 } /* Generic.Traceback */
+.documentation .kc { color: #000000; font-weight: bold } /* Keyword.Constant */
+.documentation .kd { color: #000000; font-weight: bold } /* Keyword.Declaration */
+.documentation .kn { color: #000000; font-weight: bold } /* Keyword.Namespace */
+.documentation .kp { color: #000000; font-weight: bold } /* Keyword.Pseudo */
+.documentation .kr { color: #000000; font-weight: bold } /* Keyword.Reserved */
+.documentation .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.documentation .m { color: #009999 } /* Literal.Number */
+.documentation .s { color: #d01040 } /* Literal.String */
+.documentation .na { color: #008080 } /* Name.Attribute */
+.documentation .nb { color: #0086B3 } /* Name.Builtin */
+.documentation .nc { color: #445588; font-weight: bold } /* Name.Class */
+.documentation .no { color: #008080 } /* Name.Constant */
+.documentation .nd { color: #3c5d5d; font-weight: bold } /* Name.Decorator */
+.documentation .ni { color: #800080 } /* Name.Entity */
+.documentation .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.documentation .nf { color: #990000; font-weight: bold } /* Name.Function */
+.documentation .nl { color: #990000; font-weight: bold } /* Name.Label */
+.documentation .nn { color: #555555 } /* Name.Namespace */
+.documentation .nt { color: #000080 } /* Name.Tag */
+.documentation .nv { color: #008080 } /* Name.Variable */
+.documentation .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.documentation .w { color: #bbbbbb } /* Text.Whitespace */
+.documentation .mf { color: #009999 } /* Literal.Number.Float */
+.documentation .mh { color: #009999 } /* Literal.Number.Hex */
+.documentation .mi { color: #009999 } /* Literal.Number.Integer */
+.documentation .mo { color: #009999 } /* Literal.Number.Oct */
+.documentation .sb { color: #d01040 } /* Literal.String.Backtick */
+.documentation .sc { color: #d01040 } /* Literal.String.Char */
+.documentation .sd { color: #d01040 } /* Literal.String.Doc */
+.documentation .s2 { color: #d01040 } /* Literal.String.Double */
+.documentation .se { color: #d01040 } /* Literal.String.Escape */
+.documentation .sh { color: #d01040 } /* Literal.String.Heredoc */
+.documentation .si { color: #d01040 } /* Literal.String.Interpol */
+.documentation .sx { color: #d01040 } /* Literal.String.Other */
+.documentation .sr { color: #009926 } /* Literal.String.Regex */
+.documentation .s1 { color: #d01040 } /* Literal.String.Single */
+.documentation .ss { color: #990073 } /* Literal.String.Symbol */
+.documentation .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.documentation .vc { color: #008080 } /* Name.Variable.Class */
+.documentation .vg { color: #008080 } /* Name.Variable.Global */
+.documentation .vi { color: #008080 } /* Name.Variable.Instance */
+.documentation .il { color: #009999 } /* Literal.Number.Integer.Long */
+
+blockquote{padding:10px 20px;margin:0 0 20px;border-left:5px solid rgba(102,128,153,0.075)}blockquote p{font-size:17.5px;font-weight:300;line-height:1.25}
+blockquote p:last-child{margin-bottom:0}
+blockquote small{display:block;line-height:1.428571429;color:#999}blockquote small:before{content:'\2014 \00A0'}
+blockquote.pull-right{padding-right:15px;padding-left:0;border-right:5px solid rgba(102,128,153,0.075);border-left:0}blockquote.pull-right p,blockquote.pull-right small{text-align:right}
+blockquote.pull-right small:before{content:''}
+blockquote.pull-right small:after{content:'\00A0 \2014'}
+q:before,q:after,blockquote:before,blockquote:after{content:""}
+address{display:block;margin-bottom:20px;font-style:normal;line-height:1.428571429}
+code,pre{font-family:Monaco,Menlo,Consolas,"Courier New",monospace}
+code{padding:2px 4px;font-size:90%;color:#162029;background-color:rgba(102,128,153,0.075);white-space:nowrap;border-radius:4px}
+pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:1.428571429;word-break:break-all;word-wrap:break-word;color:#333;background-color:rgba(102,128,153,0.05);border:1px solid rgba(102,128,153,0.075);border-radius:4px}pre.prettyprint{margin-bottom:20px}
+pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;background-color:transparent;border:0}
+
+a code{color:inherit}
+h1{font-size:36px}
+h2{font-size:30px}
+h3{font-size:24px}
+h4{font-size:18px}
+h5{font-size:14px}
+h6{font-size:12px}
+h1{margin:60px 0 40px}
+h2{margin:50px 0 30px}
+h3{margin:35px 0 20px}
+h4,h5,h6{margin:25px 0 15px}
+p,pre,pre.prettyprint,blockquote{margin:0 0 15px}
+hr{margin:30px 0}
+code,pre{font-family:Menlo,Consolas,"Courier New",monospace;font-size:12px !important}
+pre,pre.prettyprint{border:0 solid rgba(102,128,153,0.075);border-left:10px solid rgba(102,128,153,0.075);border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;padding:10px 15px}pre code,pre.prettyprint code{background-color:transparent !important}
+dt,dd{margin-top:5px;margin-bottom:5px}
+dd{margin-left:40px}
+table{margin-bottom:20px}
+table th,table td{padding:8px;line-height:20px;text-align:left;vertical-align:top;border-top:1px solid #dddddd}
+table th{font-weight:bold}
+table thead th{vertical-align:bottom}
+table caption+thead tr:first-child th,table caption+thead tr:first-child td,table colgroup+thead tr:first-child th,table colgroup+thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td{border-top:0}
+table tbody+tbody{border-top:2px solid #dddddd}
+blockquote{border-left-width:10px;background-color:rgba(102,128,153,0.05);border-top-right-radius:5px;border-bottom-right-radius:5px;padding:15px 20px}blockquote p{margin-bottom:15px;font-size:14px;line-height:1.428571429}
+blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}
+ul,ol{margin-bottom:15px}ul ul,ol ul,ul ol,ol ol{margin-bottom:15px}
+kbd{padding:0.1em 0.6em;border:1px solid rgba(22,32,41,0.25);-webkit-box-shadow:0 1px 0 rgba(22,32,41,0.25);box-shadow:0 1px 0 rgba(22,32,41,0.25);font-size:11px;font-family:Arial,Helvetica,sans-serif;background-color:#fff;color:#333;border-radius:3px;display:inline-block;margin:0 0.1em;white-space:nowrap}
