@@ -1,16 +1,15 @@
-﻿<div class="carousel no-phone" data-role="carousel" data-period="3500" data-duration="700">
-    <div style="background: url(img/b1.jpg) no-repeat center; background-size: cover; height: 400px;">
-        <div class="slide">
+<div class="carousel no-phone" data-role="carousel" data-period="3500" data-duration="700">
+    <div style="background: url(img/b1.png) no-repeat center #333; background-size: cover; height: 400px;">
+          <div class="slide">
             <div class="container">
                 <h1>Reporting platform</h1>
-                <h2>No lame WYSIWYG editor</h2>
                 <h2>Just code, Just javascript</h2>
                 <h2>Open sourced</h2>
-                <h2>Unlimited posibilities</h2>
+                <h2>Unlimited posibilities</h2><br>
             </div>
         </div>
     </div>
-    
+
     <div class="slide">
         <div class="container">
             <h1>Solutions</h1>
@@ -23,8 +22,9 @@
     <div class="slide">
         <div class="container">
             <h1>Quick to Learn</h1>
-            <h2>Just javascript, html and popular templating engines.</h2>
-            <img class="code-img" src="screenshots/example.png" alt="Just javascript"/>
+            <h2>Just javascript, html and popular templating engines</h2>
+            <h2>No lame WYSIWYG editor</h2>
+            <!--<img class="code-img" src="screenshots/example.png" alt="Just javascript"/>-->
         </div>			
     </div>		
     
@@ -41,13 +41,15 @@
         <div class="container">
             <h1>REST API</h1>
             <h2>ODATA endpoint</h2>
-            <h2>c# client SDK</h2>
-            <h2>java client SDK</h2>
+            <h2>C# client SDK</h2>
+            <h2>Java client SDK</h2>
         </div>			
     </div>
-		 
     <a class="controls left"><i class="icon-arrow-left-5"></i></a>
     <a class="controls right"><i class="icon-arrow-right-5"></i></a>
+</div>
+<div class="container">
+<a class="button large bg-emerald bg-hover-gray fg-white" id="createFlatWindow" style="position: absolute; margin: 0px; margin-top: -87px;">Quick Start Video<i class="icon-arrow-right-3 on-right fg-white"></i></a>
 </div>
 <div class="bg-cyan underbanner">
     <div class="container">
@@ -114,3 +116,19 @@
         </div>
     </div>
 </div>
+<script>
+$("#createFlatWindow").on('click', function(){
+    $.Dialog({
+        overlay: true,
+        shadow: true,
+        flat: true,
+        title: 'jsreport - Quick Start Tutorial',
+        padding: 10,
+        content: '',
+        onShow: function(_dialog){
+            var content = _dialog.children('.content');
+            content.html('<iframe width="853" height="480" src="//www.youtube.com/embed/L7MZqwDCxP8" frameborder="0" allowfullscreen></iframe><p class="modal">This video is very basic quick start into reporting software <strong>jsreport</strong>.</p>');
+        }
+    });
+});
+</script>

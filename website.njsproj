@@ -274,6 +274,7 @@
     <Content Include="views\post.html" />
     <Content Include="web.config" />
     <Content Include="_posts\asp-net-mvc-render-pdf-from-view.md" />
+    <Content Include="_posts\rendering-pdf-reports-in-azure-mobile-services.md" />
     <Content Include="_posts\welcome-to-jsreport.md" />
     <Content Include="_posts\national-characters-in-phantom-pdf.md" />
   </ItemGroup>

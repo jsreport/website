@@ -12299,8 +12299,6 @@ margin: 0 auto;
   color: #fff;
 }
 
-.slide .container h1 {font-weight: bold;}
-
 .top10 {
 margin-top: 10px;
 }
@@ -12311,4 +12309,30 @@ margin-top: 10px;
 margin-top: 20px;
 margin-bottom: 20px;
 }
+
+.carousel h2 {
+font-size: 19px;
+margin: 5px;
+padding: 0px;
+}
+
+/* Modal - Quick Start video */
+.metro .window.flat{
+background: #f9f9f9;
+}
+
+p.modal {
+margin-top: 10px;
+text-align: center;
+}
+
+.slide .container h1 {
+margin-bottom: 20px;
+}
+
+.samples-img {
+margin-bottom: 10px;
+}
+
+
 
