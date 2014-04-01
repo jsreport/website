@@ -59,5 +59,5 @@ require("./posts.js")(app).then(function() {
 
     app.listen(process.env.PORT);
 
-    console.log('express3-handlebars example server listening on: 3000');
+    console.log('express3-handlebars example server listening on' + process.env.PORT);
 });
