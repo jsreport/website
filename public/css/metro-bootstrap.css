@@ -135,7 +135,7 @@ input[type=password]::-ms-reveal {
 a {
   text-decoration: none;
 }
-@media print {
+/*@media print {
   * {
     text-shadow: none !important;
     color: #000 !important;
@@ -182,7 +182,7 @@ a {
   h3 {
     page-break-after: avoid;
   }
-}
+}*/
 .metro .box-sizing-border {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

@@ -15,10 +15,10 @@ var hbs = exphbs.create({
             return content;
         },
         toShortDate: function(date) {
-            return require("moment")(date).format("MM.DD.YYYY");
+            return require("moment")(date).format("MM-DD-YYYY");
         },
         toLongDate: function(date) {
-            return require("moment")(date).format("MM.DD.YYYY HH:mm");
+            return require("moment")(date).format("MM-DD-YYYY HH:mm");
         }
     }
 });
@@ -51,13 +51,20 @@ app.get('/downloads', router.downloads);
 app.get('/embedding', router.embedding);
 
 
-require("./posts.js")(app).then(function() {
+require("./posts.js")(app).then(function(poet) {
+  
+    
+    app.get('/sitemap*', function(req, res) {
+        var postCount = poet.helpers.getPostCount();
+        var posts = poet.helpers.getPosts(0, postCount);
+        res.setHeader('Content-Type', 'application/xml');
+        res.render('sitemap', { posts: posts, layout: false });
+    });
+  
 
     app.get('*', function(req, res) {
         res.status(404).render("404");
     });
-
+    
     app.listen(process.env.PORT);
-
-    console.log('express3-handlebars example server listening on: 3000');
 });

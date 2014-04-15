@@ -3,7 +3,7 @@
     "date"     : "03-23-2014 15:56"
 }}}
 
-**Are you searching for an easy way how to render pdf report in your [Azure Mobile Services](http://www.windowsazure.com/en-us/develop/mobile) application? [jsreport](http://jsreport.net) is here with the help.**
+> Are you searching for an easy way how to render pdf report in your [Azure Mobile Services](http://www.windowsazure.com/en-us/develop/mobile) application? [jsreport](http://jsreport.net) is here with the help.
 
 ## Quick Hello World
 

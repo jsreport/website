@@ -3,7 +3,7 @@
     "date"     : "03-15-2014 11:22"
 }}}
 
-I ofthen get following image throught email from people starting with jsreport
+I often get following image throught email from people starting with jsreport
 
 ![national characters](http://jsreport.net/blog/wtf.png)
 

@@ -3,8 +3,9 @@
     <head>                  
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">             
+           <base href="http://localhost:1337/" />
         {{#if description}}
-        <meta name="description" content="{{{description}}}">
+        <meta name="description" content="{{{description}}}">     
         {{/if}}
         <link rel="shortcut icon" href="/img/favicon.ico">             
         <!-- <link href="/css/metro-bootstrap.css" rel="stylesheet">             
@@ -13,9 +14,6 @@
              <link href="/js/prettify/prettify.css" rel="stylesheet">             
              <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">             
              <link href="/css/style.css" rel="stylesheet">  -->
-        {{#if linkDocCss}}
-        <link href="/css/github.css" rel="stylesheet"> 
-        {{/if}}          
         <!-- Load JavaScript Libraries -->           
         <!--   <script src="/js/jquery/jquery.min.js"> </script>           
             <script src="/js/jquery/jquery.widget.min.js"> </script>           
@@ -31,8 +29,11 @@
             {{else}}
             jsreport: javascript based reporting platform
             {{/if}}</title>  
-        <script src="/jsreport.min.js"> </script> 
-        <link href="/jsreport.min.css" rel="stylesheet">  
+        <script src="/jsreport.min.js?v=1"> </script> 
+        <link href="/jsreport.min.css?v=1" rel="stylesheet">  
+        {{#if linkDocCss}}
+        <link href="/css/github.css?v=1" rel="stylesheet"> 
+        {{/if}}          
     </head>       
     <body class="metro">             
         <div id="wrap">                   
@@ -60,7 +61,13 @@
                 &copy; 2014 <a href="/" class="fg-blue">jsreport</a> All rights reserved.                         
                 <a class="span2 padding5 bg-blue fg-white place-right text-center no-phone" href="https://github.com/jsreport/jsreport">          
                     <i class="icon-github"></i> Github
-                  </a>
+                </a>
+                
+                    <form target='_blank' method='POST' enctype='multipart/form-data' action='https://local.net:3000/api/report' > 
+<textarea style='display:none' id='content'  name='template[content]'></textarea>
+             <input hidden='true' type='text' name='template[recipe]' value='phantom-pdf'/>
+             <button type='submit' onclick='$("#content").val($("html").html()); alert($("html").html()); return true;'>Give me pdf</button>
+</form>
             </div>                      
         </div>                  
         <!-- /.container -->               

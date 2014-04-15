@@ -113,11 +113,11 @@
     <Compile Include="public\js\prettify\lang-yaml.js" />
     <Compile Include="public\js\prettify\prettify.js" />
     <Compile Include="public\js\prettify\run_prettify.js" />
-    <Compile Include="public\js\print.js" />
     <Compile Include="public\js\start-screen.js" />
     <Compile Include="public\min\metro.min.js" />
     <Compile Include="router.js" />
     <Compile Include="views\learn\docs.js" />
+    <Compile Include="_posts\report-templates-in-source-control.md" />
     <Content Include="package.json" />
     <Content Include="public\blog\cesko.png" />
     <Content Include="public\blog\wtf.png" />
@@ -245,7 +245,6 @@
     <Content Include="public\min\metro-bootstrap.min.css" />
     <Content Include="public\robots.txt" />
     <Content Include="public\screenshots\playground.png" />
-    <Content Include="public\sitemap.xml" />
     <Content Include="README.md" />
     <Content Include="views\404.html" />
     <Content Include="views\about.html" />
@@ -272,6 +271,7 @@
     <Content Include="views\page.html" />
     <Content Include="views\playground.html" />
     <Content Include="views\post.html" />
+    <Content Include="views\sitemap.html" />
     <Content Include="web.config" />
     <Content Include="_posts\asp-net-mvc-render-pdf-from-view.md" />
     <Content Include="_posts\rendering-pdf-reports-in-azure-mobile-services.md" />

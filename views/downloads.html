@@ -8,24 +8,47 @@
 </div>
 
 <div class="container">
-    <div class="description padding20 bg-grayLighter">
-        <p><strong>We</strong> are currently working on the multiplatform seamless jsreport installer. Please try first our <a href="\online">jsreport online</a> 
-            service for free and we will prepare installer for you in the next couple of weeks.
-        </p>
-        
-        <p>
-            If you are eager to try to install on your own server, please do the following steps. Don't hasitate to tweet me in case of problems @jan_blaha
-        </p>   
-        <ol>
-            <li>download and install latest <a href="http://nodejs.org/">nodejs</a></li>  
-            <li>download and install latest <a href="http://www.mongodb.org">mongodb</a> and start it</li>  
-            <li>cmd in your working directory <code>npm install jsreport</code></li>  
-            <li>cmd in your working directory <code>cd node_modules/jsreport</code></li>  
-            <li>cmd in your working directory <code>node server.js</code></li>  
-        </ol>
-        <p>
-            Now you should have your local jsreport server running. You can try to access https://localhost in your browser and it should display jsreport
-            html studio. 
-        </p>
+    <div data-closeany="false" data-role="accordion" class="accordion with-marker span12 ">
+        <div class="accordion-frame">
+            <a href="#" class="heading bg-lightBlue fg-white collapsed">Windows</a>
+            <div class="content">
+                <p>Download and run x64 windows installer <a href="/jsreport_x64.exe">jsreport_x64.exe</a></p>
+            </div>
+        </div>
+
+        <div class="accordion-frame">
+            <a href="#" class="heading bg-green fg-white collapsed">Linux</a>
+            <div class="content">
+                <p>We are currently preparing linux packages. Before it's finished, please follow these steps</p>
+                                            
+                <ol>
+                    <li>install <strong>latest</strong> <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">node.js</a> particular for your linux distribution.</li>
+                    <li>go to console, navigate to your working directory</li>
+                    <li>type <code>sudo npm install jsreport</code></li>
+                    <li>type <code>sudo node node_modules/jsreport --init</code></li>
+                    <li>type <code>sudo node server.js</code></li>
+                    <li>open browser and see <a>https://localhost</a></li>
+                </ol>
+                
+                <p>Use init script to install jsreport server pernamently.</p>
+                
+                <p>You can use following for ubuntu</p>
+                
+                <p>/etc/init/jsreport.conf</p>
+                <code>
+                    start on startup <br/>
+                    chdir [working directory] <br/>
+                    exec sudo node server.js
+                </code>
+                
+                <p>Don't forget to add execution rights with <code>chmod -x jsreport.conf</code></p>
+            </div>
+        </div>
+        <div class="accordion-frame">
+            <a href="#" class="heading bg-orange fg-white collapsed">Mac</a>
+            <div class="content">
+                We are currently testing jsreport on mac. The installation description should pop up in couple of days.
+            </div>
+        </div>
     </div>
 </div>

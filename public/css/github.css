@@ -1,6 +1,7 @@
+.documentation { width: 85%; margin: 0 auto;}
+
 .documentation pre { padding-bottom: 0px; margin-bottom: 0px}
 
-.documentation hll { background-color: #ffffcc }
 .documentation .c { color: #999988; font-style: italic } /* Comment */
 .documentation .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .documentation .k { color: #000000; font-weight: bold } /* Keyword */
@@ -62,43 +63,44 @@
 .documentation .vi { color: #008080 } /* Name.Variable.Instance */
 .documentation .il { color: #009999 } /* Literal.Number.Integer.Long */
 
-blockquote{padding:10px 20px;margin:0 0 20px;border-left:5px solid rgba(102,128,153,0.075)}blockquote p{font-size:17.5px;font-weight:300;line-height:1.25}
-blockquote p:last-child{margin-bottom:0}
-blockquote small{display:block;line-height:1.428571429;color:#999}blockquote small:before{content:'\2014 \00A0'}
-blockquote.pull-right{padding-right:15px;padding-left:0;border-right:5px solid rgba(102,128,153,0.075);border-left:0}blockquote.pull-right p,blockquote.pull-right small{text-align:right}
-blockquote.pull-right small:before{content:''}
-blockquote.pull-right small:after{content:'\00A0 \2014'}
-q:before,q:after,blockquote:before,blockquote:after{content:""}
-address{display:block;margin-bottom:20px;font-style:normal;line-height:1.428571429}
-code,pre{font-family:Monaco,Menlo,Consolas,"Courier New",monospace}
-code{padding:2px 4px;font-size:90%;color:#162029;background-color:rgba(102,128,153,0.075);white-space:nowrap;border-radius:4px}
-pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:1.428571429;word-break:break-all;word-wrap:break-word;color:#333;background-color:rgba(102,128,153,0.05);border:1px solid rgba(102,128,153,0.075);border-radius:4px}pre.prettyprint{margin-bottom:20px}
-pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;background-color:transparent;border:0}
+.documentation blockquote{padding:10px 20px;margin:0 0 20px;border-left:5px solid rgba(102,128,153,0.075)}blockquote p{font-size:17.5px;font-weight:300;line-height:1.25}
+.documentation blockquote p:last-child{margin-bottom:0}
+.documentation blockquote small{display:block;line-height:1.428571429;color:#999}blockquote small:before{content:'\2014 \00A0'}
+.documentation blockquote.pull-right{padding-right:15px;padding-left:0;border-right:5px solid rgba(102,128,153,0.075);border-left:0}blockquote.pull-right p,blockquote.pull-right small{text-align:right}
+.documentation blockquote.pull-right small:before{content:''}
+.documentation blockquote.pull-right small:after{content:'\00A0 \2014'}
+.documentation q:before,q:after,blockquote:before,blockquote:after{content:""}
+.documentation address{display:block;margin-bottom:20px;font-style:normal;line-height:1.428571429}
+.documentation code,pre{font-family:Monaco,Menlo,Consolas,"Courier New",monospace}
+.documentation code{padding:2px 4px;font-size:90%;color:#162029;background-color:rgba(102,128,153,0.075);white-space:nowrap;border-radius:4px}
+.documentation pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:1.428571429;word-break:break-all;word-wrap:break-word;color:#333;background-color:rgba(102,128,153,0.05);border:1px solid rgba(102,128,153,0.075);border-radius:4px}pre.prettyprint{margin-bottom:20px}
+.documentation pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;background-color:transparent;border:0}
 
-a code{color:inherit}
-h1{font-size:36px}
-h2{font-size:30px}
-h3{font-size:24px}
-h4{font-size:18px}
-h5{font-size:14px}
-h6{font-size:12px}
-h1{margin:60px 0 40px}
-h2{margin:50px 0 30px}
-h3{margin:35px 0 20px}
-h4,h5,h6{margin:25px 0 15px}
-p,pre,pre.prettyprint,blockquote{margin:0 0 15px}
-hr{margin:30px 0}
-code,pre{font-family:Menlo,Consolas,"Courier New",monospace;font-size:12px !important}
-pre,pre.prettyprint{border:0 solid rgba(102,128,153,0.075);border-left:10px solid rgba(102,128,153,0.075);border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;padding:10px 15px}pre code,pre.prettyprint code{background-color:transparent !important}
-dt,dd{margin-top:5px;margin-bottom:5px}
-dd{margin-left:40px}
-table{margin-bottom:20px}
-table th,table td{padding:8px;line-height:20px;text-align:left;vertical-align:top;border-top:1px solid #dddddd}
-table th{font-weight:bold}
-table thead th{vertical-align:bottom}
-table caption+thead tr:first-child th,table caption+thead tr:first-child td,table colgroup+thead tr:first-child th,table colgroup+thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td{border-top:0}
-table tbody+tbody{border-top:2px solid #dddddd}
-blockquote{border-left-width:10px;background-color:rgba(102,128,153,0.05);border-top-right-radius:5px;border-bottom-right-radius:5px;padding:15px 20px}blockquote p{margin-bottom:15px;font-size:14px;line-height:1.428571429}
-blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}
-ul,ol{margin-bottom:15px}ul ul,ol ul,ul ol,ol ol{margin-bottom:15px}
-kbd{padding:0.1em 0.6em;border:1px solid rgba(22,32,41,0.25);-webkit-box-shadow:0 1px 0 rgba(22,32,41,0.25);box-shadow:0 1px 0 rgba(22,32,41,0.25);font-size:11px;font-family:Arial,Helvetica,sans-serif;background-color:#fff;color:#333;border-radius:3px;display:inline-block;margin:0 0.1em;white-space:nowrap}
+.documentation a code{color:inherit}
+.documentation h1{font-size:36px}
+.documentation h2{font-size:30px}
+.documentation h3{font-size: 24px}
+.documentation h4{font-size:18px}
+.documentation h5{font-size:14px}
+.documentation h6{font-size:12px}
+.documentation h1{margin:60px 0 40px}
+.documentation h2{margin:50px 0 30px}
+.documentation h3{margin:35px 0 20px}
+.documentation h4,h5,h6{margin:25px 0 15px}
+.documentation p,pre,pre.prettyprint,blockquote{margin:0 0 15px}
+.documentation hr{margin:30px 0}
+.documentation code,pre{font-family:Menlo,Consolas,"Courier New",monospace;font-size:12px !important}
+.documentation pre,pre.prettyprint{border:0 solid rgba(102,128,153,0.075);border-left:10px solid rgba(102,128,153,0.075);border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;padding:10px 15px}pre code,pre.prettyprint code{background-color:transparent !important}
+.documentation dt,dd{margin-top:5px;margin-bottom:5px}
+.documentation dd{margin-left:40px}
+.documentation table{margin-bottom:20px}
+.documentation table th,table td{padding:8px;line-height:20px;text-align:left;vertical-align:top;border-top:1px solid #dddddd}
+.documentation table th{font-weight:bold}
+.documentation table thead th{vertical-align:bottom}
+.documentation table caption+thead tr:first-child th,table caption+thead tr:first-child td,table colgroup+thead tr:first-child th,table colgroup+thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td{border-top:0}
+.documentation table tbody+tbody{border-top:2px solid #dddddd}
+.documentation blockquote{border-left-width:10px;background-color:rgba(102,128,153,0.05);border-top-right-radius:5px;border-bottom-right-radius:5px;padding:15px 20px}blockquote p{margin-bottom:15px;font-size:14px;line-height:1.428571429}
+.documentation blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}
+.documentation ul,ol{margin-bottom:15px}ul ul,ol ul,ul ol,ol ol{margin-bottom:15px}
+.documentation kbd{padding:0.1em 0.6em;border:1px solid rgba(22,32,41,0.25);-webkit-box-shadow:0 1px 0 rgba(22,32,41,0.25);box-shadow:0 1px 0 rgba(22,32,41,0.25);font-size:11px;font-family:Arial,Helvetica,sans-serif;background-color:#fff;color:#333;border-radius:3px;display:inline-block;margin:0 0.1em;white-space:nowrap}
+ 
