@@ -3,7 +3,6 @@
     <head>                  
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">             
-           <base href="http://localhost:1337/" />
         {{#if description}}
         <meta name="description" content="{{{description}}}">     
         {{/if}}
@@ -62,12 +61,6 @@
                 <a class="span2 padding5 bg-blue fg-white place-right text-center no-phone" href="https://github.com/jsreport/jsreport">          
                     <i class="icon-github"></i> Github
                 </a>
-                
-                    <form target='_blank' method='POST' enctype='multipart/form-data' action='https://local.net:3000/api/report' > 
-<textarea style='display:none' id='content'  name='template[content]'></textarea>
-             <input hidden='true' type='text' name='template[recipe]' value='phantom-pdf'/>
-             <button type='submit' onclick='$("#content").val($("html").html()); alert($("html").html()); return true;'>Give me pdf</button>
-</form>
             </div>                      
         </div>                  
         <!-- /.container -->               
