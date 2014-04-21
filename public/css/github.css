@@ -1,4 +1,4 @@
-.documentation { width: 85%; margin: 0 auto;}
+.documentation { }
 
 .documentation pre { padding-bottom: 0px; margin-bottom: 0px}
 
@@ -77,16 +77,17 @@
 .documentation pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;background-color:transparent;border:0}
 
 .documentation a code{color:inherit}
-.documentation h1{font-size:36px}
-.documentation h2{font-size:30px}
-.documentation h3{font-size: 24px}
-.documentation h4{font-size:18px}
-.documentation h5{font-size:14px}
-.documentation h6{font-size:12px}
+.documentation h1{ font-size: 40px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
+.documentation h2{font-size:36px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
+.documentation h3{font-size: 30px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
+.documentation h4{font-size:24px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
+.documentation h5{font-size:18px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
+.documentation h6{font-size:14px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
 .documentation h1{margin:60px 0 40px}
 .documentation h2{margin:50px 0 30px}
 .documentation h3{margin:35px 0 20px}
 .documentation h4,h5,h6{margin:25px 0 15px}
+
 .documentation p,pre,pre.prettyprint,blockquote{margin:0 0 15px}
 .documentation hr{margin:30px 0}
 .documentation code,pre{font-family:Menlo,Consolas,"Courier New",monospace;font-size:12px !important}

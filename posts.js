@@ -31,7 +31,8 @@
                 linkDocCss: true,
                 url: "http://jsreport.net" + post.url,
                 id: req.params.slug,
-                blog: true
+                blog: true,
+                lastPosts: poet.helpers.getPosts(0, 3),
             });
         } else {
             res.send(404);

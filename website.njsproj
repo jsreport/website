@@ -261,6 +261,10 @@
     <Content Include="views\learn\docs\import-export.md" />
     <Content Include="views\learn\docs\inline-data.md" />
     <Content Include="views\learn\docs\net-client.md" />
+    <Content Include="views\partials\last-posts.html" />
+    <Content Include="_posts\charts-in-pdf-reports.md" />
+    <Content Include="_posts\pdf-report-orientation-and-paper-size.md" />
+    <Content Include="_posts\pdf-report-paging-and-page-breaks.md" />
     <Content Include="views\learn\docs\phantom-recipe.md" />
     <Content Include="views\learn\docs\reports.md" />
     <Content Include="views\learn\docs\scripts.md" />
@@ -274,12 +278,14 @@
     <Content Include="views\sitemap.html" />
     <Content Include="web.config" />
     <Content Include="_posts\asp-net-mvc-render-pdf-from-view.md" />
+    <Content Include="_posts\pdf-reports-in-csharp.md" />
     <Content Include="_posts\rendering-pdf-reports-in-azure-mobile-services.md" />
     <Content Include="_posts\welcome-to-jsreport.md" />
     <Content Include="_posts\national-characters-in-phantom-pdf.md" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\blog\" />
+    <Folder Include="views\partials\" />
     <Folder Include="_posts\" />
     <Folder Include="public\" />
     <Folder Include="public\css\" />

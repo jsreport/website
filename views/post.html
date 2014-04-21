@@ -10,27 +10,37 @@
     </div>
     
     <div class="container">
-        <div id="documentation" class="documentation">
-            <div>
-                {{{post.content}}}
+        <div class="grid">
+            <div class="row">
+                <div class="span11">
+                    <div id="documentation" class="documentation">
+                        {{{post.content}}}
+
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                            var disqus_shortname = 'jsreport';
+                            var disqus_developer = 1;
+
+                            var disqus_url = '{{url}}';
+                            var disqus_identifier = '{{id}}';
+
+                            (function() {
+                                var dsq = document.createElement('script');
+                                dsq.type = 'text/javascript';
+                                dsq.async = true;
+                                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
+                        </script>
+                    </div>
+                </div>  
+                <div class="span3" style="float: right; padding-top: 5px;">
+                    <a href="/blog">
+                        <h2>last blog posts </h2>
+                    </a>
+                    {{> last-posts lastPosts}}
+                </div>
             </div>
-    
-            <div id="disqus_thread"></div>
-            <script type="text/javascript">
-                var disqus_shortname = 'jsreport';
-                var disqus_developer = 1;
-
-                var disqus_url = '{{url}}';
-                var disqus_identifier = '{{id}}';
-
-                (function() {
-                    var dsq = document.createElement('script');
-                    dsq.type = 'text/javascript';
-                    dsq.async = true;
-                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                })();
-            </script>
         </div>
     </div>
 </div>
