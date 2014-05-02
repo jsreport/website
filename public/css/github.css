@@ -76,8 +76,9 @@
 .documentation pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:1.428571429;word-break:break-all;word-wrap:break-word;color:#333;background-color:rgba(102,128,153,0.05);border:1px solid rgba(102,128,153,0.075);border-radius:4px}pre.prettyprint{margin-bottom:20px}
 .documentation pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;background-color:transparent;border:0}
 
+.documentation-wrap h1 {display:inline; font-size: 35px; }
 .documentation a code{color:inherit}
-.documentation h1{ font-size: 40px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
+.documentation h1{font-size: 40px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
 .documentation h2{font-size:36px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
 .documentation h3{font-size: 30px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
 .documentation h4{font-size:24px;color: black; font-family: 'Open Sans',"Trebuchet MS",Helvetica,sans-serif; font-weight: 500; line-height: 1.1;}
@@ -87,6 +88,11 @@
 .documentation h2{margin:50px 0 30px}
 .documentation h3{margin:35px 0 20px}
 .documentation h4,h5,h6{margin:25px 0 15px}
+
+.documentation-wrap .main-title a {
+    font-size: 35px;
+    padding-right: 10px;
+}
 
 .documentation p,pre,pre.prettyprint,blockquote{margin:0 0 15px}
 .documentation hr{margin:30px 0}

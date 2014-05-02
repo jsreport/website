@@ -133,5 +133,22 @@ margin-bottom: 20px;
 margin-bottom: 10px;
 }
 
+.main-title a {
+    font-size: 35px;
+    padding-right: 15px;
+}
+
+.main-title h1 {
+    display: inline;
+}
+
+.pull-right {
+    float: right !important;
+}
+
+.about-box {
+    margin-top: -20px;
+}
+
 
 

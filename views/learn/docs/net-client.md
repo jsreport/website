@@ -87,17 +87,12 @@ Then you need to instantiate `ODataClient` instance. When you have on-premise ve
 var odataClient = new ODataClient("https://192.168.02.01/odata");
 ```
 
-When you are using jsreport online, it's little bit tricky because of authentication. You need to provide a basic authorization header for every request odata client makes. 
+You need to add credentials When yusing jsreport online.
 
 ```c#
 var odataClient = new ODataClient(new ODataClientSettings() {
                 UrlBase = "https://subdomain.jsreportonline.net/odata",
-                BeforeRequest = (r) =>
-                {
-                    var encoded = System.Convert.ToBase64String(
-                        System.Text.Encoding.UTF8.GetBytes("email:password"));
-                    r.Headers["Authorization"] = "Basic " + encoded;
-                }
+                Credentials = new NetworkCredential("[email]", "[password]"),
 });
 ```
 

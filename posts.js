@@ -33,6 +33,7 @@
                 id: req.params.slug,
                 blog: true,
                 lastPosts: poet.helpers.getPosts(0, 3),
+                title: post.title,
             });
         } else {
             res.send(404);

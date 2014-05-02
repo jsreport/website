@@ -31,5 +31,5 @@ exports.downloads = function(req, res) {
 };
 
 exports.embedding = function(req, res) {
-    res.render("embedding",  { playground: true, title: "Download jsreport on-prem" });
+    res.render("embedding",  { playground: true, title: "Embed jsreport to any page" });
 };

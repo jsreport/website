@@ -7,15 +7,11 @@
         <meta name="description" content="{{{description}}}">     
         {{/if}}
         <link rel="shortcut icon" href="/img/favicon.ico">             
-        <title>{{#if title}}
-            {{{title}}}
-            {{else}}
-            jsreport: javascript based reporting platform
-            {{/if}}</title>  
+        <title>{{#if title}}{{{title}}}{{else}}jsreport: javascript based reporting platform{{/if}}</title>  
         <script src="/jsreport.min.js?v=6"> </script> 
         <link href="/jsreport.min.css?v=6" rel="stylesheet">  
         {{#if linkDocCss}}
-        <link href="/css/github.css?v=6" rel="stylesheet"> 
+        <link href="/css/github.css?v=7" rel="stylesheet"> 
         {{/if}}          
     </head>       
     <body class="metro">             
@@ -33,7 +29,8 @@
                     <a class="element brand {{#if blog}}fg-blue{{/if}}" href="/blog">BLOG</a>                               
                     <a class="element brand {{#if learn}}fg-blue{{/if}}" href="/learn">LEARN</a>                               
                     <a class="element brand {{#if about}}fg-blue{{/if}}" href="/about">ABOUT</a>                               
-                    <a class="element brand place-right" href="https://jsreportonline.net"><sup>MY ACCOUNT</sup></a>                                        
+                    <span class="element brand place-right bg-gray fg-white">BETA</span>                     
+                    <a class="element brand place-right" href="https://jsreportonline.net">MY ACCOUNT</a>                                        
                     <span class="element-divider place-right">          
                     </span>                         
                 </nav>                   
