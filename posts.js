@@ -43,7 +43,8 @@
     poet.addRoute('/blog', function(req, res) {
         res.render('page', {
             posts: poet.helpers.getPosts(0, 300),
-            blog: true
+            blog: true,
+            title: "Blog about jsreport"
         });
     });
 

@@ -35,7 +35,7 @@ The last and final approach is to use reporting software jsreport. It provides m
 ## Example
 
 >**The finall code from jsreport is accessible [here](https://playground.jsreport.net/#/playground/eyaNpy1ho/11)**
-**The Visual Studio project is stored at [github]("https://github.com/jsreport/net/tree/master/examples/Library)**
+**The Visual Studio project is stored at [github](https://github.com/jsreport/net/tree/master/examples/Library)**
 
 Let's say we are implementing system for local library and we need to generate monthly pdf report containing table of sold books, the best selling book and a chart highlighting books sales. All of this should be achieved using c# and entities from Library system. We will first prepare report layout in jsreport and then we will call its api to get report from c#.
 

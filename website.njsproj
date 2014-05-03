@@ -33,6 +33,7 @@
     <Compile Include="docs.js" />
     <Compile Include="Gruntfile.js" />
     <Compile Include="posts.js" />
+    <Compile Include="public\js\custom.js" />
     <Compile Include="public\js\embed.js" />
     <Compile Include="public\js\docs.js" />
     <Compile Include="public\js\github.info.js" />
@@ -252,7 +253,7 @@
     <Content Include="views\embedding.html" />
     <Content Include="views\examples\certificates.html" />
     <Content Include="views\home.html" />
-    <Content Include="views\layouts\main.html" />
+    <Content Include="public\layouts\main.html" />
     <Content Include="views\learn\doc.html" />
     <Content Include="views\learn\docs\API.md" />
     <Content Include="views\learn\docs\child-templates.md" />
@@ -308,7 +309,7 @@
     <Folder Include="public\min\" />
     <Folder Include="public\screenshots\" />
     <Folder Include="views\" />
-    <Folder Include="views\layouts\" />
+    <Folder Include="public\layouts\" />
     <Folder Include="views\learn\" />
     <Folder Include="views\learn\docs\" />
     <Folder Include="views\examples\" />

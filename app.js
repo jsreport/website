@@ -25,6 +25,7 @@ var hbs = exphbs.create({
 
 app.engine('.html', hbs.engine);
 app.set('view engine', '.html');
+
 app.use(express.static('public/'));
 
 app.get('/', function(req, res) {
