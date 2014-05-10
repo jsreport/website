@@ -101,11 +101,10 @@ You can see that the html snippet contains some special marks like `{{for books}
 Now we can proceed to the next step. We will add information about the most selling book to the report. This means we need to search for the book with the highest `sales` attribute in the input collection. We will need a helper javascript function for this. You can define helper function in the `Helpers` tab in jsreport. So switch there and paste following snippet.
 
 ```js
-{
-  mostSelling: function(books) {
-     return _.max(books, function(book){ return book.sales; });
-  }
+function mostSelling(books) {
+  return _.max(books, function(book){ return book.sales; });
 }
+
 ```
 `mostSelling` helper function simply searches for the book with highest sales attribute using [underscorejs](http://underscorejs.org/) library that is available out of the box. Now you can switch back to the `Content` tab and add code displaying the functions results.
 
