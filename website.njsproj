@@ -118,6 +118,7 @@
     <Compile Include="public\min\metro.min.js" />
     <Compile Include="router.js" />
     <Compile Include="views\learn\docs.js" />
+    <Compile Include="_posts\jsreport-release-0-1-0.md" />
     <Compile Include="_posts\report-templates-in-source-control.md" />
     <Content Include="package.json" />
     <Content Include="public\blog\cesko.png" />

@@ -1,4 +1,5 @@
-﻿ (function ($) {
+﻿(function($) {
+    $(function() {
         $("#createFlatWindow").on('click', function() {
             $.Dialog({
                 overlay: true,
@@ -13,4 +14,5 @@
                 }
             });
         });
-    })(jQuery);
+    });
+})(jQuery);
