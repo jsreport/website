@@ -38,7 +38,7 @@ In the advanced scenario where you have some kind of a dynamic template, you can
 > `BODY:`
 >```js 
    { 
-      "template": { "html" : "Hello world", "recipe" : "phantom-pdf" },
+      "template": { "content" : "Hello world", "recipe" : "phantom-pdf" },
    } 
 >```
 
