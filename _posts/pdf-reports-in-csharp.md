@@ -188,7 +188,7 @@ class Book
 ```
 
 >**The finall code from jsreport is accessible [here](https://playground.jsreport.net/#/playground/eyaNpy1ho/11)**
-**The Visual Studio project is stored at [github]("https://github.com/jsreport/net/tree/master/examples/Library)**
+**The Visual Studio project is stored at [github](https://github.com/jsreport/net/tree/master/examples/Library)**
 
 ## Summary
 You should now see that jsreport can be an option for reports rendering from c#. It's quite innovative approach which of course has some pros and cons. As the biggest dissadvantage could be seen the lack of visual designer and the fact that jsreport is a server and cannot be just embeded into .NET dll. On the other hand it could be seen as an advantage, because full control over report design will allow you to build any report you want. And separation of reporting responsibility into another process will also make your system better loosely coupled. The biggest advantage is the usage of javascript templating engines which makes doing reports unrestrictive and productive. 

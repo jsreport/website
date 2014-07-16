@@ -12,7 +12,7 @@ You can choose from three versions of jsreport server:
  * [on-prem](http://jsreport.net/on-prem) for installing jsreport on your server
  * [online](http://jsreport.net/online) for using multitenant SaaS jsreport in the cloud
 
-How to install jsreport on your server or how to register to online version is not topic of this article, but you can read about it if you will follow the links. It does not matter which version you choose right now. Basic principles are applicable to all of them so if you haven't decided yet you can just open [playground](http://jsreport.net/plaground) and continue with the tutorial. 
+How to install jsreport on your server or how to register to online version is not topic of this article, but you can read about it if you will follow the links. It does not matter which version you choose right now. Basic principles are applicable to all of them so if you haven't decided yet you can just open [playground](http://jsreport.net/playground) and continue with the tutorial. 
 
 When you have jsreport server you need to create a report template defining how will the report look like and how it will be rendered. The best way to define report template is to use html based studio which is hosted in jsreport server and you can access it using any web browser.
 
