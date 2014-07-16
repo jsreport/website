@@ -1,18 +1,26 @@
-#Pdf rendering perfomance
+{{{
+    "title"    : "Pdf reporting performance",
+    "slug"     : "pdf-reporting-performance",  
+    "date"     : "07-16-2014 15:08"    
+}}}
 
-jsreport is currently not
-jsreport will get massive performance improvements in the next release. I will try to 
-
-jsreport dangerous reports with infinete loops
 
 
-In the current version jsreport every report rendering allocates new nodejs child process to render javascript templating engine and one phantomjs instance to render pdf. This was not very efficient because every sub process startup cost around 20ms. And also caused troubles in big load when thousands of sub processes where allocated at once which caused server to burn.
+It's quite a while since I wrote the last blog post about jsreport and you maybe wondering what is new and what we are currently working on. It's 2 months since we closed feature scope and started to concentrate mainly on better code base, stability and performance. We have made a huge step already in all of these areas. Today I will go deeper into performance improvements we have added into jsreport and show you some results.
 
-So what we have done is that we allocate just couple of worker sub procesess for javascript templating engines rendering and couple of phantomjs workers. We reuse this workers over the requests and load balance them so we don't have to wait for workers to start and can spread the work over multiple processes and cpus. It also stays safe for executing dangerous reports because we messure timeouts for the rendering and if the limit is exceeded we kill and recycle affected worker.
+Some background...
 
-Visio image
+jsreport is safe by design and rendering any report should not hurt the system. This was reached by moving report rendering into separate process where we control it's consumptions and kill it if needed. Unfortunately this turned out to be quite slow approach and not very well behaving when thousands of requests to render report come at once. The biggest problem there is allocating child process for every request takes some time and also you cannot allocate hundreds of them at once.
 
-##Load test
+To solve this problem we slightly changed jsreport infrastructure. Right now we are allocating just fixed amount of child processes and reuse them over multiple requests. We have separate workers for javascript templating engine rendering as well as for printing pdf files using phantomjs. This change has huge impact on jsreport performance and on scalability as well. Now jsreport can server thousands of request at once and doesn't need to even sweat. It also stays safe for executing dangerous reports because we measure timeouts for the rendering and if the limit is exceeded we kill and recycle affected worker.
+
+You can see current jsreport infrastructure schema on the following picture.
+![schema](http://jsreport.net/blog/performance/schema.png)
+
+By default jsreport allocates a worker for every cpu to maximize parallelization. This can be changed in config file and I recommend you to check out [config file documentation](https://github.com/jsreport/jsreport/blob/master/config.md) for other options.
+
+Ok, give us some numbers and results...
+
 
 ###Tested scenario
 
@@ -25,11 +33,9 @@ Visio image
 
 ###Results
 - rendering took 156s 
-- memory consumption 2.5 GB
+- memory consumption 1.5 GB
 - 641 pdf pages rendered per second
 - rendering same report without parallelism takes 0.63s in average 
 
-
-You can see these results are pretty good. 
-
-Checkout https://github.com/jsreport/jsreport/blob/master/config.md
+###Conclusion
+You can see these results are pretty good. This means that doing reports based on html -> pdf conversion is not only the most flexible way but also performing very well. 641 pdf pages per second should be enough for the most crazy reporting solution you have.
