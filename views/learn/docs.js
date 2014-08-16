@@ -1,12 +1,20 @@
 ﻿module.exports = {
-    "get-started": "Get started",
+    "get-started": "Getting started",
     "inline-data": "Inline data extension",
     "images": "Images extension",
     "scripts": "Scripts extension",
     "phantom-recipe": "Phantom resipe",
     "child-templates": "Child templates extension",
-    "API": "API",
+    "api": "API",
     "reports": "Reports extension",
     "net-client": ".NET client",
     "import-export": "Import Export extension",
+    "net-embedded": ".NET embedded",
+    "visual-studio-extension": "Visual Studio Extension",
+    "phantom-pdf": "Phantom pdf recipe",
+    "fop-pdf": "Fop pdf recipe",
+    "html": "Html recipe",
+    "engines": "Engines",
+    "jsrender": "jsrender templating engine",
+    "handlebars": "handlebars templating engine"
 };

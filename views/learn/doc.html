@@ -1,21 +1,31 @@
-﻿<div class="container">
-    <div class="documentation" id="documentation">
-        {{{content}}}
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            var disqus_shortname = 'jsreport';
-            var disqus_developer = 1;
+﻿<div class="bg-cyan no-tablet-portrait no-phone main-title">
+    <div class="container padding20 fg-white">
+        <h1 class="fg-white">{{{title}}}</h1>
+</div></div>
+<div class="container">
+    <div class="grid">
+        <div class="row">
+             <div class="span12">
+                <div class="documentation" id="documentation">
+                    {{{content}}}
+                    <div id="disqus_thread"></div>
+                    <script type="text/javascript">
+                        var disqus_shortname = 'jsreport';
+                        var disqus_developer = 1;
 
-            var disqus_url = '{{url}}';
-            var disqus_identifier = '{{id}}';
+                        var disqus_url = '{{url}}';
+                        var disqus_identifier = '{{id}}';
 
-            (function() {
-                var dsq = document.createElement('script');
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
+                        (function() {
+                            var dsq = document.createElement('script');
+                            dsq.type = 'text/javascript';
+                            dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

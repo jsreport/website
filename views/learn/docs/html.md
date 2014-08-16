@@ -1,0 +1,1 @@
+`Html` is the most basic jsreport recipe. It will just evaluate javascript templating engine and outputs html report file. It is not only use full when you want to print out just an html but it's also required when using [child templates](http://jsreport.net/learn/child-templates) and assembling multiple templates together.
