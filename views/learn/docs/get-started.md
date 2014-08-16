@@ -1,6 +1,6 @@
 <a class="button large bg-emerald bg-hover-gray fg-white" id="createFlatWindow">Quick Start Video<i class="icon-arrow-right-3 on-right fg-white"></i></a>
 
-jsreport is an open source reporting server running cross platform using [node.js](http://nodejs.org/). It allows to create any pdf report you can think of without lame designers just using html and javascript. This article is kind of `Hello world` into jsreport which will cover basic principles you need to understand to get started.
+jsreport is an open source reporting server running cross platform using [node.js](http://nodejs.org/). It allows to create any pdf report you can think of without lame designers just using html and javascript. This article is kind of `Hello world` into jsreport and covers basic principles you need to understand to get started.
 
 ##Basic workflow
 
@@ -13,7 +13,7 @@ jsreport is an open source reporting server running cross platform using [node.j
 ##Getting jsreport server
 You need to have access to jsreport server to be able to render reports. You can use [jsreport as a service solution](http://jsreport.net/online) or you can [download](http://jsreport.net/on-prem) and run it to on own on premise server.
 
-No metter what option will you choose you will get access to jsreport html based studio you will need for designing and testing reports.
+No matter what option you will choose you will get access to jsreport html based studio you're going to need for designing and testing reports.
 
 <a href="http://jsreport.net/screenshots/studio.png" target="_blank">
 <img src="http://jsreport.net/screenshots/studio.png" alt="studio" style="width: 600px;"/>
@@ -21,9 +21,9 @@ No metter what option will you choose you will get access to jsreport html based
 
 
 ##Defining sample data
-Now when you have access to [jsreport online](https://jsreportonline.net) or you have your own jsreport server running you can start preparing reports. But before actually designing report's layout it's good to define some sample data you will use for previewing and testing reports first.
+Now when you have access to [jsreport online](https://jsreportonline.net) or have your own jsreport server running you can start preparing reports. But before actually designing report's layout it's good to define some sample data you will use for previewing and testing reports first.
 
-You can create sample data in jsreport studio using `actions/create data` menu. Whole jsreport including API is based on javascript so you guess right sample data are based on `json` format. Sample data can in fact contain any `json` object.
+You can create sample data in jsreport studio using `actions/create data` menu. Whole jsreport including API is based on javascript so you guess right that sample data are based on `json` format. Sample data can in fact contain any `json` object.
 
 <a href="http://jsreport.net/img/sample-data.png" target="_blank">
 <img src="http://jsreport.net/img/sample-data.png" alt="sample data" style="width: 600px;"/>
@@ -32,7 +32,7 @@ You can create sample data in jsreport studio using `actions/create data` menu. 
 
 ##Defining report template
 
-Report template together with the rendering process is the hearth of jsreport. Template defines how will the result report look like and it's used together with input data every time you render a new report. You can create report template again in jsreport studio using `actions/create template` menu. When is the template created you can immediately add sample data you previously created.
+Report template is together with the rendering process the heart of jsreport. Template defines how the result report is going to look like and is used together with input data every time you render a new report. You can create report template again in jsreport studio using `actions/create template` menu. When the template is created you can immediately add sample data you previously created.
 
 <a href="http://jsreport.net/img/sample-data-selection.png" target="_blank">
 <img src="http://jsreport.net/img/sample-data-selection.png" alt="sample data selection" style="width: 150px;"/>
@@ -40,7 +40,7 @@ Report template together with the rendering process is the hearth of jsreport. T
 
 ### Templating engines
 
-The templates are defined using common javascript templating engines (like [jsrender](https://github.com/BorisMoore/jsrender) or [handlebars](http://handlebarsjs.com/)). You can bind input data, use loops, conditions or javascript helpers... Templating engines basicaly provides you way to define any custom report you like. So for example following code will print table of all books we defined previously.
+The templates are defined using common javascript templating engines (like [jsrender](https://github.com/BorisMoore/jsrender) or [handlebars](http://handlebarsjs.com/)). You can bind input data, use loops, conditions or javascript helpers... Templating engines basically provides you a way to define any custom report you like. So for example the following code will print table of all books we defined previously.
 
 ```html
 <table style='border-style:solid'>
@@ -79,7 +79,7 @@ You might find helpful several features jsreport ships out of the box in the for
 
 ##Use API to render report
 
-Now you are ready to integrate your application with jsreport API. It's very simple and in the most cases you just need to do one REST call. You can even try it from your browser's REST plugin. Only one think needed before you start is report template `shortid`. You can find it for example in jsreport studio url (`https://localhost/#extension/templates/eygi2w2axR`).
+Now you are ready to integrate your application with jsreport API. It's very simple and in the most cases you just need to do one REST call. You can even try it from your browser's REST plugin. Only one thing needed before you start is report template `shortid`. You can find it for example in jsreport studio url (`https://localhost/#extension/templates/eygi2w2axR`).
 
 Following request will invoke rendering previously defined template with shortid `eygi2w2axR`. Response will be stream to a pdf report.
 > `POST:` https://localhost/api/report<br/>

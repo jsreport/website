@@ -5,7 +5,7 @@ Along with html based studio jsreport provides also visual studio extension for 
 
 
 
-This extension will add new jsreport file templates into c# project which you will use to create report templates, images or sample data. But to be able to actualy create and preview reports you need install first [jsreport.Embedded](https://www.nuget.org/packages/jsreport.Embedded) nuget package or just [jsreport.Client](https://www.nuget.org/packages/jsreport.Client) if you already have somewhere running remote jsreport server.
+This extension adds new jsreport file templates into c# project which you will use to create report templates, images or sample data. But to be able to actually create and preview reports you need install first [jsreport.Embedded](https://www.nuget.org/packages/jsreport.Embedded) nuget package or just [jsreport.Client](https://www.nuget.org/packages/jsreport.Client) if you already have remote jsreport server running somewhere.
 
 <a href="http://jsreport.net/img/vstools-3.png" target="_blank">
 <img src="http://jsreport.net/img/vstools-3.png" alt="vstools" style="width: 600px;"/>
@@ -13,7 +13,7 @@ This extension will add new jsreport file templates into c# project which you wi
 
 ##Creating report template
 
-jsreport report template will create for you grouped `Report.jsrep`, `Report.jsrep.html` and `Report.jsrep.js` where you should define report. The main `Report.jsrep` file provides a custom editor allowing to configure basic report settings like paper size and orientation.
+jsreport report template creates for you grouped `Report.jsrep`, `Report.jsrep.html` and `Report.jsrep.js` and you can define report in them. The main `Report.jsrep` file provides a custom editor allowing you to configure basic report settings like paper size and orientation.
 
 <a href="http://jsreport.net/img/vstools-2.png" target="_blank">
 <img src="http://jsreport.net/img/vstools-2.png" alt="vstools" style="width: 600px;"/>
@@ -21,7 +21,7 @@ jsreport report template will create for you grouped `Report.jsrep`, `Report.jsr
 
 `Report.jsrep.html` file is used to define report template layout using specified javascript templating engine and `Report.jsrep.js` is a place for javascript helper functions. You can navigate to these files from visual studio solution or use buttons in jsreport editor.
 
-To preview report click green `Preview` button or hit `F5` from any of the `.jsrep` file. To view a pdf report you need to have a pdf adobe acrobat reader installed and also you should consider running visual studio with administrator privileges to avoid prompting from visual studio every time you want to preview a report.
+To preview report click green `Preview` button or hit `F5` from any of the `.jsrep` files. To view a pdf report you need to have a pdf adobe acrobat reader installed and also you should consider running visual studio with administrator privileges to avoid prompting from visual studio every time you want to preview a report.
 
 Keep in mind you can redock report preview tab and keep report definition together with preview side by side.
 
@@ -33,15 +33,15 @@ Keep in mind you can redock report preview tab and keep report definition togeth
 
 ##Creating sample data for preview
 
-Typical report needs a layout definition and some input data. While in real application you should provide data dynamically and during design time you need to provide some preview testing data. You can create static testing data using `jsreport sample data` project item template from create new item dialog. This will create a `SampleData.jsrep.json` file where you can fill any json data.
+Typical report needs a layout definition and some input data. While in real application you should provide data dynamically and you need to provide some preview testing data during design time. You can create static testing data using `jsreport sample data` project item template from create new item dialog. This will create a `SampleData.jsrep.json` file where you can fill any json data.
 
-To assign testing data into particular report use `Sample Data` combobox in `jsrep` file. Note you may need to reopen it first.
+To assign testing data into particular report use `Sample Data` combobox in `jsrep` file. Note that you may need to reopen it first.
 
 ##Creating images
 
-Reports quite often contain some static images for headers or background. You can easily create and use such an image from `jsreport image` project item template. This will create a `ReportImage.jsrep.png` which is nothing but an image with `.jsrep` saying to jsreport it should synchronize it with the server.
+Reports quite often contain some static images for headers or background. You can easily create and use such an image from `jsreport image` project item template. This will create a `ReportImage.jsrep.png` which is nothing but an image with `.jsrep` saying to jsreport it should  be synchronized with the server.
 
-Adding image into report is done using special tag jsreport [images extension](http://jsreport.net/learn/images) recognizes and replace with a real base64 image representation.
+Adding image into report is done using special tag jsreport [images extension](http://jsreport.net/learn/images) recognizes and replaces with a real base64 image representation.
 ```
 <img src="{#image ImageName}" height... />
 ```
@@ -59,7 +59,7 @@ public class ReportingStartup {
 }
 ```
 
-You can use `IVSReportingConfiguration` to specify if visual studio should use [embedded jsreport server](http://jsreport.net/learn/net-embedded) or a remote one. You can also define dynamicaly reports sample data.
+You can use `IVSReportingConfiguration` to specify if visual studio should use [embedded jsreport server](http://jsreport.net/learn/net-embedded) or a remote one. You can also define dynamically reports sample data.
 
 ```c#
 public class ReportingStartup {

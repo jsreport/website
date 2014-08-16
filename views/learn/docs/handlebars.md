@@ -2,7 +2,7 @@
 
 ##Basics
 
-jsreport handlebars engines uses [handlebars](http://handlebarsjs.com) library therefore is fully compatible with it. This page will contain only some examples. Full documentation is located at [http://handlebarsjs.com](http://handlebarsjs.com)
+jsreport handlebars engine uses [handlebars](http://handlebarsjs.com) library and therefore is fully compatible with it. This page contains only some examples. Full documentation is located at [http://handlebarsjs.com](http://handlebarsjs.com)
 
 ##Data binding
 
@@ -56,9 +56,9 @@ You can simply iterate over `comments` using `each`
 
 ##Helpers
 
-jsreport report template contains `content` filed with javascript tempalting engines tags and `helpers` field where you can place some javascript functions and then use them.
+jsreport report template contains `content` filed with javascript templating engines tags and `helpers` field where you can place some javascript functions and then use them.
 
-For example you want to have a upper case helper function. You can register a global function inside a `helpers` field with following code:
+For example you want to have an upper case helper function. You can register a global function inside a `helpers` field with the following code:
 
 ```javascript
 function toUpperCase(str) {

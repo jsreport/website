@@ -1,14 +1,14 @@
 
 `Phantom-pdf` recipe is using [phantomjs](http://phantomjs.org/) screen capture feature to print html content into pdf files. This approach is very productive in defining report templates and also the most used one with jsreport.
 
-`Pantom-pdf` recipe is capable of rendering any html and javascript you provide. This means you can also use external javascript libraries or use canvas to print visual charts.
+`Pantom-pdf` recipe is capable of rendering any html and javascript you provide. This means you can also use external javascript libraries or canvas to print visual charts.
 
 ##Basic settings
 
 - Margin - px or cm specification of margin used from page borders
 - Paper Format - predefined page sizes containing A3, A4, A5, Legal, Letter
-- Paper Width - px or cm page width, takes precedence ofer paper format
-- Paper Heigth - px or cm page height, takes precedence ofer paper format
+- Paper Width - px or cm page width, takes precedence over paper format
+- Paper Heigth - px or cm page height, takes precedence over paper format
 - Orientation - portrait or landscape orientation
 - Header Height - px or cm height of the header in the page
 - Header - header html content
