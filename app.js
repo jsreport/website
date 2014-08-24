@@ -1,5 +1,5 @@
 var express = require('express'),
-    exphbs = require('express3-handlebars'),
+    exphbs = require('express-handlebars'),
     app = express(),
     router = require("./router.js"),
     docs = require("./docs.js");
@@ -31,12 +31,16 @@ app.use(express.static('public/'));
 app.get('/', function(req, res) {
     res.render('home', {
         home: true,
-        title: "jsreport - javascript based reporting platform",
+        title: "js" +
+            "report - javascript based reporting platform",
         description: "jsreport is an open source reporting platform where reports are designed using popular javascript templating engines."
     });
 });
 
+app.get('/learn/templating-engines', docs.engines);
+app.get('/learn/recipes', docs.recipes);
 app.get('/learn/extensions', docs.extensions);
+app.get('/learn/visual-studio-and-net', docs.vsNet);
 app.get('/learn/:doc', docs.doc);
 app.get('/learn', docs.learn);
 app.get('/examples/certificates', function(req, res) {
@@ -67,5 +71,5 @@ require("./posts.js")(app).then(function(poet) {
         res.status(404).render("404");
     });
     
-    app.listen(process.env.PORT);
+    app.listen(process.env.PORT || 2000);
 });

@@ -2,8 +2,10 @@
     "title"    : "Pdf reports in c#",
 	"slug"     : "pdf-reports-in-csharp",  
     "date"     : "04-18-2014 12:53",
-	"preview"  : "This article tries to summarize solutions I have tried or found and finally describes in detail how to render pdf reports using jsreport. "
+	"preview"  : "This article tries to summarize solutions I have tried or found and finally describes in detail how to render pdf reports using jsreport."
 }}}
+
+> **Update**: This article compares current approaches for printing pdf reports from c# and highlights jsreport as solution for problems related to reporting in c#. We have recently released jsreport visual studio tools that make things much more easier. See [reporting visual studio extension](http://jsreport.net/learn/visual-studio-extension) and [reporting embedded into .net](http://jsreport.net/learn/net-embedded) documentation. You can also find interesting full tutorial for [reporting in asp.net mvc](http://www.janblaha.net/blog/pdf-reporting-in-visual-studio-csharp-and-asp-net-mvc).
 
 ## Introduction
 To output a pdf business report is a typical requirement for almost every enterprise solution.  I was implementing this use case for many companies and I was having hard time doing it. That made me think if I am doing it actually right. This article tries to summarize solutions I have tried or found and finally describes in detail how to render pdf reports using jsreport. 

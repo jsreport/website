@@ -4,7 +4,9 @@
     "date"     : "07-18-2014 13:18"    
 }}}
 
+jsreport is able to generate pdf reports from any external system having an API without any changes or implementations needed on the external system side. You just basically need to create a custom jsreport script that will actively download data from external system and create html defining report layout using common javascript templating engines. You can directly check [following example](https://playground.jsreport.net/#/playground/lyWJuycgAc) if you are not familiar with this principle.
 
+You can see downloading report data using custom jsreport script can be quite easy but can also become a little complex when reaching system like sharepoint with complex API. Fortunately these systems have usually some wrappers around api to make integration simple. 
 
 ```javascript
 var Sharepoint  = require('sharepoint-api')

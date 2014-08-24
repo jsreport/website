@@ -15,20 +15,21 @@ exports.extensions = function(req, res) {
     res.render('learn/extensions', { learn: true });
 };
 
+exports.vsNet = function(req, res) {
+    res.render('learn/vs-net', { learn: true });
+};
+
+exports.recipes = function(req, res) {
+    res.render('learn/recipes', { learn: true });
+};
+
+exports.engines = function(req, res) {
+    res.render('learn/engines', { learn: true });
+};
 
 exports.learn = function(req, res) {
     res.render('learn/learn', { learn: true, title: "Learn jsreport" });
 };
-
-//   var items = [];
-//    for (var key in docs) {
-//        items.push({ title: docs[key], link: key });
-//    }
-
-//    res.render('learn/learn', {
-//        tutorials: items,
-//        learn: true
-//    });
 
 exports.doc = function(req, res) {
     var filePath = path.join(__dirname, "views", "learn", "docs", req.params.doc + ".md");
@@ -43,6 +44,7 @@ exports.doc = function(req, res) {
 
         marked(content, function(err, renderedContent) {
             res.render('learn/doc', {
+                title: docs[req.params.doc],
                 content: renderedContent,
                 url: "http://jsreport.net" + req.url,
                 id: req.params.doc,
@@ -52,13 +54,3 @@ exports.doc = function(req, res) {
         });
     });
 };
-
-    //<div>
-
-    //    <ul>
-    //        {{#each tutorials}}
-    //        <li><a href="/learn/{{this.link}}">{{this.title}}</a></li>
-    //        {{/each}}
-    //    </ul>
-        
-    //</div>

@@ -1,4 +1,4 @@
-jsreport comes with .NET c# client which wraps REST API and is very convenient to use if you are in .NET environment. You can use .NET c# client to connect to a remote jsreport server and also to [jsreport .NET embedded server](http://jsreport.net/net-embedded).
+jsreport comes with .NET c# client which wraps REST API and is very convenient to use if you are in .NET environment. You can use .NET c# client to connect to a remote jsreport server and also to [jsreport .NET embedded server](http://jsreport.net/learn/net-embedded).
 
 ## Get Started
 
@@ -78,7 +78,7 @@ var loadedReport = await _reportingService.ReadReportAsync(report.PermanentLink)
 ```
 
 ##Synchronizing visual studio templates
-jsreport client can synchronize reports defined inside visual studio project using [jsreport visual studio tools](http://jsreport.net/learn/visual-studio-tools) against embedded or remote jsreport server. 
+jsreport client can synchronize reports defined inside visual studio project using [jsreport visual studio tools](http://jsreport.net/learn/visual-studio-extension) against embedded or remote jsreport server.
 
 ```c#
 await _reportingService.SynchronizeTemplatesAsync();
