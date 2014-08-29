@@ -1,6 +1,6 @@
 .documentation { }
 
-.documentation pre { padding-bottom: 0px; margin-bottom: 0px}
+.documentation pre { padding-bottom: 0px !important; margin-bottom: 15px !important;}
 
 .documentation .c { color: #999988; font-style: italic } /* Comment */
 .documentation .err { color: #a61717; background-color: #e3d2d2 } /* Error */
@@ -69,9 +69,9 @@
 .documentation blockquote.pull-right{padding-right:15px;padding-left:0;border-right:5px solid rgba(102,128,153,0.075);border-left:0}blockquote.pull-right p,blockquote.pull-right small{text-align:right}
 .documentation blockquote.pull-right small:before{content:''}
 .documentation blockquote.pull-right small:after{content:'\00A0 \2014'}
-.documentation q:before,q:after,blockquote:before,blockquote:after{content:""}
+.documentation q:before,.documentation q:after,.documentation blockquote:before,.documentation blockquote:after{content:""}
 .documentation address{display:block;margin-bottom:20px;font-style:normal;line-height:1.428571429}
-.documentation code,pre{font-family:Monaco,Menlo,Consolas,"Courier New",monospace}
+.documentation code,.documentation pre, .documentation span {font-family:Monaco,Menlo,Consolas,"Courier New",monospace}
 .documentation code{padding:2px 4px;font-size:90%;color:#162029;background-color:rgba(102,128,153,0.075);white-space:nowrap;border-radius:4px}
 .documentation pre{display:block;padding:9.5px;margin:0 0 10px;font-size:13px;line-height:1.428571429;word-break:break-all;word-wrap:break-word;color:#333;background-color:rgba(102,128,153,0.05);border:1px solid rgba(102,128,153,0.075);border-radius:4px}pre.prettyprint{margin-bottom:20px}
 .documentation pre code{padding:0;font-size:inherit;color:inherit;white-space:pre-wrap;background-color:transparent;border:0}
@@ -87,27 +87,27 @@
 .documentation h1{margin:60px 0 40px}
 .documentation h2{margin:50px 0 30px}
 .documentation h3{margin:35px 0 20px}
-.documentation h4,h5,h6{margin:25px 0 15px}
+.documentation h4,.documentation h5,.documentation h6{margin:25px 0 15px}
 
 .documentation-wrap .main-title a {
     font-size: 35px;
     padding-right: 10px;
 }
 
-.documentation p,pre,pre.prettyprint,blockquote{margin:0 0 15px}
+.documentation p,.documentation pre,.documentation pre.prettyprint,.documentation blockquote{margin:0 0 15px}
 .documentation hr{margin:30px 0}
-.documentation code,pre{font-family:Menlo,Consolas,"Courier New",monospace;font-size:12px !important}
-.documentation pre,pre.prettyprint{border:0 solid rgba(102,128,153,0.075);border-left:10px solid rgba(102,128,153,0.075);border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;padding:10px 15px}pre code,pre.prettyprint code{background-color:transparent !important}
-.documentation dt,dd{margin-top:5px;margin-bottom:5px}
+.documentation code,.documentation pre{font-family:Menlo,Consolas,"Courier New",monospace;font-size:14px !important}
+.documentation pre,.documentation pre.prettyprint{border:0 solid rgba(102,128,153,0.075);border-left:10px solid rgba(102,128,153,0.075);border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;padding:10px 15px}pre code,pre.prettyprint code{background-color:transparent !important}
+.documentation dt,.documentation dd{margin-top:5px;margin-bottom:5px}
 .documentation dd{margin-left:40px}
 .documentation table{margin-bottom:20px}
-.documentation table th,table td{padding:8px;line-height:20px;text-align:left;vertical-align:top;border-top:1px solid #dddddd}
+.documentation table th,.documentation table td{padding:8px;line-height:20px;text-align:left;vertical-align:top;border-top:1px solid #dddddd}
 .documentation table th{font-weight:bold}
 .documentation table thead th{vertical-align:bottom}
 .documentation table caption+thead tr:first-child th,table caption+thead tr:first-child td,table colgroup+thead tr:first-child th,table colgroup+thead tr:first-child td,table thead:first-child tr:first-child th,table thead:first-child tr:first-child td{border-top:0}
 .documentation table tbody+tbody{border-top:2px solid #dddddd}
 .documentation blockquote{border-left-width:10px;background-color:rgba(102,128,153,0.05);border-top-right-radius:5px;border-bottom-right-radius:5px;padding:15px 20px}blockquote p{margin-bottom:15px;font-size:14px;line-height:1.428571429}
-.documentation blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}
-.documentation ul,ol{margin-bottom:15px}ul ul,ol ul,ul ol,ol ol{margin-bottom:15px}
+.documentation blockquote ul:last-child,.documentation blockquote ol:last-child{margin-bottom:0}
+.documentation ul,.documentation ol{margin-bottom:15px}ul ul,ol ul,ul ol,ol ol{margin-bottom:15px}
 .documentation kbd{padding:0.1em 0.6em;border:1px solid rgba(22,32,41,0.25);-webkit-box-shadow:0 1px 0 rgba(22,32,41,0.25);box-shadow:0 1px 0 rgba(22,32,41,0.25);font-size:11px;font-family:Arial,Helvetica,sans-serif;background-color:#fff;color:#333;border-radius:3px;display:inline-block;margin:0 0.1em;white-space:nowrap}
  

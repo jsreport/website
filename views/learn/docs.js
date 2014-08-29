@@ -16,5 +16,7 @@
     "html": "Html recipe",
     "engines": "Engines",
     "jsrender": "jsrender templating engine",
-    "handlebars": "handlebars templating engine"
+    "handlebars": "handlebars templating engine",
+    "adapting-jsreport": "Adapting jsreport",
+    "nodejs-client": "node.js client"
 };

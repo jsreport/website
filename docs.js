@@ -23,6 +23,10 @@ exports.recipes = function(req, res) {
     res.render('learn/recipes', { learn: true });
 };
 
+exports.nodejs = function(req, res) {
+    res.render('learn/nodejs', { learn: true });
+};
+
 exports.engines = function(req, res) {
     res.render('learn/engines', { learn: true });
 };
@@ -34,7 +38,7 @@ exports.learn = function(req, res) {
 exports.doc = function(req, res) {
     var filePath = path.join(__dirname, "views", "learn", "docs", req.params.doc + ".md");
 
-    if (!fs.existsSync(filePath)) {
+    if (!fs.existsSync(filePath) || !docs[req.params.doc]) {
         return res.status(404).render("404");
     }
 

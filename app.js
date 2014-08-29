@@ -37,6 +37,7 @@ app.get('/', function(req, res) {
     });
 });
 
+app.get('/learn/nodejs', docs.nodejs);
 app.get('/learn/templating-engines', docs.engines);
 app.get('/learn/recipes', docs.recipes);
 app.get('/learn/extensions', docs.extensions);

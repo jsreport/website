@@ -1,98 +1,54 @@
 {{{
-    "title"    : "Create pdf reports from jira",
-    "slug"     : "create-pdf-reports-from-jira",  
-    "date"     : "07-18-2014 13:18"    
+    "title"    : "Creating pdf reports from jira",
+    "slug"     : "creating-pdf-reports-from-jira",  
+    "date"     : "08-24-2014 20:09"    
 }}}
 
+jsreport is able to generate pdf reports from any external system having an API without any changes or implementations needed on the external system side. You just basically need to create a custom jsreport script that will actively download data from external system and create html defining report layout using common javascript templating engines. You can directly check [following example](https://playground.jsreport.net/#/playground/lyWJuycgAc) if you are not familiar with this principle.
 
+Downloading report data using custom jsreport script can be quite easy but can also become a little difficult when reaching system like jira or sharepoint with complex API. Fortunately these systems have usually some wrappers around api to make integration simple.  For example [node-jira](https://github.com/steves/node-jira) is one of these wrappers for [jira bug tracking system](https://www.atlassian.com/software/jira).
+
+Using jsreport to render pdf reports from jira is quite common use case there for I decided to write a jsreport extension that will allow to use [node-jira](https://github.com/steves/node-jira) directly in the jsreport custom script. You can find this extension on github in [jsreport-contrib-jira](https://github.com/jsreport/jsreport-contrib-jira) repository. It's pre-installed in jsreport [online](http://jsreport.net/online) but you need to explicitly install this extension to jsreport [on-prem](http://jsreport.net/on-prem) by:
+
+> npm install jsreport-contrib-jira
+
+##Example
+Once is `jsreport-contrib-jira` extension running you can use `require('jira')` inside your custom scripts.
+
+Simple example of getting jira issues for particular user.
 
 ```javascript
-var Sharepoint  = require('sharepoint-api')
+JiraApi = require('jira').JiraApi;
+var jira = new JiraApi('https', 'simplias-jira.atlassian.net', 443, [username], [password], '2');
 
-var sp = new Sharepoint({
-    host: "pofider.sharepoint.com",
-    username: "pofider@pofider.onmicrosoft.com",
-    password: "blaha4888*"
-});
-
-
-request.data = {};
-
-function loadUsers(cb) {
-    sp.query({ resource: "Lists", filter: "Title eq 'User Information List'"},function(err, r) {
-        sp.query({ resource: "Lists(guid'" + r.data.d.results[0].Id + "')/Items"}, function (err, rr) {
-          request.data.users = rr;
-          cb();
-        });
-    });
-}
-
-function loadLists(cb) {
-    sp.query({ resource: "Lists"},function(err, r) {
-        request.data.lists = r;
-        cb();
-    });
-}
-
-
-loadUsers(function() {
-    loadLists(function() {
-        done();
-    });
+jira.getUsersIssues([username], true, function(err, res) {
+    request.data = res;
+    done();    
 });
 ```
 
-```javascript
-function formatDate(d) {
-    return moment(d).format('DD.MM.YYYY, h:mm:ss');
-}
-```
-
+And then for example display issues using `jsrender`
 ```html
-<html>
-  <head>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.2/jquery.flot.pie.min.js"></script>
-  </head>
-  <body>
-        <style>
-           table, th, td {
-             border: 1px solid black;
-           }
-        </style>
-        
-        <h1>Users table</h1>
-        
-        <table>
-            <tr><th>User</th><th>Date Created</th></tr>
-            {{for #data.users.data.d.results}}
-                <tr >
-                    <td>{{:Title}}</td>
-                    <td>{{:~formatDate(Created)}}</td>
-                </tr>    
-            {{/for}}
-        </table>
-    
-        <h1>Lists with sizes</h1> 
-    
-        <div id="placeholder" style="width:700px;height:350px"></div>
-    
-        <script>
-            $(function () {   
-                var data = [];
-    
-                {{for #data.lists.data.d.results}}
-                    data.push({
-                        label: "{{:Title}}",
-                        data: {{:ItemCount}}
-                    });
-                {{/for}}
-    
-                $.plot('#placeholder', data, { series: { pie: {  show: true   } } });
-            });
-        </script>
-        
-    </body>
-</html>
+{{for issues}}
+    <h3>
+        <img src='{{:#data.fields.status.iconUrl}}' /> 
+        {{:#data.key}} - 
+        {{:#data.fields.summary}}
+    </h3>
+    <p>
+        {{>#data.fields.description}}
+    </p>
+{{/for}}
 ```
+
+And how it looks in the jsreport studio....
+
+
+
+<a href="http://jsreport.net/img/blog/jira.png" target="_blank">
+<img src="http://jsreport.net/img/blog/jira.png" alt="jira pdf report" style="width: 800px;"/>
+</a>
+
+>
+
+
