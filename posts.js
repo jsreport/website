@@ -1,7 +1,10 @@
 ﻿module.exports = function(app) {
+
     var poet = require('poet')(app, {
-        postsPerPage: 300,
+        postsPerPage: 300
     });
+
+    var cache = {};
 
     var marked = require("marked");
 
@@ -25,16 +28,23 @@
 
     poet.addRoute('/blog/:post', function(req, res, next) {
         var post = poet.helpers.getPost(req.params.post);
+
         if (post) {
-            res.render('post', {
+            if (cache[req.params.slug]) {
+                return res.render('post', cache[req.params.post]);
+            }
+
+            cache[req.params.post] = {
                 post: post,
                 linkDocCss: true,
                 url: "http://jsreport.net" + post.url,
                 id: req.params.slug,
                 blog: true,
                 lastPosts: poet.helpers.getPosts(0, 3),
-                title: post.title,
-            });
+                title: post.title
+            };
+
+            res.render('post', cache[req.params.post]);
         } else {
             res.send(404);
         }

@@ -4,9 +4,11 @@
 	"preview"  : "jsreport phantom-pdf recipe allows you to convert any html, css and javascript into pdf page. "
 }}}
 
->**Online example is accesible [here](https://playground.jsreport.net/#/playground/g1U3De6Ch/1)**
+>**Update**: [highchart](http://www.highcharts.com/) library seems to perform much better then jquery.flot and we recommend using hightchart instead. You only need to to disable animations. See [example](https://playground.jsreport.net/#playground/e77zeliQO/2)
 
 jsreport phantom-pdf recipe allows you to convert any html, css and javascript into pdf page. This means you can even link a javascript charting library, let it render an image or svg chart and jsreport phantom-pdf recipe will still be able to print them into pdf.
+
+>**Online example is accesible [here](https://playground.jsreport.net/#/playground/g1U3De6Ch/1)**
 
 Look at the following example. It shows how to do a simple chart in jsreport. It uses jquery and [jquery flot charting library](http://www.flotcharts.org/) to render a very simple chart. Note also that jsreport allows you to link javascript libraries from cdn so you don't have to embed the whole code into report.
 

@@ -2,6 +2,7 @@
     fs = require("fs"),
     path = require("path"),
     marked = require("marked");
+    cache = {};
 
 marked.setOptions({
     highlight: function(code, lang, callback) {
@@ -42,19 +43,25 @@ exports.doc = function(req, res) {
         return res.status(404).render("404");
     }
 
+    if (cache[req.params.doc]) {
+        return res.render('learn/doc', cache[req.params.doc]);
+    }
+
     fs.readFile(filePath, 'UTF-8', function(err, content) {
         if (content.charAt(0) === '\uFEFF')
             content = content.substr(1);
 
         marked(content, function(err, renderedContent) {
-            res.render('learn/doc', {
+            cache[req.params.doc] = {
                 title: docs[req.params.doc],
                 content: renderedContent,
                 url: "http://jsreport.net" + req.url,
                 id: req.params.doc,
                 learn: true,
                 linkDocCss: true
-            });
+            };
+
+            res.render('learn/doc', cache[req.params.doc]);
         });
     });
 };
