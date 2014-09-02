@@ -18,5 +18,6 @@
     "jsrender": "jsrender templating engine",
     "handlebars": "handlebars templating engine",
     "adapting-jsreport": "Adapting jsreport",
-    "nodejs-client": "node.js client"
+    "nodejs-client": "node.js client",
+    "pdf-reports-in-nodejs": "Pdf reports in node.js"
 };

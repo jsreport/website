@@ -2,7 +2,7 @@
 The most common way to adapt jsreport settings is using configuration file. Configuration file is stored at the root directory with name `[dev | prod].config.json`. Editing this file you can change for example port service is running on or scale up number of worker processes jsreport uses. You can find full documentation of various options [here](https://github.com/jsreport/jsreport/blob/master/config.md).
 
 ##Configuring using nodejs
-In addition to configuration file based settings you can also use [node.js](http://nodejs.org) and dynamically adapt jsreport to your needs. Following chapters applies to those using jsreport on premise and want to apply some advanced configurations and for those integrating jsreport module directly to their node.js application as well. 
+In addition to configuration file based settings you can also use [node.js](http://nodejs.org) and dynamically adapt jsreport to your needs. Following chapters applies to those using jsreport on premise and want to apply some advanced configurations. Those  who wants to use jsreport rendering directly inside their node.js application should refer to [this](/learn/pdf-reports-in-nodejs) article. 
 
 ### Basic startup
 
@@ -82,19 +82,12 @@ require("jsreport").bootstrapper({
 	}
 }).start().then(function() {
 	app.listen(5000);
-}
+});
 ```
 This approach can be used for example in conjunction with [vhost](https://github.com/expressjs/vhost) middle-ware to start jsreport on sub domain of the existing application.
 
 
-###Start nodejs without API
-You may want to use jsreport inside your nodejs application just for rendering pdf files without any further user interface or any other API. This can be achieved easily if you just remove `express` folder from `node_modules\jsreport\extension`. Or if you explicitly specify extensions you want to use without specifying `express`.
 
-```
-require("jsreport").bootstrapper({
-    extensions: ["templates", "html", "phantom-pdf"]    
-}).start()
-```
 
 ###Custom logging
 jsreport is doing logging with [winston](https://github.com/flatiron/winston) library by default. You can change this if you call `createLogger` function on bootstrap and provide your own logger.
@@ -102,13 +95,23 @@ jsreport is doing logging with [winston](https://github.com/flatiron/winston) li
 ```js
 require("jsreport")
 	.bootstrapper()
-	.createLogger(function(bootstraooer) {
+	.createLogger(function(bootstrapper) {
 		return {
-			info: functtion() {...},
-			debug: functtion() {...},
-			error: functtion() {...},
-			warn: functtion() {...},
+			info: function() {...},
+			debug: function() {...},
+			error: function() {...},
+			warn: function() {...},
 		}
 	}
-	.start()
+	.start();
+```
+
+Or you can use one of the default loggers. jsreport currently supports a `winston`, `console` and `dummy` logger. You can specify a logger also in the config.
+
+```js
+require("jsreport")
+	.bootstrapper({
+		logger: { providerName: "console" }
+	})
+	.start();
 ```
