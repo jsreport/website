@@ -28,7 +28,7 @@ require('jsreport').bootstrapper().start().then(function(bootstrap) {
 ```
 
 ###Dynamic rendering of reports
-The goal of jsreport is to render reports. This can be dynamically invoked using `Render` method on the instances of `Reporter` class. The most simple use case can look like this:
+The goal of jsreport is to render reports. This can be dynamically invoked using `render` method on the instances of `Reporter` class. The most simple use case can look like this:
 
 ```js
 reporter.render({
@@ -62,7 +62,7 @@ jsreport is using [jaydata](http://jaydata.org/) library as data access layer. I
 
 ```js
 reporter.dataProvider.startContext().then(function (ctx) {
-	//query all jsreport templates and found one with 
+	//query all jsreport templates and find one with specific shortid
 	return ctx.templates.single(function (t) {  
 			   return t.shortid === "a18dfF";
 		   });
