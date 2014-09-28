@@ -15,7 +15,7 @@
             basic: {
                 files: {
                     'public/jsreport.min.js': ['public/js/jquery/jquery.min.js', 'public/js/jquery/jquery.widget.min.js',
-                        'public/js/jquery/jquery.mousewheel.min.js', 'public/js/pretify/pretify.js', 'public/js/docs.js', 'public/js/github.info.js',
+                        'public/js/jquery/jquery.mousewheel.min.js', 'public/js/pretify/pretify.js', 'public/js/docs.js',
                         'public/js/metro.min.js', 'public/js/custom.js']
                 }
             }

@@ -17,7 +17,15 @@ exports.playground = function(req, res) {
 exports.online = function(req, res) {
     res.render("online", { 
         online: true, 
-        title: "jsreportonline - cloud based SaaS",
+        title: "jsreportonline - pdf reports as a service",
+        description: "Do not install anything. Just register to cloud based jsreportonline service and start creating reports now."
+    });
+};
+
+exports.onlinePricing = function(req, res) {
+    res.render("online-pricing", {
+        online: true,
+        title: "jsreportonline - pdf reports as a service",
         description: "Do not install anything. Just register to cloud based jsreportonline service and start creating reports now."
     });
 };

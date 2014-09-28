@@ -50,6 +50,7 @@ app.get('/examples/certificates', function(req, res) {
 
 
 app.get('/online', router.online);
+app.get('/online/pricing', router.onlinePricing);
 app.get('/playground', router.playground);
 app.get('/on-prem', router.onprem);
 app.get('/about', router.about);
