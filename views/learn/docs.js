@@ -19,5 +19,9 @@
     "handlebars": "handlebars templating engine",
     "adapting-jsreport": "Adapting jsreport",
     "nodejs-client": "node.js client",
-    "pdf-reports-in-nodejs": "Pdf reports in node.js"
+    "pdf-reports-in-nodejs": "Pdf reports in node.js",
+    "authentication": "Authentication",
+    "authorization": "Authorization",
+    "client-html": "Client html recipe",
+    "embedding": "Embedding"
 };

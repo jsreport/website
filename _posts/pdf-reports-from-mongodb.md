@@ -3,7 +3,7 @@
     "date"     : "09-27-2014 09:18"    
 }}}
 
-Rendering pdf reports from [mongodb](http://www.mongodb.org/) is a peace of cake with the new  [jsreport mongodb extension](https://github.com/jsreport/jsreport-contrib-mongodb). You don't need any application with API above mongo. Only thing you need is jsreport and valid accessible mongodb endpoint.
+Rendering pdf reports from [mongodb](http://www.mongodb.org/) is a piece of cake with the new  [jsreport mongodb extension](https://github.com/jsreport/jsreport-contrib-mongodb). You don't need any application with API above mongo. Only thing you need is jsreport and valid accessible mongodb endpoint.
 
 How does it work...
 
