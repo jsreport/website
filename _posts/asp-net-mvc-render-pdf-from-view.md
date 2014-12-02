@@ -21,7 +21,7 @@ public static void RegisterGlobalFilters(GlobalFilterCollection filters)
   //when using .net embedded version you need to start server first
   EmbeddedReportingServer = new EmbeddedReportingServer();
   EmbeddedReportingServer.StartAsync().Wait();
-  filters.Add(new JsReportFilterAttribute(EmbeddedReportingServer.ReportingService);
+  filters.Add(new JsReportFilterAttribute(EmbeddedReportingServer.ReportingService));
 
   //when using on prem or online just instantiate ReportingService with correct url
   //filters.Add(new JsReportFilterAttribute(new ReportingService("http://localhost:2000");
@@ -39,6 +39,8 @@ public ActionResult Index()
 ```
 
 And now you can try to visit the page and it should open a pdf instead of html.
+
+jsreport will evaluate all your css files and even javascript. You only need to keep in mind that every resource like script or style has to be linked with absolute url.
 
 ####Quick notes for more sophisticated scenarios.
 

@@ -2,7 +2,8 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     app = express(),
     router = require("./router.js"),
-    docs = require("./docs.js");
+    docs = require("./docs.js"),
+    multer  = require('multer');
 
 
 var hbs = exphbs.create({
@@ -27,6 +28,21 @@ app.engine('.html', hbs.engine);
 app.set('view engine', '.html');
 
 app.use(express.static('public/'));
+
+app.use(multer({ dest: "public/temp"}));
+
+
+app.post('/temp', function(req, res) {
+    function findFirstFile() {
+        for (var f in req.files) {
+            if (req.files.hasOwnProperty(f)) {
+                return req.files[f];
+            }
+        }
+    }
+
+    return res.send(require("path").basename(findFirstFile(0).path));
+});
 
 app.get('/', function(req, res) {
     res.render('home', {

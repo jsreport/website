@@ -23,5 +23,8 @@
     "authentication": "Authentication",
     "authorization": "Authorization",
     "client-html": "Client html recipe",
-    "embedding": "Embedding"
+    "embedding": "Embedding",
+    "xlsx": "Xlsx recipe",
+    "html-to-xlsx": "Converting html to xlsx",
+    "text": "Text recipe"
 };

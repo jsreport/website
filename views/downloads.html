@@ -1,6 +1,7 @@
 ﻿<div class="bg-cyan main-title">
     <div class="container padding20 fg-white">
         <a href="/on-prem"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
+
         <h1 class="fg-white">downloads</h1>
     </div>
 </div>
@@ -11,34 +12,96 @@
             <div data-closeany="false" data-role="accordion" class="accordion with-marker span12 ">
                 <div class="accordion-frame">
                     <a href="#" class="heading bg-lightBlue fg-white collapsed">Windows</a>
+
                     <div class="content">
-                        <p>Download and run x64 windows installer <a href="/jsreport_x64.exe">jsreport_x64.exe</a> to host jsreport in windows service</p>
-			<P>Or see <a href="http://jsreport.net/blog/jsreport-hosting-options-on-windows">following blog post</a> how to host jsreport in iis </p>
+                        <div>
+                            <div class="bg-steel padding10 fg-white">Installer</div>
+                            <div class="padding10">
+                                Download and run x64 windows installer <a href="/jsreport_x64.exe">jsreport_x64.exe</a>
+                                to host jsreport in windows service.
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="bg-steel padding10 fg-white">Manual installation steps</div>
+                            <div>
+                                <ol>
+                                    <li>download and install latest <a href="http://nodejs.org">node.js</a></li>
+                                    <li>run cmd with admin rights</li>
+                                    <li>cd to working directory</li>
+                                    <li>type: <code>npm install jsreport</code></li>
+                                    <li>type: <code>node node_modules/jsreport --init</code></li>
+                                    <li>to start server type: <code>node server.js</code></li>
+                                    <li>to install windows service type: <code>node server.js --install</code></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="bg-steel padding10 fg-white">IIS</div>
+                            <div>
+                                <ol>
+                                    <li>download and install latest <a href="http://nodejs.org">node.js</a></li>
+                                    <li>run cmd with admin rights</li>
+                                    <li>cd to working directory</li>
+                                    <li>type: <code>npm install jsreport</code></li>
+                                    <li>type: <code>node node_modules/jsreport --init</code></li>
+                                    <li>remove httpsPort specification from created prod.config.json</li>
+                                    <li>download and place sample <a
+                                            href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>
+                                        into jsreport folder
+                                    </li>
+                                    <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a> Don't forget
+                                        to have iis installed with all Application development sub features and also iis
+                                        <a href="http://www.iis.net/downloads/microsoft/url-rewrite">url rewrite
+                                            extension</a>.
+                                    </li>
+                                    <li>create standard iis website for jsreport folder and choose port and bindings you
+                                        want, also don't forget to add security permissions to jsreport
+                                        folder for IIS App Pool user when appropriate. IMPORTANT: Create a separate
+                                        website. Don't just add application to the default website.
+                                    </li>
+                                    <li>try access website url in browser, jsreport should pop up</li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="accordion-frame">
-                    <a href="#" class="heading bg-green fg-white collapsed">Linux</a>
-                    <div class="content">
-                        <p>Please follow these steps</p>
-                                            
-                        <ol>
-                            <li>install <strong>latest</strong> <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">node.js</a> particular for your linux distribution.</li>
-                            <li>go to console, navigate to your working directory</li>
-                            <li>type <code>sudo npm install jsreport</code></li>
-                            <li>type <code>sudo node node_modules/jsreport --init</code></li>
-                            <li>type <code>sudo node server.js</code></li>
-                            <li>open browser and see <a>https://localhost</a></li>
-                        </ol>
+                    <a href="#" class="heading bg-green fg-white collapsed">Unix</a>
 
-                        <p>You may find troubleshooting guide <a href='https://github.com/jsreport/docs/tree/master/installation'>here</a>.</p>
-                    </div>
-                </div>
-                <div class="accordion-frame">
-                    <a href="#" class="heading bg-orange fg-white collapsed">Mac</a>
                     <div class="content">
-                        Installation script has not been created for Mac yet. See status on github or join and collaborate: <br/>
-                        <a href="https://github.com/jsreport/jsreport/issues/5">https://github.com/jsreport/jsreport/issues/5</a>
+                        <div>
+                            <div class="bg-steel padding10 fg-white">Installation steps</div>
+
+                            <ol>
+                                <li>install <strong>latest</strong> <a
+                                        href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">node.js</a>
+                                    particular for your linux distribution.
+                                </li>
+                                <li>go to console, navigate to your working directory</li>
+                                <li>type <code>sudo npm install jsreport</code></li>
+                                <li>type <code>sudo node node_modules/jsreport --init</code></li>
+                                <li>type <code>sudo node server.js</code></li>
+                                <li>open browser and see <a>https://localhost</a></li>
+                            </ol>
+
+                            <p>You may find troubleshooting guide <a
+                                    href='https://github.com/jsreport/docs/tree/master/installation'>here</a>.</p>
+                        </div>
+
+                        <div>
+                            <div class="bg-steel padding10 fg-white">Docker</div>
+
+                            <div class="padding10">
+                                <p>You can use <a href="https://www.docker.com/">docker</a> image <a href="https://registry.hub.docker.com/u/jsreport/jsreport/">jsreport/jsreport</a>
+                                   for easy installation</p>
+                                <p>
+                                    See <a href="https://github.com/jsreport/docker">jsreport docker</a> repository for details.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

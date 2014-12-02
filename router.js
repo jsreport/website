@@ -1,7 +1,7 @@
 ﻿exports.onprem = function(req, res) {
     res.render("onprem", {
          onprem: true, 
-         title: "Download jsreport on-prem to your server",
+         title: "jsreport - report server",
          description: "Download jsreport on-prem version to your server in your company and use it without any limitations."
     });
 };

@@ -4,11 +4,14 @@ jsreport is designed to be highly extensible, but defining your own recipe or ex
 
 Every script can access global variable called `request` to modify process inputs. Any script can alter:
 
- - `request.template.html`
+ - `request.template.content`
  - `request.template.helpers`
  - `request.data`
 
-Every script is interpreted asynchronously and you need to call global `done()` function when the script is finished.
+Every script is interpreted asynchronously and you need to call global `done([error])` function when the script is finished. 
+
+`Scripts` extension currently allows to use following `npm` modules:
+`handlebars`, `request-json`, `feedparser`, `request`, `underscore`, `constants`
 
 Follows the example of script that is downloading rss data from bbc and creates items collection on the input data which template can later iterate over and render.
 ```js
