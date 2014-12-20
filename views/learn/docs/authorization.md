@@ -1,6 +1,11 @@
+> Use external service to authorize user access to jsreport data
+
+##Basics
 jsreport implements authorization using an external custom service you provide. When enabled, jsreport will send http request to external authorization service every time some entity is about to be read or modified. External service then decides if the current user should be authorized or not.
 
-To enable authorization add following into [config] file.
+
+##Configuration
+To enable authorization add following into config file.
 ```js
 "authorization" : {
         "externalService": {

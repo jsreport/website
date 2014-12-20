@@ -26,5 +26,9 @@
     "embedding": "Embedding",
     "xlsx": "Xlsx recipe",
     "html-to-xlsx": "Converting html to xlsx",
-    "text": "Text recipe"
+    "text": "Text recipe",
+    "reports-in-sharepoint": "Reports in SharePoint",
+    "scheduling": "Scheduling",
+    "asp-net-mvc": "ASP.NET MVC"
+
 };

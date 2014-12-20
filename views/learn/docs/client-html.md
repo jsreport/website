@@ -56,14 +56,17 @@ You would soon realize `client-render` runs just in the studio and requests to r
 <html>
 <head lang="en">
     <!-- jquery is required for jsreport embedding -->
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
     <div style="height:100vh" id="placeholder"></div>
     <script>
         //jsreport will call jsreportInit function from global scope when its initialized
         jsreportInit = function () {          
-            jsreport.render($("#placeholder"), "-JencUHkI");
+            jsreport.render($("#placeholder"), { 
+	            content: "foo",
+	            recipe: "client-html"
+            });
         };
     </script>
 
@@ -76,7 +79,7 @@ You would soon realize `client-render` runs just in the studio and requests to r
             }
             js = d.createElement(s);
             js.id = id;
-            js.src = "http://local.net:2000/extension/embedding/public/embed.min.js";
+            js.src = "http://local.net:2000/extension/embedding/public/embed.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'jsreport-embedding'));
     </script>
