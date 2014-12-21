@@ -14,5 +14,25 @@
                 }
             });
         });
+
+        function toggle(content) {
+            var backSide = $(content).next(".tile-content-back");
+            if (backSide.length === 1) {
+                $(content).toggle();
+                backSide.toggle();
+
+                if (backSide.next(".tile-status").length === 1)
+                    backSide.next(".tile-status").toggle();
+            }
+        }
+
+        $(".tile-content").each(function (i, content) {
+            setTimeout(function () {
+                toggle(content);
+                setInterval(function () {
+                    toggle(content);
+                }, 6000);
+            }, Math.random() * 14000);
+        });
     });
 })(jQuery);

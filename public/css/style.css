@@ -150,5 +150,25 @@ margin-bottom: 10px;
     margin-top: -20px;
 }
 
+.metro .grid .row {
+	margin: 0px;
+}
+
+.metro .grid {
+	margin: 0px;
+}
+
+.tile-content-back {
+	display: none;
+	padding: 10px;
+}
+
+.tile-text {
+	height: 120px;
+	line-height: 120px; /* <-- this is what you must define */
+	vertical-align: middle;
+}
+
+
 
 
