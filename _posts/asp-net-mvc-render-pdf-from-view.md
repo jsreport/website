@@ -20,6 +20,7 @@ public static void RegisterGlobalFilters(GlobalFilterCollection filters)
   
   //when using .net embedded version you need to start server first
   EmbeddedReportingServer = new EmbeddedReportingServer();
+  EmbeddedReportingServer.RelativePathToServer = "../App_Data";
   EmbeddedReportingServer.StartAsync().Wait();
   filters.Add(new JsReportFilterAttribute(EmbeddedReportingServer.ReportingService));
 
@@ -49,3 +50,4 @@ If you want to add headers and footers to your page, look at the additional para
 For more sophisticated scenarios you can inherit from the `JsReportFilterAttribute` and override `RenderReport` method.
 
 For more informations see source codes on [github](https://github.com/jsreport/net/tree/master/examples/Mvc).
+

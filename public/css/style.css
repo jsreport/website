@@ -1,3 +1,25 @@
+.metro p, ul, li, code {
+	font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif;
+	font-size: 17px;
+	font-style: normal;
+	font-weight: 200;
+	letter-spacing: 0.01rem;
+	line-height: 1.4;
+	color:  rgba(0, 0, 0, 0.77);
+}
+
+.metro p.subtitle {
+	color: #000;
+	font-family: "Segoe UI_","Open Sans",Verdana,Arial,Helvetica,sans-serif;
+	font-size: 11pt;
+	font-style: normal;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	line-height: 15pt;
+	margin: 0 0 7pt;
+}
+
+
 a:hover {
 	text-decoration: none;
 }
@@ -23,9 +45,9 @@ a:hover {
 #wrap {
 	min-height: 100%;
 	height: auto;
-/* Negative indent footer by its height */
+	/* Negative indent footer by its height */
 	margin: 0 auto -60px;
-/* Pad bottom by footer height */
+	/* Pad bottom by footer height */
 	padding: 0 0 60px;
 }
 /* Set the fixed height of the footer here */
@@ -72,7 +94,7 @@ img.profil {
 	padding: 2px;
 }
 .divider {
-  margin: 0 auto;
+	margin: 0 auto;
 	border-left: 1px solid #eee;
 }
 .twitter-mention-button {
@@ -80,82 +102,82 @@ img.profil {
 }
 
 .top40 {
-display: block;
-margin-top: 40px;
-margin-bottom: 40px;
+	display: block;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 .center {
-margin: 0 auto;
+	margin: 0 auto;
 }
 
 .slide .container {
-  padding: 30px 0px;
+	padding: 30px 0px;
 }
 
-.slide .container h1, 
+.slide .container h1,
 .slide .container h2 {
-  color: #fff;
+	color: #fff;
 }
 
 .top10 {
-margin-top: 10px;
+	margin-top: 10px;
 }
 
 .code-img {margin-top: 5px;}
 
 .listview-outlook {
-margin-top: 20px;
-margin-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .carousel h2 {
-font-size: 19px;
-margin: 5px;
-padding: 0px;
+	font-size: 19px;
+	margin: 5px;
+	padding: 0px;
 }
 
 /* Modal - Quick Start video */
 .metro .window.flat{
-background: #f9f9f9;
+	background: #f9f9f9;
 }
 
 p.modal {
-margin-top: 10px;
-text-align: center;
+	margin-top: 10px;
+	text-align: center;
 }
 
 .slide .container h1 {
-margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .samples-img {
-margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .main-title a {
-    font-size: 35px;
-    padding-right: 15px;
+	font-size: 35px;
+	padding-right: 15px;
 }
 
 .main-title h1 {
-    display: inline;
+	display: inline;
 }
 
 .pull-right {
-    float: right !important;
+	float: right !important;
 }
 
 .about-box {
-    margin-top: -20px;
+	margin-top: -20px;
 }
 
-.metro .grid .row {
-	margin: 0px;
+.metro .home .bg-homeGray {
+	background-color: #888;
 }
 
-.metro .grid {
-	margin: 0px;
+.metro .home .grid, .metro .home .grid .row {
+	margin: 0;
 }
 
 .tile-content-back {
@@ -163,12 +185,36 @@ margin-bottom: 10px;
 	padding: 10px;
 }
 
-.tile-text {
-	height: 120px;
-	line-height: 120px; /* <-- this is what you must define */
+.metro .tile.thin {
+	height: 65px;
+	width: 200px;
+}
+
+.metro .tile.thin .tile-content-multiline {
+	padding: 10px;
+}
+
+.metro .tile.thin .tile-content {
+	height: 65px;
+	line-height: 65px;
+	padding-left: 10px;
 	vertical-align: middle;
 }
 
 
+.metro .notice {
+	height: 65px;
+	padding: 10px;
+}
+
+.tile-text {
+	height: 120px;
+	line-height: 120px;
+	vertical-align: middle;
+}
+
+.metro .notice.marker-no:before {
+	width: 0px;
+}
 
 

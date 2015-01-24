@@ -1,23 +1,18 @@
-> Add login screen to jsreport editor and authenticate API requests
+> Add login screen to jsreport and user management forms
 
 ##Basics
+Enabling `authentication` extension will add a login screen into jsreport studio and authenticate all incoming requests. The browser authentication is based on the cookie and API calls are verified using [basic](http://en.wikipedia.org/wiki/Basic_access_authentication) authentication.  
 
-Enabling `authentication` extension will add a login screen into jsreport studio and authenticate all incoming requests. The browser authentication is based on the cookie and API calls are verified using [basic](http://en.wikipedia.org/wiki/Basic_access_authentication) authentication.
-
-Extension currently supports only a single admin user.
+`Authentication` configuration adds a `user administrator` into the system  responsible for managing other users. This user can create users, remove users or change their passwords. All other individual users do not have permissions to alter any other user.
 
 ##Configuration
-jsreport provides simple access `Authentication` through [configuration file](https://github.com/jsreport/jsreport/blob/master/config.md).
 
-To enable authentication add following json into `[prod|dev].config.json`
+To enable authentication add following json into [configuration file](https://github.com/jsreport/jsreport/blob/master/config.md).
 
 ```js
 "authentication" : {
 	"cookieSession": {
-        "secret": "dasd321as56d1sd5s61vdv32",
-        "cookie": {
-            "domain": "localhost"
-        }
+        "secret": "dasd321as56d1sd5s61vdv32"        
 	},
 	"admin": {
 		"username" : "admin",
@@ -26,7 +21,7 @@ To enable authentication add following json into `[prod|dev].config.json`
 },
 ```
 
-You can change admin username or password and you will also need to change `cookieSession.cookie.domain` to your domain host or ip address.
+You can change admin username or password as you want.
 
 ##API
 You need to add header to every request when is this extension enabled.
@@ -35,4 +30,8 @@ You need to add header to every request when is this extension enabled.
 
 Where the hash is based on username and password:
 `base64(username:password)`
+
+You can use standard OData API to manage and query user entities. For example you can query all users using:
+
+>`GET` http://jsreport-host/odata/users
 

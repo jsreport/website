@@ -3,7 +3,6 @@
     "inline-data": "Inline data extension",
     "images": "Images extension",
     "scripts": "Scripts extension",
-    "phantom-recipe": "Phantom resipe",
     "child-templates": "Child templates extension",
     "api": "API",
     "reports": "Reports extension",
@@ -29,6 +28,10 @@
     "text": "Text recipe",
     "reports-in-sharepoint": "Reports in SharePoint",
     "scheduling": "Scheduling",
-    "asp-net-mvc": "ASP.NET MVC"
-
+    "asp-net-mvc": "ASP.NET MVC",
+    "wrapped-html": "Wrapped html recipe",
+    "public-templates": "Public templates",
+    "live-reports": "Live reports",
+    "periodical-report-sending-through-email": "Periodical report sending through email",
+    "customizable-dashboards-integration": "Customizable dashboards integration"
 };

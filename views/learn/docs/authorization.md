@@ -1,27 +1,13 @@
-> Use external service to authorize user access to jsreport data
+> Manage and delegate user permissions on jsreport objects
 
 ##Basics
-jsreport implements authorization using an external custom service you provide. When enabled, jsreport will send http request to external authorization service every time some entity is about to be read or modified. External service then decides if the current user should be authorized or not.
+jsreport `authorization` extension implements permission rules evaluation and delegation with single object granularity. Every user previously created by [authentication](/learn/authentication) extension is only authorized to manage objects created by himself by default. If the user wants to share an object with another user he needs to explicitly set this up in the permissions form. jsreport can currently distinguish only between `read` and `edit` permissions where `edit` permission represents all operations including permission delegation.
+
+##API
+
+`Authorization` extensions adds to every jsreport object `readPermissions` and `editPermissions` properties. These properties contains list of user ids you can easily alter from the odata API.
+
+##Limitations
+[Scheduling](learn/scheduling) extension is currently enabled just for admin user. 
 
 
-##Configuration
-To enable authorization add following into config file.
-```js
-"authorization" : {
-        "externalService": {
-            "url" : "http://169.89.123.45:9000"
-        }
-},
-```
-
-jsreport will send requests to external service in the following format:
-
-`externalService.url/operation/type/shortid`
-
-- `operation` can take value `create`, `read`, `delete` or `update`
-- `type` is entity type like `templates`
-- `shortid` identification of object which can be taken from url in studio for example
-
-Note that jsreport will attach authentication cookie and authorization header to the authorization request. The external service can use these information to authenticate user in the main application.
-
-jsreport will skip authorization for admin users authenticated previously with [authentication](/learn/authentication) extensions.

@@ -1,4 +1,6 @@
-.documentation { }
+.documentation {
+    margin-top: 20px;
+}
 
 .documentation pre { padding-bottom: 0px !important; margin-bottom: 15px !important;}
 
