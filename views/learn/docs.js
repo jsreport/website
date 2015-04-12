@@ -33,5 +33,6 @@
     "public-templates": "Public templates",
     "live-reports": "Live reports",
     "periodical-report-sending-through-email": "Periodical report sending through email",
-    "customizable-dashboards-integration": "Customizable dashboards integration"
+    "customizable-dashboards-integration": "Customizable dashboards integration",
+    "resources": "Resources"
 };
