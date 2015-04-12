@@ -34,5 +34,7 @@
     "live-reports": "Live reports",
     "periodical-report-sending-through-email": "Periodical report sending through email",
     "customizable-dashboards-integration": "Customizable dashboards integration",
-    "resources": "Resources"
+    "resources": "Resources",
+    "faq": "FAQ",
+    "configuration": "Configuration"
 };
