@@ -35,7 +35,7 @@ jsreport loads `dev.config.json` or `prod.config.json` on startup depending on y
 all extensions located under root directory if it's undefined or null. If the attribute is defined, jsreport will only load specified extensions. All specified extensions must be present somewhere in the jsreport directory. Order is not relevant because extensions are reordered by it's dependencies.
 
 **httpPort** `(number)` - http port on which is jsreport running, if both `httpPort` and `httpsPort` are specified, jsreport will automaticaly create http redirects
-from http to https, if any of `httpPort` and `httpsPort` is specified default process.env.PORT will be used
+from http to https, if any of `httpPort` and `httpsPort` is specified default process.env.PORT will be used    
 **httpsPort** (number) - https port on which jsreport is running
 
 **ga** `object`: google analytics settings, example
@@ -47,9 +47,9 @@ Cluster will not work with `nedb` as data store. You need to set up a mongodb in
 
 **daemon** (`true/false`) - default `false`, non windows only, jsreport will run as [daemon](https://www.npmjs.org/package/daemon) and will not block command line
 
-**phantom** (`object`) - this attribute is `optional` and is used to configure phantom-pdf recipe. 
-**phantom.numberOfWorkers** (`int`) - specify how many phantomjs instances will phantom-pdf recipe use. If the value is not filled, jsreport will use number of cpus by default
-**phantom.timeout** (`int`) - specify default timeout for pdf rendering using phantomjs
+**phantom** (`object`) - this attribute is `optional` and is used to configure phantom-pdf recipe.    
+**phantom.numberOfWorkers** (`int`) - specify how many phantomjs instances will phantom-pdf recipe use. If the value is not filled, jsreport will use number of cpus by default    
+**phantom.timeout** (`int`) - specify default timeout for pdf rendering using phantomjs    
 **phantom.allowLocalFilesAccess** (`bool`) - default is `false`. When set to true you can use local paths to get resources.
 
 **tasks** (`object`) - this attribute is `optional` and is used to configure component executing custom scripts. This component is use to excute javascript templating engines during rendering or in scripts extension. You can set here `numberOfWorkers` attribute to specify how many child nodejs instances will be used for task execution. If the value is not filled, jsreport will use number of cpus by default. You can also set `timeout` attribute to specify default timeout for one task execution.
