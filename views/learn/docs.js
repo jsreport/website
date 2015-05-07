@@ -36,5 +36,6 @@
     "customizable-dashboards-integration": "Customizable dashboards integration",
     "resources": "Resources",
     "faq": "FAQ",
-    "configuration": "Configuration"
+    "configuration": "Configuration",
+    "custom-extension": "Custom Extension"
 };
