@@ -37,5 +37,6 @@
     "resources": "Resources",
     "faq": "FAQ",
     "configuration": "Configuration",
-    "custom-extension": "Custom Extension"
+    "custom-extension": "Custom Extension",
+    "client-app": "Client Application"
 };
