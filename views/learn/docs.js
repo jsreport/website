@@ -38,5 +38,6 @@
     "faq": "FAQ",
     "configuration": "Configuration",
     "custom-extension": "Custom Extension",
-    "client-app": "Client Application"
+    "client-app": "Client Application",
+    "wkhtmltopdf": "wkhtmltopdf recipe"
 };
