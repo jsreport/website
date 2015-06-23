@@ -10,14 +10,16 @@
         <div class="row">
             <div class="span12">
                 <p>
-                    Whole jsreport is written in <a href="http://nodejs.org">node.js</a> and its obvious it has first class support for node environment.
-                    It is distributed in a common way through <a href="https://www.npmjs.org/package/jsreport">npm package</a> so it's easy to reach it.
+                    jsreport is written in <a href="http://nodejs.org">node.js</a> and can easily be customized through javascript or run
+                    as a part of another node application. See the article <a href="/learn/adapting-jsreport"> jsreport in node.js</a> for
+                    the details how to integrate or adapt jsreport.
                 </p>
                 <p>
-                    It can run as a standalone <a href="http://expressjs.com/">express</a> server in form of <a href="http://jsreport.net/on-prem">jsreport on premise</a>
-                    or it can run as a part of another nodejs application. <a href="adapting-jsreport">"Adapting jsreport"</a> section covers how to customize
-                    jsreport on premise and section <a href="/learn/pdf-reports-in-nodejs">"Integrate into node.js"</a> covers how to use jsreport from another node.js application. Section
-                    <a href="/learn/nodejs-client">"node.js remote client"</a> covers connecting into running jsreport server remotely using dedicated node.js library.
+                    <a href="https://github.com/jsreport/toner">jsreport toner</a> is a lightweight node.js project which is used by jsreport to render reports.
+                    If you don't need advanced features like designer and your intention is just to render reports check its github page.
+                </p>
+                <p>
+                    Refer to the article <a href="/learn/nodejs-client">node.js remote client</a> when searching for a way how to remotely communicate with jsreport server through http API.
                 </p>
             </div>
         </div>
@@ -27,15 +29,15 @@
             <div class="span4">
                 <a href="/learn/adapting-jsreport">
                     <button class="span12 bg-orange padding20 text-center bg-hover-gray">
-                        <h2 class="fg-white">Adapting jsreport<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                        <h2 class="fg-white">jsreport in node.js<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
                     </button>
                 </a>
             </div>
 
             <div class="span4">
-                <a href="/learn/pdf-reports-in-nodejs">
+                <a href="https://github.com/jsreport/toner">
                     <button class="span12 bg-lightOrange padding20 text-center bg-hover-gray">
-                        <h2 class="fg-white">Integrate into node.js<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
+                        <h2 class="fg-white">jsreport toner<i class="icon-arrow-right-3 place-right fg-white"></i></h2>
                     </button>
                 </a>
             </div>

@@ -39,5 +39,9 @@
     "configuration": "Configuration",
     "custom-extension": "Custom Extension",
     "client-app": "Client Application",
-    "wkhtmltopdf": "wkhtmltopdf recipe"
+    "wkhtmltopdf": "wkhtmltopdf recipe",
+    "ejs": "EJS",
+    "custom-engine": "Custom Engine",
+    "custom-recipe": "Custom Recipe",
+    "html-to-text": "Html to Text recipe"
 };
