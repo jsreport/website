@@ -18,6 +18,7 @@ Recipes are added into jsreport through a [custom extension](/learn/custom-exten
 ```js
  module.exports = {   
 	 "name": "html-to-text",   
+         "dependencies": ["templates"],
 	 "main": "lib/main.js" 
 }
 ```
