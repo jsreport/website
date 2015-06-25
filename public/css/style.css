@@ -217,4 +217,10 @@ p.modal {
 	width: 0px;
 }
 
+.youtube {
+	font-size: larger;
+	padding: 2px 4px 2px 4px;
+	border-radius:4px
+}
+
 
