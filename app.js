@@ -1,8 +1,10 @@
 var express = require('express'),
     exphbs = require('express-handlebars'),
     app = express(),
+    fs = require("fs"),
     router = require("./router.js"),
     docs = require("./docs.js"),
+    bodyParser = require("body-parser"),
     multer  = require('multer');
 
 
@@ -30,6 +32,46 @@ app.set('view engine', '.html');
 app.use(express.static('public/'));
 
 app.use(multer({ dest: "public/temp"}));
+
+app.post('/gumroad', bodyParser.urlencoded({extended: true, limit: "2mb"}), function(req, res) {
+
+    if (req.body.product_name === "jsreport enterprise 0.7") {
+        var sendgrid = require("sendgrid")("pofider", "blahajarosov");
+        var email = new sendgrid.Email();
+
+        email.addTo(req.body.email);
+        email.setFrom("jsreport.net@gmail.com");
+        email.setSubject("jsreport license");
+        email.setText(fs.readFileSync("license-email-body.txt"));
+
+        var crypto = require('crypto');
+        var algorithm = 'aes256';
+        var key = fs.readFileSync("key.txt");
+        var text = req.body["product_name"] + "$" + new Date().toISOString().slice(0,10).replace(/-/g,"") + "$" + crypto.randomBytes(8).toString('hex');
+        var cipher = crypto.createCipher(algorithm, key);
+        var encrypted = cipher.update(text, 'utf8', 'hex') + cipher.final('hex');
+        //var decipher = crypto.createDecipher(algorithm, key);
+        //var decrypted = decipher.update(encrypted, 'hex', 'utf8') + decipher.final('utf8');
+
+
+        email.addFile({
+            filename: 'license-key.txt',
+            content:  new Buffer(encrypted)
+        });
+
+        email.addFile({
+            filename: 'license.txt',
+            content:  new Buffer(fs.readFileSync("license.txt"))
+        });
+
+        sendgrid.send(email);
+        return res.send(encrypted);
+    }
+
+    res.statusCode = 500;
+    res.send('Invalid product name');
+});
+
 
 
 app.post('/temp', function(req, res) {
@@ -89,5 +131,5 @@ require("./posts.js")(app).then(function(poet) {
         res.status(404).render("404");
     });
     
-    app.listen(process.env.PORT || 1000);
+    app.listen(process.env.PORT || 3000);
 });

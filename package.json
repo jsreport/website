@@ -14,13 +14,15 @@
     "grunt-contrib-uglify": "^0.5.1"
   },
   "dependencies": {
+    "body-parser": "^1.13.2",
     "express": "<4.0.0",
-    "multer": "*",
     "express-handlebars": "^1.0.1",
     "highlight.js": "^8.1.0",
     "marked": "^0.3.2",
     "moment": "^2.8.1",
+    "multer": "*",
     "poet": "<=1.0.2",
-    "pygmentize-bundled": "^2.1.1"
+    "pygmentize-bundled": "^2.1.1",
+    "sendgrid": "^1.9.0"
   }
 }
