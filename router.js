@@ -14,6 +14,14 @@ exports.playground = function(req, res) {
     });
 };
 
+exports.buy = function(req, res) {
+    res.render("buy", {
+        buy: true,
+        title: "jsreport - buy",
+        description: "Buy on premise jsreport"
+    });
+};
+
 exports.online = function(req, res) {
     res.render("online", { 
         online: true, 

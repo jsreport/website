@@ -114,6 +114,7 @@ app.get('/on-prem', router.onprem);
 app.get('/about', router.about);
 app.get('/downloads', router.downloads);
 app.get('/embedding', router.embedding);
+app.get('/buy', router.buy);
 
 
 require("./posts.js")(app).then(function(poet) {
