@@ -3,10 +3,10 @@ Hi,
 thank you for buying jsreport!
 
 
-To attach license to your jsreport server please download the attachment license-key.txt and copy it to your jsreport working directory.
+To attach license to your jsreport server please download the attachment license-key.txt and copy it to your jsreport working directory or data folder.
 You can also provide the key in the command line parameter "--license-key=xxx" when starting jsreport. Then enjoy using jsreport without any limitations.
 
-Please use jsreport.net@gmail.com for support questions and incidents.
+Please use email jsreport.net@gmail.com and phone number +420 776 271 021 for support questions and incidents.
 
 Jan Blaha
 
