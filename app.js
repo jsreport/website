@@ -35,7 +35,7 @@ app.use(multer({ dest: "public/temp"}));
 
 app.post('/gumroad', bodyParser.urlencoded({extended: true, limit: "2mb"}), function(req, res) {
 
-    if (req.body.product_name === "jsreport enterprise 0.7") {
+    if (req.body.product_name === "jsreport enterprise 0.x") {
         var sendgrid = require("sendgrid")("pofider", "blahajarosov");
         var email = new sendgrid.Email();
 
@@ -132,5 +132,5 @@ require("./posts.js")(app).then(function(poet) {
         res.status(404).render("404");
     });
     
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 2000);
 });
