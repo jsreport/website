@@ -1,30 +1,49 @@
-<div class="home">
-    <div class="bg-cyan">
-        <div class="container fg-white padding20">
-            <div class="grid fluid">
-                <div class="row">
-                    <div class="span6 padding20">
-                        <h1 class="fg-white" style="font-weight: 500">javascript reporting server</h1>
+<style>
+    .intro {
+        background: url("https://mongolab.com/welcome/img/bg1.png") no-repeat scroll center bottom;
+        min-height: 320px;
+        padding-top: 30px;
+    }
 
-                        <p class="fg-white subtitle">
-                            innovative and unlimited reporting based on javascript templating engines,
-                            no more frustration from creepy report designers
-                        </p>
-                    </div>
-                    <div class="span6 no-phone">
-                        <img src="img/home.png" alt="Just javascript"/>
-                    </div>
+    .intro h1 {
+        color: #fff;
+        margin: 0 0 10px;
+        font-weight: 500;
+        font-size: 5.8rem;
+        margin-left: 80px;
+        /*text-align: center;*/
+    }
+
+    .subheaders {
+        margin-right: 120px !important;
+    }
+</style>
+
+<div class="home">
+    <div class="bg-cyan intro">
+        <div class="container fg-white">
+            <h1 class="fg-white">javascript reporting server</h1>
+
+
+            <div class="subheaders">
+                <div class="pull-right margin5">
+                    <h3 class="fg-grayLighter padding5 text-center" style="width:150px">Standards</h3>
+                </div>
+                <div class="pull-right margin5">
+                    <h3 class="fg-grayLighter padding5 text-center" style="width:150px">Openness</h3>
+                </div>
+                <div class="pull-right margin5">
+                    <h3 class="fg-grayLighter padding5 text-center" style="width:150px">Innovations</h3>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <div class="bg-grayLight padding20">
+    <div class="padding20">
         <div class="container padding20">
             <div class="grid">
-                <div class="row ">
-                    <a href="/playground">
+                <div class="row">
+                    <a href="/playground" class="span4">
                         <div class="tile double bg-blue">
                             <div class="padding10">
                                 <h2 class="fg-white">Playground</h2>
@@ -34,7 +53,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="/on-prem">
+                    <a href="/on-prem" class="span4">
                         <div class="tile double bg-green">
                             <div class="padding10">
                                 <h2 class="fg-white">Download</h2>
@@ -44,7 +63,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="/online">
+                    <a href="/online" class="span4">
                         <div class="tile double bg-amber">
                             <div class="padding10">
                                 <h2 class="fg-white">Online Service</h2>
@@ -57,6 +76,72 @@
             </div>
         </div>
     </div>
+
+    <div class="bg-grayLighter">
+        <div class="container fg-gray padding20">
+            <div class="grid">
+                <div class="row text-center">
+                    <h3>Learn</h3>
+                </div>
+
+                <div class="row text-center">
+
+                    <div style="display:inline-block; width: 250px" class="padding20">
+                        <a id="createFlatWindow" style="cursor: pointer">
+                            <img src="img/video.png" alt="Deep Dive video"/>
+                        </a>
+                    </div>
+
+                    <div class="padding20" style="display:inline-block;">
+                        <a href="/learn" class="fg-white">
+                            <div class="tile half bg-cyan">
+                                <div class="tile-content icon">
+                                    <i class="icon-camera-2"></i>
+                                </div>
+                            </div>
+                            <div class="fg-gray">Videos, tutorials, examples ...</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-grayLight">
+        <div class="container padding20">
+            <div class="grid">
+                <div class="row text-center">
+                    <h3 class="fg-grayLighter">Meet us</h3>
+                </div>
+                <div class="row text-center">
+                    <div style="display: inline-block;" class="padding20">
+                        <a href="https://groups.google.com/forum/#!forum/jsreport">
+                            <div class="tile half bg-red">
+                                <div class="tile-content icon">
+                                    <i class="icon-google"></i>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://twitter.com/jan_blaha">
+                            <div class="tile half bg-cyan">
+                                <div class="tile-content icon">
+                                    <i class="icon-twitter"></i>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="https://github.com/jsreport">
+                            <div class="tile half bg-darker">
+                                <div class="tile-content icon">
+                                    <i class="icon-github on-right"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="bg-homeGray">
         <div class="container padding20">
@@ -242,38 +327,4 @@
     </div>
 
 
-    <div class="bg-homeGray">
-        <div class="container">
-            <div class="grid">
-                <div class="row text-center">
-                    <h3 class="fg-grayLighter">Meet us</h3>
-                </div>
-                <div class="row text-center">
-                    <div style="display: inline-block;" class="padding20">
-                        <a href="https://groups.google.com/forum/#!forum/jsreport">
-                            <div class="tile half bg-red">
-                                <div class="tile-content icon">
-                                    <i class="icon-google"></i>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="https://twitter.com/jan_blaha">
-                            <div class="tile half bg-cyan">
-                                <div class="tile-content icon">
-                                    <i class="icon-twitter"></i>
-                                </div>
-                            </div>
-                        </a>
-                        <a href="https://github.com/jsreport">
-                            <div class="tile half bg-darker">
-                                <div class="tile-content icon">
-                                    <i class="icon-github on-right"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
