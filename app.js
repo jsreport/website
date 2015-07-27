@@ -36,7 +36,7 @@ app.use(multer({ dest: "public/temp"}));
 app.post('/gumroad', bodyParser.urlencoded({extended: true, limit: "2mb"}), function(req, res) {
 
     if (req.body.product_name === "jsreport enterprise 0.x") {
-        var sendgrid = require("sendgrid")("pofider", "blahajarosov");
+        var sendgrid = require("sendgrid")(/****/);
         var email = new sendgrid.Email();
 
         email.addTo(req.body.email);
