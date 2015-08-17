@@ -15,24 +15,17 @@
 
                     <div class="content">
                         <div>
-                            <div class="bg-steel padding10 fg-white">Installer</div>
-                            <div class="padding10">
-                                Download and run x64 windows installer <a href="/jsreport_x64.exe">jsreport_x64.exe</a>
-                                to host jsreport in windows service.
-                            </div>
-                        </div>
-
-                        <div>
                             <div class="bg-steel padding10 fg-white">Manual installation steps</div>
                             <div>
                                 <ol>
                                     <li>download and install latest <a href="http://nodejs.org">node.js</a></li>
                                     <li>run cmd with admin rights</li>
-                                    <li>cd to working directory</li>
-                                    <li>type: <code>npm install jsreport</code></li>
-                                    <li>type: <code>node node_modules/jsreport --init</code></li>
-                                    <li>to start server type: <code>node server.js</code></li>
-                                    <li>to install windows service type: <code>node server.js --install</code></li>
+                                    <li>cd to working directory (not the Program Files)</li>
+                                    <li><code>npm install jsreport</code></li>
+                                    <li> <code>node node_modules/jsreport --init</code></li>
+                                    <li>to start the server type: <code>node server.js</code></li>
+                                    <li>open a browser and see <a>https://localhost</a></li>
+                                    <li>(optional) install a windows service with: <code>node server.js --install</code></li>
                                 </ol>
                             </div>
                         </div>
@@ -43,15 +36,15 @@
                                 <ol>
                                     <li>download and install latest <a href="http://nodejs.org">node.js</a></li>
                                     <li>run cmd with admin rights</li>
-                                    <li>cd to working directory</li>
-                                    <li>type: <code>npm install jsreport</code></li>
-                                    <li>type: <code>node node_modules/jsreport --init</code></li>
+                                    <li>cd to working directory (not the Program Files)</li>
+                                    <li><code>npm install jsreport</code></li>
+                                    <li><code>node node_modules/jsreport --init</code></li>
                                     <li>remove httpsPort specification from created prod.config.json</li>
                                     <li>download and place sample <a
                                             href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>
                                         into jsreport folder
                                     </li>
-                                    <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a> Don't forget
+                                    <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a>, don't forget
                                         to have iis installed with all Application development sub features and also iis
                                         <a href="http://www.iis.net/downloads/microsoft/url-rewrite">url rewrite
                                             extension</a>.
@@ -61,7 +54,7 @@
                                         folder for IIS App Pool user when appropriate. IMPORTANT: Create a separate
                                         website. Don't just add application to the default website.
                                     </li>
-                                    <li>try access website url in browser, jsreport should pop up</li>
+                                    <li>open a browser and see <a>https://localhost</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -81,10 +74,10 @@
                                     particular for your linux distribution.
                                 </li>
                                 <li>go to console, navigate to your working directory</li>
-                                <li>type <code>sudo npm install jsreport</code></li>
-                                <li>type <code>sudo node node_modules/jsreport --init</code></li>
-                                <li>type <code>sudo node server.js</code></li>
-                                <li>open browser and see <a>https://localhost</a></li>
+                                <li><code>sudo npm install jsreport</code></li>
+                                <li><code>sudo node node_modules/jsreport --init</code></li>
+                                <li><code>sudo node server.js</code></li>
+                                <li>open a browser and see <a>https://localhost</a></li>
                             </ol>
 
                             <p>You may find troubleshooting guide <a

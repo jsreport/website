@@ -20,9 +20,8 @@
     "highlight.js": "^8.1.0",
     "marked": "^0.3.2",
     "moment": "^2.8.1",
-    "multer": "*",
+    "multer": "*",    
     "poet": "<=1.0.2",
-    "pygmentize-bundled": "^2.1.1",
-    "sendgrid": "^1.9.0"
+    "pygmentize-bundled": "^2.1.1"  
   }
 }
