@@ -15,6 +15,17 @@
 
                     <div class="content">
                         <div>
+                            <div class="bg-steel padding10 fg-white">Single executable</div>
+                            <div>
+                                <ol>
+                                    <li>download <a href="/downloads/jsreport.exe">jsreport.exe</a></li>
+                                    <li>cmd: jsreport.exe</li>
+                                    <li>see the executable <a href="/learn/windows-single-executable">documentation</a></li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div>
                             <div class="bg-steel padding10 fg-white">Manual installation steps</div>
                             <div>
                                 <ol>
@@ -39,7 +50,6 @@
                                     <li>cd to working directory (not the Program Files)</li>
                                     <li><code>npm install jsreport</code></li>
                                     <li><code>node node_modules/jsreport --init</code></li>
-                                    <li>remove httpsPort specification from created prod.config.json</li>
                                     <li>download and place sample <a
                                             href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>
                                         into jsreport folder
@@ -114,6 +124,22 @@
                                 You need to set up Azure VM or Azure cloud service where both Windows and Linux images
                                 works well with jsreport. There is no particular configuration needed.
                             </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-frame">
+                    <a href="#" class="heading bg-orange fg-white collapsed">Amazon WS</a>
+
+                    <div class="content">
+                        <div class="padding10">
+                            <div class="bg-steel padding10 fg-white">Elastic Beanstalk</div>
+                            <ol>
+                                <li>Prepare local jsreport installation using the Windows or Unix installation steps</li>
+                                <li>Zip package.json, prod.config.json and server.js</li>
+                                <li>Create Amazon Elastic Beanstalk Web Server with Node.js predefined configuration</li>
+                                <li>Upload previously zipped package</li>
+                            </ol>
+			    <a href="/blog/jsreport-on-amazon-elastic-beanstalk">See the blog post for details. </a>
                         </div>
                     </div>
                 </div>

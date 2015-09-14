@@ -3,6 +3,8 @@
     "date"     : "11-07-2014 16:50"    
 }}}
 
+> **Update**: This is no longer valid, see the [updated licensing](http://jsreport.net/blog/updated-licensing).
+
 There is quite often a confusion about jsreport licensing so I decided to clarify it in this blog post. I am not an expert on open source licenses so don't hesitate to correct me when I am wrong.
 
 jsreport is published under [AGPL](http://en.wikipedia.org/wiki/Affero_General_Public_License) license. This type of license guarantees we get back all the possible contributions made to the jsreport core. This means you cannot just download jsreport, do the changes to the source codes and redistribute it. You need to contribute your changes to us first.  This help us to get all the possible enhancements and tune up jsreport as much as possible for everyone. 

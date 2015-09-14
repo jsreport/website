@@ -43,5 +43,6 @@
     "ejs": "EJS",
     "custom-engine": "Custom Engine",
     "custom-recipe": "Custom Recipe",
-    "html-to-text": "Html to Text recipe"
+    "html-to-text": "Html to Text recipe",
+    "windows-single-executable": "Windows single executable"
 };
