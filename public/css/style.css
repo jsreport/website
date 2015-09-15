@@ -223,4 +223,117 @@ p.modal {
 	border-radius:4px
 }
 
+.feature-icon {
+	font-size: 2.1em !important;
+	margin-right: 8px;
+}
+
+.section .no-background {
+	background-color: transparent !important;
+	margin-left: -55px !important;
+	border: 0px !important;
+}
+
+.home-splash {
+	background: url(img/home.jpg?v=5) no-repeat center #333;
+	background-size: cover;
+	height: 550px;
+	padding-top:200px;
+}
+
+.home-title {
+	background-color: rgba(65, 65, 65, 0.8);
+	width: 660px;
+	padding: 20px
+}
+
+.home-splash-button {
+	width: 150px;
+}
+
+.coll {
+	display:inline-block;
+}
+
+.padding-top10 {
+	padding-top:10px;
+}
+
+.learn-icon {
+	font-size:3.8em !important;
+	cursor:pointer;
+	margin-left: -35px;
+}
+
+.online-icon {
+	font-size: 5.8em !important; float:left;margin-top:-20px; margin-right: 15px
+}
+
+.download-icon {
+	font-size: 3.8em !important; float:left;margin-top:-20px; margin-right: 15px
+}
+
+.grid3 {
+}
+
+.coll3 {
+	display: inline-block;
+	width: 33%;
+	padding-right: 15px;
+	vertical-align: top;
+}
+
+.grid2 {
+	width: 100%;
+}
+
+.coll2 {
+	display: inline-block;
+	width: 49%;
+	padding-right: 15px;
+	vertical-align: top;
+}
+
+@media only screen and (max-width: 800px) {
+	.coll3 {
+		display: block;
+		width: 100%;
+	}
+
+	.coll2 {
+		display: block;
+		width: 100%;
+	}
+}
+
+.section {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.cycle {
+	margin-left: -35px !important;
+}
+
+.title {
+	padding-bottom: 45px;
+}
+
+.section h3 {
+	font-weight: normal
+}
+
+.section h4 {
+	font-weight: normal;
+	font-family: inherit;
+}
+
+.bg-grayLightest {
+	background-color: #fff;
+}
+
+.tile {
+	box-shadow: none !important;
+}
+
 

@@ -2,14 +2,14 @@
 <html lang="en">       
     <head>                  
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">             
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         {{#if description}}
         <meta name="description" content="{{{description}}}">     
         {{/if}}
         <link rel="shortcut icon" href="/img/favicon.ico">             
         <title>{{#if title}}{{{title}}}{{else}}jsreport: javascript based reporting platform{{/if}}</title>  
         <script src="/jsreport.min.js?v=12"> </script>
-        <link href="/jsreport.min.css?v=16" rel="stylesheet">
+        <link href="/jsreport.min.css?v=20" rel="stylesheet">
         {{#if linkDocCss}}<link href="/css/github.css?v=16" rel="stylesheet">{{/if}}
     </head>       
     <body class="metro">             
@@ -21,7 +21,7 @@
                         </div></a>
                     <span class="element-divider place-left"></span>                                 
                     <a class="element brand {{#if home}}fg-blue{{/if}}" href="/">HOME</a>
-                    <a class="element brand {{#if onprem}}fg-blue{{/if}}" href="/on-prem">JSREPORT ON-PREM</a>                               
+                    <a class="element brand {{#if onprem}}fg-blue{{/if}}" href="/on-prem">DOWNLOAD</a>
                     <a class="element brand {{#if online}}fg-blue{{/if}}" href="/online">JSREPORT ONLINE</a>
                     <a class="element brand {{#if playground}}fg-blue{{/if}}" href="/playground">PLAYGROUND</i></a>
                     <a class="element brand {{#if blog}}fg-blue{{/if}}" href="/blog">BLOG</a>                               
@@ -34,7 +34,7 @@
         </div>             
         <div id="footer" class="bg-dark">                   
             <div class="container fg-white">
-                &copy; 2014 <a href="/" class="fg-blue">jsreport</a> All rights reserved.
+                &copy; 2015 <a href="/" class="fg-blue">jsreport</a> All rights reserved.
             </div>                      
         </div>                  
         <!-- /.container -->               
