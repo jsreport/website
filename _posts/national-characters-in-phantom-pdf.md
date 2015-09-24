@@ -7,7 +7,7 @@ I often get following image throught email from people starting with jsreport
 
 ![national characters](http://jsreport.net/blog/wtf.png)
 
-This is what [phantom-pdf](http://jsreport.net/learn/phantom-recipe) recipe will render by default when you try to render some national characters (china, czech..)
+This is what [phantom-pdf](http://jsreport.net/learn/phantom-pdf) recipe will render by default when you try to render some national characters (china, czech..)
 
 There is a easy fix for this. Add coding to the html header.
 ščěščě
