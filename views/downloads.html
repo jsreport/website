@@ -14,16 +14,6 @@
                     <a href="#" class="heading bg-lightBlue fg-white collapsed">Windows</a>
 
                     <div class="content">
-                        <div>
-                            <div class="bg-steel padding10 fg-white">Single executable</div>
-                            <div>
-                                <ol>
-                                    <li>download <a href="/downloads/jsreport.exe">jsreport.exe</a></li>
-                                    <li>cmd: jsreport.exe</li>
-                                    <li>see the executable <a href="/learn/windows-single-executable">documentation</a></li>
-                                </ol>
-                            </div>
-                        </div>
 
                         <div>
                             <div class="bg-steel padding10 fg-white">Manual installation steps</div>
@@ -33,10 +23,11 @@
                                     <li>run cmd with admin rights</li>
                                     <li>cd to working directory (not the Program Files)</li>
                                     <li><code>npm install jsreport</code></li>
-                                    <li> <code>node node_modules/jsreport --init</code></li>
+                                    <li><code>node node_modules/jsreport --init</code></li>
                                     <li>to start the server type: <code>node server.js</code></li>
                                     <li>open a browser and see <a>https://localhost</a></li>
-                                    <li>(optional) install a windows service with: <code>node server.js --install</code></li>
+                                    <li>(optional) install a windows service with: <code>node server.js --install</code>
+                                    </li>
                                 </ol>
                             </div>
                         </div>
@@ -68,6 +59,18 @@
                                 </ol>
                             </div>
                         </div>
+
+                        <div>
+                            <div class="bg-steel padding10 fg-white">Single executable</div>
+                            <div>
+                                <ol>
+                                    <li>download <a href="/downloads/jsreport.exe">jsreport.exe</a></li>
+                                    <li>cmd: jsreport.exe</li>
+                                    <li>see the executable <a href="/learn/windows-single-executable">documentation</a>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -92,8 +95,12 @@
 
                             <p>Some additional notes</p>
                             <ul>
-                                <li><a href='https://github.com/jsreport/docs/tree/master/installation/ubuntu.md'>Ubuntu</a></li>
-                                <li><a href='https://github.com/jsreport/docs/tree/master/installation/centos.md'>CentOS</a></li>
+                                <li>
+                                    <a href='https://github.com/jsreport/docs/tree/master/installation/ubuntu.md'>Ubuntu</a>
+                                </li>
+                                <li>
+                                    <a href='https://github.com/jsreport/docs/tree/master/installation/centos.md'>CentOS</a>
+                                </li>
                             </ul>
 
                         </div>
@@ -124,6 +131,7 @@
                             <p>
                                 jsreport doesn't work on Azure Website due to limitations for printing pdf.
                             </p>
+
                             <p>
                                 You need to set up Azure VM or Azure cloud service where both Windows and Linux images
                                 works well with jsreport. There is no particular configuration needed.
@@ -138,12 +146,14 @@
                         <div class="padding10">
                             <div class="bg-steel padding10 fg-white">Elastic Beanstalk</div>
                             <ol>
-                                <li>Prepare local jsreport installation using the Windows or Unix installation steps</li>
+                                <li>Prepare local jsreport installation using the Windows or Unix installation steps
+                                </li>
                                 <li>Zip package.json, prod.config.json and server.js</li>
-                                <li>Create Amazon Elastic Beanstalk Web Server with Node.js predefined configuration</li>
+                                <li>Create Amazon Elastic Beanstalk Web Server with Node.js predefined configuration
+                                </li>
                                 <li>Upload previously zipped package</li>
                             </ol>
-			    <a href="/blog/jsreport-on-amazon-elastic-beanstalk">See the blog post for details. </a>
+                            <a href="/blog/jsreport-on-amazon-elastic-beanstalk">See the blog post for details. </a>
                         </div>
                     </div>
                 </div>
@@ -151,10 +161,13 @@
                     <a href="#" class="heading bg-crimson fg-white collapsed">OpenShift</a>
 
                     <div class="content">
-                        <div class="padding10">                            
+                        <div class="padding10">
                             <p>
-                                For OpenShift you need to configure host and port ranges for jsreport internal web servers.
-                                You can find how to do it in <a href="https://github.com/jsreport/docs/blob/master/installation/OpenShift.md">OpenShift installation instructions</a>.
+                                For OpenShift you need to configure host and port ranges for jsreport internal web
+                                servers.
+                                You can find how to do it in <a
+                                    href="https://github.com/jsreport/docs/blob/master/installation/OpenShift.md">OpenShift
+                                installation instructions</a>.
                             </p>
                         </div>
                     </div>
