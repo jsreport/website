@@ -3,6 +3,8 @@
     "date"     : "06-10-2015 19:52"
 }}}
 
+> **Update**: There is now better way to use full power of jsreport in lightweight form. See post [Introducing jsreport-core](/blog/introducing-jsreport-core)
+
 jsreport can be very easily integrated into the node.js application, but for some simple use cases it is too heavy. Sometimes you just want to quickly render the html with javascript helpers and produce pdf. Sometimes you don't want a jsreport studio nor storing the templates. To better fit these simple use cases I have extracted the rendering part from jsreport and made a dedicated [npm package](https://www.npmjs.com/package/toner) from it.
 
 **Introducing jsreport toner ...**
