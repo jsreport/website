@@ -336,4 +336,11 @@ p.modal {
 	box-shadow: none !important;
 }
 
+.code {
+	background-color: #efefef;
+	font-family: monospace;
+	padding-left:7px;
+	padding-right:7px;
+}
+
 
