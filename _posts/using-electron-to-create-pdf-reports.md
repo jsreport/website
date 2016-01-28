@@ -1,6 +1,6 @@
 ﻿{{{
     "title"    : "Using Electron to create pdf reports",	
-    "date"     : "09-01-2016 14:09"	
+    "date"     : "01-09-2016 14:09"	
 }}}
 
 I am happy to announce the new kid in the jsreport recipes family. Thanks to Boris Matos Morillo you can now use [Electron](http://electron.atom.io/) to print pdf reports from html. 
