@@ -33,7 +33,7 @@ And call this helper in inline script
 *handlebars*
 ```html
 <script>
-	var inputParameters = {{#toJSON data.parameters}}{{/toJSON}}
+	var inputParameters = {{{toJSON data.parameters}}}
 </script>
 ```
 
