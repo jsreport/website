@@ -19,9 +19,9 @@ And then zip the files `prod.config.json`, `server.js` and `package.json` into a
 
 ## Launch Elastic Beanstalk 
 
-The next step is to launch a new Elastic Beanstalk environment and upload `package.zip` you previously created.  The environment should be created as a Web Server with node.js pre configured type. The rest is just about following the wizard and keeping the default values.
+The next step is to launch a new Elastic Beanstalk environment and upload `package.zip` you previously created.  The application should be created as a Web Server with node.js pre configured type. Only exception is the environment variables page where you should add pair **NODE_ENV=production**. This instructs jsreport to use bundled client sources and also `prod.config.json` configuration file. The rest is just about following the wizard and keeping the default values.
 
-Now you should be able to reach the public endpoint and render reports. **Simple!**
+Now you should be able to reach the public endpoint and render reports. Simple!
 
 
 #Adding persistent volume
@@ -59,24 +59,28 @@ Finally it is time to deploy again the zipped application. Now it should contain
 Now you should be able to reach the public endpoint!
 
 #Horizontal scaling and Mongo
-You have now running jsreport in Elastic Beanstalk which is storing data on replicated mounted disk provided by Amazon EBS. However this still doesn't let you to horizontally scale multiple server nodes talking to a single storage. Why? Because jsreport default data driver is using [nedb](https://github.com/louischatriot/nedb) which is not a full database and it doesn't support concurrent access. To get fully horizontally scalable reporting server you need to use a full database with supported jsreport data driver. This currently fulfills [MongoDb](https://www.mongodb.org/). 
+> **Update **
+> You can now use also MS SQL Server or PostgreSQL stores - see available [Templates' stores](http://jsreport.net/learn/extensions) 
 
-The installation of the MongoDb is not in the scope of this article, but we recommend you to check out the [mongolab service](https://mongolab.com/) or [official mongo cloud manager](https://www.mongodb.com/cloud/) to get the db quickly running.
+You have now running jsreport in Elastic Beanstalk which is storing data on replicated mounted disk provided by Amazon EBS. However this still doesn't let you to horizontally scale multiple server nodes talking to a single storage. Why? Because jsreport default data driver is using [nedb](https://github.com/louischatriot/nedb) which is not a full database and it doesn't support concurrent access. To get fully horizontally scalable reporting server you need to use a full database with supported jsreport data driver. This currently fulfills [mongodb](https://www.mongodb.org/). 
+
+The installation of the mongodb is not in the scope of this article, but we recommend you to check out the [mongolab service](https://mongolab.com/) or [official mongo cloud manager](https://www.mongodb.com/cloud/) to get the db quickly running.
 
 If you have an access to the running mongodb you need to make two changes.
 
-Add the `mongodb` module to the `package.json` dependencies:
+Add the `jsreport-mongodb-store` and `mongodb` module to the `package.json` dependencies:
 
 ```
  "dependencies": {
     "mongodb": "*",
-    "jsreport": "*"  
+    "jsreport": "*",
+    "jsreport-mongodb-store": "*",    
 } 
 ```
 
 Update the connection string inside`prod.config.json` :
 ```js
-{ "name": "mongoDB", "address": "...", "port": 27017, "databaseName" : "jsreport" }
+{ "name": "mongodb", "authDb": "my-db", "address": "foo.mlab.com", "port": 37657, "databaseName" : "my-db", "username": "mydbuser", "password":"password" },
 ```
 
 Now you can scale up to render even millions reports per hour. Enjoy!

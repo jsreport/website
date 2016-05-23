@@ -39,7 +39,7 @@ What if you don't want to call `require` but rather read the file from the disk 
 `__appDirectory` - directory of the script which is used when starting node<br/>
 `__parentModuleDirectory` - directory of script which was initializing jsreport-core
 
-You can then use this variables to combine the full path to your local resources...
+You can then use this variables to combine the full path to your local resources inside helpers or also [custom scripts](/learn/scripts)...
 ```js
 var path = require('path');
 var fs = require('fs');
