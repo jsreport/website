@@ -44,5 +44,7 @@
     "custom-engine": "Custom Engine",
     "custom-recipe": "Custom Recipe",
     "html-to-text": "Html to Text recipe",
-    "windows-single-executable": "Windows single executable"
+    "windows-single-executable": "Windows single executable",
+    "studio-api-reference": "Studio API reference",
+    "extending-studio": "Extending studio"
 };
