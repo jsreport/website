@@ -2,117 +2,48 @@
     <div class="container padding20 fg-white">
         <a href="/"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
 
-        <h1 class="fg-white">buy <small>//on premise</small></h1>
+        <h1 class="fg-white">buy</h1>
     </div>
 </div>
 
-<a class="gumroad-button" id="buyGumroad" href="https://gumroad.com/l/eHNnu" style="display:none !important">Buy my product</a>
-
-<a class="gumroad-button" id="buyRoyaltyFree" href="https://gumroad.com/l/CqnQt" style="display:none !important">Buy my product</a>
-
 <div class="container">
-
-    <style>
-        .pricing-row {
-            margin-top:8px !important;
-        }
-
-        .buy {
-            padding: 0px 15px 0px 15px !important;
-        }
-    </style>
-
-    <div class="grid">       
-
+    <div class="grid">
         <div class="row">
-            <p class="description padding20 bg-grayLighter subtitle">
-                This is the pricing page for <b>jsreport <a href="/on-prem">on premise</a></b> installation, pricing for <a href="/online">jsreportonline</a> can be found <a href="/online/pricing">here</a>.
-            </p>
-        </div>
-
-        <div class="row pricing-row">
-            <div class="span5">
-                <div class="grid text-center bg-grayLighter">
-                    <div class="row bg-green">
-                        <h2 class="fg-white">FREE</h2>
+            <div class="padding5 span2 {{#if buyOnPrem}}bg-amber{{else}}bg-steel{{/if}}">
+                <a href="/buy">
+                    <div class="text-center">
+                        <span class="fg-white">on premise</span>
                     </div>
-                    <div class="row pricing-row">
-                        <span class="fg-gray">price</span>
-
-                        <h3 class="fg-grayDark">0 $</h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <span class="fg-gray">template limitations</span>
-
-                        <h3 class="fg-red">max 5</h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <span3 class="fg-gray">support</span3>
-                        <h3 class="fg-grayDark">community</h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <span class="fg-gray">fully featured</span>
-
-                        <h3 class=""><span class="fg-green icon-checkmark"/></h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <a href="/downloads" class="button buy bg-green text-center bg-hover-gray">
-                            <h2 class="fg-white">Download</h2>
-                        </a>
-                    </div>
-                    <div class="row"></div>
-                </div>
+                </a>
             </div>
-            <div class="span5">
-                <div class="grid text-center bg-grayLighter">
-                    <div class="row bg-orange">
-                        <h2 class="fg-white">ENTERPRISE</h2>
+            <div class="padding5 span2 {{#if buySupport}}bg-amber{{else}}bg-steel{{/if}}">
+                <a href="/buy/support">
+                    <div class="text-center">
+                        <span class="fg-white">support</span>
                     </div>
-                    <div class="row pricing-row">
-                        <span class="fg-gray">price</span>
-
-                        <h3 class="fg-grayDark">395 $ *</h3>
+                </a>
+            </div>
+            <div class="padding5 span2 {{#if buyOnline}}bg-amber{{else}}bg-steel{{/if}}">
+                <a href="/buy/online">
+                    <div class="text-center">
+                        <span class="fg-white">online SaaS</span>
                     </div>
-                    <div class="row pricing-row">
-                        <span class="fg-gray">template limitations</span>
-
-                        <h3 class="fg-darkGreen">unlimited</h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <span3 class="fg-gray">support</span3>
-                        <h3 class="fg-grayDark">email/phone</h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <span class="fg-gray">fully featured</span>
-
-                        <h3 class=""><span class="fg-green icon-checkmark"/></h3>
-                    </div>
-                    <div class="row pricing-row">
-                        <a class="button buy bg-orange text-center bg-hover-gray" onclick="$('#buyGumroad')[0].click()">
-                            <h2 class="fg-white">Buy</h2>
-                        </a>
-                    </div>
-                    <div class="row"></div>
-                </div>
+                </a>
             </div>
         </div>
 
-        <div class="row">
-            <p class="description padding20 bg-grayLighter subtitle">
-                * The price is per server installation and valid for specific major version and all minor upgrades. The development instances are for free.
-                  Currently we offer free upgrade to 1.0 when buying now.
-                </br> </br>
-                You can also buy license for royalty-free redistribution of jsreport <a onclick="$('#buyRoyaltyFree')[0].click()" href="#">here</a>.
-            </p>
-        </div>
+        {{#if buyOnPrem}}
+            {{> buy-on-prem}}
+        {{/if}}
 
-        <div class="row">
-            <p class="description padding20 bg-grayLighter subtitle">
-                <img src="/img/github-logo-transparent.png" style="height:40px" alt="github" align="left"/>
-                free enterprise for contributors <br/>
-                free enterprise for all open source projects <br/>
-            </p>
-        </div>
+        {{#if buySupport}}
+        {{> buy-support}}
+        {{/if}}
+
+        {{#if buyOnline}}
+        {{> buy-online}}
+        {{/if}}
+
     </div>
 </div>
 

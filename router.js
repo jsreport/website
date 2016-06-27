@@ -14,12 +14,39 @@ exports.playground = function(req, res) {
     });
 };
 
-exports.buy = function(req, res) {
+exports.buyOnPrem = function(req, res) {
     res.render("buy", {
         buy: true,
+        buyOnPrem: true,
         title: "jsreport - buy",
-        description: "Buy on premise jsreport"
+        description: "Buy jsreport license"
     });
+};
+
+exports.buySupport = function(req, res) {
+  res.render("buy", {
+    buy: true,
+    buySupport: true,
+    title: "jsreport - buy",
+    description: "Buy jsreport support"
+  });
+};
+
+exports.buyOnline = function(req, res) {
+  res.render("buy", {
+    buy: true,
+    buyOnline: true,
+    title: "jsreport - buy",
+    description: "Buy jsreport online credits"
+  });
+};
+
+exports.buyThankYou = function(req, res) {
+  res.render("thank-you", {
+    buy: true,
+    title: "jsreport - buy",
+    description: "Thank you"
+  });
 };
 
 exports.online = function(req, res) {

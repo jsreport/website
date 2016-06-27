@@ -107,6 +107,10 @@ img.profil {
 	margin-bottom: 40px;
 }
 
+.top80 {
+	margin-top: 80px;
+}
+
 .center {
 	margin: 0 auto;
 }
@@ -343,4 +347,18 @@ p.modal {
 	padding-right:7px;
 }
 
+.pricing-row {
+	margin-top: 2px !important;
+}
+
+h2.buy-title {
+	font-size: 38px;
+	margin-bottom: 20px;
+}
+
+.buy-line {
+	border-bottom: 1px solid;
+	margin: 5px 15px 5px 15px;
+	opacity: 0.4;
+}
 

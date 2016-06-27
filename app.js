@@ -72,14 +72,16 @@ app.get('/examples/certificates', function(req, res) {
 
 
 app.get('/online', router.online);
-app.get('/online/pricing', router.onlinePricing);
 app.get('/playground', router.playground);
 app.get('/on-prem', router.onprem);
 app.get('/about', router.about);
 app.get('/downloads', router.downloads);
 app.get('/embedding', router.embedding);
-app.get('/buy', router.buy);
-
+app.get('/buy', router.buyOnPrem);
+app.get('/buy/on-prem', router.buyOnPrem);
+app.get('/buy/support', router.buySupport);
+app.get('/buy/online', router.buyOnline);
+app.get('/buy/thank-you', router.buyThankYou);
 
 require("./posts.js")(app).then(function(poet) {
   

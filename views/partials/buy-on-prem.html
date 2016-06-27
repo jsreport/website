@@ -1,0 +1,277 @@
+<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="display:none !important">Buy my
+    product</a>
+
+<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="display:none !important">Buy my
+    product</a>
+
+<a class="gumroad-button" id="buyRoyaltyFreeSubscription" href="https://gumroad.com/l/qUXxZs" style="display:none !important">Buy my
+    product</a>
+
+<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="display:none !important">Buy my
+    product</a>
+
+<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="display:none !important">Buy my
+    product</a>
+
+<a class="gumroad-button" id="buyRoyaltyFree" href="https://gumroad.com/l/OOfMv" style="display:none !important">Buy my
+    product</a>
+
+
+<script>
+    function yearly () {
+        $('.yearly').show()
+        $('.one-time').hide()
+        $('#yearlyButton').addClass('bg-amber')
+        $('#yearlyButton').removeClass('bg-steel')
+        $('#oneTimeButton').removeClass('bg-amber')
+        $('#oneTimeButton').addClass('bg-steel')
+    }
+
+    function oneTime () {
+        $('.yearly').hide()
+        $('.one-time').show()
+        $('#oneTimeButton').addClass('bg-amber')
+        $('#oneTimeButton').removeClass('bg-steel')
+        $('#yearlyButton').removeClass('bg-amber')
+        $('#yearlyButton').addClass('bg-steel')
+    }
+</script>
+
+
+
+<div class="row">
+    <div class="padding5 span2 bg-amber text-center" id="yearlyButton" onclick="yearly()">
+        <a href="#">
+            <span class="fg-white">yearly</span>
+        </a>
+    </div>
+    <div class="padding5 span2 bg-steel text-center" id="oneTimeButton" onclick="oneTime()">
+        <a href="#">
+            <span class="fg-white">one time</span>
+        </a>
+    </div>
+    <div class="span6"></div>
+</div>
+
+
+<div class="row yearly">
+    <div class="span4 grid text-center bg-grayLighter">
+        <div class="row padding5">
+            <h2 class="fg-darker buy-title">free</h2>
+            <small>fully featured server limited for up to 5 report templates</small>
+            <div class="buy-line fg-grayLight"></div>
+        </div>
+        <div class="row pricing-row">
+            <small>no license key</small>
+            <div class="buy-line fg-grayLight"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-red">max 5 templates</small>
+            <div class="buy-line fg-grayLight"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-grayDark">0 $</h3>
+        </div>
+        <div class="row pricing-row">
+            <a href="/downloads" class="button text-center bg-green bg-hover-gray">
+                <span class="fg-white">Download</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+    <div class="span4 grid text-center bg-darkCyan">
+        <div class="row padding5">
+            <h2 class="fg-white buy-title">enterprise</h2>
+            <small class="fg-grayLighter">fully featured single server instance with no limitations
+            </small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">dev servers for free</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">updates included</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-white">295 $ / year</h3>
+        </div>
+        <div class="row pricing-row">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseSubscription')[0].click()">
+                <span class="padding10 fg-white">Subscribe</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+    <div class="span4 grid text-center bg-mauve">
+        <div class="row padding5">
+            <h2 class="fg-white buy-title">enterprise scale</h2>
+            <small class="fg-grayLighter">one license valid for infinite amount of servers in single
+                application
+            </small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">infinite scale in one application</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">updates included</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-white">995 $ / year</h3>
+        </div>
+        <div class="row pricing-row">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseScaleSubscription')[0].click()">
+                <span class="padding10 fg-white">Subscribe</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+
+<div class="row pricing-row yearly">
+    <div class="span4 grid text-center bg-teal">
+        <div class="row padding5">
+            <h2 class="fg-white buy-title">royalty-free</h2>
+            <small class="fg-grayLighter">allows to distribute jsreport along with your single application
+            </small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">infinite amount of copies</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">updates included</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-white">995 $ / year</h3>
+        </div>
+        <div class="row pricing-row">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyRoyaltyFreeSubscription')[0].click()">
+                <span class="padding10 fg-white">Subscribe</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+
+<div class="row one-time" style="display:none">
+    <div class="span4 grid text-center bg-grayLighter">
+        <div class="row padding5">
+            <h2 class="fg-darker buy-title">free</h2>
+            <small>fully featured server limited for up to 5 report templates</small>
+            <div class="buy-line fg-grayLight"></div>
+        </div>
+        <div class="row pricing-row">
+            <small>no license key</small>
+            <div class="buy-line fg-grayLight"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-red">max 5 templates</small>
+            <div class="buy-line fg-grayLight"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-grayDark">0 $</h3>
+        </div>
+        <div class="row pricing-row">
+            <a href="/downloads" class="button text-center bg-green bg-hover-gray">
+                <span class="fg-white">Download</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+    <div class="span4 grid text-center bg-darkCyan">
+        <div class="row padding5">
+            <h2 class="fg-white buy-title">enterprise</h2>
+            <small class="fg-grayLighter">fully featured single server instance with no limitations
+            </small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">dev servers for free</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">updates included for 6 months</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-white">645 $</h3>
+        </div>
+        <div class="row pricing-row">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterprise')[0].click()">
+                <span class="padding10 fg-white">Buy</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+    <div class="span4 grid text-center bg-mauve">
+        <div class="row padding5">
+            <h2 class="fg-white buy-title">enterprise scale</h2>
+            <small class="fg-grayLighter">one license valid for infinite amount of servers in single
+                application
+            </small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">infinite scale in one application</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">updates included for 6 months</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-white">1995 $</h3>
+        </div>
+        <div class="row pricing-row">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseScale')[0].click()">
+                <span class="padding10 fg-white">Buy</span>
+            </a>
+        </div>
+        <div class="row"></div>
+
+    </div>
+</div>
+<div class="row pricing-row one-time" style="display:none">
+    <div class="span4 grid text-center bg-teal">
+
+        <div class="row padding5">
+            <h2 class="fg-white buy-title">royalty-free</h2>
+            <small class="fg-grayLighter">allows to distribute jsreport along with your single application
+            </small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">infinite amount of copies</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <small class="fg-grayLighter">updates included for 6 months</small>
+            <div class="buy-line fg-grayLighter"></div>
+        </div>
+        <div class="row pricing-row">
+            <h3 class="fg-white">1995 $</h3>
+        </div>
+        <div class="row pricing-row">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyRoyaltyFree')[0].click()">
+                <span class="padding10 fg-white">Buy</span>
+            </a>
+        </div>
+        <div class="row"></div>
+    </div>
+</div>
+
+
+<div class="row">
+    <p class="description padding20 bg-grayLighter subtitle">
+        <img src="/img/github-logo-transparent.png" style="height:40px" alt="github" align="left" />
+        free enterprise for contributors <br />
+        free enterprise for all open source projects <br />
+    </p>
+</div>

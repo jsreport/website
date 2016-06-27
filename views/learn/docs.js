@@ -46,5 +46,8 @@
     "html-to-text": "Html to Text recipe",
     "windows-single-executable": "Windows single executable",
     "studio-api-reference": "Studio API reference",
-    "extending-studio": "Extending studio"
+    "extending-studio": "Extending studio",
+    "upgrading-to-10": "Upgrading to 1.0",
+    "html-with-browser-client": "Html with browser client",
+    "browser-client": "Browser client"
 };
