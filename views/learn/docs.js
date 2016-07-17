@@ -49,5 +49,6 @@
     "extending-studio": "Extending studio",
     "upgrading-to-10": "Upgrading to 1.0",
     "html-with-browser-client": "Html with browser client",
-    "browser-client": "Browser client"
+    "browser-client": "Browser client",
+    "dynamic-excel-pivot-table": "Dynamic excel pivot table"
 };
