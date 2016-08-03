@@ -63,7 +63,7 @@ app.get('/learn/nodejs', docs.nodejs);
 app.get('/learn/templating-engines', docs.engines);
 app.get('/learn/recipes', docs.recipes);
 app.get('/learn/extensions', docs.extensions);
-app.get('/learn/visual-studio-and-net', docs.vsNet);
+app.get('/learn/dotnet', docs.dotnet);
 app.get('/learn/:doc', docs.doc);
 app.get('/learn', docs.learn);
 app.get('/examples/certificates', function(req, res) {

@@ -17,3 +17,5 @@ node_modules
 .idea
 
 key.txt
+
+views/learn/docs/*.*

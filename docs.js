@@ -16,8 +16,8 @@ exports.extensions = function(req, res) {
     res.render('learn/extensions', { learn: true });
 };
 
-exports.vsNet = function(req, res) {
-    res.render('learn/vs-net', { learn: true });
+exports.dotnet = function(req, res) {
+    res.render('learn/dotnet', { learn: true });
 };
 
 exports.recipes = function(req, res) {
