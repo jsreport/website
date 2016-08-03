@@ -4,6 +4,8 @@
     "date"     : "05-23-2016 11:56"
 }}}
 
+> Update: [c# integration reached 1.0](http://jsreport.net/blog/jsreport-for-csharp-reached-1-0)
+
 In parallel to works on jsreport@1 release we are also improving integration with .NET and c#.
 
 Through time we traced the following problems with them:
