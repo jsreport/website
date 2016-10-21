@@ -1,5 +1,5 @@
 var express = require('express'),
-    exphbs = require('express-handlebars'),
+    exphbs = require('express3-handlebars'),
     app = express(),
     fs = require("fs"),
     router = require("./router.js"),

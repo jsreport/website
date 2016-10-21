@@ -16,7 +16,7 @@ exports.get = function(request, response) {
    
   require("request").post({
                uri: 'https://playground.jsreport.net/api/report',
-               body: { template: { content: "<h1>Hello from jsreport</h1>", recipe:"phantom-pdf" } },
+               body: { template: { content: "<h1>Hello from jsreport</h1>", recipe:"phantom-pdf", engine: "jsrender" } },
                json: true        
        }).pipe(response);
 };
