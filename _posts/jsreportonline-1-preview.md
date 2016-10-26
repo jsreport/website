@@ -41,6 +41,12 @@ We have made significant infrastructure change and moved our servers from window
 
 If you are using firewall rules to whitelist jsreportonline access to your server please don't forget to add the new ip. 
 
+If anything goes wrong for you after the update. You should be able to fall back to 
+the original environment on the ip 104.40.139.112. You only need to add these entries to your host file    
+104.40.139.112       [subdomain].jsreportonline.net    
+104.40.139.112       jsreportonline.net
+
+
 
 
 
