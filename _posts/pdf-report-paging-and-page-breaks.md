@@ -5,7 +5,7 @@
 }}}
 
 
->**The example report is [here in playground](https://playground.jsreport.net/#/playground/gyHJRWnpn/3)**
+>**The example report is [here in playground](https://playground.jsreport.net/#/playground/gyHJRWnpn/79)**
 
 If you are using phantom-pdf recipe and struggling with paging in the pdf document, this article is just for you. The key information you need to achieve paging is the fact that phantom-pdf has the full support for css styles. One of the styles that allows to break the page in css is called [page-break-before](http://www.w3schools.com/cssref/pr_print_pagebb.asp). You can add this css style to  any of the element and it will wrap the page. Look at the following example
 
