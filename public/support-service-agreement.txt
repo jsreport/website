@@ -1,0 +1,31 @@
+Support service agreement
+
+You should carefully read the following before buying jsreport support services. By buying support services, you agree to be by this agreement. If do not agree to the terms of this agreement, please contact us at http://jsreport.net to arrange full refund.
+
+Provided support services
+1. The service provider gives advice and answers as reply from email which is specified in the service payment confirmation
+2. The service provider is also available for chat and skype calls on account which is specified in the service payment confirmation
+3. The service provider is willing to implement custom code if it helps solving the service buyer problem
+
+Service scope limitations
+The services 2 and 3 are limited to maximum 3 hours in total. The custom implementations length are provided by the service provider.
+
+Services response time
+The service provider will use its best to deliver response until the end of the next business day of the service provider. The business day of the service provider is defined as the time interval 09:00-19:00 GMT during Monday - Friday. The service response doesn't necessarily need to represent the final answer, solution for the problem or final custom implementation. Service provider is not responsible for any damage caused by the provided advice, code, any other provided information or late response. See Limitation of Liability for more information.
+
+Refunds
+The service provider guarantees full refund if the support service response time is not met.
+
+Termination
+This Service Agreement is effective until terminated. You may terminate the Service Agreement at any time by notifying service provider of your intention to terminate this Service Agreement. Service provider may, at its discretion, block service continuation after each year. 
+
+Limitation of Liability
+The service is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors and service providers be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software and service or the use or other dealings in the software and services. 
+
+Changes to the Agreement
+Any changes to this agreement will be available at http://jsreport.net website.
+
+Miscellaneous
+This Service Agreement shall be deemed to have been made and executed in Czech Republic without regard to conflicts of law provisions, and any dispute arising hereunder shall be resolved in accordance with the law of Czech Republic. You agree that any claim asserted in any legal proceeding by one of the parties against the other shall be commenced and maintained in Czech Republic, having subject matter jurisdiction with respect to the dispute between the parties. In the event that any provision of this Service Agreement shall be held by a court or other tribunal of competent jurisdiction to be unenforceable, such provision will be enforced to the maximum extent permissible, and the remaining portions of this License Agreement shall remain in full force and effect. This Service Agreement constitutes and contains the entire agreement between the parties with respect to the subject matter hereof and supersedes any prior oral or written agreements.
+
+I hereby acknowledge that I have read and understand the foregoing Service Agreement and agree that the action of buying the Service is an acknowledgment of my agreement to be bound by the terms and conditions of the Service Agreement contained herein.
