@@ -1,13 +1,7 @@
-﻿{{#each this}}
-<div class="panel">
-    <div class="panel-header bg-lightBlue fg-white text-center">
-        <a href="{{url}}" class="fg-white">{{title}}</a>
-    </div>
-    <div class="padding5">
-        <span class="post-date">{{toLongDate date}}</span>
-    </div>
-    <div class="panel-content">
-        {{{preview}}}
-    </div>
+﻿<div class="listview-outlook">
+    {{#each this}}
+    <a class="list marked" href="{{url}}">
+        <div class="list-content">{{title}} <div><small>{{toLongDate date}}</small></div></div>
+    </a>
+    {{/each}}
 </div>
-{{/each}}

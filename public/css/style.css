@@ -362,3 +362,32 @@ h2.buy-title {
 	opacity: 0.4;
 }
 
+@media (max-width: 1450px) {
+	.toc {
+		display:none
+	}
+}
+
+.toc {
+	max-width: 250px;
+	position:fixed;
+	right: 100px;
+	top: 0px;
+	padding-top:115px;
+}
+
+.metro .documentation .toc .level-2 {
+	padding-left: 6px;
+	font-size: 100%;
+}
+
+.metro .documentation .toc .level-3 {
+	padding-left: 12px;
+	font-size: 83%;
+}
+
+.metro .documentation .toc .level-4 {
+	padding-left: 18px;
+	font-size: 74%;
+}
+
