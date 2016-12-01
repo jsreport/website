@@ -8,7 +8,7 @@ Provided support services
 3. The service provider is willing to implement custom code if it helps solving the service buyer problem
 
 Service scope limitations
-The services 2 and 3 are limited to maximum 3 hours in total. The custom implementations length are provided by the service provider.
+The services 2 and 3 are limited to maximum 2 hours in total. The custom implementations length are provided by the service provider.
 
 Services response time
 The service provider will use its best to deliver response until the end of the next business day of the service provider. The business day of the service provider is defined as the time interval 09:00-19:00 GMT during Monday - Friday. The service response doesn't necessarily need to represent the final answer, solution for the problem or final custom implementation. Service provider is not responsible for any damage caused by the provided advice, code, any other provided information or late response. See Limitation of Liability for more information.
@@ -17,7 +17,7 @@ Refunds
 The service provider guarantees full refund if the support service response time is not met.
 
 Termination
-This Service Agreement is effective until terminated. You may terminate the Service Agreement at any time by notifying service provider of your intention to terminate this Service Agreement. Service provider may, at its discretion, block service continuation after each year. 
+This Service Agreement is effective until terminated. You may terminate the Service Agreement at any time by notifying service provider of your intention to terminate this Service Agreement. The Service Agreement is automatically terminated after two months since the service is bought.
 
 Limitation of Liability
 The service is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors and service providers be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software and service or the use or other dealings in the software and services. 
