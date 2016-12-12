@@ -1,16 +1,14 @@
 .metro p, ul, li, code {
-	font-family: "freight-text-pro",Georgia,Cambria,"Times New Roman",Times,serif;
 	font-size: 17px;
 	font-style: normal;
 	font-weight: 200;
 	letter-spacing: 0.01rem;
 	line-height: 1.4;
-	color:  rgba(0, 0, 0, 0.77);
+	color:  rgba(0, 0, 0, 0.87);
 }
 
 .metro p.subtitle {
 	color: #000;
-	font-family: "Segoe UI_","Open Sans",Verdana,Arial,Helvetica,sans-serif;
 	font-size: 11pt;
 	font-style: normal;
 	font-weight: 400;
