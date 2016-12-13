@@ -1,73 +1,268 @@
-﻿<div class="bg-cyan main-title">
-    <div class="container padding20 fg-white">
-        <a href="/"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
+﻿<style>
+    .wrap {
+        position: relative;
+        padding-bottom: 80px;
+    }
 
-        <h1 class="fg-white">jsreport on premise
-            <small>//report server</small>
+    .wrap:after {
+        content: "\e02c";
+        font-family: iconFont;
+        position: absolute;
+        font-size: 170px;
+        color: rgba(0, 175, 240, 0.60);
+        top: 10px;
+        left: 55%;
+        z-index: 1;
+    }
+
+    .inner {
+        position: relative;
+        z-index: 2;
+    }
+
+    .cmd {
+        width: 33%;
+        display: inline-block;
+        background: #fff none repeat scroll 0 0;
+        border-radius: 3px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .cmd .cmd-toolbar {
+        border-bottom: 1px solid #f1f1f1;
+        overflow: hidden;
+        padding: 0 4px;
+    }
+
+    .cmd .cmd-toolbar i {
+        background: #f00 none repeat scroll 0 0;
+        border-radius: 100px;
+        display: inline-block;
+        float: left;
+        height: 12px;
+        margin: 8px 0 8px 8px;
+        width: 12px;
+    }
+
+    .cmd .cmd-toolbar i.red {
+        background-color: #ff5f57;
+    }
+
+    .cmd .cmd-toolbar i.yellow {
+        background-color: #ffbd2e;
+    }
+
+    .cmd .cmd-toolbar i.green {
+        background-color: #2ace42;
+    }
+
+    .cmd .cmd-toolbar span {
+        color: #999;
+        display: block;
+        font-family: Menlo;
+        font-size: 12px;
+        margin: 6px auto auto;
+        max-width: 150px;
+        text-align: center;
+    }
+
+</style>
+
+<div class="section bg-gray wrap">
+    <div class="text-center inner">
+        <h1 class="fg-white">
+            jsreport download <br/>
+            <small>report server</small>
         </h1>
+
+        <div class="feature-icon">
+            <i class="fg-blue icon-windows"></i>
+            <i class="fg-yellow icon-tux"></i>
+        </div>
     </div>
 </div>
-<div class="container">
-    <div class="grid top40">
-        <div class="row">
-            <div class="span4">
-                <div class="row">
-                    <div class="span2 bg-magenta padding20 marker-on-bottom fg-white text-center">SOURCE CONTROL
-                        INTEGRATION
-                    </div>
-                    <div class="span2 bg-crimson padding20 marker-on-bottom fg-white text-center bg-hover-gray">
-                        <a href="/learn/custom-extension" class="fg-white">CUSTOM EXTENSIONS<i
-                                class="icon-arrow-right-3 on-right fg-white"></i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span2 bg-magenta padding20 marker-on-bottom fg-white text-center">EMBEDED DATABASE</div>
-                    <div class="span2 bg-crimson padding20 marker-on-bottom fg-white text-center bg-hover-gray">
-                        <a href="/buy" class="fg-white">ENTERPRISE EDITION<i
-                                class="icon-arrow-right-3 on-right fg-white"></i></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span2 bg-magenta padding20 marker-on-bottom fg-white text-center">PLATFORM INDEPENDENT
-                    </div>
-                    <div class="span2 bg-crimson padding20 marker-on-bottom fg-white text-center bg-hover-gray">
-                        <a href="/learn/adapting-jsreport" class="fg-white">FULL CONTROL<i
-                                class="icon-arrow-right-3 on-right fg-white"></i></a>
 
-                    </div>
-                </div>
-            </div>
-            <div class="span6 offset2">
-                <img src="/img/onprem-schema.png"/>
-            </div>
+<div class="bg-grayLighter section text-center">
+    <div>
+        <p>
+            jsreport runs almost everywhere including windows, linux or mac machines. <br/> The only prerequisite is
+            presence of <a href="https://nodejs.org">node.js</a> on the target machine. The installation is then
+            initiated using <a href="https://www.npmjs.com/">npm</a>.
+        </p>
+    </div>
 
+    <div class="cmd">
+        <div class="cmd-toolbar">
+            <i class="red"></i>
+            <i class="yellow"></i>
+            <i class="green"></i>
+            <span>cmd</span>
+        </div>
+
+        <div class="cmd-content bg-grayDarker fg-white padding5 text-left">
+            npm install jsreport --production<br/>
+            node node_modules/jsreport --init<br/>
+            npm start
         </div>
     </div>
 
-    <div class="text-center top40">
-        <a href="/downloads" class="button bg-emerald fg-white margin10 text-center span4 bg-hover-gray" style="padding: 0px">
-            <h2 class="fg-white">Download</h2>
-            <div class="bg-green padding5">
-                <div><i class="icon-checkmark"></i> Proven solution</div>
-                <div>> 40 000 downloads</div>
-            </div>
-        </a>
-    </div>
-
-    <div class="description padding20 bg-grayLighter subtitle">
-        <p class="subtitle">
-            You can install jsreport to any of yours linux or windows machines. Additionally you can also download one from
-            the <a href="https://github.com/jsreport/jsreport-contrib">third party extensions</a> or even write your own
-            <a href="/learn/custom-extension">custom extension</a>.
-
-        </p>
-            jsreport on premise is free as long as you use less than 5 report templates, afterwards you need to
-            <a href="/buy">buy</a> an enterprise license. See <a href="/terms-of-use-commercial.txt">terms of use</a>.
-
+    <div>
         <p>
-
+            Now you can reach jsreport on default port 5488. See the <a href="/learn/configuration">configuration
+            documentation</a> for changing
+            the port and other options.
         </p>
     </div>
-
-
 </div>
+
+<div class="container bg-grayLightest section">
+    <div class="grid">
+        <div class="row">
+            <div class="span6">
+                <div class="row">
+                    <h3>Full customizations</h3>
+
+                    <div>
+                        <p>
+                            The default installation can be additionally extended with custom <a
+                                href="/learn/extensions">extensions</a>,
+                            <a href="/learn/recipes">recipes</a> and <a href="/learn/templating-engines">engines</a>.
+                            You can even
+                            <a href="/learn/custom-extension">write your own custom extension</a>.
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <h3>Licensing</h3>
+
+                    <div>
+                        <p>
+                            jsreport on premise is free as long as you use up to 5 report templates, afterwards you need
+                            to
+                            <a href="/buy">buy</a> an enterprise license. See <a href="/terms-of-use-commercial.txt">terms
+                            of use</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="span6 row">
+                <h3>Advanced installations and troubleshooting</h3>
+
+                <div data-closeany="false" data-role="accordion" class="accordion with-marker">
+                    <div class="accordion-frame">
+                        <a href="#" class="heading collapsed">IIS Node</a>
+
+                        <div class="content">
+                            <ol>
+                                <li>install jsreport based on the common instructions</li>
+                                <li>download and place sample <a
+                                        href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>
+                                    into jsreport folder
+                                </li>
+                                <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a>, don't forget
+                                    to have iis installed with all Application development sub features and also iis
+                                    <a href="http://www.iis.net/downloads/microsoft/url-rewrite">url rewrite
+                                        extension</a>.
+                                </li>
+                                <li>create standard iis website for jsreport folder and choose port and bindings you
+                                    want, also don't forget to add security permissions to jsreport
+                                    folder for IIS App Pool user when appropriate. IMPORTANT: Create a separate
+                                    website. Don't just add application to the default website.
+                                </li>
+                                <li>open a browser on <a>https://localhost</a></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-frame">
+                        <a href="#" class="heading collapsed">Ubuntu - CentOS</a>
+
+                        <div class="content">
+                            <p>Trubleshooting guides</p>
+                            <ul>
+                                <li>
+                                    <a href='https://github.com/jsreport/docs/tree/master/installation/ubuntu.md'>Ubuntu</a>
+                                </li>
+                                <li>
+                                    <a href='https://github.com/jsreport/docs/tree/master/installation/centos.md'>CentOS</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion-frame">
+                        <a href="#" class="heading collapsed">Docker</a>
+
+                        <div class="content">
+                            <div class="padding10">
+                                <p>You can use <a href="https://www.docker.com/">docker</a> image <a
+                                        href="https://registry.hub.docker.com/u/jsreport/jsreport/">jsreport/jsreport</a>
+                                    for easy installation</p>
+
+                                <p>
+                                    See <a href="https://github.com/jsreport/docker">jsreport docker</a> repository for
+                                    details.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-frame">
+                        <a href="#" class="heading collapsed">Microsoft Azure</a>
+
+                        <div class="content">
+                            <div class="padding10">
+                                <p>
+                                    jsreport doesn't work on Azure Website due to limitations for printing pdf.
+                                </p>
+
+                                <p>
+                                    You need to set up Azure VM or Azure cloud service where both Windows and Linux
+                                    images
+                                    works well with jsreport. There is no particular configuration needed.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-frame">
+                        <a href="#" class="heading collapsed">Amazon WS</a>
+
+                        <div class="content">
+                            <div class="padding10">
+                                <div class="bg-steel padding10 fg-white">Elastic Beanstalk</div>
+                                <ol>
+                                    <li>Prepare local jsreport installation using the Windows or Unix installation steps
+                                    </li>
+                                    <li>Zip package.json, prod.config.json and server.js</li>
+                                    <li>Create Amazon Elastic Beanstalk Web Server with Node.js predefined configuration
+                                    </li>
+                                    <li>Upload previously zipped package</li>
+                                </ol>
+                                <a href="/blog/jsreport-on-amazon-elastic-beanstalk">See the blog post for details. </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-frame">
+                        <a href="#" class="heading collapsed">OpenShift</a>
+
+                        <div class="content">
+                            <div class="padding10">
+                                <p>
+                                    For OpenShift you need to configure host and port ranges for jsreport internal web
+                                    servers.
+                                    You can find how to do it in <a
+                                        href="https://github.com/jsreport/docs/blob/master/installation/OpenShift.md">OpenShift
+                                    installation instructions</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

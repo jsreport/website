@@ -4,7 +4,7 @@
 	font-weight: 200;
 	letter-spacing: 0.01rem;
 	line-height: 1.4;
-	color:  rgba(0, 0, 0, 0.87);
+	color:  rgba(0, 0, 0, 0.77);
 }
 
 .metro p.subtitle {
@@ -63,7 +63,7 @@ a:hover {
 	margin-top: -5px;
 }
 .main-title {
-	margin-bottom: 20px;
+	/*margin-bottom: 20px;*/
 }
 /* About Us page */
 .developers {
@@ -237,7 +237,7 @@ p.modal {
 }
 
 .home-splash {
-	background: url(img/home.jpg?v=5) no-repeat center #333;
+	background: url(/img/home.jpg?v=5) no-repeat center #333;
 	background-size: cover;
 	height: 550px;
 	padding-top:200px;

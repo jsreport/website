@@ -1,56 +1,162 @@
-﻿<div class="bg-cyan main-title">
-    <div class="container padding20 fg-white">
-        <a href="/"><i class="icon-arrow-left-3 smaller fg-white"></i></a>
-        <h1 class="fg-white">jsreport online <small>// pdf reports as a service</small></h1>
+﻿<style>
+    .wrap {
+        position: relative;
+        padding-bottom: 80px;
+    }
+
+    .wrap:after {
+        content: "\e06f";
+        font-family: iconFont;
+        position: absolute;
+        font-size: 170px;
+        color: rgba(0, 175, 240, 0.60);
+        top: 0;
+        left: 55%;
+        z-index: 1;
+    }
+
+    .inner {
+        position: relative;
+        z-index: 2;
+    }
+
+    .online-feature-icon {
+        margin-top: 10px;
+        margin-right: 20px;
+        font-size: 3.1em !important;
+    }
+</style>
+
+<div class="section bg-gray wrap">
+    <div class="text-center inner">
+        <h1 class="fg-white">
+            jsreport online<br/>
+            <small>reports as a service in cloud</small>
+        </h1>
+
+        <div class="text-center">
+            <div class="margin5 coll">
+                <a href="https://jsreportonline.net">
+                    <div class="bg-green home-splash-button">
+                        <div class="padding10 text-center">
+                            <span class="fg-white">Free Sign Up</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="margin5 coll">
+                <a href="https://jsreportonline.net">
+                    <div class="bg-amber home-splash-button">
+                        <div class="padding10 text-center">
+                            <span class="fg-white">Login</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="margin5 coll">
+                <a href="/buy/online">
+                    <div class="bg-blue home-splash-button">
+                        <div class="padding10 text-center">
+                            <span class="fg-white">Pricing</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="margin5 coll">
+                <a href="https://jsreportonline.a.offsitestatus.com">
+                    <div class="bg-mauve home-splash-button">
+                        <div class="padding10 text-center">
+                            <span class="fg-white">Status</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="grid top40">
-        <div class="row">
-            <div class="span4">
-                <div class="row">
-                    <div class="span2 bg-amber padding20 marker-on-bottom fg-white text-center">NO INSTALLATION</div> 
-                    <div class="span2 bg-darkOrange padding20 marker-on-bottom fg-white text-center bg-hover-gray">
-                        <a href="/buy/online" class="fg-white">SIMPLE PRICING<i class="icon-arrow-right-3 on-right fg-white"></i></a></div>
-                </div>
-                <div class="row">
-                    <div class="span2 bg-amber padding20 marker-on-bottom fg-white text-center">CLOUD HOSTED</div> 
-                    <div class="span2 bg-amber padding20 marker-on-bottom fg-white text-center">HIGH AVAILABILITY</div> 
-                </div>
-                <div class="row">
-                    <div class="span2 bg-amber padding20 marker-on-bottom fg-white text-center">AUTOMATIC BACKUP</div> 
-                    <div class="span2 bg-darkOrange padding20 marker-on-bottom fg-white text-center bg-hover-gray">
-                        <a href="https://jsreportonline.a.offsitestatus.com" class="fg-white">STATUS PAGE<i class="icon-arrow-right-3 on-right fg-white"></i></a>
-                    </div>
-                </div>
-            </div> 
-            <div class="span6 offset2">
-                 <img src="/img/online-schema.png"/>
-            </div>        
-                
-        </div> 
+<div class="bg-grayLighter section">
+    <div class="text-center title">
+        <h3>FEATURES</h3>
     </div>
+    <div class="container articles grid3">
+        <div>
+            <div class="coll3">
+                <h2>No installation</h2>
 
-    <div class="text-center top40">
-        <a href="https://jsreportonline.net" class="button bg-emerald fg-white margin10 text-center span4 bg-hover-gray" style="padding: 0px">
-            <h2 class="fg-white">Sign In / Sign Up</h2>
-            <div class="bg-green padding5">
-                <div><i class="icon-checkmark"></i> Proven solution</div>
-                <div>> 2 mil reports generated</div>
+                <p class="padding-top10">
+                    You don't have to download, install and configure jsreport. You only need the internet access.
+                </p>
+
+                <div class="text-center">
+                    <i class="fg-green icon-broadcast online-feature-icon"></i>
+                </div>
             </div>
-        </a>
-    </div>
+            <div class="coll3">
+                <h2>Proven solution</h2>
 
-    <div class="description padding20 bg-grayLighter ">
-        <p class="subtitle">jsreport online version can be used without any previous installation. Just create a free account, define your
-            reports, connect to <a href="/learn/api">REST API</a> from any language and generate reports.
-            It is free for 200 reports per month or you can choose from one of the <a href="/online/pricing">enterprise plans.</a>
-        </p>
-        
-        <p class="subtitle">
-            The most popular extensions from the community are provided out of the box in jsreport online without any installation needed.
-            Additionally service's cloud infrastructure grows with you so you have nothing to worry about.
-        </p>
+                <p class="padding-top10">
+                    There is more than hundred companies using jsreportonline in production with more than four millions
+                    reports already generated.
+                </p>
+
+                <div class="text-center">
+                    <i class="fg-green icon-rocket online-feature-icon"></i>
+                </div>
+            </div>
+            <div class="coll3">
+                <h2>Isolated</h2>
+
+                <p class="padding-top10">
+                    Every single user is isolated in its own dedicated docker container and cannot affect the
+                    neighbours.
+                </p>
+
+                <div class="text-center">
+                    <i class="fg-green icon-user online-feature-icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-grayLighter section">
+    <div class="container articles grid3">
+        <div>
+            <div class="coll3">
+                <h2>Automatic updates</h2>
+
+                <p class="padding-top10">
+                    We make sure to constantly install os, node an jsreport stable updates.
+                </p>
+
+                <div class="text-center">
+                    <i class="fg-green icon-checkmark online-feature-icon"></i>
+                </div>
+            </div>
+            <div class="coll3">
+                <h2>Cloud hosted</h2>
+
+                <p class="padding-top10">
+                    The service is hosted in public cloud and provides high availability.
+                </p>
+
+                <div class="text-center">
+                    <i class="fg-green icon-cloud online-feature-icon"></i>
+                </div>
+            </div>
+
+            <div class="coll3">
+                <h2>Simple pricing</h2>
+
+                <p class="padding-top10">
+                    You can start with free plan and upgrade your account as your business grow.
+                </p>
+
+                <div class="text-center">
+                    <i class="fg-green icon-dollar-2 online-feature-icon"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

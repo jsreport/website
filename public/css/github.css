@@ -4,6 +4,7 @@
 
 .documentation p, code, li, ul {
     font-size: 16px;
+    color:  rgba(0, 0, 0, 0.87);
 }
 
 .documentation pre { padding-bottom: 0px !important; margin-bottom: 15px !important;}
