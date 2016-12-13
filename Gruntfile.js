@@ -5,7 +5,7 @@
                 files: {
                     'public/jsreport.min.css': [
                         'public/css/docs.css', 'public/css/metro-bootstrap.css', 'public/css/metro-bootstrap-responsive.css', 'public/css/style.css',
-                        'public/css/font-awesome.min.css', 'public/js/pretify/pretify.css'
+                        'public/js/pretify/pretify.css'
                     ]
                 }
             }

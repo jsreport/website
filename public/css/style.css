@@ -93,7 +93,7 @@ img.profil {
 }
 .divider {
 	margin: 0 auto;
-	border-left: 1px solid #eee;
+	border-left: 1px solid #ddd;
 }
 .twitter-mention-button {
 	margin-top: 4px;
@@ -261,6 +261,10 @@ p.modal {
 	padding-top:10px;
 }
 
+.padding-top5 {
+	padding-top:5px;
+}
+
 .learn-icon {
 	font-size:3.8em !important;
 	cursor:pointer;
@@ -296,7 +300,23 @@ p.modal {
 	vertical-align: top;
 }
 
+.grid4 {
+	width: 100%;
+}
+
+.coll4 {
+	display: inline-block;
+	width: 24%;
+	padding-right: 15px;
+	vertical-align: top;
+}
+
 @media only screen and (max-width: 800px) {
+	.coll4 {
+		display: block;
+		width: 100%;
+	}
+
 	.coll3 {
 		display: block;
 		width: 100%;
@@ -389,3 +409,93 @@ h2.buy-title {
 	font-size: 74%;
 }
 
+.product-box {
+	position: relative;
+	padding-bottom: 35px;
+}
+
+.product-box:after {
+	font-family: iconFont;
+	position: absolute;
+	font-size: 170px;
+	color: rgba(0, 175, 240, 0.60);
+	z-index: 1;
+}
+
+.product {
+	position: relative;
+	z-index: 2;
+}
+
+.online:after {
+	content: "\e06f";
+	top: 0;
+	left: 55%;
+}
+
+.playground:after {
+	content: "\e058";
+	top: 20px;
+	left: 57%;
+}
+
+.online-feature-icon {
+	margin-top: 10px;
+	margin-right: 20px;
+	font-size: 3.1em !important;
+}
+
+.onprem:after {
+	content: "\e02c";
+	top: 20px;
+	left: 55%;
+}
+
+.cmd {
+	width: 33%;
+	display: inline-block;
+	background: #fff none repeat scroll 0 0;
+	border-radius: 3px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.cmd .cmd-toolbar {
+	border-bottom: 1px solid #f1f1f1;
+	overflow: hidden;
+	padding: 0 4px;
+}
+
+.cmd .cmd-toolbar i {
+	background: #f00 none repeat scroll 0 0;
+	border-radius: 100px;
+	display: inline-block;
+	float: left;
+	height: 12px;
+	margin: 8px 0 8px 8px;
+	width: 12px;
+}
+
+.cmd .cmd-toolbar i.red {
+	background-color: #ff5f57;
+}
+
+.cmd .cmd-toolbar i.yellow {
+	background-color: #ffbd2e;
+}
+
+.cmd .cmd-toolbar i.green {
+	background-color: #2ace42;
+}
+
+.cmd .cmd-toolbar span {
+	color: #999;
+	display: block;
+	font-family: Menlo;
+	font-size: 12px;
+	margin: 6px auto auto;
+	max-width: 150px;
+	text-align: center;
+}
