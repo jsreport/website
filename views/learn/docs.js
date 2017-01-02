@@ -51,5 +51,6 @@
     "html-with-browser-client": "Html with browser client",
     "browser-client": "Browser client",
     "dynamic-excel-pivot-table": "Dynamic excel pivot table",
-    "assets": "Assets"
+    "assets": "Assets",
+    "import-export": "Import - Export"
 };
