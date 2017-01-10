@@ -245,7 +245,7 @@ p.modal {
 
 .home-title {
 	background-color: rgba(65, 65, 65, 0.8);
-	width: 660px;
+	width: 700px;
 	padding: 20px
 }
 
@@ -498,4 +498,29 @@ h2.buy-title {
 	margin: 6px auto auto;
 	max-width: 150px;
 	text-align: center;
+}
+
+.button-box {
+	cursor: pointer;
+}
+
+.video {
+	position: relative;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.video:after {
+	content: "\e15c";
+	top: 25%;
+	left: 38%;
+	font-family: iconFont;
+	position: absolute;
+	font-size: 145px;
+	color: rgba(229, 20, 0, 0.60);
+	z-index: 1;
+}
+
+.video:hover:after {
+	color: rgba(51, 33, 0, 0.60);
 }

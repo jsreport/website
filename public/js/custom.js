@@ -1,16 +1,17 @@
 ﻿(function ($) {
     $(function () {
-        $("#createFlatWindow").on('click', function () {
+        $(".youtubeModal").on('click', function () {
+            var button = $(this)
             $.Dialog({
                 overlay: true,
                 shadow: true,
                 flat: true,
-                title: 'jsreport - Deep Dive',
+                title: button.attr('data-title'),
                 padding: 10,
                 content: '',
                 onShow: function (_dialog) {
                     var content = _dialog.children('.content');
-                    content.html('<iframe width="853" height="480" src="//www.youtube.com/embed/fhOQ0HPjK6s" frameborder="0" allowfullscreen></iframe><p class="modal"></p>');
+                    content.html('<iframe width="853" height="480" src="' + button.attr('data-youtube') + '" frameborder="0" allowfullscreen></iframe><p class="modal"></p>');
                 }
             });
         });
