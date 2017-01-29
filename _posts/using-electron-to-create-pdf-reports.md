@@ -13,5 +13,5 @@ npm install electron-prebuilt
 
 >**Playground example can be found [here](https://playground.jsreport.net/#playground/ZJZMyHgm2e/2)**
 
-![electron](http://jsreport.net/blog/electron.gif)
+![electron](https://jsreport.net/blog/electron.gif)
 

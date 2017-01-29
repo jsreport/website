@@ -15,7 +15,7 @@ jsreport is safe by design and rendering any report should not hurt the system. 
 To solve this problem we slightly changed jsreport infrastructure. Right now we are allocating just fixed amount of child processes and reuse them over multiple requests. We have separate workers for javascript templating engine rendering as well as for printing pdf files using phantomjs. This change has huge impact on jsreport performance and on scalability as well. Now jsreport can server thousands of request at once and doesn't need to even sweat. It also stays safe for executing dangerous reports because we measure timeouts for the rendering and if the limit is exceeded we kill and recycle affected worker.
 
 You can see current jsreport infrastructure schema on the following picture.
-![schema](http://jsreport.net/blog/performance/schema.png)
+![schema](https://jsreport.net/blog/performance/schema.png)
 
 By default jsreport allocates a worker for every cpu to maximize parallelization. This can be changed in config file and I recommend you to check out [config file documentation](https://github.com/jsreport/jsreport/blob/master/config.md) for other options.
 

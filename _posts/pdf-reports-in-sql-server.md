@@ -7,7 +7,7 @@ You probably already know you can use [Microsoft SQL Server Reporting Services](
 [SAP Crystal Reports](http://www.crystalreports.com/) to generate pdf reports from your SQL Server datasource. In this post I'll give you the alternative to these tools and show you how to render reports from SQL Server in completely different way. In the flexible way which is based just on html and javascript. There won't be any frustration from using limited designers or proprietary report formats, I promise.
 
 ##javascript based reporting
-The alternative I'm gonna show you is the tool called [jsreport](http://jsreport.net). jsreport is cross platform solution which was designed to change the report generation process with emphases on flexibility, openness and standards. With jsreport you mostly fetch the report datasource with javascript, design the report with html/css and let jsreport to print it into pdf or other formats. It's this simple, there is no learning curve, no limitations and you can simply design reports you really want. I'll show you now how to use jsreport to directly load the datasource from SQL Server, design a fancy report and also how to use jsreport API to integrate it in the existing application.
+The alternative I'm gonna show you is the tool called [jsreport](https://jsreport.net). jsreport is cross platform solution which was designed to change the report generation process with emphases on flexibility, openness and standards. With jsreport you mostly fetch the report datasource with javascript, design the report with html/css and let jsreport to print it into pdf or other formats. It's this simple, there is no learning curve, no limitations and you can simply design reports you really want. I'll show you now how to use jsreport to directly load the datasource from SQL Server, design a fancy report and also how to use jsreport API to integrate it in the existing application.
 
 
 
@@ -15,7 +15,7 @@ The alternative I'm gonna show you is the tool called [jsreport](http://jsreport
 
 The official jsreport package is distributed through [npm](https://www.npmjs.com/package/jsreport). You can find the installation instructions for each platform in the download section [here](/downloads). After you follow the installation steps you should be able to reach jsreport studio in the browser.
 
-![studio](http://jsreport.net/screenshots/studio.png?v=1)
+![studio](https://jsreport.net/screenshots/studio.png?v=1)
 
 Now I'll continue to show you the integration with SQL Server, if you are eager to learn more about jsreport right away, you can switch to [get started article](/learn/get-started) first.
 
@@ -39,7 +39,7 @@ Restart jsreport and proceed to the next step.
 ##Prepare input data source
 The first step is to prepare the input datasource for the report. In this example I will fetch the data from the SQL database using [custom script](/learn/scripts) and as the datasource I'll use standard [northwind](http://businessimpactinc.com/install-northwind-database/).
 
-![sql-script](http://jsreport.net/img/blog/sql-script.png)
+![sql-script](https://jsreport.net/img/blog/sql-script.png)
 
 Now I create the script using jsreport studio ACTIONS/Create script. This will be the script running in jsreport server and fetching datasource. It should look the following way.
 ```js
@@ -67,7 +67,7 @@ There is no magic in here, this is the plain javascript using mssql to which you
 
 Now you should create report template using jsreport studio ACTIONS/Create template and associate previously created script with the new template.
 
-![sql-simple](http://jsreport.net/img/blog/sql-simple.png)
+![sql-simple](https://jsreport.net/img/blog/sql-simple.png)
 
 To design the report I use html together with [handlebars](/learn/handlebars) templating engine. This allows me to dynamically create the layout based on the input data. I can for example iterate over data and print a table from it.
 
@@ -90,7 +90,7 @@ Lets add a chart to the report. jsreport doesn't limit you with a predefined cha
 
 
 
-![sql-chart](http://jsreport.net/img/blog/sql-chart.png)
+![sql-chart](https://jsreport.net/img/blog/sql-chart.png)
 
 
 You can find many examples in the  highcharts documentation and everything will run in jsreport as well and produces pdf. You only need to always turn off animation, otherwise the pdf won't contain complete chart.
@@ -151,7 +151,7 @@ When you have the report template ready, you can integrate jsreport through API 
    } 
 >```
 
-You can find the full API documentation [here](http://jsreport.net/learn/api).
+You can find the full API documentation [here](https://jsreport.net/learn/api).
 
 
 
@@ -180,7 +180,7 @@ Change the connection string in `prod.config.json`
 
 Restart jsreport server and the templates should be stored inside SQL Server afterwards.
 
-![sql-store](http://jsreport.net/img/blog/sql-store.png)
+![sql-store](https://jsreport.net/img/blog/sql-store.png)
 
 ##Summary
 You see you can easily integrate jsreport with your SQL Server database and design flexible reports using knowledge you already have - javascript with html. 

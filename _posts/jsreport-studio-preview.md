@@ -7,7 +7,7 @@ Today we ship to public the very first preview of the new jsreport studio. The n
 
 > **Try to play with the new studio http://vnext.jsreport.net**
 
-![preview](http://jsreport.net/blog/preview.png)
+![preview](https://jsreport.net/blog/preview.png)
 
 You can see from the screen that we have completely reworked the user experience. The studio looks now more like WebStorm, Visual Studio or another modern software development tool. We hope this will dramatically improve the productivity of report designers.
 

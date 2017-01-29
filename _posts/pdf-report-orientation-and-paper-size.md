@@ -7,7 +7,7 @@ Today we are announcing support for configuring pdf page orientation and paper s
 
 The configuration is accessible in the `Phantom Pdf` menu.
 
-![paper size](http://jsreport.net/img/blog/paper-size.png)
+![paper size](https://jsreport.net/img/blog/paper-size.png)
 
 You can see you have several options for pdf paper format - `A3`, `A4`, `A5`, `Legal`, `Letter` and `Tabloid`. And that you can switch paper orientation between `portrait` and `landscape`. `Paper width` and `Paper height` takes precedence over `Paper Format` and can be filled with following units: `mm`, `cm`, `in` and `px`.
 

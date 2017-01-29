@@ -7,4 +7,4 @@ One of the requested features finally arrived in fresh jsreport 0.11. Now you ar
 
 The scripts run in particular order as series. This means it is guaranteed for the second script that the first one has already finished. If you need to pass parameters between scripts you can set them into the `request.data` for example.
 
-![scripts](http://jsreport.net/blog/scripts.gif)
+![scripts](https://jsreport.net/blog/scripts.gif)

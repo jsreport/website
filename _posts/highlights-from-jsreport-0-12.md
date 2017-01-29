@@ -28,7 +28,7 @@ npm start --production
 We recommend you to always explicitly set environment variable to be sure in which configuration you are starting. You will see also warning in the console output if don't set it up.
 
 ##Asynchronous report rendering
-Rendering a report can take sometimes very long time and it can be technically difficult to handle these long connections. For these big reports it is also not intended to provide it synchronously to the user. It is usually rather a background job and the caller is interested just in the status of the processing and link to the final output intermediately after the request is submitted. And this is exactly what we provided in the [reports extension](http://jsreport.net/learn/reports) through the new `async` option. The asynchronous request looks the following:
+Rendering a report can take sometimes very long time and it can be technically difficult to handle these long connections. For these big reports it is also not intended to provide it synchronously to the user. It is usually rather a background job and the caller is interested just in the status of the processing and link to the final output intermediately after the request is submitted. And this is exactly what we provided in the [reports extension](https://jsreport.net/learn/reports) through the new `async` option. The asynchronous request looks the following:
 
 > `POST:` https://jsreport-host/api/report
 > `BODY:`

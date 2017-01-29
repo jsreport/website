@@ -17,7 +17,7 @@ Using `jsreport-freeze`  you can easily block all all the templates' updates and
 
 Or even through jsreport studio action:
 
-![freeze](http://jsreport.net/blog/freeze.gif)
+![freeze](https://jsreport.net/blog/freeze.gif)
 
 
 Installation to jsreport is done through npm as usual

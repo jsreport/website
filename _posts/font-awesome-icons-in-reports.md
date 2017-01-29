@@ -27,7 +27,7 @@ The easiest way is to use a public cdn to link the font awesome css. This is qui
 
 ##Upload as asset
 
-The second approach is to use [assets](http://jsreport.net/learn/assets) extension to upload the font into jsreport.  You can find the description how to do this in my previous post [fonts in pdf](http://jsreport.net/blog/fonts-in-pdf). Note you need to upload both `font-awesome.css` and `fontawesome-webfont.woff` files in this case. 
+The second approach is to use [assets](https://jsreport.net/learn/assets) extension to upload the font into jsreport.  You can find the description how to do this in my previous post [fonts in pdf](https://jsreport.net/blog/fonts-in-pdf). Note you need to upload both `font-awesome.css` and `fontawesome-webfont.woff` files in this case. 
 
 The `font-awesome.css` uses relative path to link the font, but this won't work because the font is stored as the asset in the different location. You need to embed the font to the template extra and then override the css to use it. This can be done by introducing the new `font-family` and overriding `font-awesome.css` to use it.
 ```html
@@ -86,4 +86,4 @@ Now you can reach all files in your application using assets syntax and simply l
 </html>
 ```
 
-Please find more information and downsides of linking assets in the [documentation](http://jsreport.net/learn/assets#embedding-assets-as-links).
+Please find more information and downsides of linking assets in the [documentation](https://jsreport.net/learn/assets#embedding-assets-as-links).

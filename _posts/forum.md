@@ -16,4 +16,4 @@ If you think you found a bug you can directly submit an issue into a proper gith
 
 You can also ask question on [stackoverflow](https://stackoverflow.com/) if you think it has global interest. Just mark it with jsreport tag.
 
-I am also still open to your questions and suggestions on my email or twitter. See [about](http://jsreport.net/about).
+I am also still open to your questions and suggestions on my email or twitter. See [about](https://jsreport.net/about).

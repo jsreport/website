@@ -9,7 +9,7 @@ Printing outputs of [Chart.js](http://www.chartjs.org/) using [phantom-pdf](/lea
 
 The first you need to instruct recipe to wait for your signal before starting printing. This is done in `phantom-pdf` menu under `wait for printing trigger` menu.
 
-![phantom pdf trigger](http://jsreport.net/blog/phantom-pdf-trigger.png)
+![phantom pdf trigger](https://jsreport.net/blog/phantom-pdf-trigger.png)
 
 The second and also the last thing to do is catch chart event `onComplete` and trigger the printing
 ```js

@@ -34,4 +34,4 @@ If you want to try fiddling with jsreport, go ahead and try [free playground](ht
 
 If you like to try enterprise jsreportonline, go ahead and [sign up](https://jsreportonline.net) 
 
-If you are lost, tweet me to @jan_blaha or see the [documentation](http://jsreport.net/learn)
+If you are lost, tweet me to @jan_blaha or see the [documentation](https://jsreport.net/learn)

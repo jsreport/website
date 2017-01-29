@@ -5,9 +5,9 @@
 
 I often get following image throught email from people starting with jsreport
 
-![national characters](http://jsreport.net/blog/wtf.png)
+![national characters](https://jsreport.net/blog/wtf.png)
 
-This is what [phantom-pdf](http://jsreport.net/learn/phantom-pdf) recipe will render by default when you try to render some national characters (china, czech..)
+This is what [phantom-pdf](https://jsreport.net/learn/phantom-pdf) recipe will render by default when you try to render some national characters (china, czech..)
 
 There is a easy fix for this. Add coding to the html header.
 ščěščě
@@ -24,4 +24,4 @@ There is a easy fix for this. Add coding to the html header.
 
 Then yoou will get proper result
 
-![cesko](http://jsreport.net/blog/cesko.png)
+![cesko](https://jsreport.net/blog/cesko.png)

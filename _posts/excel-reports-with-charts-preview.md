@@ -5,7 +5,7 @@
 
 While waiting for [phantomjs to stabilize the second version](https://github.com/ariya/phantomjs/milestones/Release%202.2) we are adding more and more features to delayed release of [jsreport v1](https://github.com/jsreport/jsreport/issues/178). Today I'm gonna show you the preview of improvements we have done in the excel generation.
 
-![excel-chart](http://jsreport.net/blog/excel-chart.png)
+![excel-chart](https://jsreport.net/blog/excel-chart.png)
 
 ##Open xml and templates
 

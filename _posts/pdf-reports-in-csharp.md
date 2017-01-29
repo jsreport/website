@@ -5,7 +5,7 @@
 	"preview"  : "This article tries to summarize solutions I have tried or found and finally describes in detail how to render pdf reports using jsreport."
 }}}
 
-> **Update**: This article compares current approaches for printing pdf reports from c# and highlights jsreport as solution for problems related to reporting in c#. We have recently released jsreport visual studio tools that make things much more easier. See [reporting visual studio extension](http://jsreport.net/learn/visual-studio-extension) and [reporting embedded into .net](http://jsreport.net/learn/net-embedded) documentation. You can also find interesting full tutorial for [reporting in asp.net mvc](http://www.janblaha.net/blog/pdf-reporting-in-visual-studio-csharp-and-asp-net-mvc).
+> **Update**: This article compares current approaches for printing pdf reports from c# and highlights jsreport as solution for problems related to reporting in c#. We have recently released jsreport visual studio tools that make things much more easier. See [reporting visual studio extension](https://jsreport.net/learn/visual-studio-extension) and [reporting embedded into .net](https://jsreport.net/learn/net-embedded) documentation. You can also find interesting full tutorial for [reporting in asp.net mvc](http://www.janblaha.net/blog/pdf-reporting-in-visual-studio-csharp-and-asp-net-mvc).
 
 ## Introduction
 To output a pdf business report is a typical requirement for almost every enterprise solution.  I was implementing this use case for many companies and I was having hard time doing it. That made me think if I am doing it actually right. This article tries to summarize solutions I have tried or found and finally describes in detail how to render pdf reports using jsreport. 
@@ -41,13 +41,13 @@ The last and final approach is to use reporting software jsreport. It provides m
 
 Let's say we are implementing system for local library and we need to generate monthly pdf report containing table of sold books, the best selling book and a chart highlighting books sales. All of this should be achieved using c# and entities from Library system. We will first prepare report layout in jsreport and then we will call its api to get report from c#.
 
-jsreport is reporting server and in order to generate pdf reports you need to have access to it first. You have three options. You can use jsreport as [on premisse reporting](http://jsreport.net/on-prem), you can also register for [cloud based SaaS reporting](http://jsreport.net/online) or you can use an online lightweight [playground](http://jsreport.net/playground) for free. For this example the lightweight playground is enough so let’s create the first report there.
+jsreport is reporting server and in order to generate pdf reports you need to have access to it first. You have three options. You can use jsreport as [on premisse reporting](https://jsreport.net/on-prem), you can also register for [cloud based SaaS reporting](https://jsreport.net/online) or you can use an online lightweight [playground](https://jsreport.net/playground) for free. For this example the lightweight playground is enough so let’s create the first report there.
 
 Go to [https://playground.jsreport.net](https://playground.jsreport.net). You should see studio dedicated to design reports. It's a bit limited but similar experience to what you would have when you have installed full jsreport on your server. We will design the library report in this studio.
 
 jsreport playground will automatically open the empty report template so we can start with filling the report name.
 
-![fill the name](http://jsreport.net/img/blog/fill-name.png)
+![fill the name](https://jsreport.net/img/blog/fill-name.png)
 
 <br/>
 
@@ -55,7 +55,7 @@ At first it's best to prepare the input testing data. This will make the develop
 
 <br/>
 
-![test data](http://jsreport.net/img/blog/data-upload.png)
+![test data](https://jsreport.net/img/blog/data-upload.png)
 
 <br/>
 
@@ -97,7 +97,7 @@ So look at the following code snippet and insert it into `Content ` tab in jsrep
 ```
 You can see that the html snippet contains some special marks like `{{for books}}` or `{{:name}}`. If you aren't already familiar with them, these are the marks of jsrender templating engine. You can use them to construct dynamic html, in this case a html table. I think the code isn't difficult to understand even if you see this templating engine for the first time. So let's click the `Run` button from toolbar and see the report preview in the right pane. You should get following pdf.
 
-![preview-1](http://jsreport.net/img/blog/report-preview1.png)
+![preview-1](https://jsreport.net/img/blog/report-preview1.png)
 <br/>
 
 Now we can proceed to the next step. We will add information about the most selling book to the report. This means we need to search for the book with the highest `sales` attribute in the input collection. We will need a helper javascript function for this. You can define helper function in the `Helpers` tab in jsreport. So switch there and paste following snippet.
@@ -147,7 +147,7 @@ $(function () {
 
 Now you can preview report last time and see the final output.
 
-![preview-2](http://jsreport.net/img/blog/report-preview2.png)
+![preview-2](https://jsreport.net/img/blog/report-preview2.png)
 
 <br/>
 

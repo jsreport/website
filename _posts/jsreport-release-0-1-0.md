@@ -11,15 +11,15 @@ jsreport now uses [Ace](http://ace.c9.io/) editor instead of [CodeMirror](http:/
 
 First improvement you will mention is highlighted handlebars and jsrender tags:
 
-![handlebars](http://jsreport.net/img/blog/handlebars-highlight.png)
+![handlebars](https://jsreport.net/img/blog/handlebars-highlight.png)
 
 Another great feature is code validations:
 
-![validations](http://jsreport.net/img/blog/validations.png)
+![validations](https://jsreport.net/img/blog/validations.png)
 
 Third feature but deffinetely not the last one is intellisense. Press `ctrl+space` and check out intellisense pop up.
 
-![intellisense](http://jsreport.net/img/blog/intellisense.png)
+![intellisense](https://jsreport.net/img/blog/intellisense.png)
 
 ##Modified helper functions syntax
 Another important change is a new style of writing helpers. Helper functions should be now declared as global functions. This is same for both jsrender and handlebars. 

@@ -7,6 +7,6 @@ Today I am releasing jsreport 0.6 which mainly includes new [client-app extensio
 
 Just update jsreport, navigate to [https://jsreport-host/client](/learn/client-app) and the new application designed for reports' end users should pop up.
 
-![client-app](http://jsreport.net/img/blog/client-app.png)
+![client-app](https://jsreport.net/img/blog/client-app.png)
 
 The application is customizable through standard jsreport templates which makes easy for you to create new report dashboards or portals for the end users. Check the [documentation](/learn/client-app) and give it a try.

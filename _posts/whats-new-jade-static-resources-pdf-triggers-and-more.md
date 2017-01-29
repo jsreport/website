@@ -48,7 +48,7 @@ More details here: [jsreport-static-resources](https://github.com/jsreport/jsrep
 
 
 ##Phantom printing trigger
-Another great feature released with jsreport 0.9 is particularly useful when you are using [phantom-pdf recipe](http://jsreport.net/learn/phantom-pdf). This improvement lets you to decide through template's javascript when the page is fully loaded and ready to be printed. First you need to enable this using `Wait for printing trigger` phantom menu or through API with setting `phantom.waitForJS=true`. This instructs jsreport to wait with pdf printing until you set `window.PHANTOM_HTML_TO_PDF_READY=true` inside your template.
+Another great feature released with jsreport 0.9 is particularly useful when you are using [phantom-pdf recipe](https://jsreport.net/learn/phantom-pdf). This improvement lets you to decide through template's javascript when the page is fully loaded and ready to be printed. First you need to enable this using `Wait for printing trigger` phantom menu or through API with setting `phantom.waitForJS=true`. This instructs jsreport to wait with pdf printing until you set `window.PHANTOM_HTML_TO_PDF_READY=true` inside your template.
 
 ```html
 ...

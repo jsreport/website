@@ -7,9 +7,9 @@ Rendering pdf reports from [mongodb](http://www.mongodb.org/) is a piece of cake
 
 How does it work...
 
-First [download](http://jsreport.net/downloads) and install jsreport to your machine or log into [reports as a service](http://jsreport.net/online) solution.  When downloading jsreport to your machine you need to also install [mongodb extension](https://github.com/jsreport/jsreport-contrib-mongodb) which is pre installed in the online service solution.
+First [download](https://jsreport.net/downloads) and install jsreport to your machine or log into [reports as a service](https://jsreport.net/online) solution.  When downloading jsreport to your machine you need to also install [mongodb extension](https://github.com/jsreport/jsreport-contrib-mongodb) which is pre installed in the online service solution.
 
-Next you need to create a custom node.js script accessing your mongodb and loading data you need. The script creation and evaluation is handled by jsreport standard [scripts extension](http://jsreport.net/learn/scripts) and it can look like this:
+Next you need to create a custom node.js script accessing your mongodb and loading data you need. The script creation and evaluation is handled by jsreport standard [scripts extension](https://jsreport.net/learn/scripts) and it can look like this:
 
 ```javascript
 //we can use mongodb node.js npm module
@@ -24,7 +24,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/maindb', function(err, db) {
 });
 ```
 
-Custom script will prepare data for the report and now we can iterate over them and generate html from it using [javascript templating engines](http://jsreport.net/learn/templating-engines) jsreport supports. 
+Custom script will prepare data for the report and now we can iterate over them and generate html from it using [javascript templating engines](https://jsreport.net/learn/templating-engines) jsreport supports. 
 
 ```html
 <table> 
@@ -37,7 +37,7 @@ Custom script will prepare data for the report and now we can iterate over them 
 </table>
 ```
 
-The output html will be then converted into pdf using jsreport default [recipe](http://jsreport.net/learn/recipes) using [phantomjs](http://phantomjs.org/).
+The output html will be then converted into pdf using jsreport default [recipe](https://jsreport.net/learn/recipes) using [phantomjs](http://phantomjs.org/).
 
 
 

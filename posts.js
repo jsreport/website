@@ -41,7 +41,7 @@
             cache[req.params.post] = {
                 post: post,
                 linkDocCss: true,
-                url: "http://jsreport.net" + post.url,
+                url: "https://jsreport.net" + post.url,
                 id: req.params.slug,
                 blog: true,
                 lastPosts: poet.helpers.getPosts(0, 3),

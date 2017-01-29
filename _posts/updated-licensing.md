@@ -8,7 +8,7 @@ After two years of heavy development we are ready to bring the product to the ma
 ##Free with limits
 jsreport can be freely used on personal or non profit projects without limits. It can be also freely used on commercial projects as long as you don't have more than 5 templates in the jsreport store. With these limits you can also distribute jsreport along with your product.
 
-If you reached the limits you should [buy](http://jsreport.net/buy) the enterprise license. The enterprise license unlocks jsreport and it also includes support with SLA directly from us.
+If you reached the limits you should [buy](https://jsreport.net/buy) the enterprise license. The enterprise license unlocks jsreport and it also includes support with SLA directly from us.
 
 Note this touches just jsreport server. All the other packages and libraries for rendering reports we released through the time on GitHub are MIT licensed. This also includes nodejs library [toner](https://github.com/jsreport/toner) which powers jsreport rendering engine.
 

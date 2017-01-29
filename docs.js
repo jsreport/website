@@ -94,7 +94,7 @@ exports.doc = function (req, res) {
             cache[req.params.doc] = {
                 title: docs[req.params.doc],
                 content: tocHTML + html,
-                url: "http://jsreport.net" + req.url,
+                url: "https://jsreport.net" + req.url,
                 id: req.params.doc,
                 learn: true,
                 linkDocCss: true

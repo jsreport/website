@@ -7,13 +7,13 @@ jsreport offers 3 ways how to migrate templates between servers. These are summa
 
 ##Using extension
 
-jsreport includes [import-export](http://jsreport.net/learn/import-export) extension which can be used to export templates into zip file and re-import it to a different instance. You can use the extension's studio UI to do this or even automate it using the REST API.
+jsreport includes [import-export](https://jsreport.net/learn/import-export) extension which can be used to export templates into zip file and re-import it to a different instance. You can use the extension's studio UI to do this or even automate it using the REST API.
 
-![export](http://jsreport.net/img/export.gif)
+![export](https://jsreport.net/img/export.gif)
 
 The nice thing about this is that the same export zip can be imported to a server instance using a different template store. This means you can use this also to migrate from local template store into sql for example. 
 
-Check the [import-export documentation](http://jsreport.net/learn/import-export) for details.
+Check the [import-export documentation](https://jsreport.net/learn/import-export) for details.
 
 
 ##Manual copy
@@ -30,7 +30,7 @@ Note that this technique can be used only when the source and target template st
 
 ##OData API
 
-The last option is to use the jsreport [odata REST API](http://jsreport.net/learn/api#querying-and-crud) to query the required templates from one instance and post the results to the different server instance. This will work also if the source template store is different from the target. It is probably the most complex technique which is completely adaptable but time consuming to implement. 
+The last option is to use the jsreport [odata REST API](https://jsreport.net/learn/api#querying-and-crud) to query the required templates from one instance and post the results to the different server instance. This will work also if the source template store is different from the target. It is probably the most complex technique which is completely adaptable but time consuming to implement. 
 
 
 

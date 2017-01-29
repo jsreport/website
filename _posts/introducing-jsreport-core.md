@@ -40,7 +40,7 @@ This can go even further, because every [extension](/learn/extensions) supported
 
 To see it in action you can for example create your own express application and run jsreport studio on the subpath.
 
-![core](http://jsreport.net/blog/core.gif)
+![core](https://jsreport.net/blog/core.gif)
 
 ```js
 var jsreport = require('jsreport-core')();

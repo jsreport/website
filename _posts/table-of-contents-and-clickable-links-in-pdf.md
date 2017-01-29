@@ -5,7 +5,7 @@
 
 Today I am releasing new jsreport recipe which is using [wkhtmltopdf](http://wkhtmltopdf.org/) utility to convert html into pdf. This recipe should add the most requested jsreport feature which is support for table of contents and clickable links in pdf generation.
 
-![wkhtmltopdf](http://jsreport.net/img/blog/wkhtmltopdf.png)
+![wkhtmltopdf](https://jsreport.net/img/blog/wkhtmltopdf.png)
 
 This new recipe is not a core part of jsreport package right now and you need to additionally install it. You can find instructions as well as documentation under construction [here](/learn/wkhtmltopdf)
 

@@ -9,4 +9,4 @@ To invoke the template rendering in the "debug" mode you need to click the `debu
 
 You can find more information about this extension on github page [jsreport-debug](https://github.com/jsreport/jsreport-debug).
 
-![debug](http://jsreport.net/blog/jsreport-debug.gif)
+![debug](https://jsreport.net/blog/jsreport-debug.gif)

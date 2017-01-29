@@ -9,7 +9,7 @@ I'm very excited to announce that jsreport SaaS known as jsreportonline has inte
 
 This new release includes all the goodness from the latest jsreport and also represents major rewrite of the infrastructure running the service. Everything is now ready for reliable and massive scale.
 
-![jsreportonline](http://jsreport.net/blog/jo-1.png)
+![jsreportonline](https://jsreport.net/blog/jo-1.png)
 
 ##Improvements
 
@@ -37,7 +37,7 @@ We worked hard to make sure the new release of jsreportonline is back compatible
 
 We have made significant infrastructure change and moved our servers from windows to linux. Unfortunately the phantomjs creates different sized outputs on linux. To make sure the existing accounts are not affected we still run the rendering on windows for existing templates and old accounts. The platform used in rendering can be later modified in the studio in template -> phantom -> phantomjs version menu. We also recommend you to design new templates on linux or even modify the existing templates to run on linux. You get better performance and better container based reliability.
 
-`wrapped-html` recipe is now replaced with [html-with-browser-client](http://jsreport.net/learn/html-with-browser-client) recipe. The new recipe has the same API as the old one, you just make sure you are sending correct recipe name in the anonymous API rendering requests.
+`wrapped-html` recipe is now replaced with [html-with-browser-client](https://jsreport.net/learn/html-with-browser-client) recipe. The new recipe has the same API as the old one, you just make sure you are sending correct recipe name in the anonymous API rendering requests.
 
 If you are using firewall rules to whitelist jsreportonline access to your server please don't forget to add the new ip. 
 

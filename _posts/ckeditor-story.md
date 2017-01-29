@@ -25,4 +25,4 @@ Integrating CKEDITOR is actually pretty easy:
 
 > Checkout the example in **[playground](https://playground.jsreport.net/#playground/-yOj_BkNlg/16)**
 
-![ckeditor](http://jsreport.net/img/blog/ckeditor.png?q)
+![ckeditor](https://jsreport.net/img/blog/ckeditor.png?q)

@@ -60,7 +60,7 @@ Now you should be able to reach the public endpoint!
 
 #Horizontal scaling and Mongo
 > **Update **
-> You can now use also MS SQL Server or PostgreSQL stores - see available [Templates' stores](http://jsreport.net/learn/extensions) 
+> You can now use also MS SQL Server or PostgreSQL stores - see available [Templates' stores](https://jsreport.net/learn/extensions) 
 
 You have now running jsreport in Elastic Beanstalk which is storing data on replicated mounted disk provided by Amazon EBS. However this still doesn't let you to horizontally scale multiple server nodes talking to a single storage. Why? Because jsreport default data driver is using [nedb](https://github.com/louischatriot/nedb) which is not a full database and it doesn't support concurrent access. To get fully horizontally scalable reporting server you need to use a full database with supported jsreport data driver. This currently fulfills [mongodb](https://www.mongodb.org/). 
 

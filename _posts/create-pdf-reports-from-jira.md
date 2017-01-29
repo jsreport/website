@@ -8,7 +8,7 @@ jsreport is able to generate pdf reports from any external system having an API 
 
 Downloading report data using custom jsreport script can be quite easy but can also become a little difficult when reaching system like jira or sharepoint with complex API. Fortunately these systems have usually some wrappers around api to make integration simple.  For example [node-jira](https://github.com/steves/node-jira) is one of these wrappers for [jira bug tracking system](https://www.atlassian.com/software/jira).
 
-Using jsreport to render pdf reports from jira is quite common use case there for I decided to write a jsreport extension that will allow to use [node-jira](https://github.com/steves/node-jira) directly in the jsreport custom script. You can find this extension on github in [jsreport-contrib-jira](https://github.com/jsreport/jsreport-contrib-jira) repository. It's pre-installed in jsreport [online](http://jsreport.net/online) but you need to explicitly install this extension to jsreport [on-prem](http://jsreport.net/on-prem) by:
+Using jsreport to render pdf reports from jira is quite common use case there for I decided to write a jsreport extension that will allow to use [node-jira](https://github.com/steves/node-jira) directly in the jsreport custom script. You can find this extension on github in [jsreport-contrib-jira](https://github.com/jsreport/jsreport-contrib-jira) repository. It's pre-installed in jsreport [online](https://jsreport.net/online) but you need to explicitly install this extension to jsreport [on-prem](https://jsreport.net/on-prem) by:
 
 > npm install jsreport-contrib-jira
 
@@ -45,8 +45,8 @@ And how it looks in the jsreport studio....
 
 
 
-<a href="http://jsreport.net/img/blog/jira.png" target="_blank">
-<img src="http://jsreport.net/img/blog/jira.png" alt="jira pdf report" style="width: 800px;"/>
+<a href="https://jsreport.net/img/blog/jira.png" target="_blank">
+<img src="https://jsreport.net/img/blog/jira.png" alt="jira pdf report" style="width: 800px;"/>
 </a>
 
 >

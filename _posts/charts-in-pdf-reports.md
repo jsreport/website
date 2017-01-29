@@ -33,4 +33,4 @@ $(function () {
 </script>
 ```
 
-![chart preview](http://jsreport.net/img/blog/chart.png)
+![chart preview](https://jsreport.net/img/blog/chart.png)

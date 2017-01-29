@@ -4,7 +4,7 @@
     "date"     : "05-23-2016 11:56"
 }}}
 
-> Update: [c# integration reached 1.0](http://jsreport.net/blog/jsreport-for-csharp-reached-1-0)
+> Update: [c# integration reached 1.0](https://jsreport.net/blog/jsreport-for-csharp-reached-1-0)
 
 In parallel to works on jsreport@1 release we are also improving integration with .NET and c#.
 
@@ -25,7 +25,7 @@ After installation you'll find out that several files have been added to the sol
 You can also see that the local jsreport instance has been downloaded from npm into `jsreport/development` folder and that it was automatically zipped for production deployment into `jsreport/production/jsreport.zip`
 
 
-![net-solution](http://jsreport.net/blog/net-solution.png)
+![net-solution](https://jsreport.net/blog/net-solution.png)
 
 ##Report development
 
@@ -33,7 +33,7 @@ The first step is to run the file `start-local.cmd`. This will start the local j
 
 My favorite approach now is to open the browser with jsreport studio on one screen (or on one half) and Visual Studio on the second one. Then navigate to the sample template in both VS and studio and try to edit it in the VS. You should see that jsreport automatically monitors changes made in VS studio and refreshes the report output.
 
-![net-local](http://jsreport.net/blog/net-local.gif)
+![net-local](https://jsreport.net/blog/net-local.gif)
 
 This way you can use VS together with jsreport without any VS extension involved and also stick with native jsreport template format. You only need to make sure that all the files you have in `jsreport/reports` have enabled `Copy to Output Directory` in the properties.
 
@@ -51,7 +51,7 @@ rs.Initialize();
 var result = rs.Render("Sample report", new { foo = "hello" });             
 ```
 
-Alternatively you can use the override which accepts single object completely describing the rendering request.  You can find how this object should look like in the jsreport studio [API dialog](http://jsreport.net/learn/api) or for example [here](https://github.com/jsreport/jsreport-core)
+Alternatively you can use the override which accepts single object completely describing the rendering request.  You can find how this object should look like in the jsreport studio [API dialog](https://jsreport.net/learn/api) or for example [here](https://github.com/jsreport/jsreport-core)
 
 ```cs
 var result = rs.Render(new {
@@ -84,7 +84,7 @@ Navigate to `jsreport` and run
 pack-production.cmd
 ```
 
-Now you can use [jsreport-wkhtmltopdf](http://jsreport.net/learn/wkhtmltopdf) in both development studio and production run.
+Now you can use [jsreport-wkhtmltopdf](https://jsreport.net/learn/wkhtmltopdf) in both development studio and production run.
 
 ##Summary
 [jsreport.Local](https://www.nuget.org/packages/jsreport.Local/) brings to c# and VS more flexible and more transparent reporting than it was with [jsreport.Embedded](https://www.nuget.org/packages/jsreport.Embedded). You should be able to easily use the whole power of jsreport and custom extensions in more reliable way. Please note this is just pre-release. We would love to get a feedback from you now.

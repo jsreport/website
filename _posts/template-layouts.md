@@ -5,9 +5,9 @@
 
 Don't you like adding the same scripts, styles or headers to every template? Do you need something like master layout template? Here is the solution for you.
 
-jsreport doesn't support template layouts out of the box, but you can easily reach the same goal using [assets](http://jsreport.net/learn/assets) and [scripts](http://jsreport.net/learn/scripts) extension.
+jsreport doesn't support template layouts out of the box, but you can easily reach the same goal using [assets](https://jsreport.net/learn/assets) and [scripts](https://jsreport.net/learn/scripts) extension.
 
-The first lets create [asset](http://jsreport.net/learn/assets) which represents the master template.
+The first lets create [asset](https://jsreport.net/learn/assets) which represents the master template.
 ```html
 <html>
     <head>
@@ -28,7 +28,7 @@ The next step is to create a template which will be later embedded into the mast
 <h1>Hello from template 1</h1>
 ```
 
-Then we create custom [script](http://jsreport.net/learn/scripts) which will be used to pick up the master asset and replace its content with the template being just rendered.
+Then we create custom [script](https://jsreport.net/learn/scripts) which will be used to pick up the master asset and replace its content with the template being just rendered.
 
 ```js
 function beforeRender(req, res, done) {

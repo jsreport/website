@@ -12,4 +12,4 @@
 3. Select `Use custom phantomjs` in the jsreport studio phantomjs menu
 
 
-![phantomjs2](http://jsreport.net/blog/phantomjs2.gif)
+![phantomjs2](https://jsreport.net/blog/phantomjs2.gif)

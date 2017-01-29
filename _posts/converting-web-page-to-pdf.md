@@ -7,7 +7,7 @@ jsreport brings power to create any pdf report you can think of. But with the po
 
 It is available at [pagetopdf.com](http://pagetopdf.com). Go ahead and check it out.
 
-![url to pdf conversion](http://jsreport.net/blog/pagetopdf1.png)
+![url to pdf conversion](https://jsreport.net/blog/pagetopdf1.png)
 
-![url to pdf conversion](http://jsreport.net/blog/pagetopdf2.png)
+![url to pdf conversion](https://jsreport.net/blog/pagetopdf2.png)
 

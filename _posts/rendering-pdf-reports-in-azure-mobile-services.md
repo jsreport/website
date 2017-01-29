@@ -3,7 +3,7 @@
     "date"     : "03-23-2014 15:56"
 }}}
 
-> Are you searching for an easy way how to render pdf report in your [Azure Mobile Services](http://www.windowsazure.com/en-us/develop/mobile) application? [jsreport](http://jsreport.net) is here with the help.
+> Are you searching for an easy way how to render pdf report in your [Azure Mobile Services](http://www.windowsazure.com/en-us/develop/mobile) application? [jsreport](https://jsreport.net) is here with the help.
 
 ## Quick Hello World
 
@@ -23,22 +23,22 @@ exports.get = function(request, response) {
 ```
 Now save the script and request the api from the browser. You should get back pdf directly to the current window. That is the jsreport magic. What is actually happening? The script is using `request` node module to access jsreport api. jsreport will receive report template with html content, print html into pdf using [phantomjs](http://phantomjs.org) and then is the response from jsreport piped to the browser. That is it. Very simple hello world using free [jsreport playground](https://playground.jsreport.net).
 
-You can also attach images into pdf, render dynamic content using javascript templating engines or even render svg or fractals using jquery. To get more informations see [learn section](http://jsreport.net/learn) or quick start video on [youtube](https://www.youtube.com/watch?v=L7MZqwDCxP8). 
+You can also attach images into pdf, render dynamic content using javascript templating engines or even render svg or fractals using jquery. To get more informations see [learn section](https://jsreport.net/learn) or quick start video on [youtube](https://www.youtube.com/watch?v=L7MZqwDCxP8). 
 
 ## Using jsreport online
-jsreport playground is great for testing and fiddling with reports. But for the production use we recommend to create an account in [jsreport online](http://jsreport.net/online). With an account in jsreport online, you will get space where you can manage all your report templates, images, custom scripts and many other features. 
+jsreport playground is great for testing and fiddling with reports. But for the production use we recommend to create an account in [jsreport online](https://jsreport.net/online). With an account in jsreport online, you will get space where you can manage all your report templates, images, custom scripts and many other features. 
 
 To create jsreport online account go [here](https://jsreportonline.net) and fill the registration form. When is the account ready, create your first report template using "New template" button.
 
-![new-template](http://jsreport.net/screenshots/new-template.png)
+![new-template](https://jsreport.net/screenshots/new-template.png)
 
 Fill the name in the new template, content and switch jsreport recipe to phantom-pdf. This recipe will specify that report should be first rendered as html and afterwards printed into pdf using [phantomjs](http://phantomjs.org).
 
-![hello-world-template](http://jsreport.net/screenshots/hello-world-template.png)
+![hello-world-template](https://jsreport.net/screenshots/hello-world-template.png)
 
 Now click the api button. This should open dialog with lot of useful informations about api options for this particular template.
 
-![api-hello-world](http://jsreport.net/screenshots/api-hello-world.png)
+![api-hello-world](https://jsreport.net/screenshots/api-hello-world.png)
 
 The most important information is the `shortid`, so take it from there and go back to azure management portal. Take the following script and replace the one used previously.
 

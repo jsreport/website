@@ -10,9 +10,9 @@ I planned the next release for January but creating jsreport extension is so sim
 `Scheduling` extension was designed with scalability in mind. You can spin up multiple jsreport servers connected to mongodb and it will run particular report rendering just once. It will also recover jobs when you restart the server.
 
 The documentation is at the standard place.
-[http://jsreport.net/learn/scheduling](http://jsreport.net/learn/scheduling)
+[https://jsreport.net/learn/scheduling](https://jsreport.net/learn/scheduling)
 
-![scheduling](http://jsreport.net/img/blog/scheduling.png)
+![scheduling](https://jsreport.net/img/blog/scheduling.png)
 
 After 18 months of development jsreport has everything I planned to. Need to say it took way longer I planned to but the result is very satisfying. I will now concentrate on stabilizing API, writing documentation, examples and improving the code base. Don't expect big new features for the next months but If you have something in mind don't hesitate to let me know. At the beginning of the next year I will create a road map with future plans for jsreport and any suggestions would be very much appreciated.
 

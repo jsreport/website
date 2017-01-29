@@ -5,7 +5,7 @@
 
 > **The online example is accessible [here](https://playground.jsreport.net/#playground/bkBXJqNOae/14)**
 
-I am sharing here a simple snipped showing how to add page numbers into a report based on [wkhtmltopdf](http://jsreport.net/learn/wkhtmltopdf) recipe. It is a bit more complicated than in [phantom-pdf](http://jsreport.net/learn/phantom-pdf) recipe, but the result is the same.
+I am sharing here a simple snipped showing how to add page numbers into a report based on [wkhtmltopdf](https://jsreport.net/learn/wkhtmltopdf) recipe. It is a bit more complicated than in [phantom-pdf](https://jsreport.net/learn/phantom-pdf) recipe, but the result is the same.
 
 The page number and other information are passed into the header's `window.location.search` variable by wkhtmltopdf. You just need to pick it up with javascript and place it anywhere you want. 
 

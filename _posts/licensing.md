@@ -3,7 +3,7 @@
     "date"     : "11-07-2014 16:50"    
 }}}
 
-> **Update**: This is no longer valid, see the [updated licensing](http://jsreport.net/blog/updated-licensing).
+> **Update**: This is no longer valid, see the [updated licensing](https://jsreport.net/blog/updated-licensing).
 
 There is quite often a confusion about jsreport licensing so I decided to clarify it in this blog post. I am not an expert on open source licenses so don't hesitate to correct me when I am wrong.
 

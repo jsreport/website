@@ -10,11 +10,11 @@ It's well now jsreport is being developed in [node.js](http://nodejs.org/). It w
 2. using jsreport in a node.js application
 3. adapting jsreport on premise using node.js
 
-So do you want to know where all the cool developers play? Go to [node.js section in the jsreport documentation](http://jsreport.net/learn/nodejs).
+So do you want to know where all the cool developers play? Go to [node.js section in the jsreport documentation](https://jsreport.net/learn/nodejs).
 
 ##node.js remote client for jsreport
 
-jsreport has now dedicated [npm package](https://www.npmjs.org/package/jsreport-client) for working with reporting server from a remote node.js client. This means you can very easily render reports or even create report templates remotely from node.js. It works with every [on premise](http://jsreport.net/on-prem) or [reporting as a service](http://jsreport.net/online) based server.
+jsreport has now dedicated [npm package](https://www.npmjs.org/package/jsreport-client) for working with reporting server from a remote node.js client. This means you can very easily render reports or even create report templates remotely from node.js. It works with every [on premise](https://jsreport.net/on-prem) or [reporting as a service](https://jsreport.net/online) based server.
 
 You only need to install [jsreport-client](https://www.npmjs.org/package/jsreport-client) npm package, specify url of the server and then you are ready for rendering.
 
@@ -31,7 +31,7 @@ client.render({
 });
 ```
 
-If you are interested in details, see the [documentation for node.js remote client](http://jsreport.net/learn/nodejs-client).
+If you are interested in details, see the [documentation for node.js remote client](https://jsreport.net/learn/nodejs-client).
 
 ## Using jsreport in a node.js application
 
@@ -43,10 +43,10 @@ require("jsreport").render("<h1>Hello world</h1>").then(function(out) {
     out.result.pipe(resp);
 });
 ```
-You can find official documentation with other examples [here](http://jsreport.net/learn/pdf-reports-in-nodejs).
+You can find official documentation with other examples [here](https://jsreport.net/learn/pdf-reports-in-nodejs).
 
 ##Adapting jsreport on premise using node.js
-jsreport is in the most of the cases adapted by editing [configuration file](https://github.com/jsreport/jsreport/blob/master/config.md). This is enough for some basic settings but it is not possible to provide for example some custom logging there. Because of this reasons I have done some changes to make it super simple to adapt jsreport directly using node.js. Everything is well documented and you can check it out [here](http://jsreport.net/learn/adapting-jsreport). Following example previews how you can edit `server.js` file and hook your own logger into jsreport.
+jsreport is in the most of the cases adapted by editing [configuration file](https://github.com/jsreport/jsreport/blob/master/config.md). This is enough for some basic settings but it is not possible to provide for example some custom logging there. Because of this reasons I have done some changes to make it super simple to adapt jsreport directly using node.js. Everything is well documented and you can check it out [here](https://jsreport.net/learn/adapting-jsreport). Following example previews how you can edit `server.js` file and hook your own logger into jsreport.
 
 ```js
 require("jsreport")
