@@ -26,7 +26,7 @@ sudo apt-get install -y nodejs
 
 ```
 npm install jsreport --production
-node node_modules/jsreport --init
+node_modules/.bin/jsreport init
 ```
 
 Edid`prod.config.json`:
