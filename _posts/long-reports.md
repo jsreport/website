@@ -37,7 +37,7 @@ The next problem can be caused by the closed http connection during the api call
 To block the requests with a bad intentions jsreport has limits for input sizes. If you have a huge report input data you may also need to increase `inputRequestLimit `.
 ```js
 "express": {
-        "inputRequestLimit ": "20mb"
+        "inputRequestLimit": "20mb"
 }
 ```
 
