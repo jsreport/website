@@ -13,7 +13,7 @@ Start jsreport server on the default port:
 >jsreport.exe
 
 Or invoke a single rendering request without starting the server
->jsreport.exe --render request.json --output report.pdf
+>jsreport.exe render --request request.json --output report.pdf
 
 
 See the [documentation](/learn/windows-single-executable) for details.
