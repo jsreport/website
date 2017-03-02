@@ -53,5 +53,6 @@
     "dynamic-excel-pivot-table": "Dynamic excel pivot table",
     "assets": "Assets",
     "import-export": "Import - Export",
-    "tags": "Tags"
+    "tags": "Tags",
+    "online-limits": "Online limits"
 };
