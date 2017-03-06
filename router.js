@@ -69,6 +69,10 @@ exports.about = function(req, res) {
     res.render("about", { about: true, title: "About jsreport"});
 };
 
+exports.about2 = function(req, res) {
+    res.render("about2", { about: true, title: "About jsreport"});
+};
+
 exports.downloads = function(req, res) {
     res.render("downloads", { onprem: true, title: "Download jsreport on-prem" });
 };

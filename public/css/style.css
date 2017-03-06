@@ -105,6 +105,10 @@ img.profil {
 	margin-bottom: 40px;
 }
 
+.top20 {	
+	margin-top: 20px;	
+}
+
 .top80 {
 	margin-top: 80px;
 }
@@ -523,4 +527,42 @@ h2.buy-title {
 
 .video:hover:after {
 	color: rgba(51, 33, 0, 0.60);
+}
+
+.card {
+	height: 300px;
+	margin: 0;
+	position: relative;
+}
+        
+.card > img {
+	width: 200px;
+	display: block;
+	margin: auto;
+	border-radius: 5%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+        
+.card > img.avatar {
+	opacity: 0.7;            
+	width: 120px;
+}
+
+.about-product {
+	font-size: 65px !important;
+}
+
+.about-story {	
+	font-size: 16px !important; 
+	line-height: 27px !important; 
+	padding:20px
+}
+
+.about-help-icon {
+	height:100px;
+	font-size:85px !important;
 }
