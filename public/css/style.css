@@ -561,6 +561,10 @@ h2.buy-title {
 	width: 120px;
 }
 
+.card > img:not(.avatar) {
+    height: 242px;
+}
+
 .about-product {
 	font-size: 65px !important;
 }
