@@ -7,47 +7,69 @@
 
         <div class="feature-icon">
             <i class="fg-amber icon-tux"></i>
-          <i class="fg-blue icon-windows"></i>
+            <i class="fg-blue icon-windows"></i>
             <i class="fg-green icon-apple"></i>
         </div>
     </div>
 </div>
 
-<div class="bg-grayLighter section text-center">
-    <div>
-        <p>
-            jsreport runs almost everywhere including windows, linux or mac machines. <br/> The only prerequisite is
-            presence of <a href="https://nodejs.org">node.js</a> on the target machine. The installation is then
-            initiated using <a href="https://www.npmjs.com/">npm</a>.
-        </p>
-    </div>
-
-    <div class="cmd">
-        <div class="cmd-toolbar">
-            <i class="red"></i>
-            <i class="yellow"></i>
-            <i class="green"></i>
-            <span>cmd</span>
+<div class="bg-white section small text-center">
+    <div class="grid container">
+        <div class="text-center">
+            <div class="row text-center">
+                <h3 class="fg-gray">FULL INSTALLATION</h3>
+            </div>
         </div>
-
-        <div class="cmd-content bg-grayDarker fg-white padding5 text-left">
-            npm install jsreport --production<br/>
-            node node_modules/jsreport --init<br/>
-            npm start
+        <div class="row">
+            <p>
+                jsreport runs almost everywhere including windows, linux or mac machines. <br/> The only prerequisite is
+                presence of <a href="https://nodejs.org">node.js</a> on the target machine. The installation is then initiated
+                using <a href="https://www.npmjs.com/">npm</a>.
+            </p>
         </div>
-    </div>
+        <div class="cmd">
+            <div class="cmd-toolbar">
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
+                <span>cmd</span>
+            </div>
 
-    <div>
-        <p>
-            Now you can reach jsreport on default port 5488. See the <a href="/learn/configuration">configuration
-            documentation</a> for changing
-            the port and other options.
-        </p>
+            <div class="cmd-content bg-grayDarker fg-white padding10 text-left">
+                npm install jsreport-cli -g<br/> jsreport init<br/> jsreport start
+            </div>
+        </div>
+        <div>
+            <p>
+                Now you can reach jsreport on default port 5488. See the <a href="/learn/configuration">configuration
+            documentation</a> for changing the port and other options.
+            </p>
+        </div>
     </div>
 </div>
 
-<div class="container bg-grayLightest section">
-    <div class="grid">
+<div class="bg-grayLighter section small text-center">
+    <div class="grid container">
+        <div class="text-center">
+            <div class="row text-center">
+                <h3 class="fg-gray">SINGLE EXECUTABLE DOWNLOAD</h3>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                You can also download jsreport in cross platform, single executable file form. <br/> The executable can be used as an utily or also as slightly
+                limited server.
+            </p>
+
+            <a href="https://github.com/jsreport/jsreport/releases/latest">
+                <strong>Download from github releases</strong>
+            </a>
+        </div>       
+    </div>
+</div>
+
+<div class="bg-white section small">
+    <div class="grid container">
         <div class="row">
             <div class="span6">
                 <div class="row">
@@ -55,10 +77,9 @@
 
                     <div>
                         <p>
-                            The default installation can be additionally extended with custom <a
-                                href="/learn/extensions">extensions</a>,
-                            <a href="/learn/recipes">recipes</a> and <a href="/learn/templating-engines">engines</a>.
-                            You can even
+                            The default installation can be additionally extended with custom <a href="/learn/extensions">extensions</a>,
+                            <a href="/learn/recipes">recipes</a> and <a href="/learn/templating-engines">engines</a>. You
+                            can even
                             <a href="/learn/custom-extension">write your own custom extension</a>.
                         </p>
                     </div>
@@ -68,8 +89,7 @@
 
                     <div>
                         <p>
-                            jsreport on premise is free as long as you use up to 5 report templates, afterwards you need
-                            to
+                            jsreport on premise is free as long as you use up to 5 report templates, afterwards you need to
                             <a href="/buy">buy</a> an enterprise license. See <a href="/terms-of-use-commercial.txt">terms
                             of use</a>.
                         </p>
@@ -86,19 +106,17 @@
                         <div class="content">
                             <ol>
                                 <li>install jsreport based on the common instructions</li>
-                                <li>download and place sample <a
-                                        href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>
-                                    into jsreport folder
+                                <li>download and place sample <a href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>                                    into jsreport folder
                                 </li>
-                                <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a>, don't forget
-                                    to have iis installed with all Application development sub features and also iis
+                                <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a>, don't forget to have iis
+                                    installed with all Application development sub features and also iis
                                     <a href="http://www.iis.net/downloads/microsoft/url-rewrite">url rewrite
                                         extension</a>.
                                 </li>
-                                <li>create standard iis website for jsreport folder and choose port and bindings you
-                                    want, also don't forget to add security permissions to jsreport
-                                    folder for IIS App Pool user when appropriate. IMPORTANT: Create a separate
-                                    website. Don't just add application to the default website.
+                                <li>create standard iis website for jsreport folder and choose port and bindings you want, also
+                                    don't forget to add security permissions to jsreport folder for IIS App Pool user when
+                                    appropriate. IMPORTANT: Create a separate website. Don't just add application to the
+                                    default website.
                                 </li>
                                 <li>open a browser on <a>https://localhost</a></li>
                             </ol>
@@ -126,9 +144,7 @@
 
                         <div class="content">
                             <div class="padding10">
-                                <p>You can use <a href="https://www.docker.com/">docker</a> image <a
-                                        href="https://registry.hub.docker.com/u/jsreport/jsreport/">jsreport/jsreport</a>
-                                    for easy installation</p>                              
+                                <p>You can use <a href="https://www.docker.com/">docker</a> image <a href="https://registry.hub.docker.com/u/jsreport/jsreport/">jsreport/jsreport</a>                                    for easy installation</p>
                             </div>
                         </div>
                     </div>
@@ -141,7 +157,8 @@
                                     jsreport works nicely on Azure VMs, just follow the linux or windows steps to install it.
                                 </p>
                                 <p>
-                                    You can also run it on azure linux app service. This is described in the tutorial <a href='http://jsreport.net/blog/render-reports-using-azure-app-service'>jsreport on azure app service</a>.
+                                    You can also run it on azure linux app service. This is described in the tutorial <a
+                                        href='http://jsreport.net/blog/render-reports-using-azure-app-service'>jsreport on azure app service</a>.
                                 </p>
                             </div>
                         </div>
@@ -170,10 +187,8 @@
                         <div class="content">
                             <div class="padding10">
                                 <p>
-                                    For OpenShift you need to configure host and port ranges for jsreport internal web
-                                    servers.
-                                    You can find how to do it in <a
-                                        href="https://github.com/jsreport/docs/blob/master/installation/OpenShift.md">OpenShift
+                                    For OpenShift you need to configure host and port ranges for jsreport internal web servers. You can find how to do it in
+                                    <a href="https://github.com/jsreport/docs/blob/master/installation/OpenShift.md">OpenShift
                                     installation instructions</a>.
                                 </p>
                             </div>
@@ -184,5 +199,3 @@
         </div>
     </div>
 </div>
-
-

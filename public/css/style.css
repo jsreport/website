@@ -1,5 +1,5 @@
 .metro p, ul, li, code {
-	font-size: 17px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 200;
 	letter-spacing: 0.01rem;
@@ -337,6 +337,11 @@ p.modal {
 	padding-bottom: 40px;
 }
 
+.section.small {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
 .cycle {
 
 }
@@ -458,7 +463,7 @@ h2.buy-title {
 .cmd {
 	width: 33%;
 	display: inline-block;
-	background: #fff none repeat scroll 0 0;
+	background: #eeeeee none repeat scroll 0 0;
 	border-radius: 3px;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	overflow: hidden;
@@ -480,6 +485,10 @@ h2.buy-title {
 	height: 12px;
 	margin: 8px 0 8px 8px;
 	width: 12px;
+}
+
+.cmd .cmd-content {
+	font-size: 15px;
 }
 
 .cmd .cmd-toolbar i.red {

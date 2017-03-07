@@ -54,5 +54,6 @@
     "assets": "Assets",
     "import-export": "Import - Export",
     "tags": "Tags",
-    "online-limits": "Online limits"
+    "online-limits": "Online limits",
+    "cli": "Command-line interface"
 };
