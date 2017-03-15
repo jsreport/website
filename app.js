@@ -75,7 +75,6 @@ app.get('/online', router.online);
 app.get('/playground', router.playground);
 app.get('/on-prem', router.onprem);
 app.get('/about', router.about);
-app.get('/about2', router.about2);
 app.get('/downloads', router.downloads);
 app.get('/embedding', router.embedding);
 app.get('/buy', router.buyOnPrem);
