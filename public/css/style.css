@@ -170,6 +170,10 @@ p.modal {
 	display: inline;
 }
 
+.pull-left {
+	float: left
+}
+
 .pull-right {
 	float: right !important;
 }
