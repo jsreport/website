@@ -42,7 +42,7 @@ There is nothing that need to be done for production publishing or deployment. V
 
 Invoking the report rendering from c# is then simple as follows.
 
-```cs
+```csharp
 var rs = new LocalReportingService();
 rs.Initialize();    
 
@@ -53,7 +53,7 @@ var result = rs.Render("Sample report", new { foo = "hello" });
 
 Alternatively you can use the override which accepts single object completely describing the rendering request.  You can find how this object should look like in the jsreport studio [API dialog](https://jsreport.net/learn/api) or for example [here](https://github.com/jsreport/jsreport-core)
 
-```cs
+```csharp
 var result = rs.Render(new {
 	template = new {
 		name = "Sample report"		

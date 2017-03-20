@@ -2,17 +2,16 @@
     fs = require("fs"),
     path = require("path"),
     marked = require("marked"),
+    Prism = require('prismjs'),
+    languages = require('prism-languages'),
     cache = {};
 
-
-function highlight(code, lang, callback) {
-    require('pygmentize-bundled')({lang: lang, format: 'html', options: {nowrap: true}}, code, function (err, result) {
-        if (err) {
-            return callback(err, code);
-        }
-
-        callback(err, result.toString());
-    });
+function highlight(code, lang, callback) {    
+    try {
+        return callback(null, Prism.highlight(code, languages[lang]));
+    } catch (err) {
+        callback(err)    
+    }
 }
 
 exports.extensions = function (req, res) {

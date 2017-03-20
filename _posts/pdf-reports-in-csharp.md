@@ -159,7 +159,7 @@ Install-Package jsreport.Client
 
 The main class you will use in jsreport is `ReportingService`. To instantiate it you would normally need url of the server, username and password, but for the playground lightweight version you don't need any credentials and url is enough. To actually invoke report rendering you need to have input data and jsreport template identification. The input data would come from Library database, but right now we can prepare just some testing data. jsreport template identification can be taken from playground url or using `Api` button in the full jsreport version. For playground url `https://playground.jsreport.net/#/playground/eyaNpy1ho/11` is identification `eyaNpy1ho` as `shortid` and `11` as `version`. Following example shows the full code in c# you need. It will initialize jsreport,  call it's api and get back proper stream with pdf report.
 
-```c#
+```csharp
 class Program
 {
   private static void Main(string[] args)

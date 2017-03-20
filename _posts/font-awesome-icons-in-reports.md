@@ -21,8 +21,6 @@ The easiest way is to use a public cdn to link the font awesome css. This is qui
 </body>
 
 </html>
-
-
 ```
 
 ##Upload as asset

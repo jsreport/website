@@ -54,7 +54,6 @@ connectionString_name=mssql
 connectionString_uri=Server=tcp:jsreport-test.database.windows.net,1433;Initial Catalog=test;Persist Security Info=False;User ID=jsreport;Password=xxx;MultipleActiveResultSets=False;Encrypt=True;
 ```
 
-
 ![azure connection](https://jsreport.net/blog/azure-connection.png?v=2)
 
 That is it. The service should now automatically apply the settings and your templates will be stored inside the sql database.

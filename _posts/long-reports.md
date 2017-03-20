@@ -44,6 +44,6 @@ To block the requests with a bad intentions jsreport has limits for input sizes.
 ##Client connection timeouts
 All of the previous settings are the jsreport server options, but the last one you may need to set is on the client side. Client rest libraries usually has default timeouts and you may need to increase it. The following code shows how to do it in c# client.
 
-```cs
+```csharp
 ReportingService.HttpClientTimeout = TimeSpan.FromMinutes(20);
 ```

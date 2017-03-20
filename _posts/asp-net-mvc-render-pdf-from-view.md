@@ -13,7 +13,7 @@ To get started you need to install `jsreport.MVC` package into your `asp.net mvc
 > Install-Package jsreport.MVC
 
 Then you need to add `JsReportFilterAttribute` to filters collection. This require access to jsreport server. You can use [.net embedded](https://jsreport.net/learn/net-embedded) or [on prem](https://jsreport.net/on-prem) or [jsreport online](https://jsreport.net/online) service. 
-```c#
+```csharp
 public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 {
   filters.Add(new HandleErrorAttribute());
@@ -30,7 +30,7 @@ public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 ```
 The last step is to enable particular controller or action to use jsreport for rendering. You will do this using `EnableJsReport` attribute.
 
-```c#
+```csharp
 [EnableJsReport()]
 public ActionResult Index()
 {

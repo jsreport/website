@@ -17,7 +17,7 @@ The studio then preview the font and you should copy to your clipboard the embed
 
 The last step is to paste the embedding code into a template and apply the `font-family` into elements you want. This looks usually like this:
 
-```csss
+```html
 <style>
     @font-face {
       font-family: 'cobaltaliensuperital';
