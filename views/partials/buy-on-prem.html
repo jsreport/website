@@ -43,7 +43,7 @@
     <h2>on-premise licenses</h2>
     <p>
         Choose between yearly subscription or perpetual based licenses
-    </p>
+    </p>    
 </div>
 
 <div class="row">
@@ -274,17 +274,31 @@
     </div>
 </div>
 
-
 <div class="row">
+    <p class="description padding20 bg-grayLighter subtitle" id="euNote">
+        <img src="/img/eu.png" style="height:40px; margin-right:10px" alt="europe" align="left" />
+        We optionally provide also invoice based sales with direct bank account transfers to companies in European Union.
+        Please <a href='/about'>contact us</a> with your company address and VAT number to get the invoice.
+    </p>    
+
+    <p class="description padding20 bg-grayLighter subtitle">
+        <img src="/img/github-logo-transparent.png" style="height:45px" alt="github" align="left" />
+        free enterprise for contributors <br />
+        free enterprise for all open source projects <br />
+    </p>
+
     <p class="description padding20 bg-grayLighter subtitle">
         * The server is considered as production if it is used by users outside of the dev team.
           This means that the continuous integration server is considered as development for example. However UAT server can
           be considered as production if it is reached by the users outside of the dev team.
     </p>
-
-    <p class="description padding20 bg-grayLighter subtitle">
-        <img src="/img/github-logo-transparent.png" style="height:40px" alt="github" align="left" />
-        free enterprise for contributors <br />
-        free enterprise for all open source projects <br />
-    </p>
 </div>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.0/userinfo.min.js"></script>
+<script>
+    UserInfo.getInfo(function(data) {
+        if (data.continent.code === 'EU' && data.country.code !== 'UK' && data.country.code !== 'CZ') {
+            $('#euNote').show()
+        }
+    })       
+</script>            
