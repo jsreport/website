@@ -70,7 +70,7 @@ exports.about = function(req, res) {
 };
 
 exports.downloads = function(req, res) {
-    res.render("downloads", { onprem: true, title: "Download jsreport on-prem" });
+    res.redirect("/on-prem")
 };
 
 exports.embedding = function(req, res) {
