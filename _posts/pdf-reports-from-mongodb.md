@@ -7,7 +7,7 @@ Rendering pdf reports from [mongodb](http://www.mongodb.org/) is a piece of cake
 
 How does it work...
 
-First [download](https://jsreport.net/downloads) and install jsreport to your machine or log into [reports as a service](https://jsreport.net/online) solution.  When downloading jsreport to your machine you need to also install [mongodb extension](https://github.com/jsreport/jsreport-contrib-mongodb) which is pre installed in the online service solution.
+First [download](https://jsreport.net/on-prem) and install jsreport to your machine or log into [reports as a service](https://jsreport.net/online) solution.  When downloading jsreport to your machine you need to also install [mongodb extension](https://github.com/jsreport/jsreport-contrib-mongodb) which is pre installed in the online service solution.
 
 Next you need to create a custom node.js script accessing your mongodb and loading data you need. The script creation and evaluation is handled by jsreport standard [scripts extension](https://jsreport.net/learn/scripts) and it can look like this:
 

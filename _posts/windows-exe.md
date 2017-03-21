@@ -7,7 +7,7 @@ I was hoping for a while that one day jsreport is distributed in the form of sin
 
 So starting today we distribute jsreport also in the form of a single `jsreport.exe`  which can be simply used in the windows command line. The `jsreport.exe` doesn't have any dependency except .net runtime and it should fit into various deployment scenarios.
 
-First you  [download](/downloads)  `jsreport.exe` and then...
+First you  [download](/on-prem)  `jsreport.exe` and then...
 
 Start jsreport server on the default port:
 >jsreport.exe

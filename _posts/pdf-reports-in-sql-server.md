@@ -13,7 +13,7 @@ The alternative I'm gonna show you is the tool called [jsreport](https://jsrepor
 
 ##Prepare jsreport
 
-The official jsreport package is distributed through [npm](https://www.npmjs.com/package/jsreport). You can find the installation instructions for each platform in the download section [here](/downloads). After you follow the installation steps you should be able to reach jsreport studio in the browser.
+The official jsreport package is distributed through [npm](https://www.npmjs.com/package/jsreport). You can find the installation instructions for each platform in the download section [here](/on-prem). After you follow the installation steps you should be able to reach jsreport studio in the browser.
 
 ![studio](https://jsreport.net/screenshots/studio.png?v=1)
 

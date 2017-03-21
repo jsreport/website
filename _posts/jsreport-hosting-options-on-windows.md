@@ -6,7 +6,7 @@
 
 You have two options when hosting jsreport on premise on windows. You can host jsreport in windows service or you can host it in iis using [iisnode](https://github.com/tjanczuk/iisnode). We cannot say one way is better than the other one. It's up to you what you prefere. For example it will be more convenient for you to use iisnode if you have already couple of applications running in iis.
 
-To install jsreport in windows service you can use [jsreport automated installer](https://jsreport.net/downloads).
+To install jsreport in windows service you can use [jsreport automated installer](https://jsreport.net/on-prem).
 
 To install jsreport in iisnode please proceed with following steps:
 
