@@ -32,3 +32,5 @@ jsreport render
 	--out=myreport.xlsx
 ```
 
+You can find the full documentation for jsreport distributed in the single file executable form [here](/learn/single-file-executable).
+

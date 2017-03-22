@@ -3,6 +3,8 @@
     "date"     : "09-12-2014 16:56"
 }}}
 
+> **UPDATE**: link to [new jsreport forum](https://forum.jsreport.net)    
+
 jsreport is getting significantly more attention and my mail box is getting overwhelmed by questions as well as me answering them. I was recommended to create a forum and I am doing so. jsreport has now a forum as well as a mailing list hosted on google groups. Please don't hesitate to post questions there as well as feature suggestions.
 
 > [https://groups.google.com/forum/#!forum/jsreport](https://groups.google.com/forum/#!forum/jsreport)

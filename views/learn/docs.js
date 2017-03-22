@@ -55,5 +55,6 @@
     "import-export": "Import - Export",
     "tags": "Tags",
     "online-limits": "Online limits",
-    "cli": "Command-line interface"
+    "cli": "Command-line interface",
+    "single-file-executable": "Single file executale"
 };
