@@ -1,6 +1,6 @@
 {{{
     "title": "Undocked previews and scheduling improvements",
-    "date": "03-27-2017 10:00"
+    "date": "03-29-2017 19:40"
 }}}
 
 As part of the jsreport 1.6 release we are introducing some improvements for previewing reports and schedules management:
