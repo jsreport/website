@@ -3,6 +3,8 @@
     "date"     : "01-10-2017 11:42"	
 }}}
 
+> The jsreport container image suddenly stopped to work in azure app service preview. It is likely problem of azure itself because even the scm kudu doesn't work. We are monitoring the situation and update here as soon everything is back to normal. I recommend to use VM for now.
+
 This tutorial is describing how to quickly set up jsreport server on [
 Microsoft Azure linux app service](https://docs.microsoft.com/en-us/azure/app-service/app-service-linux-readme) and start creating pdf or excel reports in no time. Please note you can also run jsreport on azure VMs or in cloud service, but the default app service running on windows doesn't support pdf rendering and you need to follow this tutorial and set up the linux app service instead.
 
