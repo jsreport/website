@@ -35,4 +35,4 @@ The last step is to paste the embedding code into a template and apply the `font
 
 You can play with this example also in playground
 
-<iframe src='https://playground.jsreport.net/studio/workspace/HyGQQ-KHl/8?embed=1' width="100%" height="400" frameborder="0"></iframe>
+<iframe src='https://playground.jsreport.net/studio/workspace/HyGQQ-KHl/33?embed=1' width="100%" height="400" frameborder="0"></iframe>
