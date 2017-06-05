@@ -56,5 +56,6 @@
     "tags": "Tags",
     "online-limits": "Online limits",
     "cli": "Command-line interface",
-    "single-file-executable": "Single file executale"
+    "single-file-executable": "Single file executale",
+    "online-faq": "Online FAQ",
 };

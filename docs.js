@@ -80,7 +80,7 @@ exports.doc = function (req, res) {
 
         marked(content, {renderer: renderer, highlight: highlight}, function (err, html) {
             var tocHTML = ''
-            if (toc.length > 3 && req.params.doc !== 'faq') {
+            if (toc.length > 3 && req.params.doc !== 'faq' && req.params.doc !== 'online-faq') {
                 tocHTML = '<div class="toc">'
                 tocHTML += '<h3>table of contents</h3>';
                 tocHTML += '<div class="listview-outlook">';
