@@ -58,4 +58,8 @@
     "cli": "Command-line interface",
     "single-file-executable": "Single file executale",
     "online-faq": "Online FAQ",
+    "dotnet-client": ".Net Client v2 preview",
+    "dotnet-aspnetcore": "asp.net core middleware and filter",
+    "dotnet-local": ".Net local reporting",
+    "dotnet-v2": ".NET sdk for jsreport"
 };
