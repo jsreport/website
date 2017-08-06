@@ -61,5 +61,6 @@
     "dotnet-client": ".Net Client v2 preview",
     "dotnet-aspnetcore": "asp.net core middleware and filter",
     "dotnet-local": ".Net local reporting",
-    "dotnet-v2": ".NET sdk for jsreport"
+    "dotnet-v2": ".NET sdk for jsreport",
+    "base": "Base tag injection"
 };
