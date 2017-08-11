@@ -55,7 +55,7 @@ function beforeRender(done) {
     sql.connect(config).then(function() {
         var req = new sql.Request();
         return req.query('select count(*) as Count, ShipCountry  from Orders group by ShipCountry').then(function(recordset) {
-            request.data = { countries: recordset };
+            Object.assign(request.data, { countries: recordset });
             done();
         });
     }).catch(done);
