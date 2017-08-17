@@ -5,8 +5,7 @@
     "scripts": "Scripts extension",
     "child-templates": "Child templates extension",
     "api": "API",
-    "reports": "Reports extension",
-    "net-client": ".NET client",
+    "reports": "Reports extension",    
     "import-export": "Import Export extension",
     "net-embedded": ".NET embedded",
     "visual-studio-extension": "Visual Studio Extension",
@@ -58,9 +57,9 @@
     "cli": "Command-line interface",
     "single-file-executable": "Single file executale",
     "online-faq": "Online FAQ",
-    "dotnet-client": ".Net Client v2 preview",
+    "dotnet-client": ".Net Client",
     "dotnet-aspnetcore": "asp.net core middleware and filter",
-    "dotnet-local": ".Net local reporting",
-    "dotnet-v2": ".NET sdk for jsreport",
+    "dotnet-local": ".Net local reporting",   
+    "dotnet": ".NET sdk for jsreport",
     "base": "Base tag injection"
 };
