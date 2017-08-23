@@ -4,7 +4,9 @@
 }}}
 
 This tutorial is describing how to quickly set up jsreport server on [
-Microsoft Azure linux app service](https://docs.microsoft.com/en-us/azure/app-service/app-service-linux-readme) and start creating pdf or excel reports in no time. Please note you can also run jsreport on azure VMs or in cloud service, but the default app service running on windows doesn't support pdf rendering and you need to follow this tutorial and set up the linux app service instead.
+Microsoft Azure linux app service](https://docs.microsoft.com/en-us/azure/app-service/app-service-linux-readme) and start creating pdf or excel reports in no time. 
+
+Note that jsreport runs also on VMs, cloud services or container instances without limitations. The only jsreport limitation for windows based Azure web apps is that it doesn't support custom fonts in pdf there.
 
 ##Create the app service on linux
 
