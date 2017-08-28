@@ -58,7 +58,8 @@
     "single-file-executable": "Single file executale",
     "online-faq": "Online FAQ",
     "dotnet-client": ".Net Client",
-    "dotnet-aspnetcore": "asp.net core middleware and filter",
+    "dotnet-aspnetcore": "ASP.NET Core",
+    "dotnet-mvc": "ASP.NET MVC",
     "dotnet-local": ".Net local reporting",   
     "dotnet": ".NET sdk for jsreport",
     "base": "Base tag injection"

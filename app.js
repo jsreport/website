@@ -26,6 +26,7 @@ var hbs = exphbs.create({
 });
 
 app.engine('.html', hbs.engine);
+//app.disable('view cache');
 app.set('view engine', '.html');
 
 app.use(express.static('public/'));
@@ -59,6 +60,7 @@ app.get('/', function(req, res) {
     });
 });
 
+app.get('/learn/dotnet', docs.dotnet);
 app.get('/learn/nodejs', docs.nodejs);
 app.get('/learn/templating-engines', docs.engines);
 app.get('/learn/recipes', docs.recipes);
