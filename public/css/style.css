@@ -583,3 +583,24 @@ h2.buy-title {
 	height:100px;
 	font-size:85px !important;
 }
+
+.video-dotnet {
+	position: relative;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.video-dotnet:after {
+	content: "\e15c";
+	top: 25%;
+	left: 38%;
+	font-family: iconFont;
+	position: absolute;
+	font-size: 90px;
+	color: rgba(229, 20, 0, 0.60);
+	z-index: 1;
+}
+
+.video-dotnet:hover:after {
+	color: rgba(51, 33, 0, 0.60);
+}
