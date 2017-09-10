@@ -4,7 +4,7 @@
 }}}
 
 
-jsreport online service providing [pdf reports as a service](https://jsreport.net/online) is being used in many production running systems already and the time I am providing this service for free is closing.  You can find newly introduced pricing model [here](https://jsreport.net/online/pricing).
+jsreport online service providing [pdf reports as a service](https://jsreport.net/online) is being used in many production running systems already and the time I am providing this service for free is closing.  You can find newly introduced pricing model [here](/buy/online).
 
 Pricing model development was not very easy because there is not such a service proving reporting in cloud to compare with. So the price mostly covers hardware costs. The price is actually very similar to sending emails in sendgrid and you can see jsreport gives you much more so I think the service price should not be problem for anyone.
 
