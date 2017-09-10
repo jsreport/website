@@ -4,6 +4,7 @@ var express = require('express'),
     fs = require("fs"),
     router = require("./router.js"),
     docs = require("./docs.js"),
+    learnDocs = require("./views/learn/docs.js")
     multer = require("multer"),
     bodyParser = require("body-parser");
 
@@ -84,14 +85,13 @@ app.get('/buy/support', router.buySupport);
 app.get('/buy/online', router.buyOnline);
 app.get('/buy/thank-you', router.buyThankYou);
 
-require("./posts.js")(app).then(function(poet) {
-  
+require("./posts.js")(app).then(function(poet) { 
     
     app.get('/sitemap*', function(req, res) {
         var postCount = poet.helpers.getPostCount();
         var posts = poet.helpers.getPosts(0, postCount);
         res.setHeader('Content-Type', 'application/xml');
-        res.render('sitemap', { posts: posts, layout: false });
+        res.render('sitemap', { posts: posts, layout: false, docs: Object.keys(learnDocs) });
     });
   
 
