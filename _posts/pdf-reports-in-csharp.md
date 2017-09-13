@@ -5,6 +5,8 @@
 	"preview"  : "This article tries to summarize solutions I have tried or found and finally describes in detail how to render pdf reports using jsreport."
 }}}
 
+> **Update 2:** There is new [.NET jsreport sdk](https://jsreport.net/learn/dotnet)  available with breaking changes which makes examples presented here outdated. Please follow the videos and example in the [sdk documentation](https://jsreport.net/learn/dotnet) to get the up to date information.
+
 > **Update**: This article compares current approaches for printing pdf reports from c# and highlights jsreport as solution for problems related to reporting in c#. We have recently released jsreport visual studio tools that make things much more easier. See [reporting visual studio extension](https://jsreport.net/learn/visual-studio-extension) and [reporting embedded into .net](https://jsreport.net/learn/net-embedded) documentation. You can also find interesting full tutorial for [reporting in asp.net mvc](http://www.janblaha.net/blog/pdf-reporting-in-visual-studio-csharp-and-asp-net-mvc).
 
 ## Introduction
