@@ -62,5 +62,6 @@
     "dotnet-mvc": "ASP.NET MVC",
     "dotnet-local": ".Net local reporting",   
     "dotnet": ".NET sdk for jsreport",
-    "base": "Base tag injection"
+    "base": "Base tag injection",
+    "chrome-pdf": "Chrome pdf recipe"
 };
