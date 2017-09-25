@@ -63,5 +63,6 @@
     "dotnet-local": ".Net local reporting",   
     "dotnet": ".NET sdk for jsreport",
     "base": "Base tag injection",
-    "chrome-pdf": "Chrome pdf recipe"
+    "chrome-pdf": "Chrome pdf recipe",
+    "html-embedded-in-docx": "Html embedded in docx"
 };
