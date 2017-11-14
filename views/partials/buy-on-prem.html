@@ -1,24 +1,18 @@
-<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="display:none !important">Buy my
-    product</a>
+<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="display:none !important">Buy my product
+</a>
 
-<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="display:none !important">Buy my
-    product</a>
+<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="display:none !important">Buy my product
+</a>
 
-<a class="gumroad-button" id="buyRoyaltyFreeSubscription" href="https://gumroad.com/l/qUXxZs" style="display:none !important">Buy my
-    product</a>
+<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="display:none !important">Buy my product
+</a>
 
-<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="display:none !important">Buy my
-    product</a>
-
-<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="display:none !important">Buy my
-    product</a>
-
-<a class="gumroad-button" id="buyRoyaltyFree" href="https://gumroad.com/l/OOfMv" style="display:none !important">Buy my
-    product</a>
+<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="display:none !important">Buy my product
+</a>
 
 
 <script>
-    function yearly () {
+    function yearly() {
         $('.yearly').show()
         $('.one-time').hide()
         $('#yearlyButton').addClass('bg-amber')
@@ -27,7 +21,7 @@
         $('#oneTimeButton').addClass('bg-steel')
     }
 
-    function oneTime () {
+    function oneTime() {
         $('.yearly').hide()
         $('.one-time').show()
         $('#oneTimeButton').addClass('bg-amber')
@@ -41,9 +35,13 @@
 
 <div class="row">
     <h2>on-premise licenses</h2>
-    <p>
-        Choose between yearly subscription or perpetual based licenses
-    </p>    
+    <p class="description subtitle">
+        Choose between yearly subscription or perpetual based license. The subscription based license is automatically renewed, include all updates and is 
+        valid as long as the subscription is paid. The perpetual license includes only limited period for which the updates are included, but is valid endlessly.
+        The enterprise plan requires dedicated license for every server instance. The scale plan is better option when running multiple instances or deploying 
+        as part of another product to multiple customers because it provides single license which can be used on infinite amount of instances.
+        All licenses are royalty free. 
+    </p>
 </div>
 
 <div class="row">
@@ -114,13 +112,12 @@
     <div class="span4 grid text-center bg-mauve">
         <div class="row padding5">
             <h2 class="fg-white buy-title">enterprise scale</h2>
-            <small class="fg-grayLighter">one license valid for infinite amount of servers in single
-                application
+            <small class="fg-grayLighter">one license key valid for infinite amount of instances
             </small>
             <div class="buy-line fg-grayLighter"></div>
         </div>
         <div class="row pricing-row">
-            <small class="fg-grayLighter">infinite scale in one application</small>
+            <small class="fg-grayLighter">royalty-free</small>
             <div class="buy-line fg-grayLighter"></div>
         </div>
         <div class="row pricing-row">
@@ -132,34 +129,6 @@
         </div>
         <div class="row pricing-row">
             <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseScaleSubscription')[0].click()">
-                <span class="padding10 fg-white">Subscribe</span>
-            </a>
-        </div>
-        <div class="row"></div>
-    </div>
-</div>
-
-<div class="row pricing-row yearly">
-    <div class="span4 grid text-center bg-teal">
-        <div class="row padding5">
-            <h2 class="fg-white buy-title">royalty-free</h2>
-            <small class="fg-grayLighter">allows to distribute jsreport along with your single application
-            </small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <small class="fg-grayLighter">infinite amount of copies</small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <small class="fg-grayLighter">updates included</small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <h3 class="fg-white">995 $ / year</h3>
-        </div>
-        <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyRoyaltyFreeSubscription')[0].click()">
                 <span class="padding10 fg-white">Subscribe</span>
             </a>
         </div>
@@ -220,13 +189,12 @@
     <div class="span4 grid text-center bg-mauve">
         <div class="row padding5">
             <h2 class="fg-white buy-title">enterprise scale</h2>
-            <small class="fg-grayLighter">one license valid for infinite amount of servers in single
-                application
+            <small class="fg-grayLighter">one license key valid for infinite amount of instances
             </small>
             <div class="buy-line fg-grayLighter"></div>
         </div>
         <div class="row pricing-row">
-            <small class="fg-grayLighter">infinite scale in one application</small>
+            <small class="fg-grayLighter">royalty-free</small>
             <div class="buy-line fg-grayLighter"></div>
         </div>
         <div class="row pricing-row">
@@ -245,66 +213,43 @@
 
     </div>
 </div>
-<div class="row pricing-row one-time" style="display:none">
-    <div class="span4 grid text-center bg-teal">
-
-        <div class="row padding5">
-            <h2 class="fg-white buy-title">royalty-free</h2>
-            <small class="fg-grayLighter">allows to distribute jsreport along with your single application
-            </small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <small class="fg-grayLighter">infinite amount of copies</small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <small class="fg-grayLighter">updates included for 6 months</small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <h3 class="fg-white">1995 $</h3>
-        </div>
-        <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyRoyaltyFree')[0].click()">
-                <span class="padding10 fg-white">Buy</span>
-            </a>
-        </div>
-        <div class="row"></div>
-    </div>
-</div>
-
 <div class="row">
     <p class="description padding20 bg-grayLighter subtitle" id="euNote">
-        <img src="/img/eu.png" style="height:40px; margin-right:10px" alt="europe" align="left" />    
-        Follow this <a href='http://help.gumroad.com/i-need-a-vat-refund'>link</a> if you are company and need a VAT refund.
-
-        We optionally provide also invoice based sales with direct EU bank account transfers to companies in European Union.
-        Please <a href='/about'>contact us</a> with your company address and VAT number to get the manual invoice.
-    </p>        
-
-    <p class="description padding20 bg-grayLighter subtitle">
-        <img src="/img/github-logo-transparent.png" style="height:45px" alt="github" align="left" />
-        free enterprise for contributors <br />
-        free enterprise for all open source projects <br />
-    </p>    
-
-    <p class="description padding20 bg-grayLighter subtitle">
-        * The server is considered as production if it is used by users outside of the dev team.
-          This means that the continuous integration server is considered as development for example. However UAT server can
-          be considered as production if it is reached by the users outside of the dev team.
+        <i class="icon-support fg-cyan" style="font-size:45px; float:left; margin-right:10px" alt="support"></i> 
+        The support isn't part of the license. It should be purchased extra in <a href="/buy/support">support section</a> if needed.
+        <b>Beware that it takes two weeks to activate support contract if it is purchased at a later date than the license.</b>
+        You can also rely on the free community support, but this has no guarantees and no benefits like paid support contract.
+    </p>
+    <p class="description padding20 bg-grayLighter subtitle" id="euNote">
+        <img src="/img/eu.png" style="height:40px; margin-right:10px" alt="europe" align="left" /> Follow this
+        <a href='http://help.gumroad.com/i-need-a-vat-refund'>link</a> if you are company and need a VAT refund. We optionally provide also invoice based sales with direct EU
+        bank account transfers to companies in European Union. Please
+        <a href='/about'>contact us</a> with your company address and VAT number to get the manual invoice.
     </p>
 
     <p class="description padding20 bg-grayLighter subtitle">
-        Having the license key already? See the <a href='/learn/faq#how-to-apply-license-key'>FAQ</a> how to apply it.
+        <img src="/img/github-logo-transparent.png" style="height:45px" alt="github" align="left" /> free enterprise for contributors
+        <br /> free enterprise for all open source projects
+        <br />
+    </p>
+
+    <p class="description padding20 bg-grayLighter subtitle">
+        * The server is considered as production if it is used by users outside of the dev team. This means that the continuous integration
+        server is considered as development for example. However UAT server can be considered as production if it is reached
+        by the users outside of the dev team.
+    </p>
+
+    <p class="description padding20 bg-grayLighter subtitle">
+        Having the license key already? See the
+        <a href='/learn/faq#how-to-apply-license-key'>FAQ</a> how to apply it.
     </p>
 </div>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.0/userinfo.min.js"></script>
 <script>
-    UserInfo.getInfo(function(data) {
+    UserInfo.getInfo(function (data) {
         if (data.continent.code === 'EU' && data.country.code !== 'UK' && data.country.code !== 'CZ') {
             $('#euNote').show()
         }
     })       
-</script>            
+</script>
