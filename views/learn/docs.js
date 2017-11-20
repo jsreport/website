@@ -64,5 +64,6 @@
     "dotnet": ".NET sdk for jsreport",
     "base": "Base tag injection",
     "chrome-pdf": "Chrome pdf recipe",
-    "html-embedded-in-docx": "Html embedded in docx"
+    "html-embedded-in-docx": "Html embedded in docx",
+    "pdf-recipes": "pdf recipes"
 };
