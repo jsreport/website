@@ -65,5 +65,7 @@
     "base": "Base tag injection",
     "chrome-pdf": "Chrome pdf recipe",
     "html-embedded-in-docx": "Html embedded in docx",
-    "pdf-recipes": "pdf recipes"
+    "pdf-recipes": "pdf recipes",
+    "template-stores": "Template stores",
+    "fs-store": "File system templates store"
 };
