@@ -67,5 +67,6 @@
     "html-embedded-in-docx": "Html embedded in docx",
     "pdf-recipes": "pdf recipes",
     "template-stores": "Template stores",
-    "fs-store": "File system templates store"
+    "fs-store": "File system templates store",
+    "version-control": "Version Control"
 };
