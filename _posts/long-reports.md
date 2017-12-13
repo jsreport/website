@@ -41,6 +41,26 @@ To block the requests with a bad intentions jsreport has limits for input sizes.
 }
 ```
 
+##Out of memory
+Bigger reports can also reach the default node.js memory limit with error 'Allocation failed - JavaScript heap out of memory'.  This can be mostly fixed by [increasing the limit](http://prestonparry.com/articles/IncreaseNodeJSMemorySize/) using `max_old_space_size` nodejs argument.
+
+```
+node --max_old_space_size=4096 server.js
+```
+
+Note this will work only if you use `in-process` rendering strategy (`tasks.strategy='in-process'`). The `dedicated-process` as well as `http-server` based rendering strategy uses extra process to which you need to propagate the `max_old_space_size` argument using the following config.
+
+```js
+{
+  "tasks": {
+	  "strategy": "dedicated-process",
+	  "forkOptions": {
+	    "execArgv": ["--max-old-space-size=4096"]
+	  }
+  }
+```
+
+
 ##Client connection timeouts
 All of the previous settings are the jsreport server options, but the last one you may need to set is on the client side. Client rest libraries usually has default timeouts and you may need to increase it. The following code shows how to do it in c# client.
 
