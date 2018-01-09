@@ -68,5 +68,6 @@
     "pdf-recipes": "pdf recipes",
     "template-stores": "Template stores",
     "fs-store": "File system templates store",
-    "version-control": "Version Control"
+    "version-control": "Version Control",
+    "pdf-utils": "Pdf utils"
 };
