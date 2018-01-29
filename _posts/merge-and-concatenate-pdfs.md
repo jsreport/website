@@ -12,7 +12,7 @@ Its one line description may look boring at the first glance:
 However with further look it pops up this extension solves the most pdf generation limitations phantomjs, wkhtmltopdf or chrome has. Lets see this on the examples.
 
 ## Chrome pdf headers
-Everybody would like to use the latest css and javascript features and render pdfs using [headless chrome ](/learn/chrome-pdf). However chrome doesn't support it. It is [getting close](https://github.com/GoogleChrome/puppeteer/issues/373) but this feature will be for very long time very limited.
+Everybody would like to use the latest css and javascript features and render pdfs using [headless chrome ](/learn/chrome-pdf). However chrome doesn't support custom headers. It is [getting close](https://github.com/GoogleChrome/puppeteer/issues/373) but this feature will be for very long time very limited.
 
 The [pdf-utils](/learn/pdf-utils) comes with help. It lets you to make separate header template, render it into separate pdf and then merge it anywhere back to the main one. Even rotated on a side.
 
