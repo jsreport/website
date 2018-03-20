@@ -1,44 +1,44 @@
 ﻿<!DOCTYPE html>
-<html lang="en">       
-    <head>                  
+<html lang="en">
+    <head>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         {{#if description}}
-        <meta name="description" content="{{{description}}}">     
+        <meta name="description" content="{{{description}}}">
         {{/if}}
-        <link rel="shortcut icon" href="/img/favicon.ico">             
-        <title>{{#if title}}{{{title}}}{{else}}jsreport: javascript based reporting platform{{/if}}</title>  
+        <link rel="shortcut icon" href="/img/favicon.ico">
+        <title>{{#if title}}{{{title}}}{{else}}jsreport: javascript based reporting platform{{/if}}</title>
         <script src="/jsreport.min.js?v=18"> </script>
-        <link href="/jsreport.min.css?v=36" rel="stylesheet">
-        {{#if linkDocCss}}<link href="/css/github.css?v=19" rel="stylesheet">{{/if}}        
+        <link href="/jsreport.min.css?v=37" rel="stylesheet">
+        {{#if linkDocCss}}<link href="/css/github.css?v=19" rel="stylesheet">{{/if}}
         <script type='application/ld+json'>{"@context":"http://schema.org","@type":"Organization","url":"https://jsreport.net","name":"jsreport","logo":"https://jsreport.net/img/jsreport-bg.png"}</script>
-    </head>       
-    <body class="metro">            
-        <div id="wrap">                   
-            <nav class="navigation-bar dark">                         
-                <nav class="navigation-bar-content container">                               
-                    <a class="element brand" href="/">            
-                        <div class="brand-logo">            
+    </head>
+    <body class="metro">
+        <div id="wrap">
+            <nav class="navigation-bar dark">
+                <nav class="navigation-bar-content container">
+                    <a class="element brand" href="/">
+                        <div class="brand-logo">
                         </div></a>
-                    <span class="element-divider place-left"></span>                                 
+                    <span class="element-divider place-left"></span>
                     <a class="element brand {{#if home}}fg-blue{{/if}}" href="/">HOME</a>
                     <a class="element brand {{#if onprem}}fg-blue{{/if}}" href="/on-prem">DOWNLOAD</a>
                     <a class="element brand {{#if online}}fg-blue{{/if}}" href="/online">JSREPORT ONLINE</a>
                     <a class="element brand {{#if playground}}fg-blue{{/if}}" href="/playground">PLAYGROUND</a>
-                    <a class="element brand {{#if blog}}fg-blue{{/if}}" href="/blog">BLOG</a>                               
+                    <a class="element brand {{#if blog}}fg-blue{{/if}}" href="/blog">BLOG</a>
                     <a class="element brand {{#if learn}}fg-blue{{/if}}" href="/learn">LEARN</a>
                     <a class="element brand {{#if buy}}fg-blue{{/if}}" href="/buy">BUY</a>
                     <a class="element brand {{#if about}}fg-blue{{/if}}" href="/about">ABOUT</a>
-                </nav>                   
-            </nav>{{{fixCoding body}}}     
-        </div>             
-        <div id="footer" class="bg-dark">                   
+                </nav>
+            </nav>{{{fixCoding body}}}
+        </div>
+        <div id="footer" class="bg-dark">
             <div class="container fg-white">
                 &copy; 2017 <a href="/" class="fg-blue">jsreport&reg;</a> All rights reserved.
-            </div>                      
-        </div>                  
-        <!-- /.container -->               
-        <!-- JavaScript -->           
+            </div>
+        </div>
+        <!-- /.container -->
+        <!-- JavaScript -->
         <!-- <script src="/js/metro.min.js"> </script>         -->
     <script>
         (function (i, s, o, g, r, a, m) {
@@ -53,4 +53,3 @@
     </script>
     </body>
 </html>
-       
