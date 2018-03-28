@@ -14,7 +14,7 @@ jsreport start
 ```
 Or using docker
 ```
-docker run -p 5488:5488 jsreport:2.0.0-beta
+docker run -p 5488:5488 jsreport/jsreport:2.0.0-beta
 ```
 
 jsreport v2 is major release which includes many improvements and also several breaking changes. The biggest change is replacement of  [phantomjs recipes](/learn/phantom-pdf) with [chrome based recipes](/learn/chrome-pdf) in the default installation. Please refer to the list of [breaking changes](/learn/v2-breaking-changes) for details.
