@@ -1,9 +1,11 @@
 ﻿{{{
     "title"    : "jsreport v2 beta",	   
-    "date"     : "03-28-2018 15:20"	
+    "date"     : "03-28-2018 15:20"
 }}}
 
 The jsreport v2 release is almost ready and we ship today the first beta version to the public. It is not production ready and we are still finishing some fixes in the migration utility, documentation and custom extensions. However it should be already stable enough for start working with it in the development environment.
+
+First, make sure to have at least nodejs with version `8.9`, v2 is a re-write that is only compatible with most recent stable versions of nodejs
 
 How to install..
 ```
@@ -22,4 +24,3 @@ jsreport v2 is major release which includes many improvements and also several b
 We will officially announce final jsreport v2 release as soon as we get a confidence about the production stability of the beta releases. The detail description of the new features should come at the same time.
 
 Please try the beta and let us know how you like it.
-
