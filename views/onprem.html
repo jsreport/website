@@ -102,29 +102,7 @@
             <div class="span6 offset2 row">
                 <h3>Advanced installations and troubleshooting</h3>
 
-                <div data-closeany="false" data-role="accordion" class="accordion with-marker">
-                    <div class="accordion-frame">
-                        <a href="#" class="heading collapsed">IIS Node</a>
-
-                        <div class="content">
-                            <ol>
-                                <li>install jsreport based on the common instructions</li>
-                                <li>download and place sample <a href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>                                    into jsreport folder
-                                </li>
-                                <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a>, don't forget to have iis
-                                    installed with all Application development sub features and also iis
-                                    <a href="http://www.iis.net/downloads/microsoft/url-rewrite">url rewrite
-                                        extension</a>.
-                                </li>
-                                <li>create standard iis website for jsreport folder and choose port and bindings you want, also
-                                    don't forget to add security permissions to jsreport folder for IIS App Pool user when
-                                    appropriate. IMPORTANT: Create a separate website. Don't just add application to the
-                                    default website.
-                                </li>
-                                <li>open a browser on <a>https://localhost</a></li>
-                            </ol>
-                        </div>
-                    </div>
+                <div data-closeany="false" data-role="accordion" class="accordion with-marker">                  
 
                     <div class="accordion-frame">
                         <a href="#" class="heading collapsed">Ubuntu - CentOS</a>
@@ -208,6 +186,29 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
+                    <div class="accordion-frame">
+                            <a href="#" class="heading collapsed">IIS Node</a>
+    
+                            <div class="content">
+                                <p>Note: We recommend using windows service instead of IIS Node. See <a href="/learn/cli">win-install cli command for details.</a></p>
+                                <ol>
+                                    <li>install jsreport based on the common instructions</li>
+                                    <li>download and place sample <a href="https://github.com/jsreport/docs/blob/master/installation/web.config">web.config</a>                                    into jsreport folder
+                                    </li>
+                                    <li>install <a href="https://github.com/tjanczuk/iisnode">iisnode</a>, don't forget to have iis
+                                        installed with all Application development sub features and also iis
+                                        <a href="http://www.iis.net/downloads/microsoft/url-rewrite">url rewrite
+                                            extension</a>.
+                                    </li>
+                                    <li>create standard iis website for jsreport folder and choose port and bindings you want, also
+                                        don't forget to add security permissions to jsreport folder for IIS App Pool user when
+                                        appropriate. IMPORTANT: Create a separate website. Don't just add application to the
+                                        default website.
+                                    </li>
+                                    <li>open a browser on <a>https://localhost</a></li>
+                                </ol>
+                            </div>
                     </div>
                 </div>
             </div>
