@@ -1,4 +1,6 @@
 ﻿
+
+
 {{{
     "title"    : "Render reports using azure app service",	   
     "date"     : "01-10-2017 11:42"	
@@ -11,7 +13,7 @@ Note that jsreport runs also on VMs, cloud services or container instances witho
 
 ## Create the app service on linux
 
-The first you need to open azure portal and create the app service and Docker OS. As the image select one of the [jsreport/jsreport](https://hub.docker.com/r/jsreport/jsreport/) images. For example `jsreport/jsreport:2.0.1-full`.
+The first you need to open azure portal and create the app service and Docker OS. As the image select one of the [jsreport/jsreport](https://hub.docker.com/r/jsreport/jsreport/) images. For example `jsreport/jsreport:2.1.0-full`.
 
 ![azure linux](https://jsreport.net/blog/azure-docker.png?v=3)
 
@@ -28,6 +30,7 @@ Lets enable [jsreport authentication](https://jsreport.net/learn/authentication)
 ```
 extensions_authentication_admin_username=admin
 extensions_authentication_admin_password=xxx
+extensions_authentication_cookieSession_secret=yoursecret
 ```
 
 ![azure config](https://jsreport.net/blog/azure-config.png?v=4)
