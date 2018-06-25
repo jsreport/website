@@ -1,4 +1,5 @@
-﻿{{{
+﻿
+{{{
     "title"    : "Pdf reports in SQL Server",	
     "date"     : "02-04-2016 15:15"	
 }}}
@@ -25,13 +26,15 @@ I expect you have jsreport already running now. However, to be able to load data
 npm install --save mssql
 ```
 
-This module must be also explicitly allowed in jsreport configuration because by default are all additional modules blocked for security reasons. This is done by adding following section into`prod.config.json` file, which was created during the installation.
+This module must be also explicitly allowed in jsreport configuration because by default are all additional modules blocked for security reasons. This is done by adding following section into `jsreport.config.json` file, which was created during the installation.
 
 ```js
    ...
-   "scripts": {
+   "extensions": {
+     "scripts": {
         "allowedModules": [ "mssql"]
-    },
+     }
+   }   
 ```
 
 Restart jsreport and proceed to the next step.
@@ -43,22 +46,23 @@ The first step is to prepare the input datasource for the report. In this exampl
 
 Now I create the script using jsreport studio ACTIONS/Create script. This will be the script running in jsreport server and fetching datasource. It should look the following way.
 ```js
-var sql = require('mssql');
-var config = {
+const sql = require('mssql');
+const config = {
     "user": "jsreport",
     "password": "password",
     "server": "janblaha-PC\\SQLEXPRESS",
     "database": "northwind"
 }
 
-function beforeRender(done) {
-    sql.connect(config).then(function() {
-        var req = new sql.Request();
-        return req.query('select count(*) as Count, ShipCountry  from Orders group by ShipCountry').then(function(recordset) {
-            Object.assign(request.data, { countries: recordset });
-            done();
-        });
-    }).catch(done);
+async function beforeRender(req, res) {
+    await sql.connect(config)
+    const sqlReq = new sql.Request();
+    const recordset = await sqlReq.query(
+	    `select count(*) as Count, ShipCountry  
+	     from Orders group by 		  
+	     ShipCountry`
+	)
+	Object.assign(req.data, { countries: recordset });         
 }
 ```
 There is no magic in here, this is the plain javascript using mssql to which you can find the full documentation and reference on [github](https://github.com/patriksimek/node-mssql). jsreport invokes its function `beforeRender` just before the report rendering starts and then reads back data which were set to `request.data`. Lets test this script and design the report layout now.
@@ -165,17 +169,22 @@ Install package [jsreport-mssql-store](https://github.com/jsreport/jsreport-mssq
 npm install --save jsreport-mssql-store
 ```
 
-Change the connection string in `prod.config.json`
+Change the connection string in `jsreport.config.json`
 
 ```js
  ...
- "connectionString": {
-        "name": "mssql",
-        "user": "jsreport",
-        "password": "password",
-        "server": "janblaha-PC\\SQLEXPRESS",
-        "database": "jsreport"
-    },
+ "store": {
+        "provider": "mssql"      
+},
+"extensions": {
+		"mssql-store": {
+			"user": "jsreport",
+			"user": "jsreport",
+	        "password": "password",
+	        "server": "janblaha-PC\\SQLEXPRESS",
+	        "database": "jsreport"
+		}
+}
 ```
 
 Restart jsreport server and the templates should be stored inside SQL Server afterwards.
