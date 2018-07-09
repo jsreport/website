@@ -319,6 +319,13 @@ p.modal {
 	vertical-align: top;
 }
 
+.coll5 {
+	display: inline-block;
+	width: 19%;
+	padding-right: 15px;
+	vertical-align: top;
+}
+
 @media only screen and (max-width: 800px) {
 	.coll4 {
 		display: block;
