@@ -408,6 +408,7 @@ let's run `npm install electron-is-dev --save` and `npm install electron-builder
   "build": {
     "appId": "com.jsreportinelectron.app",
     "extraFiles": [
+      "jsreport.config.json",
       "local-assets",
       "node_modules/puppeteer/.local-chromium/**/*"
     ]
