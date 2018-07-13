@@ -6,6 +6,9 @@
   "author": {
     "name": "Jan Blaha"
   },
+  "scripts": {
+    "start": "node app.js"
+  },
   "devDependencies": {
     "grunt": "^0.4.4",
     "grunt-contrib-concat": "^0.3.0",

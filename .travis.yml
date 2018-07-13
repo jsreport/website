@@ -1,0 +1,17 @@
+sudo: required
+language: node_js
+node_js:
+- '8'
+services:
+- docker
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: bash deploy.sh
+  on:
+    tags: true
+env:
+  global:
+  - secure: Kxrkhz4S1MkAcj7aNgpi06JvHA9be+BhudmsOHcXXsTlAEpQa20TooRN/AGTC7Zy9dUiEPPj9L0vbUWHRqQzIattp2fxHxuU3wgqXBxTKvnLeEfg7CxBPn9cLDViUnvaHDfZbBeADigXB6DgYL+DWcP/nCEWZILGZ2fYbrHf1tc=
+  - secure: AW2/ln829c+/w07PidH9jGLxk2DTzMLgcDV4LiUOk0916CqlY6clPcI8MUCqyUpam9yBGxNBLbwQPyrlfLTNmbaFJ7wJic/pllVnK+e6fkq+R6sh2AHHV16ske+RWFkNgYYCWJK4IbFg4eT8OGrp1/iT3TRB3WZUA0tlhPC9Iew=
+  - secure: JGTuMNAUQ73ppd2mwPic7GmqOW8gT7TiT6YLnv6uMq1Ga8lbY5DIvysNmQRw1znlH76TJl420tmIBNrVzZMjhPH8j5HAjkyWl9PzCkGO7jSlcdyZq8MbDEho+cbv9UfGiP2+DY6To48klYggaewpxOYzJ0/wjttsiGQCvxJCwac=
