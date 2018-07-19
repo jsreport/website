@@ -36,13 +36,19 @@
             </div>
 
             <div class="cmd-content bg-grayDarker fg-white padding10 text-left">
-                npm install jsreport-cli -g<br/> jsreport init<br/> jsreport configure<br/> jsreport start
+                npm install jsreport-cli -g<br/>mkdir jsreportapp<br/>cd jsreportapp<br/>jsreport init<br/> jsreport configure<br/> jsreport start
             </div>
         </div>
         <div>
             <p>
                 Now you can reach jsreport on default port 5488. See the <a href="/learn/configuration">configuration
             documentation</a> for changing the port and other options. 
+            </p>
+            <p>
+                The minimal supported node.js version is 8.9, but we recommend to use the latest 8.x nodejs version and the latest npm 6.x.
+                Check also <a href='https://github.com/npm/npm/wiki/Troubleshooting'>npm troubleshooting</a>
+                or <a href='https://docs.npmjs.com/getting-started/fixing-npm-permissions'>guide for fixing npm permissions</a> 
+                if you find some problems when installing.                               
             </p>
 	    <p>
 		Updating already installed application can be done through npm. See <a href='/learn/faq#update-server'>update steps in FAQ</a>.
