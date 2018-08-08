@@ -42,15 +42,15 @@ The `extensions.fs-store.syncModifications` instructs jsreport to monitor extern
 Now you can start jsreport again but this time with the vscode.
 Open the `jsreportapp` folder with vscode, then hit F5 an chose "node.js".
 
-![vscode-run](https://jserport.net/img/blog/vscode-run.png)
+![vscode-run](/img/blog/vscode-run.png)
 
 This should start jsreport and you should be able to reach it again on http://localhost:5488. Open it and then select "Invoice" template and render it. Put the browser on one side or on extra screen and open the vscode. In vscode open the "data/templates/Invoice/content.handlebars", edit it and save. This should initiate action in the browser/studio which reloads the template and run the render again. You should see the updated pdf in a second.
 
-![vscode-reload](https://jserport.net/img/blog/vscode-reload.gif)
+![vscode-reload](/img/blog/vscode-reload.gif)
 
 This scenario can be even a bit improved if you use jsreport studio feature to undock the preview. The undock creates extra tab just with the pdf and you don't loose the space with the rest of the studio.
 
-![undock](https://jserport.net/img/blog/vscode-undock.png)
+![undock](/img/blog/vscode-undock.png)
 
 This way you can edit the helpers, scripts or templates directly in the vscode editor and check changes in pdf displayed on a side.
 
@@ -68,4 +68,4 @@ This change should again trigger the reload and render in the studio. However th
 
 You need to open debug menu in vscode. Select "loaded scripts" pane, open "<node_internals>/data/templates/Invoice/helpers.js" and put the breakpoint there. Now make a small change like add a whitespace to the original "helpers.js" file. The jsreport reloads and renders the file and this time the breakpoint will get hit.
 
-![vscode-debug](https://jserport.net/img/blog/vscode-debug.png)
+![vscode-debug](/img/blog/vscode-debug.png)
