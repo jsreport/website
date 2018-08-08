@@ -50,7 +50,7 @@ This should start jsreport and you should be able to reach it again on http://lo
 
 This scenario can be even a bit improved if you use jsreport studio feature to undock the preview. The undock creates extra tab just with the pdf and you don't loose the space with the rest of the studio.
 
-![undock](/img/blog/vscode-undock.png)
+![undock](/img/blog/undock.png)
 
 This way you can edit the helpers, scripts or templates directly in the vscode editor and check changes in pdf displayed on a side.
 
