@@ -1,3 +1,4 @@
+
 {{{
     "title"    : "Debug jsreport in vscode",
     "date"     : "08-08-2018 11:30"
@@ -64,8 +65,16 @@ Open the "data/templates/Invoice/helpers.js" and put the following line at the e
 //# sourceURL=data/templates/Invoice/helpers.js
 ```
 
-This change should again trigger the reload and render in the studio. However the breakpoints in "helpers.js` still won't get hit. 
+Then add to the desired place of a helper the keyword `debugger`.
+```js
+function  now() {
+	debugger;
+	return  new  Date().toLocaleDateString()
+}
+```
 
-You need to open debug menu in vscode. Select "loaded scripts" pane, open "<node_internals>/data/templates/Invoice/helpers.js" and put the breakpoint there. Now make a small change like add a whitespace to the original "helpers.js" file. The jsreport reloads and renders the file and this time the breakpoint will get hit.
+This change should again trigger the reload and render in the studio.  The vscode should start the helper debugging at the `debugger` line.
+
+The debugging experience can be additionally improved by enabling the interactive vscode breakpoints. To make it  working you need to open debug menu in vscode. Select "loaded scripts" pane, open "<node_internals>/data/templates/Invoice/helpers.js" and put the breakpoint there. Now make a small change like add a whitespace to the original "helpers.js" file. The jsreport reloads and renders the file and this time the breakpoint will get hit.
 
 ![vscode-debug](/img/blog/vscode-debug.png)
