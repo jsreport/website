@@ -70,7 +70,7 @@
     "version-control": "Version Control",
     "pdf-utils": "Pdf utils",
     "v2-breaking-changes": "v2 breaking changes",
-    "ubuntu": "Ununtu",
+    "ubuntu": "Ubuntu",
     "amazon-linux": "Amazon Linux",
     "centos": "CentOS",
     "windows": "Windows",
