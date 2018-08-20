@@ -69,5 +69,12 @@
     "fs-store": "File system templates store",
     "version-control": "Version Control",
     "pdf-utils": "Pdf utils",
-    "v2-breaking-changes": "v2 breaking changes"
+    "v2-breaking-changes": "v2 breaking changes",
+    "ubuntu": "Ununtu",
+    "amazon-linux": "Amazon Linux",
+    "centos": "CentOS",
+    "windows": "Windows",
+    "aws": "Amazon Web Services",
+    "azure": "Microsoft Azure",
+    "rancher": "Rancher"
 };

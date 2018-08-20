@@ -626,3 +626,14 @@ h2.buy-title {
 .video-dotnet:hover:after {
 	color: rgba(51, 33, 0, 0.60);
 }
+
+.platform-link {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	margin-right: 20px;
+}
+
+.platform-link:hover {
+	transform: scale(1.2);
+}
