@@ -3,12 +3,12 @@ Support service agreement
 You should carefully read the following before buying jsreport support services. By buying support services, you agree to this agreement. If do not agree to the terms of this agreement, please contact us at https://jsreport.net to arrange full refund.
 
 Provided support services
-1. The service provider gives advice and answers as reply from email which is specified in the service payment confirmation
+1. The service provider gives advice and answers as reply from email or using support portal https://support.jsreport.net
 2. The service provider is also available for chat and skype calls on account which is specified in the service payment confirmation
 3. The service provider is willing to implement custom code if it helps solving the service buyer problem
 
 Service scope limitations
-The services 2 and 3 are limited to maximum 3 hours in total. The custom implementations length are provided by the service provider.
+The service is limited to the maximum 3 hours of the support team time. The current support contract usage with the support team time tracking is always visible at https://support.jsreport.net
 
 Services response time
 The service provider will use its best to deliver response until the end of the next business day of the service provider. The business day of the service provider is defined as the time interval 09:00-19:00 GMT during Monday - Friday. The service response doesn't necessarily need to represent the final answer, solution for the problem or final custom implementation. Service provider is not responsible for any damage caused by the provided advice, code, any other provided information or late response. See Limitation of Liability for more information.
@@ -26,6 +26,6 @@ Changes to the Agreement
 Any changes to this agreement will be available at https://jsreport.net website.
 
 Miscellaneous
-This Service Agreement shall be deemed to have been made and executed in Czech Republic without regard to conflicts of law provisions, and any dispute arising hereunder shall be resolved in accordance with the law of Czech Republic. You agree that any claim asserted in any legal proceeding by one of the parties against the other shall be commenced and maintained in Czech Republic, having subject matter jurisdiction with respect to the dispute between the parties. In the event that any provision of this Service Agreement shall be held by a court or other tribunal of competent jurisdiction to be unenforceable, such provision will be enforced to the maximum extent permissible, and the remaining portions of this License Agreement shall remain in full force and effect. This Service Agreement constitutes and contains the entire agreement between the parties with respect to the subject matter hereof and supersedes any prior oral or written agreements.
+This Service Agreement shall be deemed to have been made and executed in Czech Republic without regard to conflicts of law provisions, and any dispute arising here under shall be resolved in accordance with the law of Czech Republic. You agree that any claim asserted in any legal proceeding by one of the parties against the other shall be commenced and maintained in Czech Republic, having subject matter jurisdiction with respect to the dispute between the parties. In the event that any provision of this Service Agreement shall be held by a court or other tribunal of competent jurisdiction to be unenforceable, such provision will be enforced to the maximum extent permissible, and the remaining portions of this License Agreement shall remain in full force and effect. This Service Agreement constitutes and contains the entire agreement between the parties with respect to the subject matter hereof and supersedes any prior oral or written agreements.
 
 I hereby acknowledge that I have read and understand the foregoing Service Agreement and agree that the action of buying the Service is an acknowledgment of my agreement to be bound by the terms and conditions of the Service Agreement contained herein.
