@@ -57,7 +57,7 @@ This way you can edit the helpers, scripts or templates directly in the vscode e
 
 ## Debug
 
-The vscode already runs in debug. You can put breakpoint to the `server.js` and it will get git. However unfortunately it is not so straight forward with jsreport templates. If you put a breakpoint to the "data/templates/Invoice/helpers.js" it won't get hit. This is because jsreport loads and evaluates these files dynamically. Luckily there is a way how to debug them.
+The vscode already runs in debug. You can put breakpoint to the `server.js` and it will get hit. However unfortunately it is not so straight forward with jsreport templates. If you put a breakpoint to the "data/templates/Invoice/helpers.js" it won't get hit. This is because jsreport loads and evaluates these files dynamically. Luckily there is a way how to debug them.
 
 Open the "data/templates/Invoice/helpers.js" and put the following line at the end.
 
