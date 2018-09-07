@@ -4,7 +4,7 @@
     "date"     : "07-23-2014 09:47"    
 }}}
 
-**UPDATE** We currently recommend using windows service instead of IIS Node. See [win-install cli command for details.](https://jsreport.net/learn/cli)
+**UPDATE** This post is outdated and applies for jsreport v1. See the latest windows instructions [here](/learn/windows).
 
 You have two options when hosting jsreport on premise on windows. You can host jsreport in windows service or you can host it in iis using [iisnode](https://github.com/tjanczuk/iisnode). We cannot say one way is better than the other one. It's up to you what you prefere. For example it will be more convenient for you to use iisnode if you have already couple of applications running in iis.
 
@@ -16,7 +16,7 @@ To install jsreport in iisnode please proceed with following steps:
 2. `cmd:` mkdir jsreport
 3. `cmd:` cd jsreport
 4. `cmd:` npm install jsreport
-5. `cmd:` node node_modules/jsreport --init
+5. `cmd:` node node_modules/jsreport@1.10.0 --init
 6. remove httpsPort specification from created prod.config.json
 7. download and place sample [web.config](https://github.com/jsreport/docs/blob/master/installation/web.config) into jsreport folder
 8. install iisnode https://github.com/tjanczuk/iisnode
