@@ -76,5 +76,6 @@
     "windows": "Windows",
     "aws": "Amazon Web Services",
     "azure": "Microsoft Azure",
-    "rancher": "Rancher"
+    "rancher": "Rancher",
+    "docker-workers": "Docker workers"
 };
