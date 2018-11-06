@@ -24,6 +24,7 @@
     "multer": "0.1.6",
     "poet": "1.0.0-rc4",
     "prism-languages": "0.3.3",
-    "prismjs": "1.6.0"
+    "prismjs": "1.6.0",
+    "reap2": "1.0.1"
   }
 }

@@ -6,7 +6,19 @@ var express = require('express'),
     docs = require("./docs.js"),
     learnDocs = require("./views/learn/docs.js")
     multer = require("multer"),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    Reaper = require('reap2')
+    path = require('path')
+
+var reaper = new Reaper({threshold: 300000})   
+reaper.watch(path.join(__dirname, 'public', 'temp'))
+setInterval(() => {
+    reaper.start((err, files) => {
+      if (err) {
+        console.error('Failed to delete temp file: ' + err)
+      }
+    })
+}, 10000).unref()
 
 var hbs = exphbs.create({
     defaultLayout: 'main',
