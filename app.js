@@ -54,6 +54,7 @@ app.post('/gumroad', bodyParser.urlencoded({extended: true, limit: "2mb"}), func
 
 app.post('/temp', function(req, res) {
     function findFirstFile() {
+        console.log(req.files)
         for (var f in req.files) {
             if (req.files.hasOwnProperty(f)) {
                 return req.files[f];

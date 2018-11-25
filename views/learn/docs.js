@@ -77,5 +77,7 @@
     "aws": "Amazon Web Services",
     "azure": "Microsoft Azure",
     "rancher": "Rancher",
-    "docker-workers": "Docker workers"
+    "docker-workers": "Docker workers",
+    "unoconv": "unoconv",
+    "docxtemplater": "docxtemplater"
 };
