@@ -1,3 +1,4 @@
+
 {{{
     "title"    : "Introducing folders",
     "date": "12-10-2018 13:30"
@@ -9,7 +10,7 @@ jsreport now supports structuring entities into the folders.  This is significan
 ![tree](../blog/tree.png)
 
 ## Studio
-Probably the most significant part of the folders feature was implemented into the jsreport studio. The folders are not just nicely visualized, but you can do buch of things you would expect. Like collapsing, expanding, cut, paste or drag/drop folders. In other words, you should be able to structure hundreds of templates using folders and keep your workspace clean and easy to orient in.
+Probably the most significant part of the folders feature was implemented into the jsreport studio. The folders are not just nicely visualized, but you can do bunch of things you would expect. Like collapsing, expanding, cut, paste or drag/drop folders. In other words, you should be able to structure hundreds of templates using folders and keep your workspace clean and easy to orient in.
 
 There will be more UX improvements coming in the next releases. Please give us your suggestions or up-vote already filled requests [here](https://github.com/jsreport/jsreport/labels/studio).
 
