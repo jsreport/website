@@ -41,7 +41,7 @@ The `extensions.fs-store.syncModifications` instructs jsreport to monitor extern
 
 ## Edit templates in vscode
 Now you can start jsreport again but this time with the vscode.
-Open the `jsreportapp` folder with vscode, then hit F5 an chose "node.js".
+Open the `jsreportapp` folder with vscode, then hit F5 an choose "node.js".
 
 ![vscode-run](/img/blog/vscode-run.png)
 
