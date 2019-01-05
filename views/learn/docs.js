@@ -79,5 +79,6 @@
     "rancher": "Rancher",
     "docker-workers": "Docker workers",
     "unoconv": "unoconv",
-    "docxtemplater": "docxtemplater"
+    "docxtemplater": "docxtemplater",
+    "blob-storages": "Blob storages"
 };
