@@ -5,13 +5,13 @@
     "scripts": "Scripts extension",
     "child-templates": "Child templates extension",
     "api": "API",
-    "reports": "Reports extension",    
+    "reports": "Reports extension",
     "import-export": "Import Export extension",
     "net-embedded": ".NET embedded",
     "visual-studio-extension": "Visual Studio Extension",
     "phantom-pdf": "Phantom pdf recipe",
     "fop-pdf": "Fop pdf recipe",
-    "html": "Html recipe",    
+    "html": "Html recipe",
     "jsrender": "jsrender templating engine",
     "handlebars": "handlebars templating engine",
     "adapting-jsreport": "Adapting jsreport",
@@ -59,7 +59,7 @@
     "dotnet-client": ".Net Client",
     "dotnet-aspnetcore": "ASP.NET Core",
     "dotnet-mvc": "ASP.NET MVC",
-    "dotnet-local": ".Net local reporting",   
+    "dotnet-local": ".Net local reporting",
     "dotnet": ".NET sdk for jsreport",
     "base": "Base tag injection",
     "chrome-pdf": "Chrome pdf recipe",
@@ -80,5 +80,6 @@
     "docker-workers": "Docker workers",
     "unoconv": "unoconv",
     "docxtemplater": "docxtemplater",
-    "blob-storages": "Blob storages"
+    "blob-storages": "Blob storages",
+    "chrome-image": "Chrome image recipe"
 };
