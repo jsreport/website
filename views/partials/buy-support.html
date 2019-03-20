@@ -4,6 +4,14 @@
 <a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs" style="display:none !important">Buy my product
 </a>
 
+<div id="gumroad-does-not-work-in-your-country" class="row" style="display: none;">
+  <p class="description padding20 bg-grayLighter subtitle">
+      <i class="icon-warning fg-yellow" style="font-size:45px; float:left; margin-right:10px" alt="warning"></i>
+      It looks like our reseller <a href="https://gumroad.com/">gumroad</a> is not supported in your country.
+      However, fortunately you can buy the license directly from us. Please send your inquiry to email <a href="mailto:support@jsreport.net">support@jsreport.net</a> if the <b>"Subscribe"</b> or <b>"Buy"</b> buttons does not work.
+  </p>
+</div>
+
 <div class="row">
     <h2>support plans</h2>
 </div>
@@ -110,7 +118,7 @@
     <p class="description padding20 bg-grayLighter subtitle" id="euNote">
         <i class="icon-support fg-cyan" style="font-size:45px; float:left; margin-right:10px" alt="support"></i>
         The support isn't part of the license. It should be purchased in this section if needed.<br/>
-        <b>Beware that it takes two weeks to activate support contract if it is purchased at a later date than the license.</b>        
+        <b>Beware that it takes two weeks to activate support contract if it is purchased at a later date than the license.</b>
     </p>
     <p class="description padding20 bg-grayLighter subtitle">
         Please open <a href="https://support.jsreport.net">support portal</a> and follow the instructions if you already purchased the support package.
@@ -120,3 +128,38 @@
         <a href="/support-service-agreement.txt" target="_blank">support service agreement</a> before subscribing
     </p>
 </div>
+<script type="text/javascript">
+  $('.gumroad-button').each(function (index) {
+    if (index > 0) {
+        return
+    }
+
+    var linkToFetch = $(this).attr('href')
+    var iframe = document.createElement('iframe')
+    var tries = 0
+    var loaded = false
+
+    iframe.style.display = 'none'
+
+    iframe.onload = function () {
+      loaded = true
+    }
+
+    iframe.src = linkToFetch
+
+    document.body.append(iframe)
+
+    function checkIfIframeWasLoaded () {
+      tries++
+
+      if (tries === 8 && !loaded) {
+        var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
+        gumroadMessageEl.style.display = 'block'
+      } else if (!loaded) {
+        setTimeout(checkIfIframeWasLoaded, 500)
+      }
+    }
+
+    setTimeout(checkIfIframeWasLoaded, 500)
+  })
+</script>

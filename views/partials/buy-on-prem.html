@@ -36,12 +36,20 @@
 <div class="row">
     <h2>on-premise licenses</h2>
     <p class="description subtitle">
-        Choose between yearly subscription or perpetual based license. The subscription based license is automatically renewed, include all updates and is 
+        Choose between yearly subscription or perpetual based license. The subscription based license is automatically renewed, include all updates and is
         valid as long as the subscription is paid. The perpetual license includes only limited period for which the updates are included, but is valid endlessly.
-        The enterprise plan requires dedicated license for every server instance. The scale plan is better option when running multiple instances or deploying 
+        The enterprise plan requires dedicated license for every server instance. The scale plan is better option when running multiple instances or deploying
         as part of another product to multiple customers because it provides single license which can be used on infinite amount of instances.
-        All licenses are royalty free. 
+        All licenses are royalty free.
     </p>
+</div>
+
+<div id="gumroad-does-not-work-in-your-country" class="row" style="display: none;">
+  <p class="description padding20 bg-grayLighter subtitle">
+      <i class="icon-warning fg-yellow" style="font-size:45px; float:left; margin-right:10px" alt="warning"></i>
+      It looks like our reseller <a href="https://gumroad.com/">gumroad</a> is not supported in your country.
+      However, fortunately you can buy the license directly from us. Please send your inquiry to email <a href="mailto:support@jsreport.net">support@jsreport.net</a> if the <b>"Subscribe"</b> or <b>"Buy"</b> buttons does not work.
+  </p>
 </div>
 
 <div class="row">
@@ -215,7 +223,7 @@
 </div>
 <div class="row">
     <p class="description padding20 bg-grayLighter subtitle" id="euNote">
-        <i class="icon-support fg-cyan" style="font-size:45px; float:left; margin-right:10px" alt="support"></i> 
+        <i class="icon-support fg-cyan" style="font-size:45px; float:left; margin-right:10px" alt="support"></i>
         The support isn't part of the license. It should be purchased extra in <a href="/buy/support">support section</a> if needed.
         <b>Beware that it takes two weeks to activate support contract if it is purchased at a later date than the license.</b>
         You can also rely on the free community support, but this has no guarantees and no benefits like paid support contract.
@@ -246,10 +254,45 @@
 </div>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.0/userinfo.min.js"></script>
+<script type="text/javascript">
+  $('.gumroad-button').each(function (index) {
+    if (index > 0) {
+        return
+    }
+
+    var linkToFetch = $(this).attr('href')
+    var iframe = document.createElement('iframe')
+    var tries = 0
+    var loaded = false
+
+    iframe.style.display = 'none'
+
+    iframe.onload = function () {
+      loaded = true
+    }
+
+    iframe.src = linkToFetch
+
+    document.body.append(iframe)
+
+    function checkIfIframeWasLoaded () {
+      tries++
+
+      if (tries === 8 && !loaded) {
+        var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
+        gumroadMessageEl.style.display = 'block'
+      } else if (!loaded) {
+        setTimeout(checkIfIframeWasLoaded, 500)
+      }
+    }
+
+    setTimeout(checkIfIframeWasLoaded, 500)
+  })
+</script>
 <script>
     UserInfo.getInfo(function (data) {
         if (data.continent.code === 'EU' && data.country.code !== 'UK' && data.country.code !== 'CZ') {
             $('#euNote').show()
         }
-    })       
+    })
 </script>
