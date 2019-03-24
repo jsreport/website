@@ -97,6 +97,7 @@ app.get('/buy/on-prem', router.buyOnPrem);
 app.get('/buy/support', router.buySupport);
 app.get('/buy/online', router.buyOnline);
 app.get('/buy/thank-you', router.buyThankYou);
+app.get('/showcases', router.showcases);
 
 require("./posts.js")(app).then(function(poet) { 
     
