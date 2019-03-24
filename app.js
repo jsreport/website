@@ -39,7 +39,7 @@ var hbs = exphbs.create({
 });
 
 app.engine('.html', hbs.engine);
-//app.disable('view cache');
+// app.disable('view cache');
 app.set('view engine', '.html');
 
 app.use(express.static('public/'));

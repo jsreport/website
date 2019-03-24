@@ -77,7 +77,7 @@ exports.embedding = function(req, res) {
     res.render("embedding",  { playground: true, title: "Embed jsreport to any page" });
 };
 
-exports.sample = function(req, res) {
+exports.showcases = function(req, res) {
   res.render("showcases", {     
        title: "jsreport - showcases",
        description: "jsreport showcases"
