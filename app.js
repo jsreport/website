@@ -10,8 +10,16 @@ var express = require('express'),
     path = require('path')
     MongoClient = require('mongodb').MongoClient
 
-const url = process.env.mongo_url || 'mongodb://localhost:27017';
-const client = new MongoClient(url);
+
+let connectionString = 'mongodb://'
+
+if (process.env.mongodb_username) {
+    connectionString += process.env.mongodb_username + ':' + process.env.mongodb_password + '@'
+}
+connectionString +=  process.env.mongodb_address || 'localhost:27017'
+connectionString +=  '/' + process.env.mongodb_authdb
+
+const client = new MongoClient(connectionString)
 let db
 client.connect((err) => {  
   if (err) {
