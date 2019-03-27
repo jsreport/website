@@ -83,3 +83,19 @@ exports.showcases = function(req, res) {
        description: "jsreport showcases"
   });
 };
+
+exports.contactEmail = (db) => (req, res) => {  
+  db().collection('contacts').insertOne({
+    date: new Date(),
+    email: req.body.contactEmail,    
+    enabledNewsletter: req.body.enabledNewsletter === 'true',
+    type: req.body.type  
+  }).then(() => {
+    // expire in 30seconds
+    res.cookie('jsreport-contact-email-set', 'true',  { maxAge: 30 * 60 * 1000 })
+    res.send('ok')
+  }).catch((e) => {
+    console.error(e)
+    res.send('error ' + e)
+  })  
+}

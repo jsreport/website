@@ -1,7 +1,6 @@
 var express = require('express'),
     exphbs = require('express3-handlebars'),
-    app = express(),
-    fs = require("fs"),
+    app = express(),    
     router = require("./router.js"),
     docs = require("./docs.js"),
     learnDocs = require("./views/learn/docs.js")
@@ -9,6 +8,22 @@ var express = require('express'),
     bodyParser = require("body-parser"),
     Reaper = require('reap2')
     path = require('path')
+    MongoClient = require('mongodb').MongoClient
+
+const url = process.env.mongo_url || 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+let db
+client.connect((err) => {  
+  if (err) {
+      console.error(err)
+      process.exit()
+  }
+
+  console.log("Connected successfully to mongodb server");
+  db = client.db('website');  
+});
+
+
 
 var reaper = new Reaper({threshold: 300000})   
 reaper.watch(path.join(__dirname, 'public', 'temp'))
@@ -98,6 +113,7 @@ app.get('/buy/support', router.buySupport);
 app.get('/buy/online', router.buyOnline);
 app.get('/buy/thank-you', router.buyThankYou);
 app.get('/showcases', router.showcases);
+app.post('/contact-email', bodyParser.urlencoded({extended: true, limit: "2mb"}), router.contactEmail(() => db));
 
 require("./posts.js")(app).then(function(poet) { 
     
@@ -113,5 +129,5 @@ require("./posts.js")(app).then(function(poet) {
         res.status(404).render("404");
     });
     
-    app.listen(process.env.PORT || 2000);
+    app.listen(process.env.PORT || 3000);
 });

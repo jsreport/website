@@ -11,7 +11,13 @@
 </a>
 
 
-<script>
+<script>    
+    function getCookie(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+    var contactEmailSet = getCookie('jsreport-contact-email-set') === 'true'
     function yearly() {
         $('.yearly').show()
         $('.one-time').hide()
@@ -29,6 +35,120 @@
         $('#yearlyButton').removeClass('bg-amber')
         $('#yearlyButton').addClass('bg-steel')
     }
+
+    function buy(type) {
+        $.Dialog.close()
+        
+        if ($('#contactEmail').val()) {  
+            contactEmailSet = true              
+            $.post('/contact-email', {
+                type,
+                contactEmail: $('#contactEmail').val(),
+                enabledNewsletter: $('#enabledNewsletter').is(':checked')
+            })
+        }
+
+        switch (type) {
+            case 'enterprise': return $('#buyEnterprise').click()
+            case 'enterprise-scale': return $('#buyEnterpriseScale').click()
+            case 'subscription': return $('#buyEnterpriseSubscription').click()
+            case 'subscription-scale': return $('#buyEnterpriseScaleSubscription').click()
+        }    
+    }
+
+    function checkGumroadWorking () {
+        var button = $($('.gumroad-button')[0])
+        var linkToFetch = button.attr('href')
+        var iframe = document.createElement('iframe')
+        var tries = 0
+        var loaded = false
+
+        iframe.style.display = 'none'
+
+        iframe.onload = function () {
+            loaded = true
+        }
+
+        iframe.src = linkToFetch
+
+        document.body.append(iframe)
+
+        function checkIfIframeWasLoaded () {    
+            tries++
+
+            if (tries === 10 && !loaded) {
+                var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
+                gumroadMessageEl.style.display = 'block'   
+                $.Dialog.autoResize()            
+            } else if (!loaded) {
+                setTimeout(checkIfIframeWasLoaded, 500)
+            }
+        }
+
+        setTimeout(checkIfIframeWasLoaded, 500) 
+    }
+
+    function contact (type) {      
+        if (contactEmailSet) {
+            return buy(type)
+        }  
+
+        checkGumroadWorking()
+
+        $.Dialog({
+                overlay: true,
+                shadow: true,
+                flat: true,
+                title: 'Contact email',
+                padding: 10,              
+                content: `                    
+                  <div class='container padding10'>
+                        <div class='grid'>  
+                            <div class='row'>
+                                <p>
+                                        Before we open the form with the payments information, we kindly ask you to give us your contact email.<br/>
+                                        This would be used in case there will be an issue with the payments processing. 
+                                </p> 
+                            </div>                   
+                            <div class='row'>                            
+                                <label>contact email (optional)</label>
+                                <input type='text' class='input-control text' id='contactEmail' style='width: 50%;cursor:text' />                            
+                            </div>
+
+                            <div class='row input-control checkbox'>     
+                                <label>                       
+                                    <input type='checkbox' id='enabledNewsletter' />
+                                    <span class='check'></span>should we enrol you to the newsletter? (max once per month)
+                                </label>
+                            </div>             
+
+                            <div class='row top10'>
+                                <a class="button text-center bg-amber bg-hover-gray btn" onclick="buy('${type}')">
+                                    <span class="padding10 fg-white">Buy now</span>
+                                </a>
+                            </div>  
+                            
+                            <div id="gumroad-does-not-work-in-your-country" class="row" style='display:none'>
+                                <p>
+                                    <i class="icon-warning fg-yellow" style="font-size:35px; float:left; margin-right:10px" alt="warning"></i>
+                                    It seems our reseller <a href="https://gumroad.com/">Gumroad, Inc.</a> is down or blocked in your country.
+                                    However, fortunately, you can buy the license directly from us. Please send your inquiry to email <a href="mailto:support@jsreport.net">support@jsreport.net</a> if the <b>"Buy now"</b> button doesn't work.
+                                </p>
+                            </div>    
+                            
+                            <div class='row'>
+                                <p>                                
+                                    <i class="icon-support fg-cyan" style="float: left;font-size:35px;margin-right:10px" alt="support"></i>                               
+                                    Please note the commercial support isn't part of the license and needs to be purchased extra if you need professional support service with SLA.<br/>
+                                    See the details in the <a href="/buy/support">support section</a>.                                
+                                </p>
+                            </div>                      
+                    </div>
+                  </div>
+                `
+        })
+    }
+
 </script>
 
 
@@ -42,14 +162,6 @@
         as part of another product to multiple customers because it provides single license which can be used on infinite amount of instances.
         All licenses are royalty free.
     </p>
-</div>
-
-<div id="gumroad-does-not-work-in-your-country" class="row" style="display: none;">
-  <p class="description padding20 bg-grayLighter subtitle">
-      <i class="icon-warning fg-yellow" style="font-size:45px; float:left; margin-right:10px" alt="warning"></i>
-      It looks like our reseller <a href="https://gumroad.com/">gumroad</a> isn't supported in your country.
-      However, fortunately, you can buy the license directly from us. Please send your inquiry to email <a href="mailto:support@jsreport.net">support@jsreport.net</a> if the <b>"Subscribe"</b> or <b>"Buy"</b> buttons does not work.
-  </p>
 </div>
 
 <div class="row">
@@ -111,7 +223,7 @@
             <h3 class="fg-white">295 $ / year</h3>
         </div>
         <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseSubscription')[0].click()">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="contact('subscription')">
                 <span class="padding10 fg-white">Subscribe</span>
             </a>
         </div>
@@ -136,7 +248,7 @@
             <h3 class="fg-white">995 $ / year</h3>
         </div>
         <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseScaleSubscription')[0].click()">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="contact('subscription-scale')">
                 <span class="padding10 fg-white">Subscribe</span>
             </a>
         </div>
@@ -188,7 +300,7 @@
             <h3 class="fg-white">645 $</h3>
         </div>
         <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterprise')[0].click()">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="contact('enterprise')">
                 <span class="padding10 fg-white">Buy</span>
             </a>
         </div>
@@ -213,7 +325,7 @@
             <h3 class="fg-white">1995 $</h3>
         </div>
         <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseScale')[0].click()">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="contact('enterprise-scale')">
                 <span class="padding10 fg-white">Buy</span>
             </a>
         </div>
@@ -254,38 +366,10 @@
 </div>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.0/userinfo.min.js"></script>
-<script type="text/javascript">
-  var button = $($('.gumroad-button')[0])
-  var linkToFetch = button.attr('href')
-  var iframe = document.createElement('iframe')
-  var tries = 0
-  var loaded = false
 
-  iframe.style.display = 'none'
-
-  iframe.onload = function () {
-    loaded = true
-  }
-
-  iframe.src = linkToFetch
-
-  document.body.append(iframe)
-
-  function checkIfIframeWasLoaded () {    
-    tries++
-
-    if (tries === 8 && !loaded) {
-      var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
-      gumroadMessageEl.style.display = 'block'
-    } else if (!loaded) {
-      setTimeout(checkIfIframeWasLoaded, 500)
-    }
-  }
-
-  setTimeout(checkIfIframeWasLoaded, 500) 
-</script>
-<script>    
+<script>      
     UserInfo.getInfo(function (data) {
+        userInfo = data
         if (data.continent.code === 'EU' && data.country.code !== 'UK' && data.country.code !== 'CZ') {
             $('#euNote').show()
         }
