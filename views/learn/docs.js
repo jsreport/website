@@ -81,5 +81,6 @@
     "unoconv": "unoconv",
     "docxtemplater": "docxtemplater",
     "blob-storages": "Blob storages",
-    "chrome-image": "Chrome image recipe"
+    "chrome-image": "Chrome image recipe",
+    "aws-lambda-serverless": "AWS Lambda serverless"
 };
