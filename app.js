@@ -85,6 +85,8 @@ app.post('/temp', function(req, res) {
         }
     }
 
+    console.log(req)
+    
     return res.send(require("path").basename(findFirstFile(0).path));
 });
 
@@ -137,5 +139,5 @@ require("./posts.js")(app).then(function(poet) {
         res.status(404).render("404");
     });
     
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 4000);
 });
