@@ -76,16 +76,13 @@ app.post('/gumroad', bodyParser.urlencoded({extended: true, limit: "2mb"}), func
 
 
 app.post('/temp', function(req, res) {
-    function findFirstFile() {
-        console.log(req.files)
+    function findFirstFile() {     
         for (var f in req.files) {
             if (req.files.hasOwnProperty(f)) {
                 return req.files[f];
             }
         }
-    }
-
-    console.log(req)
+    }    
     
     return res.send(require("path").basename(findFirstFile(0).path));
 });
@@ -139,5 +136,5 @@ require("./posts.js")(app).then(function(poet) {
         res.status(404).render("404");
     });
     
-    app.listen(process.env.PORT || 4000);
+    app.listen(process.env.PORT || 3000);
 });
