@@ -68,6 +68,7 @@
     "template-stores": "Template stores",
     "fs-store": "File system templates store",
     "version-control": "Version Control",
+    "static-pdf": "Static Pdf",
     "pdf-utils": "Pdf utils",
     "v2-breaking-changes": "v2 breaking changes",
     "ubuntu": "Ubuntu",
