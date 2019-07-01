@@ -11,13 +11,13 @@
 </a>
 
 
-<script>  
+<script>
     document.addEventListener('click', printMousePos, true);
-    let cursorX
-    let cursorY
-    function printMousePos(e){        
+    var cursorX
+    var cursorY
+    function printMousePos(e){
         cursorX = e.pageX
-        cursorY = e.pageY          
+        cursorY = e.pageY
     }
 
     function getCookie(name) {
@@ -45,8 +45,8 @@
     }
 
     function buy(type) {
-        if ($('#contactEmail').val()) {  
-            contactEmailSet = true              
+        if ($('#contactEmail').val()) {
+            contactEmailSet = true
             $.post('/contact-email', {
                 type,
                 contactEmail: $('#contactEmail').val(),
@@ -54,7 +54,7 @@
             })
         }
 
-        let selector
+        var selector
         switch (type) {
             case 'enterprise': selector = '#buyEnterprise'; break
             case 'enterprise-scale': selector = '#buyEnterpriseScale'; break
@@ -63,18 +63,18 @@
         }
 
         var btn = $(selector)
-            .css({               
+            .css({
                 "left": (cursorX - 200) + 'px',
-                "top": (cursorY - 200) + 'px'            
-            })      
-       
-        btn.click()       
-        $.Dialog.close()              
-        
-        setTimeout(() => {           
-            btn.css({                        
+                "top": (cursorY - 200) + 'px'
+            })
+
+        btn.click()
+        $.Dialog.close()
+
+        setTimeout(function () {
+            btn.css({
                 left: -3000
-            })            
+            })
         }, 2000)
     }
 
@@ -93,27 +93,27 @@
 
         iframe.src = linkToFetch
 
-        document.body.append(iframe)
+        document.body.appendChild(iframe)
 
-        function checkIfIframeWasLoaded () {    
+        function checkIfIframeWasLoaded () {
             tries++
 
             if (tries === 10 && !loaded) {
                 var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
-                gumroadMessageEl.style.display = 'block'   
-                $.Dialog.autoResize()            
+                gumroadMessageEl.style.display = 'block'
+                $.Dialog.autoResize()
             } else if (!loaded) {
                 setTimeout(checkIfIframeWasLoaded, 500)
             }
         }
 
-        setTimeout(checkIfIframeWasLoaded, 500) 
+        setTimeout(checkIfIframeWasLoaded, 500)
     }
 
-    function contact (type) {      
+    function contact (type) {
         if (contactEmailSet) {
             return buy(type)
-        }  
+        }
 
         checkGumroadWorking()
 
@@ -122,49 +122,49 @@
                 shadow: true,
                 flat: true,
                 title: 'Contact email',
-                padding: 10,              
-                content: `                    
+                padding: 10,
+                content: `
                   <div class='container padding10'>
-                        <div class='grid'>  
+                        <div class='grid'>
                             <div class='row'>
                                 <p>
                                         Before we open the form with the payments information, we kindly ask you to give us your contact email.<br/>
-                                        This would be used in case there will be an issue with the payments processing. 
-                                </p> 
-                            </div>                   
-                            <div class='row'>                            
+                                        This would be used in case there will be an issue with the payments processing.
+                                </p>
+                            </div>
+                            <div class='row'>
                                 <label>contact email (optional)</label>
-                                <input type='text' class='input-control text' id='contactEmail' style='width: 50%;cursor:text' />                            
+                                <input type='text' class='input-control text' id='contactEmail' style='width: 50%;cursor:text' />
                             </div>
 
-                            <div class='row input-control checkbox'>     
-                                <label>                       
+                            <div class='row input-control checkbox'>
+                                <label>
                                     <input type='checkbox' id='enabledNewsletter' />
                                     <span class='check'></span>should we enrol you to the newsletter? (max once per month)
                                 </label>
-                            </div>             
+                            </div>
 
                             <div class='row top10'>
                                 <a class="button text-center bg-amber bg-hover-gray btn" onclick="buy('${type}')">
                                     <span class="padding10 fg-white">Buy now</span>
                                 </a>
-                            </div>  
-                            
+                            </div>
+
                             <div id="gumroad-does-not-work-in-your-country" class="row" style='display:none'>
                                 <p>
                                     <i class="icon-warning fg-yellow" style="font-size:35px; float:left; margin-right:10px" alt="warning"></i>
                                     It seems our reseller <a href="https://gumroad.com/">Gumroad, Inc.</a> is down or blocked in your country.
                                     However, fortunately, you can buy the license directly from us. Please send your inquiry to email <a href="mailto:support@jsreport.net">support@jsreport.net</a> if the <b>"Buy now"</b> button doesn't work.
                                 </p>
-                            </div>    
-                            
+                            </div>
+
                             <div class='row'>
-                                <p>                                
-                                    <i class="icon-support fg-cyan" style="float: left;font-size:35px;margin-right:10px" alt="support"></i>                               
+                                <p>
+                                    <i class="icon-support fg-cyan" style="float: left;font-size:35px;margin-right:10px" alt="support"></i>
                                     Please note the commercial support isn't part of the license and needs to be purchased extra if you need professional support service with SLA.<br/>
-                                    See the details in the <a href="/buy/support">support section</a>.                                
+                                    See the details in the <a href="/buy/support">support section</a>.
                                 </p>
-                            </div>                      
+                            </div>
                     </div>
                   </div>
                 `
@@ -389,11 +389,11 @@
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.0/userinfo.min.js"></script>
 
-<script>      
+<script>
     UserInfo.getInfo(function (data) {
         userInfo = data
         if (data.continent.code === 'EU' && data.country.code !== 'UK' && data.country.code !== 'CZ') {
             $('#euNote').show()
         }
-    }) 
+    })
 </script>
