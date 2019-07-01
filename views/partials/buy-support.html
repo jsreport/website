@@ -1,7 +1,7 @@
-<a class="gumroad-button" id="buyEnterpriseSupport" href="https://gum.co/SVEKk" style="display:none !important">Buy my product
+<a class="gumroad-button" id="buyEnterpriseSupport" href="https://gum.co/SVEKk" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
-<a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs" style="display:none !important">Buy my product
+<a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
 <div id="gumroad-does-not-work-in-your-country" class="row" style="display: none;">
@@ -74,7 +74,7 @@
             <h3 class="fg-white">395 $</h3>
         </div>
         <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyStarterSupport')[0].click()">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="buy('#buyStarterSupport')">
                 <span class="padding10 fg-white">Buy</span>
             </a>
         </div>
@@ -105,7 +105,7 @@
             <h3 class="fg-white">895 $ / year</h3>
         </div>
         <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="$('#buyEnterpriseSupport')[0].click()">
+            <a class="button text-center bg-amber bg-hover-gray btn" onclick="buy('#buyEnterpriseSupport')">
                 <span class="padding10 fg-white">Subscribe</span>
             </a>
         </div>
@@ -150,4 +150,28 @@
     }
   }
   setTimeout(checkIfIframeWasLoaded, 500)
+
+  document.addEventListener('click', printMousePos, true);
+    let cursorX
+    let cursorY
+    function printMousePos(e){
+        cursorX = e.pageX
+        cursorY= e.pageY        
+    }
+
+  function buy(selector) {      
+    var btn = $(selector)
+            .css({               
+                "left": (cursorX - 5) + 'px',
+                "top": (cursorY - 5) + 'px'            
+            })      
+       
+    btn.click()                    
+
+    setTimeout(() => {
+        btn.css({                        
+            left: -3000
+        })
+    }, 8000)
+  }
 </script>

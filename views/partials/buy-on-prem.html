@@ -1,17 +1,25 @@
-<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="display:none !important">Buy my product
+
+<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product</a>
+
+<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
-<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="display:none !important">Buy my product
+<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
-<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="display:none !important">Buy my product
-</a>
-
-<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="display:none !important">Buy my product
+<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
 
-<script>    
+<script> 
+    document.addEventListener('click', printMousePos, true);
+    let cursorX
+    let cursorY
+    function printMousePos(e){        
+        cursorX = e.pageX
+        cursorY = e.pageY          
+    }
+
     function getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
@@ -37,8 +45,6 @@
     }
 
     function buy(type) {
-        $.Dialog.close()
-        
         if ($('#contactEmail').val()) {  
             contactEmailSet = true              
             $.post('/contact-email', {
@@ -48,12 +54,28 @@
             })
         }
 
+        let selector
         switch (type) {
-            case 'enterprise': return $('#buyEnterprise').click()
-            case 'enterprise-scale': return $('#buyEnterpriseScale').click()
-            case 'subscription': return $('#buyEnterpriseSubscription').click()
-            case 'subscription-scale': return $('#buyEnterpriseScaleSubscription').click()
-        }    
+            case 'enterprise': selector = '#buyEnterprise'; break
+            case 'enterprise-scale': selector = '#buyEnterpriseScale'; break
+            case 'subscription': selector = '#buyEnterpriseSubscription'; break
+            case 'subscription-scale': selector = '#buyEnterpriseScaleSubscription'; break
+        }
+
+        var btn = $(selector)
+            .css({               
+                "left": (cursorX - 5) + 'px',
+                "top": (cursorY - 5) + 'px'            
+            })      
+       
+        btn.click()        
+        $.Dialog.close()
+        
+        setTimeout(() => {
+            btn.css({                        
+                left: -3000
+            })
+        }, 8000)
     }
 
     function checkGumroadWorking () {
@@ -373,5 +395,5 @@
         if (data.continent.code === 'EU' && data.country.code !== 'UK' && data.country.code !== 'CZ') {
             $('#euNote').show()
         }
-    })
+    }) 
 </script>
