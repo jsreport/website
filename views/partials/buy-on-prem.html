@@ -1,17 +1,17 @@
 
-<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product</a>
+<a class="gumroad-button" id="buyEnterpriseSubscription" href="https://gumroad.com/l/SBwu" style="z-index:10000;position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product</a>
 
-<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
+<a class="gumroad-button" id="buyEnterpriseScaleSubscription" href="https://gumroad.com/l/SrfG" style="z-index:10000;position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
-<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
+<a class="gumroad-button" id="buyEnterprise" href="https://gumroad.com/l/XOxVq" style="z-index:10000;position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
-<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
+<a class="gumroad-button" id="buyEnterpriseScale" href="https://gumroad.com/l/onQk" style="z-index:10000;position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
 
-<script> 
+<script>  
     document.addEventListener('click', printMousePos, true);
     let cursorX
     let cursorY
@@ -64,18 +64,18 @@
 
         var btn = $(selector)
             .css({               
-                "left": (cursorX - 5) + 'px',
-                "top": (cursorY - 5) + 'px'            
+                "left": (cursorX - 200) + 'px',
+                "top": (cursorY - 200) + 'px'            
             })      
        
-        btn.click()        
-        $.Dialog.close()
+        btn.click()       
+        $.Dialog.close()              
         
-        setTimeout(() => {
+        setTimeout(() => {           
             btn.css({                        
                 left: -3000
-            })
-        }, 8000)
+            })            
+        }, 2000)
     }
 
     function checkGumroadWorking () {

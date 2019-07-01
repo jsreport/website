@@ -1,7 +1,7 @@
-<a class="gumroad-button" id="buyEnterpriseSupport" href="https://gum.co/SVEKk" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
+<a class="gumroad-button" id="buyEnterpriseSupport" href="https://gum.co/SVEKk" style="position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
-<a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs" style="position:absolute;left:-3000px;opacity:0.01;display:block">Buy my product
+<a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs" style="position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
 </a>
 
 <div id="gumroad-does-not-work-in-your-country" class="row" style="display: none;">
@@ -162,8 +162,8 @@
   function buy(selector) {      
     var btn = $(selector)
             .css({               
-                "left": (cursorX - 5) + 'px',
-                "top": (cursorY - 5) + 'px'            
+                "left": (cursorX - 200) + 'px',
+                "top": (cursorY - 200) + 'px'            
             })      
        
     btn.click()                    
@@ -172,6 +172,6 @@
         btn.css({                        
             left: -3000
         })
-    }, 8000)
+    }, 2000)
   }
 </script>
