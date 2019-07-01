@@ -139,7 +139,7 @@
     loaded = true
   }
   iframe.src = linkToFetch
-  document.body.append(iframe)
+  document.body.appendChild(iframe)
   function checkIfIframeWasLoaded () {
     tries++
     if (tries === 8 && !loaded) {
@@ -152,11 +152,11 @@
   setTimeout(checkIfIframeWasLoaded, 500)
 
   document.addEventListener('click', printMousePos, true);
-    let cursorX
-    let cursorY
+    var cursorX
+    var cursorY
     function printMousePos(e){
         cursorX = e.pageX
-        cursorY= e.pageY        
+        cursorY = e.pageY        
     }
 
   function buy(selector) {      
@@ -168,7 +168,7 @@
        
     btn.click()                    
 
-    setTimeout(() => {
+    setTimeout(function () {
         btn.css({                        
             left: -3000
         })
