@@ -85,5 +85,7 @@
     "chrome-image": "Chrome image recipe",
     "aws-lambda-serverless": "AWS Lambda serverless",
     "online-versions": "Online versions",
-    "pdf-sign": "Pdf signing"
+    "pdf-sign": "Pdf signing",
+    "docx": "Docx",
+    "pptx": "Pptx"
 };
