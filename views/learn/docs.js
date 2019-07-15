@@ -87,5 +87,6 @@
     "online-versions": "Online versions",
     "pdf-sign": "Pdf signing",
     "docx": "Docx",
-    "pptx": "Pptx"
+    "pptx": "Pptx",
+    "customize-docker-image": "Customize docker image"
 };
