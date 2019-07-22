@@ -88,5 +88,6 @@
     "pdf-sign": "Pdf signing",
     "docx": "Docx",
     "pptx": "Pptx",
-    "customize-docker-image": "Customize docker image"
+    "customize-docker-image": "Customize docker image",
+    "pdf-meta": "Pdf meta",
 };
