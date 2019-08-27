@@ -1,0 +1,108 @@
+<script src='https://js.braintreegateway.com/web/dropin/1.19.0/js/dropin.min.js'></script>
+
+<div class='section bg-darkCyan'>
+    <div class='text-center'>
+        <h1 class='fg-white buy-title'>enterprise</h1>
+        <small class='fg-grayLighter'>You are about to purchase fully featured single server instance with no
+            limitations.
+        </small>
+    </div>
+</div>
+<div class='grid container small section'>
+    <div class='row text-center'>
+        <div class='fg-gray'>
+            <h3>BILLING INFORMATION</h3>
+        </div>
+    </div>
+    <div class='row'>
+        <form id='paymentForm'>
+            <div class='grid fg-gray'>
+                <div class='row'>
+                    <div class='span4'>
+                        <label>Email</label>
+                        <small>
+                            <input class='fg-gray' type='email' id='email' size=30 required></input>
+                        </small>
+                    </div>
+                    <div class='span4'>
+                        <label>VAT number (optional)</label>
+                        <small>
+                            <input class='fg-gray' type='text' id='vatNumber' size=30 onfocusout='validateVAT()'
+                                onkeypress='vatTypying()'>
+                        </small>
+                        <div>
+                            <small>
+                                <label id='errorVAT' style='color: red;display:none'></label>
+                            </small>
+                        </div>
+                    </div>
+                    <div class='span4'>
+                        <label>Country</label>
+                        <small>
+                            <select class='fg-gray' id='country' onchange='countryChanged()' required></select>
+                        </small>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='span4'>
+                        <label>Company name (or personal name)</label>
+                        <small>
+                            <input class='fg-gray' type='text' id='companyName' size=30  required></input>
+                        </small>
+                    </div>
+                    <div class='span8'>
+                        <label>Address</label>
+                        <small>
+                            <input class='fg-gray' type='text' id='companyAddress' size=40 required></input>
+                        </small>
+                    </div>
+                </div>
+                <div class='row'>
+                    <hr>
+                </div>
+                <div class='row'>
+                    <div class='span4'>
+                        <label>License price</label>
+                        <h3 id='licensePrice'></h3>
+                    </div>
+                    <div class='span4'>
+                        <label>VAT</label>
+                        <h3 id='vatAmount'></h3>
+                    </div>
+                    <div class='span4'>
+                        <label>Amount to pay</label>
+                        <h3 id='amount'></h3>
+                    </div>
+                </div>
+            </div>
+            <div onclick='proceedCardDetails()' id='proceedCardDetailsBox'>
+                <a class='button text-center bg-green bg-hover-gray btn'>
+                    <span class='fg-white'>
+                        Proceed to card details
+                    </span>
+                </a>
+            </div>
+            <div id='braintreeBox' style='display: none'>
+                <style>
+                    @keyframes spin {
+                        100% {
+                            -webkit-transform: rotate(360deg);
+                            transform: rotate(360deg);
+                        }
+                    }
+                </style>
+                <i class='icon-spin' id='spinner' style='animation:spin 1s linear infinite;'></i>
+                <div id='dropin-container'></div>
+                <div>
+                    <a id='submitCheckout' class='button text-center bg-green bg-hover-gray btn' style='display: none'>
+                        <span class='fg-white'>
+                            Submit checkout
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </form>
+        <script src='/js/countries.js'></script>
+        <script src='/js/payments.js'></script>
+    </div>
+</div>
