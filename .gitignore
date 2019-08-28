@@ -21,3 +21,5 @@ key.txt
 
 views/learn/docs/*.*
 .env
+.cache
+dist

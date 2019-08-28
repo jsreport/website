@@ -1,4 +1,5 @@
 ﻿const payments = require('./lib/payments')
+const path = require('path')
 
 exports.onprem = function (req, res) {
   res.render('onprem', {
@@ -102,13 +103,15 @@ exports.contactEmail = (db) => (req, res) => {
   })
 }
 
-exports.checkout = (req, res) => res.render('checkout', { title: 'jsreport checkout' })
+exports.checkout = (req, res) => res.render(path.join(__dirname, '/dist/checkout.html'), { title: 'jsreport checkout' })
+exports.customer = (req, res) => res.render(path.join(__dirname, '/dist/customer.html'), { title: 'jsreport customer' })
 
-exports.checkoutSubmit = (db) => (req, res, next) => {
-  return payments.checkout(req.body, db).then((r) => res.send(r)).catch(next)
-}
-
+exports.checkoutSubmit = (db) => (req, res, next) => payments.checkout(req.body, db).then((r) => res.send(r)).catch(next)
 exports.braintreeToken = (req, res, next) => payments.generateToken().then((r) => res.send(r)).catch(next)
-exports.validateVat = (req, res, next) => payments.validateVat(req.body.vatNumber).then((r) => res.send(r)).catch(next)
-exports.customer = (req, res) => res.render('customer', { title: 'jsreport customer' })
+exports.validateVat = (req, res) => payments.validateVat(req.body.vatNumber).then((r) => res.send(r)).catch((r) => res.send({ valid: false }))
 exports.customerApi = (db) => (req, res, next) => payments.customer(req.params.id, db).then((r) => res.send(r)).catch(next)
+exports.invoice = (db) => (req, res, next) => payments.invoice(req.params.customerId, req.params.invoiceId, db).then((buf) => {
+  res.setHeader('Content-Type', 'application/pdf')
+  res.setHeader('Content-Disposition', `inline; filename=${req.params.invoiceId}.pdf`)
+  res.send(buf)
+}).catch(next)

@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const exphbs = require('express3-handlebars')
 const app = express()
@@ -21,7 +22,7 @@ if (process.env.mongodb_username) {
 connectionString += process.env.mongodb_address || 'localhost:27017'
 connectionString += '/' + process.env.mongodb_authdb
 
-const client = new MongoClient(connectionString, { useNewUrlParser: true })
+const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
 let db
 client.connect((err) => {
   if (err) {
@@ -63,11 +64,8 @@ client.connect((err) => {
   // app.disable('view cache');
   app.set('view engine', '.html')
 
-  app.use((err, req, res, next) => {
-    logger.error('Error when processing ' + req.path + '; ' + err.stack)
-    res.status(500).send({ error: err.message })
-  })
   app.use(express.static('public/'))
+  app.use(express.static('dist/'))
   app.use(multer({ dest: 'public/temp' }))
 
   app.post('/gumroad', bodyParser.urlencoded({ extended: true, limit: '2mb' }), (req, res) => res.send('Ok'))
@@ -137,6 +135,12 @@ client.connect((err) => {
   app.post('/api/checkout', bodyParser.json(), router.checkoutSubmit(db))
   app.post('/api/validate-vat', bodyParser.json(), router.validateVat)
   app.get('/api/braintree-token', router.braintreeToken)
+  app.get('/customer/:customerId/invoice/:invoiceId', router.invoice(db))
   app.get('/customer/:id', router.customer)
   app.get('/api/customer/:id', router.customerApi(db))
+
+  app.use((err, req, res, next) => {
+    logger.error('Error when processing ' + req.path + '; ' + err.stack)
+    res.status(500).send({ error: err.message })
+  })
 })

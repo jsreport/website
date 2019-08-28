@@ -8,23 +8,37 @@
   },
   "scripts": {
     "start": "node app.js",
-    "build": "parcel views/home.html"
+    "build": "parcel src/payments/*.html"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "browser": true
+    }
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/polyfill": "^7.4.4",
+    "eslint": "6.2.2",
+    "eslint-config-standard-jsx": "8.0.1",
+    "eslint-plugin-babel": "5.3.0",
     "parcel-bundler": "1.12.3",
-    "standard": "14.0.0"
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "standard": "14.0.2"
   },
   "dependencies": {
     "axios": "0.19.0",
     "body-parser": "1.13.2",
     "braintree": "2.19.0",
-    "dotenv": "^8.1.0",
+    "dotenv": "8.1.0",
     "express": "3.4.8",
     "express3-handlebars": "0.5.0",
     "jsreport-client": "1.0.2",
     "marked": "0.3.1",
     "moment": "2.24.0",
-    "mongodb": "3.2.2",
+    "mongodb": "3.3.1",
     "multer": "0.1.6",
     "poet": "1.0.0-rc4",
     "prism-languages": "0.3.3",
