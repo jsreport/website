@@ -1,13 +1,8 @@
 import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import products from './products.js'
 import countries from './countries.js'
-import { getUserCountry, validateVAT, proceedToCardPayment, calculatePrice, submitCheckout } from './checkout.js'
-
-const product = 'enterprise'
-const currency = 'usd'
-const currencyChar = currency === 'usd' ? '$' : '€'
+import { getUserCountry, validateVAT, proceedToCardPayment, calculatePrice, submitCheckout, product, currency, currencyChar, price } from './checkout.js'
 
 function Email ({ value, onChange }) {
   return (
@@ -28,7 +23,15 @@ function Vat ({ value, onChange, validate, typing, isVATValid }) {
         <input className='fg-gray' type='text' size='30' onChange={onChange} onBlur={validate} onKeyPress={typing} value={value} />
       </small>
       <div>
-        {isVATValid !== false || !value ? <span /> : <small><label id='errorVAT' style={{ color: 'red' }}>The VAT number isn't valid and won't be used</label></small>}
+        {isVATValid !== false || !value ? (
+          <span />
+        ) : (
+          <small>
+            <label id='errorVAT' style={{ color: 'red' }}>
+              The VAT number isn't valid and won't be used
+            </label>
+          </small>
+        )}
       </div>
     </div>
   )
@@ -40,7 +43,11 @@ function Country ({ value, onChange }) {
       <label>Country</label>
       <small>
         <select className='fg-gray' onChange={onChange} required value={value}>
-          {countries.map(c => <option key={c.code} value={c.code}>{c.name}</option>)}
+          {countries.map(c => (
+            <option key={c.code} value={c.code}>
+              {c.name}
+            </option>
+          ))}
         </select>
       </small>
     </div>
@@ -83,28 +90,31 @@ class Checkout extends React.Component {
   }
 
   componentDidMount () {
-    getUserCountry().then(r => this.setState({ country: r })).catch(console.error.bind(console))
+    getUserCountry()
+      .then(r => this.setState({ country: r }))
+      .catch(console.error.bind(console))
   }
 
   validateVAT () {
-    validateVAT(this.state.vatNumber).then((r) => {
-      if (r === false) {
-        this.setState({
-          isVATValid: false
-        })
-      } else {
-        this.setState({
-          isVATValid: true,
-          name: r.name,
-          address: r.address,
-          country: r.country
-        })
-      }
-    }).catch(console.error.bind(console))
+    validateVAT(this.state.vatNumber)
+      .then(r => {
+        if (r === false) {
+          this.setState({
+            isVATValid: false
+          })
+        } else {
+          this.setState({
+            isVATValid: true,
+            name: r.name,
+            address: r.address,
+            country: r.country
+          })
+        }
+      })
+      .catch(console.error.bind(console))
   }
 
-  vatTypying () {
-  }
+  vatTypying () {}
 
   proceedCardDetails () {
     if (!this.refs.paymentForm.checkValidity()) {
@@ -115,9 +125,11 @@ class Checkout extends React.Component {
     this.setState({
       cardDetailsVisible: true
     })
-    proceedToCardPayment().then(() => this.setState({
-      braintreeLoaded: true
-    }))
+    proceedToCardPayment().then(() =>
+      this.setState({
+        braintreeLoaded: true
+      })
+    )
   }
 
   submitCheckout () {
@@ -126,7 +138,6 @@ class Checkout extends React.Component {
     }
 
     const { vatRate, vatAmount, amount } = calculatePrice({
-      price: products[product].price[currency],
       country: this.state.country,
       isVATValid: this.state.isVATValid
     })
@@ -136,8 +147,6 @@ class Checkout extends React.Component {
       vatRate,
       vatAmount,
       email: this.state.email,
-      price: products[product].price[currency],
-      product: products[product],
       currency,
       customer: {
         name: this.state.name,
@@ -146,76 +155,95 @@ class Checkout extends React.Component {
         vatNumber: this.vatNumber
       }
     })
+      .then(d => this.props.history.push(`/payments/customer/${d.uuid}`))
+      .catch(console.error)
   }
 
   render () {
     const calculatedPrice = calculatePrice({
-      price: products[product].price[currency],
       country: this.state.country,
       isVATValid: this.state.isVATValid
     })
 
     return (
-      <form ref='paymentForm'>
-        <div className='grid fg-gray'>
-          <div className='row'>
-            <Email value={this.state.email} onChange={(v) => this.setState({ email: v.target.value })} />
-            <Vat
-              value={this.state.vatNumber}
-              isVATValid={this.state.isVATValid}
-              validate={() => this.validateVAT()}
-              typing={() => this.vatTypying()}
-              onChange={(v) => this.setState({ vatNumber: v.target.value })}
-            />
-            <Country value={this.state.country} onChange={(v) => this.setState({ country: v.target.value })} />
-          </div>
-          <div className='row'>
-            <Name value={this.state.name} onChange={(v) => this.setState({ name: v.target.value })} />
-            <Address value={this.state.address} onChange={(v) => this.setState({ address: v.target.value })} />
+      <div>
+        <div className='section bg-darkCyan'>
+          <div className='text-center'>
+            <h2 className='fg-white buy-title'>{product().name}</h2>
+            <small className='fg-grayLighter'>{product().infoLine}</small>
           </div>
         </div>
-        <div className='row'>
-          <hr />
-        </div>
-        <div className='row'>
-          <div className='span4'>
-            <label>License price</label>
-            <h3>{products[product].price[currency] + currencyChar}</h3>
-          </div>
-          <div className='span4'>
-            <label>VAT {calculatedPrice.vatRate + '%'}</label>
-            <h3>{calculatedPrice.vatAmount + currencyChar}</h3>
-          </div>
-          <div className='span4'>
-            <label>Amount to pay</label>
-            <h3>{calculatedPrice.amount + currencyChar}</h3>
-          </div>
-        </div>
-        {!this.state.cardDetailsVisible
-          ? (
-            <div onClick={() => this.proceedCardDetails()}>
-              <a className='button text-center bg-green bg-hover-gray btn'>
-                <span className='fg-white'>Proceed to card details</span>
-              </a>
+        <div className='grid container small section'>
+          <div className='row text-center'>
+            <div className='fg-gray'>
+              <h3>BILLING INFORMATION</h3>
             </div>
-          )
-          : (
-            <div id='braintreeBox'>
-              {this.state.braintreeLoaded ? <span /> : <i className='icon-spin fg-gray' id='spinner' style={{ animation: 'spin 1s linear infinite' }} />}
-              <div id='dropin-container' />
-              <div>
-                {this.state.braintreeLoaded ? (
-                  <a onClick={() => this.submitCheckout()} className='button text-center bg-green bg-hover-gray btn'>
-                    <span className='fg-white'>Submit checkout</span>
-                  </a>
-                ) : <span />}
-
+          </div>
+          <div className='row'>
+            <form ref='paymentForm'>
+              <div className='grid fg-gray'>
+                <div className='row'>
+                  <Email value={this.state.email} onChange={v => this.setState({ email: v.target.value })} />
+                  <Vat
+                    value={this.state.vatNumber}
+                    isVATValid={this.state.isVATValid}
+                    validate={() => this.validateVAT()}
+                    typing={() => this.vatTypying()}
+                    onChange={v => this.setState({ vatNumber: v.target.value })}
+                  />
+                  <Country value={this.state.country} onChange={v => this.setState({ country: v.target.value })} />
+                </div>
+                <div className='row'>
+                  <Name value={this.state.name} onChange={v => this.setState({ name: v.target.value })} />
+                  <Address value={this.state.address} onChange={v => this.setState({ address: v.target.value })} />
+                </div>
               </div>
-            </div>
-          )}
-      </form>
+              <div className='row'>
+                <hr />
+              </div>
+              <div className='row'>
+                <div className='span4'>
+                  <label>License price</label>
+                  <h3>{price() + currencyChar}</h3>
+                </div>
+                <div className='span4'>
+                  <label>VAT {calculatedPrice.vatRate + '%'}</label>
+                  <h3>{calculatedPrice.vatAmount + currencyChar}</h3>
+                </div>
+                <div className='span4'>
+                  <label>Amount to pay</label>
+                  <h3>{calculatedPrice.amount + currencyChar}</h3>
+                </div>
+              </div>
+              {!this.state.cardDetailsVisible ? (
+                <div onClick={() => this.proceedCardDetails()}>
+                  <a className='button text-center bg-green bg-hover-gray btn'>
+                    <span className='fg-white'>Proceed to card details</span>
+                  </a>
+                </div>
+              ) : (
+                <div id='braintreeBox'>
+                  {this.state.braintreeLoaded ? <span /> : <i className='icon-spin fg-gray' id='spinner' style={{ animation: 'spin 1s linear infinite' }} />}
+                  <div id='dropin-container' />
+                  <div>
+                    {this.state.braintreeLoaded ? (
+                      <a onClick={() => this.submitCheckout()} className='button text-center bg-green bg-hover-gray btn'>
+                        <span className='fg-white'>Submit checkout</span>
+                      </a>
+                    ) : (
+                      <span />
+                    )}
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
+      </div>
     )
   }
 }
 
-ReactDOM.render(<Checkout />, document.getElementById('root'))
+export default Checkout
+
+// ReactDOM.render(<Checkout />, document.getElementById('root'))

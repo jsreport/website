@@ -38,7 +38,13 @@ export async function validateVAT (vatNumber) {
   }
 }
 
-export function calculatePrice ({ price, country, isVATValid }) {
+export const productCode = () => window.location.pathname.replace('/payments/checkout/', '')
+export const product = () => products[productCode()]
+export const currency = 'usd'
+export const currencyChar = '$'
+export const price = () => product().price[currency]
+
+export function calculatePrice ({ country, isVATValid }) {
   function round (value) {
     return Number(Math.round(value + 'e' + 2) + 'e-' + 2)
   }
@@ -48,48 +54,39 @@ export function calculatePrice ({ price, country, isVATValid }) {
       return 21
     }
 
-    return (countries.find(c => c.code === country).eu && !isVATValid) ? 21 : 0
+    return countries.find(c => c.code === country).eu && !isVATValid ? 21 : 0
   }
 
   const vatRate = getVatRate()
-  const vatAmount = round(vatRate * 0.01 * price)
+  const vatAmount = round(vatRate * 0.01 * price())
   return {
     vatRate,
     vatAmount,
-    amount: vatAmount + price
+    amount: vatAmount + price()
   }
 }
 
 let braintreeInstance
 export async function proceedToCardPayment () {
-  const token = await window.fetch('/api/braintree-token').then((res) => res.text())
+  const token = await window.fetch('/api/braintree-token').then(res => res.text())
   braintreeInstance = await braintree.dropin.create({
     authorization: token,
     container: '#dropin-container'
   })
 }
 
-export async function submitCheckout ({
-  price,
-  amount,
-  vatRate,
-  vatAmount,
-  email,
-  currency,
-  product,
-  customer
-}) {
+export async function submitCheckout ({ amount, vatRate, vatAmount, email, customer }) {
   const paymentMethod = await braintreeInstance.requestPaymentMethod()
   const checkoutRes = await window.fetch('/api/checkout', {
     method: 'POST',
     body: JSON.stringify({
-      price,
+      price: price(),
       amount,
       vatRate,
       vatAmount,
       email,
       nonce: paymentMethod.nonce,
-      product: product,
+      product: product(),
       customer,
       currency,
       isEU: countries.find(c => c.code === customer.country).eu
@@ -99,6 +96,5 @@ export async function submitCheckout ({
     }
   })
 
-  const checkoutData = await checkoutRes.json()
-  window.location = '/customer/' + checkoutData.uuid
+  return checkoutRes.json()
 }

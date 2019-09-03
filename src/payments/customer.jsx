@@ -1,36 +1,20 @@
 import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { load } from './customer.js'
+import { load, cancelSubscription } from './customer.js'
+import LicenseKey from './licenseKey'
+import products from './products'
 
 function currencyChar (currency) {
   return currency === 'usd' ? '$' : '€'
 }
 
-function Invoice ({ invoice }) {
-  function downloadInvoice () {
-    window.open(window.location + '/invoice/' + invoice.data.invoiceId, '_blank')
-  }
-
+function Product ({ product, cancel, onClick }) {
   return (
-    <div>
-      <div>
-        <a onClick={downloadInvoice} className='text-center fg-green fg-hover-gray' style={{ cursor: 'pointer' }}>
-          <span className='padding5'>{invoice.data.invoiceId}</span>
-          <span className='padding5'>{invoice.data.amount + currencyChar(invoice.data.currency)}</span>
-          <i className='padding5 icon-download' />
-        </a>
-      </div>
-    </div>
-  )
-}
-
-function Product ({ product }) {
-  return (
-    <div className='list marked'>
+    <div className='list marked' onClick={onClick}>
       <div className='list-content'>
         <h3>
-          {product.type}
+          {products[product.code].name}
           <div>
             <small>Purchased on {new Date(product.purchaseDate).toLocaleDateString()}</small>
           </div>
@@ -40,17 +24,8 @@ function Product ({ product }) {
           <div>
             <span>License key</span>
           </div>
-          <div>
-            <span>{product.licenseKey}</span>
-          </div>
         </div>
-
-        <div>
-          <div className='padding5'>
-            <span>Invoices</span>
-          </div>
-          {product.invoices.map(i => <Invoice invoice={i} key={i.data.invoiceId} />)}
-        </div>
+        <LicenseKey licenseKey={product.licenseKey} />
       </div>
     </div>
   )
@@ -65,29 +40,39 @@ class Customer extends React.Component {
   }
 
   componentDidMount () {
-    load().then((c) => this.setState({ ...c }))
+    load().then(c => this.setState({ ...c }))
+  }
+
+  cancel (product) {
+    cancelSubscription(product).then(() => {
+      this.setState({
+        products: [
+          ...this.state.products.filter(p => p.id !== product.id),
+          {
+            ...product,
+            subscription: {
+              state: 'canceled'
+            }
+          }
+        ]
+      })
+    })
+  }
+
+  openProductDetail (p) {
+    this.props.history.push(`/payments/customer/${this.state.uuid}/product/${p.id}`)
   }
 
   render () {
+    const { products } = this.state
+    products.reverse()
+
     return (
       <div className='fg-gray'>
         <div className='section bg-darkCyan'>
           <div className='text-center'>
-            <h1 className='fg-white buy-title'>Customer details</h1>
-          </div>
-        </div>
-        <div className='grid container small section'>
-          <div className='row text-center'>
-            <div>
-              <h3>DETAILS</h3>
-            </div>
-          </div>
-          <div className='row'>
-            <h3>{this.state.email}
-              <div>
-                <small>Created on {new Date(this.state.creationDate).toLocaleDateString()}</small>
-              </div>
-            </h3>
+            <h2 className='fg-white buy-title'>{this.state.email}</h2>
+            <small className='fg-grayLighter'>Created on {new Date(this.state.creationDate).toLocaleDateString()}</small>
           </div>
         </div>
         <div className='grid container small section'>
@@ -98,7 +83,9 @@ class Customer extends React.Component {
           </div>
           <div className='row'>
             <div className='listview-outlook'>
-              {this.state.products.map(p => <Product key={p.purchaseDate} product={p} />)}
+              {products.map(p => (
+                <Product key={p.purchaseDate} product={p} cancel={p => this.cancel(p)} onClick={() => this.openProductDetail(p)} />
+              ))}
             </div>
           </div>
         </div>
@@ -107,4 +94,6 @@ class Customer extends React.Component {
   }
 }
 
-ReactDOM.render(<Customer />, document.getElementById('root'))
+export default Customer
+
+// ReactDOM.render(<Customer />, document.getElementById('root'))

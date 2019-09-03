@@ -77,7 +77,10 @@ exports.downloads = function (req, res) {
 }
 
 exports.embedding = function (req, res) {
-  res.render('embedding', { playground: true, title: 'Embed jsreport to any page' })
+  res.render('embedding', {
+    playground: true,
+    title: 'Embed jsreport to any page'
+  })
 }
 
 exports.showcases = function (req, res) {
@@ -87,31 +90,69 @@ exports.showcases = function (req, res) {
   })
 }
 
-exports.contactEmail = (db) => (req, res) => {
-  db().collection('contacts').insertOne({
-    date: new Date(),
-    email: req.body.contactEmail,
-    enabledNewsletter: req.body.enabledNewsletter === 'true',
-    type: req.body.type
-  }).then(() => {
-    // expire in 30seconds
-    res.cookie('jsreport-contact-email-set', 'true', { maxAge: 30 * 60 * 1000 })
-    res.send('ok')
-  }).catch((e) => {
-    console.error(e)
-    res.send('error ' + e)
-  })
+exports.contactEmail = db => (req, res) => {
+  db()
+    .collection('contacts')
+    .insertOne({
+      date: new Date(),
+      email: req.body.contactEmail,
+      enabledNewsletter: req.body.enabledNewsletter === 'true',
+      type: req.body.type
+    })
+    .then(() => {
+      // expire in 30seconds
+      res.cookie('jsreport-contact-email-set', 'true', {
+        maxAge: 30 * 60 * 1000
+      })
+      res.send('ok')
+    })
+    .catch(e => {
+      console.error(e)
+      res.send('error ' + e)
+    })
 }
 
-exports.checkout = (req, res) => res.render(path.join(__dirname, '/dist/checkout.html'), { title: 'jsreport checkout' })
-exports.customer = (req, res) => res.render(path.join(__dirname, '/dist/customer.html'), { title: 'jsreport customer' })
+exports.payments = (req, res) =>
+  res.render(path.join(__dirname, '/dist/app.html'), {
+    title: 'jsreport checkout'
+  })
 
-exports.checkoutSubmit = (db) => (req, res, next) => payments.checkout(req.body, db).then((r) => res.send(r)).catch(next)
-exports.braintreeToken = (req, res, next) => payments.generateToken().then((r) => res.send(r)).catch(next)
-exports.validateVat = (req, res) => payments.validateVat(req.body.vatNumber).then((r) => res.send(r)).catch((r) => res.send({ valid: false }))
-exports.customerApi = (db) => (req, res, next) => payments.customer(req.params.id, db).then((r) => res.send(r)).catch(next)
-exports.invoice = (db) => (req, res, next) => payments.invoice(req.params.customerId, req.params.invoiceId, db).then((buf) => {
-  res.setHeader('Content-Type', 'application/pdf')
-  res.setHeader('Content-Disposition', `inline; filename=${req.params.invoiceId}.pdf`)
-  res.send(buf)
-}).catch(next)
+exports.checkoutSubmit = db => (req, res, next) =>
+  payments
+    .checkout(req.body, db)
+    .then(r => res.send(r))
+    .catch(next)
+
+exports.braintreeToken = (req, res, next) =>
+  payments
+    .generateToken()
+    .then(r => res.send(r))
+    .catch(next)
+
+exports.validateVat = (req, res) =>
+  payments
+    .validateVat(req.body.vatNumber)
+    .then(r => res.send(r))
+    .catch(r => res.send({ valid: false }))
+
+exports.customerApi = db => (req, res, next) =>
+  payments
+    .customer(req.params.id, db)
+    .then(r => res.send(r))
+    .catch(next)
+
+exports.invoice = db => (req, res, next) =>
+  payments
+    .invoice(req.params.customerId, req.params.invoiceId, db)
+    .then(buf => {
+      res.setHeader('Content-Type', 'application/pdf')
+      res.setHeader('Content-Disposition', `inline; filename=${req.params.invoiceId}.pdf`)
+      res.send(buf)
+    })
+    .catch(next)
+
+exports.cancelSubscription = db => (req, res, next) =>
+  payments
+    .cancelSubscription(req.params.customerId, req.params.productId, db)
+    .then(() => res.send('ok'))
+    .catch(next)

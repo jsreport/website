@@ -22,9 +22,12 @@ if (process.env.mongodb_username) {
 connectionString += process.env.mongodb_address || 'localhost:27017'
 connectionString += '/' + process.env.mongodb_authdb
 
-const client = new MongoClient(connectionString, { useNewUrlParser: true, useUnifiedTopology: true })
+const client = new MongoClient(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
 let db
-client.connect((err) => {
+client.connect(err => {
   if (err) {
     console.error(err)
     process.exit()
@@ -48,7 +51,9 @@ client.connect((err) => {
     extname: '.html',
     helpers: {
       fixCoding: function (content) {
-        if (content.charAt(0) === '\uFEFF') { content = content.substr(1) }
+        if (content.charAt(0) === '\uFEFF') {
+          content = content.substr(1)
+        }
         return content
       },
       toShortDate: function (date) {
@@ -85,8 +90,7 @@ client.connect((err) => {
   app.get('/', function (req, res) {
     res.render('home', {
       home: true,
-      title: 'js' +
-            'report - javascript based reporting platform',
+      title: 'js' + 'report - javascript based reporting platform',
       description: 'jsreport is an open source reporting platform where reports are designed using popular javascript templating engines.'
     })
   })
@@ -121,7 +125,11 @@ client.connect((err) => {
       var postCount = poet.helpers.getPostCount()
       var posts = poet.helpers.getPosts(0, postCount)
       res.setHeader('Content-Type', 'application/xml')
-      res.render('sitemap', { posts: posts, layout: false, docs: Object.keys(learnDocs) })
+      res.render('sitemap', {
+        posts: posts,
+        layout: false,
+        docs: Object.keys(learnDocs)
+      })
     })
 
     app.get('*', function (req, res) {
@@ -131,13 +139,13 @@ client.connect((err) => {
     app.listen(process.env.PORT || 3000)
   })
 
-  app.get('/checkout', router.checkout)
+  app.get('/payments/customer/:customerId/invoice/:invoiceId', router.invoice(db))
+  app.get('/payments/*', router.payments)
   app.post('/api/checkout', bodyParser.json(), router.checkoutSubmit(db))
   app.post('/api/validate-vat', bodyParser.json(), router.validateVat)
   app.get('/api/braintree-token', router.braintreeToken)
-  app.get('/customer/:customerId/invoice/:invoiceId', router.invoice(db))
-  app.get('/customer/:id', router.customer)
   app.get('/api/customer/:id', router.customerApi(db))
+  app.delete('/api/customer/:customerId/subscription/:productId', router.cancelSubscription(db))
 
   app.use((err, req, res, next) => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)
