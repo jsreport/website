@@ -65,36 +65,3 @@ export function calculatePrice ({ country, isVATValid }) {
     amount: vatAmount + price()
   }
 }
-
-let braintreeInstance
-export async function proceedToCardPayment () {
-  const token = await window.fetch('/api/braintree-token').then(res => res.text())
-  braintreeInstance = await braintree.dropin.create({
-    authorization: token,
-    container: '#dropin-container'
-  })
-}
-
-export async function submitCheckout ({ amount, vatRate, vatAmount, email, customer }) {
-  const paymentMethod = await braintreeInstance.requestPaymentMethod()
-  const checkoutRes = await window.fetch('/api/checkout', {
-    method: 'POST',
-    body: JSON.stringify({
-      price: price(),
-      amount,
-      vatRate,
-      vatAmount,
-      email,
-      nonce: paymentMethod.nonce,
-      product: product(),
-      customer,
-      currency,
-      isEU: countries.find(c => c.code === customer.country).eu
-    }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-
-  return checkoutRes.json()
-}

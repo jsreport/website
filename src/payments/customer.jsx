@@ -9,7 +9,7 @@ function currencyChar (currency) {
   return currency === 'usd' ? '$' : '€'
 }
 
-function Product ({ product, cancel, onClick }) {
+function Product ({ product, onClick }) {
   return (
     <div className='list marked' onClick={onClick}>
       <div className='list-content'>
@@ -43,22 +43,6 @@ class Customer extends React.Component {
     load().then(c => this.setState({ ...c }))
   }
 
-  cancel (product) {
-    cancelSubscription(product).then(() => {
-      this.setState({
-        products: [
-          ...this.state.products.filter(p => p.id !== product.id),
-          {
-            ...product,
-            subscription: {
-              state: 'canceled'
-            }
-          }
-        ]
-      })
-    })
-  }
-
   openProductDetail (p) {
     this.props.history.push(`/payments/customer/${this.state.uuid}/product/${p.id}`)
   }
@@ -84,7 +68,7 @@ class Customer extends React.Component {
           <div className='row'>
             <div className='listview-outlook'>
               {products.map(p => (
-                <Product key={p.purchaseDate} product={p} cancel={p => this.cancel(p)} onClick={() => this.openProductDetail(p)} />
+                <Product key={p.purchaseDate} product={p} onClick={() => this.openProductDetail(p)} />
               ))}
             </div>
           </div>
@@ -95,5 +79,3 @@ class Customer extends React.Component {
 }
 
 export default Customer
-
-// ReactDOM.render(<Customer />, document.getElementById('root'))

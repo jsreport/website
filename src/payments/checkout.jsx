@@ -2,7 +2,9 @@ import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import countries from './countries.js'
-import { getUserCountry, validateVAT, proceedToCardPayment, calculatePrice, submitCheckout, product, currency, currencyChar, price } from './checkout.js'
+import Vat from './vat'
+import Braintree from './braintree'
+import { getUserCountry, calculatePrice, product, currency, currencyChar, price } from './checkout.js'
 
 function Email ({ value, onChange }) {
   return (
@@ -11,28 +13,6 @@ function Email ({ value, onChange }) {
       <small>
         <input className='fg-gray' type='email' size='30' required value={value} onChange={onChange} />
       </small>
-    </div>
-  )
-}
-
-function Vat ({ value, onChange, validate, typing, isVATValid }) {
-  return (
-    <div className='span4'>
-      <label>VAT number (optional)</label>
-      <small>
-        <input className='fg-gray' type='text' size='30' onChange={onChange} onBlur={validate} onKeyPress={typing} value={value} />
-      </small>
-      <div>
-        {isVATValid !== false || !value ? (
-          <span />
-        ) : (
-          <small>
-            <label id='errorVAT' style={{ color: 'red' }}>
-              The VAT number isn't valid and won't be used
-            </label>
-          </small>
-        )}
-      </div>
     </div>
   )
 }
@@ -95,27 +75,6 @@ class Checkout extends React.Component {
       .catch(console.error.bind(console))
   }
 
-  validateVAT () {
-    validateVAT(this.state.vatNumber)
-      .then(r => {
-        if (r === false) {
-          this.setState({
-            isVATValid: false
-          })
-        } else {
-          this.setState({
-            isVATValid: true,
-            name: r.name,
-            address: r.address,
-            country: r.country
-          })
-        }
-      })
-      .catch(console.error.bind(console))
-  }
-
-  vatTypying () {}
-
   proceedCardDetails () {
     if (!this.refs.paymentForm.checkValidity()) {
       this.refs.paymentForm.reportValidity()
@@ -125,38 +84,46 @@ class Checkout extends React.Component {
     this.setState({
       cardDetailsVisible: true
     })
-    proceedToCardPayment().then(() =>
-      this.setState({
-        braintreeLoaded: true
-      })
-    )
   }
 
-  submitCheckout () {
-    if (!this.refs.paymentForm.checkValidity()) {
-      this.refs.paymentForm.reportValidity()
-    }
-
+  async submitCheckout (pm) {
     const { vatRate, vatAmount, amount } = calculatePrice({
       country: this.state.country,
       isVATValid: this.state.isVATValid
     })
 
-    submitCheckout({
-      amount,
-      vatRate,
-      vatAmount,
-      email: this.state.email,
-      currency,
-      customer: {
-        name: this.state.name,
-        address: this.state.address,
-        country: this.state.country,
-        vatNumber: this.vatNumber
+    const country = countries.find(c => c.code === this.state.country)
+    const checkoutRes = await window.fetch('/api/checkout', {
+      method: 'POST',
+      body: JSON.stringify({
+        price: price(),
+        amount,
+        vatRate,
+        vatAmount,
+        email: this.state.email,
+        nonce: pm.nonce,
+        product: product(),
+        customer: {
+          name: this.state.name,
+          address: this.state.address,
+          country,
+          vatNumber: this.state.vatNumber
+        },
+        currency,
+        isEU: country.eu
+      }),
+      headers: {
+        'Content-Type': 'application/json'
       }
     })
-      .then(d => this.props.history.push(`/payments/customer/${d.uuid}`))
-      .catch(console.error)
+
+    const resData = await checkoutRes.json()
+
+    if (!checkoutRes.ok) {
+      throw new Error(resData && resData.error ? resData.error : checkoutRes.statusText)
+    }
+
+    this.props.history.push(`/payments/customer/${resData.uuid}`)
   }
 
   render () {
@@ -186,10 +153,15 @@ class Checkout extends React.Component {
                   <Email value={this.state.email} onChange={v => this.setState({ email: v.target.value })} />
                   <Vat
                     value={this.state.vatNumber}
-                    isVATValid={this.state.isVATValid}
-                    validate={() => this.validateVAT()}
-                    typing={() => this.vatTypying()}
                     onChange={v => this.setState({ vatNumber: v.target.value })}
+                    onValidVAT={r =>
+                      this.setState({
+                        isVATValid: true,
+                        address: r.address,
+                        country: r.country,
+                        name: r.name
+                      })
+                    }
                   />
                   <Country value={this.state.country} onChange={v => this.setState({ country: v.target.value })} />
                 </div>
@@ -216,25 +188,13 @@ class Checkout extends React.Component {
                 </div>
               </div>
               {!this.state.cardDetailsVisible ? (
-                <div onClick={() => this.proceedCardDetails()}>
+                <div className='row' onClick={() => this.proceedCardDetails()}>
                   <a className='button text-center bg-green bg-hover-gray btn'>
                     <span className='fg-white'>Proceed to card details</span>
                   </a>
                 </div>
               ) : (
-                <div id='braintreeBox'>
-                  {this.state.braintreeLoaded ? <span /> : <i className='icon-spin fg-gray' id='spinner' style={{ animation: 'spin 1s linear infinite' }} />}
-                  <div id='dropin-container' />
-                  <div>
-                    {this.state.braintreeLoaded ? (
-                      <a onClick={() => this.submitCheckout()} className='button text-center bg-green bg-hover-gray btn'>
-                        <span className='fg-white'>Submit checkout</span>
-                      </a>
-                    ) : (
-                      <span />
-                    )}
-                  </div>
-                </div>
+                <Braintree onSubmit={pm => this.submitCheckout(pm)} />
               )}
             </form>
           </div>
@@ -245,5 +205,3 @@ class Checkout extends React.Component {
 }
 
 export default Checkout
-
-// ReactDOM.render(<Checkout />, document.getElementById('root'))

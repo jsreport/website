@@ -114,7 +114,7 @@ exports.contactEmail = db => (req, res) => {
 
 exports.payments = (req, res) =>
   res.render(path.join(__dirname, '/dist/app.html'), {
-    title: 'jsreport checkout'
+    title: 'jsreport customers'
   })
 
 exports.checkoutSubmit = db => (req, res, next) =>
@@ -154,5 +154,11 @@ exports.invoice = db => (req, res, next) =>
 exports.cancelSubscription = db => (req, res, next) =>
   payments
     .cancelSubscription(req.params.customerId, req.params.productId, db)
-    .then(() => res.send('ok'))
+    .then(() => res.send({ result: 'ok' }))
+    .catch(next)
+
+exports.updatePaymentMethod = db => (req, res, next) =>
+  payments
+    .updatePaymentMethod(req.params.customerId, req.params.productId, req.body, db)
+    .then(() => res.send({ result: 'ok' }))
     .catch(next)

@@ -146,6 +146,7 @@ client.connect(err => {
   app.get('/api/braintree-token', router.braintreeToken)
   app.get('/api/customer/:id', router.customerApi(db))
   app.delete('/api/customer/:customerId/subscription/:productId', router.cancelSubscription(db))
+  app.put('/api/customer/:customerId/subscription/:productId', bodyParser.json(), router.updatePaymentMethod(db))
 
   app.use((err, req, res, next) => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)

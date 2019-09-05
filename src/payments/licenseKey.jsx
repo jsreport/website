@@ -23,20 +23,20 @@ class LicenseKey extends React.Component {
 
   render () {
     return (
-      <div onMouseEnter={() => this.handleCopyMouseIn()} onMouseLeave={() => this.handleCopyMouseOut()} onClick={e => e.stopPropagation()}>
+      <div>
         <CopyToClipboard text={this.props.licenseKey} onCopy={() => this.setState({ copied: true })}>
-          <div>
+          <span onMouseEnter={() => this.handleCopyMouseIn()} onMouseLeave={() => this.handleCopyMouseOut()} onClick={e => e.stopPropagation()}>
             <span>{this.props.licenseKey}</span>
             {this.state.copyVisible ? (
               this.state.copied ? (
                 <i style={{ marginLeft: '10px' }} className='fg-green icon-checkmark' />
               ) : (
-                <i style={{ marginLeft: '10px', cursor: 'pointer' }} className='fg-lightGray icon-copy' />
+                <i alt='copy to cliboard' style={{ marginLeft: '10px', cursor: 'pointer' }} className='fg-lightGray icon-copy' />
               )
             ) : (
               <React.Fragment />
             )}
-          </div>
+          </span>
         </CopyToClipboard>
       </div>
     )

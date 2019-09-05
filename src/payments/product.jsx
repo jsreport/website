@@ -1,6 +1,7 @@
 import React from 'react'
 import LicenseKey from './licenseKey'
 import products from './products'
+import Braintree from './braintree'
 
 function loadCustomer (uuid) {
   return window.fetch(`/api/customer/${uuid}`).then(r => r.json())
@@ -22,7 +23,7 @@ function Invoice ({ invoice, customerId }) {
         <a
           href={`/payments/customer/${customerId}/invoice/${invoice.data.invoiceId}`}
           target='_blank'
-          className='text-center fg-green fg-hover-gray'
+          className='text-center fg-cyan fg-hover-green'
           style={{ cursor: 'pointer' }}
         >
           <span className='padding5'>{invoice.data.invoiceId}</span>
@@ -41,10 +42,51 @@ export default class Product extends React.Component {
   }
 
   componentDidMount () {
+    this.load()
+  }
+
+  load () {
     loadCustomer(this.props.match.params.customer).then(c => {
       const product = c.products.find(p => p.id === this.props.match.params.product)
-      this.setState(product)
+      this.setState({
+        ...product,
+        updating: false
+      })
     })
+  }
+
+  async cancel () {
+    try {
+      await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+        method: 'DELETE'
+      })
+      this.setState({
+        subscription: {
+          ...this.state.subscription,
+          state: 'canceled'
+        }
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  async updatePaymentMethod (pm) {
+    const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+      method: 'PUT',
+      body: JSON.stringify(pm),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    const resJson = await res.json()
+
+    if (!res.ok) {
+      throw new Error(resJson.error)
+    }
+
+    this.load()
   }
 
   renderSubscrption () {
@@ -55,17 +97,32 @@ export default class Product extends React.Component {
         </div>
         {this.state.subscription.state === 'active' ? (
           <div>
-            <p>The next payment is planned on {addYear(new Date(this.state.nextBillingDate)).toLocaleDateString()}</p>
-
-            <button className='button info' style={{ marginRight: '10px' }}>
-              Update payment
-            </button>
-            <button className='button danger' onClick={() => cancel(this.state)}>
-              Cancel
-            </button>
+            <p>
+              The next payment is planned on {addYear(new Date(this.state.braintree.subscription.nextBillingDate)).toLocaleDateString()}
+              <br />
+              The current used bank card is {this.state.braintree.paymentMethod.maskedNumber} expiring on {this.state.braintree.paymentMethod.expirationMonth}/
+              {this.state.braintree.paymentMethod.expirationYear}
+            </p>
+            {!this.state.updating ? (
+              <React.Fragment>
+                <button className='button info' style={{ marginRight: '10px' }} onClick={() => this.setState({ updating: true })}>
+                  Update payment
+                </button>
+                <button className='button danger' onClick={() => this.cancel()}>
+                  Cancel
+                </button>
+              </React.Fragment>
+            ) : (
+              <React.Fragment />
+            )}
+            {this.state.updating ? <Braintree onSubmit={pm => this.updatePaymentMethod(pm)} /> : <React.Fragment />}
           </div>
         ) : (
-          <div>Canceled</div>
+          <div>
+            <span className='bg-red fg-white' style={{ padding: '3px' }}>
+              Canceled
+            </span>
+          </div>
         )}
       </React.Fragment>
     )
