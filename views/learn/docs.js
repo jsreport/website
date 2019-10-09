@@ -90,5 +90,6 @@
     "pptx": "Pptx",
     "customize-docker-image": "Customize docker image",
     "pdf-meta": "Pdf meta",
-    "studio": "Studio"
+    "studio": "Studio",
+    "office-preview": "Office preview"
 };
