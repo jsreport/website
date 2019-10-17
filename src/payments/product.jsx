@@ -56,10 +56,21 @@ export default class Product extends React.Component {
   }
 
   async cancel () {
+    if (!window.confirm('Are you sure you want to cancel this subscription?')) {
+      return
+    }
+
     try {
-      await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+      const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
         method: 'DELETE'
       })
+
+      const resJson = await res.json()
+
+      if (!res.ok) {
+        return alert(resJson.error)
+      }
+
       this.setState({
         subscription: {
           ...this.state.subscription,
@@ -67,23 +78,27 @@ export default class Product extends React.Component {
         }
       })
     } catch (e) {
-      console.error(e)
+      return alert(e.message)
     }
   }
 
   async updatePaymentMethod (pm) {
-    const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
-      method: 'PUT',
-      body: JSON.stringify(pm),
-      headers: {
-        'Content-Type': 'application/json'
+    try {
+      const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(pm),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const resJson = await res.json()
+
+      if (!res.ok) {
+        return alert(resJson.error)
       }
-    })
-
-    const resJson = await res.json()
-
-    if (!res.ok) {
-      throw new Error(resJson.error)
+    } catch (e) {
+      return alert(e.message)
     }
 
     this.load()
@@ -106,7 +121,7 @@ export default class Product extends React.Component {
             {!this.state.updating ? (
               <React.Fragment>
                 <button className='button info' style={{ marginRight: '10px' }} onClick={() => this.setState({ updating: true })}>
-                  Update payment
+                  Update bank card
                 </button>
                 <button className='button danger' onClick={() => this.cancel()}>
                   Cancel

@@ -2,15 +2,17 @@ require('dotenv').config()
 const express = require('express')
 const exphbs = require('express3-handlebars')
 const app = express()
-const router = require('./router.js')
+const Router = require('./router.js')
 const docs = require('./docs.js')
 const learnDocs = require('./views/learn/docs.js')
 const multer = require('multer')
 const bodyParser = require('body-parser')
 const Reaper = require('reap2')
 const path = require('path')
-const logger = require('./lib/logger.js')
+const logger = require('./lib/utils/logger.js')
 const MongoClient = require('mongodb').MongoClient
+const Braintree = require('./lib/payments/braintree')
+const Payments = require('./lib/payments/payments')
 
 logger.init()
 
@@ -35,6 +37,9 @@ client.connect(err => {
 
   console.log('Connected successfully to mongodb server')
   db = client.db('website')
+
+  const payments = Payments(Braintree(), db)
+  const router = Router(payments, db)
 
   var reaper = new Reaper({ threshold: 300000 })
   reaper.watch(path.join(__dirname, 'public', 'temp'))
@@ -118,7 +123,7 @@ client.connect(err => {
   app.get('/buy/online', router.buyOnline)
   app.get('/buy/thank-you', router.buyThankYou)
   app.get('/showcases', router.showcases)
-  app.post('/contact-email', bodyParser.urlencoded({ extended: true, limit: '2mb' }), router.contactEmail(() => db))
+  app.post('/contact-email', bodyParser.urlencoded({ extended: true, limit: '2mb' }), router.contactEmail)
 
   require('./posts.js')(app).then(function (poet) {
     app.get('/sitemap*', function (req, res) {
@@ -139,14 +144,15 @@ client.connect(err => {
     app.listen(process.env.PORT || 3000)
   })
 
-  app.get('/payments/customer/:customerId/invoice/:invoiceId', router.invoice(db))
+  app.get('/payments/customer/:customerId/invoice/:invoiceId', router.invoice)
   app.get('/payments/*', router.payments)
-  app.post('/api/checkout', bodyParser.json(), router.checkoutSubmit(db))
+  app.post('/api/checkout', bodyParser.json(), router.checkoutSubmit)
   app.post('/api/validate-vat', bodyParser.json(), router.validateVat)
   app.get('/api/braintree-token', router.braintreeToken)
-  app.get('/api/customer/:id', router.customerApi(db))
-  app.delete('/api/customer/:customerId/subscription/:productId', router.cancelSubscription(db))
-  app.put('/api/customer/:customerId/subscription/:productId', bodyParser.json(), router.updatePaymentMethod(db))
+  app.get('/api/customer/:id', router.customerApi)
+  app.delete('/api/customer/:customerId/subscription/:productId', router.cancelSubscription)
+  app.put('/api/customer/:customerId/subscription/:productId', bodyParser.json(), router.updatePaymentMethod)
+  app.post('/api/braintree/hook', bodyParser.urlencoded(), router.braintreeHook)
 
   app.use((err, req, res, next) => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)

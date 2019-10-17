@@ -23,3 +23,6 @@ views/learn/docs/*.*
 .env
 .cache
 dist
+
+test/body.txt
+test/signature.txt
