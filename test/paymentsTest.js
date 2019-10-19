@@ -50,4 +50,13 @@ describe('payments', () => {
     customer.email.should.be.eql('a@a.com')
     customer.uuid.should.be.eql('uuid')
   })
+
+  it('checkout', async () => {
+    await payments.checkout({
+        email: 'a@a.com'
+    })
+    
+    const customer = awat db.collection('customers').findOne()
+    customer.email.should.be.eql('a@a.com')
+  })
 })

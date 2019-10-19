@@ -13,6 +13,7 @@ const logger = require('./lib/utils/logger.js')
 const MongoClient = require('mongodb').MongoClient
 const Braintree = require('./lib/payments/braintree')
 const Payments = require('./lib/payments/payments')
+const jsreportClient = require('jsreport-client')(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD)
 
 logger.init()
 
@@ -38,7 +39,7 @@ client.connect(err => {
   console.log('Connected successfully to mongodb server')
   db = client.db('website')
 
-  const payments = Payments(Braintree(), db)
+  const payments = Payments(Braintree(), jsreportClient, db)
   const router = Router(payments, db)
 
   var reaper = new Reaper({ threshold: 300000 })
