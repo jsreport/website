@@ -1,15 +1,15 @@
-﻿var Prism = require('prismjs'),
-    languages = require('prism-languages'),
-    Poet = require('poet'),
-    marked = require("marked");
+﻿import * as Prism from 'prismjs'
+import * as languages from 'prism-languages'
+import Poet from 'poet'
+import marked from 'marked'
 
-module.exports = function (app) {
+export default async function (app) {
 
     var poet = Poet(app, {
         postsPerPage: 300
     });
 
-    var cache = {};   
+    var cache = {};
 
     marked.setOptions({
         highlight: function (code, lang, callback) {

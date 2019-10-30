@@ -1,6 +1,6 @@
 
-const sendgrid = require('sendgrid')
-const logger = require('./logger.js')
+import sendgrid from 'sendgrid'
+import * as logger from './logger.js'
 const helper = sendgrid.mail
 
 module.exports = ({

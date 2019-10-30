@@ -1,14 +1,17 @@
-const Payments = require('../lib/payments/payments')
-const MongoClient = require('mongodb').MongoClient
-const logger = require('../lib/utils/logger')
-require('should')
+import Payments from '../src/lib/payments/payments'
+import { MongoClient, Db } from 'mongodb'
+import * as logger from '../src/lib/utils/logger'
+import 'should'
+
 logger.init()
 
 describe('payments', () => {
   let braintree
   let payments
-  let db
+  let db: Db
   let dbClient
+  let jsreportClient
+  let axios
 
   before(async () => {
     const Client = new MongoClient('mongodb://localhost:27017/test', {
@@ -23,7 +26,9 @@ describe('payments', () => {
     await db.dropDatabase()
 
     braintree = {}
-    payments = Payments(braintree, db)
+    jsreportClient = { render: () => { } }
+    axios = {}
+    payments = Payments(braintree, jsreportClient, db, axios)
   })
 
   after(() => {
@@ -53,10 +58,10 @@ describe('payments', () => {
 
   it('checkout', async () => {
     await payments.checkout({
-        email: 'a@a.com'
+      email: 'a@a.com'
     })
-    
-    const customer = awat db.collection('customers').findOne()
+
+    const customer = await db.collection('customers').findOne({})
     customer.email.should.be.eql('a@a.com')
   })
 })
