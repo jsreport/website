@@ -10,13 +10,8 @@ import Reaper from 'reap2'
 import * as path from 'path'
 import * as logger from './utils/logger'
 import { MongoClient } from 'mongodb'
-import Braintree from './payments/braintree'
 import Payments from './payments/payments'
-import JsreportClient from 'jsreport-client'
 import Posts from './posts'
-import axios from 'axios'
-
-const jsreportClient = JsreportClient(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD)
 
 const app = express()
 logger.init()
@@ -43,7 +38,7 @@ client.connect(err => {
   console.log('Connected successfully to mongodb server')
   db = client.db('website')
 
-  const payments = Payments(new Braintree(), jsreportClient, db, axios)
+  const payments = new Payments(db)
   const router = Router(payments, db)
 
   var reaper = new Reaper({ threshold: 300000 })

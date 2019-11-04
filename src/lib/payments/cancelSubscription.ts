@@ -1,19 +1,14 @@
 import { CustomerRepository } from "./customer"
 import Braintree from "./braintree"
+import { Services } from "./services"
 
-export default async function (customerId, productId, {
-    customerRepository,
-    braintree
-}: {
-    customerRepository: CustomerRepository,
-    braintree: Braintree
-}) {
-    const customer = await customerRepository.find(customerId)
+export const cancelSubscription = (services: Services) => async (customerId, productId) => {
+    const customer = await services.customerRepository.find(customerId)
     const product = customer.products.find(p => p.id === productId)
 
-    await braintree.cancelSubscription(product.braintree.subscription.id)
+    await services.braintree.cancelSubscription(product.braintree.subscription.id)
 
     product.subscription.state = 'canceled'
     Object.assign(customer.products.find(p => p.id === productId), product)
-    await customerRepository.update(customer)
+    await services.customerRepository.update(customer)
 }

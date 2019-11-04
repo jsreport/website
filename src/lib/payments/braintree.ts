@@ -20,7 +20,7 @@ export default class Braintree {
     return this._gateway.customer.create(obj)
   }
 
-  createPaymentMethod(obj) {
+  createPaymentMethod(obj: braintree.PaymentMethodCreateRequest) {
     return this._gateway.paymentMethod.create(obj)
   }
 
@@ -32,7 +32,7 @@ export default class Braintree {
     return this._gateway.transaction.sale(obj)
   }
 
-  updateSubscription(id, obj) {
+  updateSubscription(id: string, obj: braintree.SubscriptionRequest) {
     return this._gateway.subscription.update(id, obj)
   }
 

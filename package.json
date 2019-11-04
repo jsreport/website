@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node -r source-map-support/register server.js",
     "build": "concurrently  \"tsc -w\" \"parcel src/public/payments/*.html -d dist/public\" ",
-    "test": "mocha -r ts-node/register test/*.ts --timeout 10000"
+    "test": "mocha -r ts-node/register test/**/*.ts --timeout 10000"
   },
   "standard": {
     "parser": "babel-eslint",

@@ -3,20 +3,21 @@ import sendgrid from 'sendgrid'
 import * as logger from './logger.js'
 const helper = sendgrid.mail
 
-module.exports = ({
-  subject,
-  from,
-  to,
-  content
-}) => {
+export type Mail = {
+  to: string,
+  subject: string,
+  content: string
+}
+
+export const sendEmail = (Mail) => {
   const sg = sendgrid(process.env.SENDGRID)
 
-  logger.info(`Sending email (${subject}) to ${to}`)
+  logger.info(`Sending email (${Mail.subject}) to ${Mail.to}`)
 
-  const fromEmail = new helper.Email(from || 'support@jsreport.net')
-  const toEmail = new helper.Email(to)
-  const contentEmail = new helper.Content('text/plain', content)
-  const mail = new helper.Mail(fromEmail, subject, toEmail, contentEmail)
+  const fromEmail = new helper.Email('support@jsreport.net')
+  const toEmail = new helper.Email(Mail.to)
+  const contentEmail = new helper.Content('text/plain', Mail.content)
+  const mail = new helper.Mail(fromEmail, Mail.subject, toEmail, contentEmail)
 
   const request = sg.emptyRequest({
     method: 'POST',

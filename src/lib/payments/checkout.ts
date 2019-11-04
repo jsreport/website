@@ -1,17 +1,17 @@
 import * as logger from '../utils/logger'
 import Uuid from 'uuid/v4'
-import moment from 'moment'
-import { CustomerRepository, Sale, AccountingData, Product } from './customer'
+import { AccountingData, Product, Invoice, Subscription } from './customer'
 import nanoid from 'nanoid'
-import Braintree from './braintree'
+import { Services } from './services'
 
-export type Checkout = {
+export type CheckoutRequest = {
     email
     name
     address
     country
     isEU
     vatNumber
+    currency
     amount
     vatRate
     price
@@ -27,28 +27,19 @@ export type Checkout = {
 
 const uuid = () => Uuid().toUpperCase()
 
-export default async function (checkoutData: Checkout, {
-    customerRepository,
-    invoiceCounter,
-    braintree,
-    renderInvoice,
-    notifyGumroad
-}: {
-    customerRepository: CustomerRepository,
-    invoiceCounter: () => Promise<string>,
-    braintree: Braintree,
-    renderInvoice: (o: object) => Promise<[]>,
-    notifyGumroad: (o: object) => Promise<void>
-}) {
+// the mock less solution is likely to fire just some events from the checkout script
+// like { action: 'sendEmail', data: { subject: '...' }}
+
+export const checkout = (services: Services) => async (checkoutData: CheckoutRequest) => {
     logger.info('Processing checkout for ' + checkoutData.email)
-    const customer = await customerRepository.findOrCreate(checkoutData.email)
+    const customer = await services.customerRepository.findOrCreate(checkoutData.email)
 
     let productBraintree: any = {}
-    let subscription = null
+    let subscription: Subscription = null
 
     if (checkoutData.product.isSubscription) {
         if (customer.braintree == null) {
-            const customerRes = await braintree.createCustomer({
+            const customerRes = await services.braintree.createCustomer({
                 company: checkoutData.name,
                 email: checkoutData.email
             })
@@ -60,7 +51,7 @@ export default async function (checkoutData: Checkout, {
             customer.braintree = { customerId: customerRes.customer.id }
         }
 
-        const pmr = await braintree.createPaymentMethod({
+        const pmr = await services.braintree.createPaymentMethod({
             customerId: customer.braintree.customerId,
             paymentMethodNonce: checkoutData.nonce,
             options: {
@@ -72,7 +63,7 @@ export default async function (checkoutData: Checkout, {
             throw new Error('Unable to register payment method: ' + pmr.message)
         }
 
-        const sr = await braintree.createSubscription({
+        const sr = await services.braintree.createSubscription({
             paymentMethodToken: pmr.paymentMethod.token,
             planId: checkoutData.product.code + (checkoutData.vatRate !== 0 ? 'VAT' : ''),
             merchantAccountId: 'jsreportsro'
@@ -86,7 +77,7 @@ export default async function (checkoutData: Checkout, {
         productBraintree.subscription = sr.subscription
         subscription = { state: 'active', nextBillingDate: sr.subscription.nextBillingDate }
     } else {
-        await braintree.createSale({
+        await services.braintree.createSale({
             amount: checkoutData.amount,
             paymentMethodNonce: checkoutData.nonce,
             options: {
@@ -99,12 +90,12 @@ export default async function (checkoutData: Checkout, {
         address: checkoutData.address,
         amount: checkoutData.amount,
         country: checkoutData.country,
-        currency: checkoutData.country,
+        currency: checkoutData.currency,
         isEU: checkoutData.isEU,
         name: checkoutData.name,
         price: checkoutData.price,
         vatAmount: checkoutData.vatAmount,
-        vatNumber: checkoutData.vatAmount,
+        vatNumber: checkoutData.vatNumber,
         vatRate: checkoutData.vatRate
     }
 
@@ -116,45 +107,36 @@ export default async function (checkoutData: Checkout, {
         name: checkoutData.product.name,
         id: nanoid(4),
         sales: [],
-        braintree,
+        braintree: services.braintree,
         accountingData
     }
-
-    const invoiceId = await invoiceCounter()
-
-    const buf = await renderInvoice({
-        ...accountingData,
-        product: {
-            ...product
-        }
-    })
-
-    /* mailer({
-    to: paymentInfo.email,
-    content: 'Your license key is ' + paymentInfo.license_key,
-    subject: 'jsreport epterprise license'
-  }) */
-
-    // await notifyGumroadHook(paymentInfo)
 
     if (subscription) {
         product.subscription = subscription
     }
 
+    const invoiceData = await services.customerRepository.createInvoiceData(accountingData)
+    const invoice: Invoice = {
+        buffer: await services.render(invoiceData),
+        data: invoiceData
+    }
+
     product.sales.push({
-        invoice: {
-            data: {
-                accountingData: accountingData,
-                id: invoiceId
-            },
-            buffer: buf
-        },
+        invoice,
         purchaseDate: new Date()
     })
 
+    await services.notifyLicensingServer(customer, product, product.sales[0])
+
     customer.products = customer.products || []
     customer.products.push(product)
-    await customerRepository.update(customer)
+    await services.customerRepository.update(customer)
+
+    await services.sendEmail({
+        to: customer.email,
+        content: 'Your license key is ' + product.licenseKey,
+        subject: 'jsreport epterprise license'
+    })
 
     return customer
 }

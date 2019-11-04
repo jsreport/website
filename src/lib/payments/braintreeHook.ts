@@ -1,23 +1,12 @@
 import * as logger from '../utils/logger'
-import Braintree from "./braintree"
-import moment from 'moment'
-import { CustomerRepository, InvoiceData } from './customer'
+import { Services } from './services'
+import { Invoice } from './customer'
 
 
-export default function ({
-    customerRepository,
-    braintree,
-    invoiceCounter,
-    renderInvoice
-}: {
-    customerRepository: CustomerRepository
-    braintree: Braintree
-    invoiceCounter: () => Promise<string>,
-    renderInvoice: (data: object) => Promise<[]>
-}) {
+export default function (services: Services) {
     async function processSubscriptionChargeNotif(payload) {
         logger.info('Search for customer with subscription id ' + payload.subscription.id)
-        const customer = await customerRepository.findBySubscription(payload.subscription.id)
+        const customer = await services.customerRepository.findBySubscription(payload.subscription.id)
 
         if (!customer) {
             throw Error('Unable to find customer with subscription')
@@ -25,15 +14,20 @@ export default function ({
 
         const product = customer.products.find(p => p.braintree.subscription.id === payload.subscription.id)
         product.subscription.nextBillingDate = payload.subscription.nextBillingDate
-
-        const lastSale = { ...product.sales[product.sales.length - 1] }
-        lastSale.invoice.data.id = await invoiceCounter()
-        lastSale.purchaseDate = new Date()
-        invoiceData.buffer = await renderInvoice(invoiceData)
-        product.invoices.push(invoiceData)
         product.braintree.subscription = payload.subscription
 
-        await customerRepository.update(customer)
+        const invoiceData = await services.customerRepository.createInvoiceData(product.accountingData)
+        const invoice: Invoice = {
+            buffer: await services.render(invoiceData),
+            data: invoiceData
+        }
+
+        product.sales.push({
+            invoice,
+            purchaseDate: new Date()
+        })
+
+        await services.customerRepository.update(customer)
 
         /*
         email: paymentInfo.email,
@@ -64,7 +58,7 @@ export default function ({
     async function processSubscriptionFailedChargeNotif(subscription) { }
 
     return async function (signature, body) {
-        const webhookNotification = await braintree.parseWebHook(signature, body)
+        const webhookNotification = await services.braintree.parseWebHook(signature, body)
         logger.info('processing braintree hook of kind ' + webhookNotification.kind)
 
         try {

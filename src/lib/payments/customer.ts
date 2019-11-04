@@ -16,17 +16,23 @@ export type AccountingData = {
 
 export type InvoiceData = {
     id: string,
+    purchaseDate: Date,
     accountingData: AccountingData
 }
 
 export type Invoice = {
     data: InvoiceData
-    buffer: []
+    buffer: Buffer
 }
 
 export type Sale = {
     purchaseDate: Date
     invoice: Invoice
+}
+
+export type Subscription = {
+    nextBillingDate: Date,
+    state: 'active' | 'canceled'
 }
 
 export type Product = {
@@ -38,7 +44,7 @@ export type Product = {
     name: string
     sales: Array<Sale>
     braintree: any
-    subscription?: any
+    subscription?: Subscription
     accountingData: AccountingData
 }
 
@@ -105,4 +111,29 @@ export class CustomerRepository {
         const customer = await this.db.collection('customer').findOne({ products: { $elemMatch: { 'braintree.subscription.id': subscriptionId } } })
         return <Customer>customer
     }
+
+    async createInvoiceData(data: AccountingData) {
+        await this.db.collection('invoiceCounter').updateOne(
+            {},
+            {
+                $inc: {
+                    nextId: 1
+                }
+            }
+        )
+        let counter = await this.db.collection('invoiceCounter').findOne({})
+        if (counter == null) {
+            counter = { nextId: 1 }
+        }
+
+        const id = `${new Date().getFullYear()}-${counter.nextId}B`
+        const invoiceData: InvoiceData = {
+            accountingData: data,
+            id: id,
+            purchaseDate: new Date()
+        }
+
+        return invoiceData
+    }
 }
+
