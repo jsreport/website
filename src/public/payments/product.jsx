@@ -109,22 +109,18 @@ export default class Product extends React.Component {
   }
 
   async updatePaymentMethod (pm) {
-    try {
-      const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
-        method: 'PUT',
-        body: JSON.stringify(pm),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const resJson = await res.json()
-
-      if (!res.ok) {
-        return alert(resJson.error)
+    const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ nonce: pm.nonce }),
+      headers: {
+        'Content-Type': 'application/json'
       }
-    } catch (e) {
-      return alert(e.message)
+    })
+
+    const resJson = await res.json()
+
+    if (!res.ok) {
+      throw new Error(resJson && resJson.error ? resJson.error : res.statusText)
     }
 
     this.load()

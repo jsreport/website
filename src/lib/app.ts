@@ -148,6 +148,7 @@ client.connect(err => {
   app.get('/payments/*', router.payments)
   app.post('/api/checkout', bodyParser.json(), router.checkoutSubmit)
   app.post('/api/validate-vat', bodyParser.json(), router.validateVat)
+  app.post('/api/customer-link', bodyParser.json(), router.customerLink)
   app.get('/api/braintree-token', router.braintreeToken)
   app.get('/api/customer/:id', router.customerApi)
   app.delete('/api/customer/:customerId/subscription/:productId', router.cancelSubscription)

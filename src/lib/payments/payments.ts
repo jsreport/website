@@ -11,6 +11,7 @@ import { cancelSubscription } from './cancelSubscription'
 import { braintreeHook } from './braintreeHook'
 import { Services } from './services'
 import { renderInvoice, readInvoice } from './renderInvoice'
+import { sendCustomerLink } from './sendCustomerLink'
 
 const braintree = new Braintree()
 
@@ -66,6 +67,11 @@ export default class Payments {
   braintreeHook(signature, body) {
     logger.info('Parsing braintree hook')
     return braintreeHook(this.services)(signature, body)
+  }
+
+  customerLink(email) {
+    logger.info('Request customer link ' + email)
+    return sendCustomerLink(this.services)(email)
   }
 }
 /*

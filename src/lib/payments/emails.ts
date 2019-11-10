@@ -130,5 +130,14 @@ jsreport team`
 <br>
 jsreport team`
         }
+    },
+    customerLink: {
+        subject: 'jsreport customer dashboard link',
+        content: `Hi,<br/>        
+you requested link to your jsreport customer dashboard. Here it is<br/><br/>
+<a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br/>
+<br/>
+jsreport team
+        `
     }
 }

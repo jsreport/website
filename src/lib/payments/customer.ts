@@ -66,6 +66,15 @@ export class CustomerRepository {
         return <Customer>customer
     }
 
+    async findByEmail(email: string) {
+        const customer = await this.db.collection('customers').findOne({ email })
+        if (!customer) {
+            throw new Error('Customer not found')
+        }
+
+        return <Customer>customer
+    }
+
     async findOrCreate(email) {
         let customer = await this.db.collection('customers').findOne({ email })
 

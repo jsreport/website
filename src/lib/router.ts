@@ -167,7 +167,7 @@ export default function (payments, db) {
 
     updatePaymentMethod(req, res, next) {
       return payments
-        .updatePaymentMethod(req.params.customerId, req.params.productId, req.body)
+        .updatePaymentMethod(req.params.customerId, req.params.productId, req.body.nonce)
         .then(() => res.send({ result: 'ok' }))
         .catch(next)
     },
@@ -175,6 +175,13 @@ export default function (payments, db) {
     braintreeHook(req, res, next) {
       return payments
         .braintreeHook(req.body.bt_signature, req.body.bt_payload)
+        .then(() => res.send('ok'))
+        .catch(next)
+    },
+
+    customerLink(req, res, next) {
+      return payments
+        .customerLink(req.body.email)
         .then(() => res.send('ok'))
         .catch(next)
     }

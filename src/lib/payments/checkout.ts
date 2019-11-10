@@ -67,7 +67,7 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
         const sr = await services.braintree.createSubscription({
             paymentMethodToken: pmr.paymentMethod.token,
             planId: checkoutData.product.code + (checkoutData.vatRate !== 0 ? 'VAT' : ''),
-            merchantAccountId: 'jsreportsro'
+            merchantAccountId: 'jsreportusd'
         })
 
         if (sr.success === false) {

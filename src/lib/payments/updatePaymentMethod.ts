@@ -21,8 +21,8 @@ export const updatePaymentMethod = (services: Services) => async (customerId: st
     const sres = await services.braintree.updateSubscription(product.braintree.subscription.id, {
         paymentMethodToken: pmr.paymentMethod.token,
         id: product.braintree.subscription.id,
-        merchantAccountId: null,
-        planId: null
+        merchantAccountId: product.braintree.subscription.merchantAccountId,
+        planId: product.braintree.subscription.planId
     })
 
     if (sres.success === false) {
