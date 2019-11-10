@@ -8,11 +8,10 @@ import { checkout, CheckoutRequest } from './checkout'
 import { notifyLicensingServer } from './notifyLicensingServer'
 import { updatePaymentMethod } from './updatePaymentMethod'
 import { cancelSubscription } from './cancelSubscription'
-import braintreeHook from './braintreeHook'
-import JsreportClient from 'jsreport-client'
+import { braintreeHook } from './braintreeHook'
 import { Services } from './services'
+import { renderInvoice, readInvoice } from './renderInvoice'
 
-const jsreportClient = JsreportClient(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD)
 const braintree = new Braintree()
 
 export default class Payments {
@@ -29,16 +28,7 @@ export default class Payments {
       braintree,
       sendEmail,
       notifyLicensingServer,
-      render: async (data) => {
-        const renderResult = await jsreportClient.render({
-          template: {
-            name: '/payments/invoice'
-          },
-          data
-        })
-
-        return renderResult.body()
-      }
+      renderInvoice
     }
   }
 
@@ -62,9 +52,10 @@ export default class Payments {
     return this.customerRepository.find(id)
   }
 
-  async invoice(customerId, invoiceId) {
-    logger.info('Downloading invoice ' + invoiceId)
-    return this.customerRepository.invoice(customerId, invoiceId)
+  async invoice(customerId, saleId) {
+    logger.info('Downloading invoice ' + saleId)
+    const sale = await this.customerRepository.findSale(customerId, saleId)
+    return readInvoice(sale.blobName)
   }
 
   async cancelSubscription(customerId, productId) {

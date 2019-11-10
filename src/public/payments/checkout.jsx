@@ -103,12 +103,10 @@ class Checkout extends React.Component {
         email: this.state.email,
         nonce: pm.nonce,
         product: product(),
-        customer: {
-          name: this.state.name,
-          address: this.state.address,
-          country,
-          vatNumber: this.state.vatNumber
-        },
+        name: this.state.name,
+        address: this.state.address,
+        country: country.name,
+        vatNumber: this.state.vatNumber,
         currency,
         isEU: country.eu
       }),

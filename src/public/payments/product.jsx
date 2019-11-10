@@ -16,20 +16,46 @@ function addYear (d) {
   return d
 }
 
-function Invoice ({ invoice, customerId }) {
+function Invoice ({ sale, customerId }) {
   return (
     <div>
       <div>
         <a
-          href={`/payments/customer/${customerId}/invoice/${invoice.data.invoiceId}`}
+          href={`/payments/customer/${customerId}/invoice/${sale.id}`}
           target='_blank'
           className='text-center fg-cyan fg-hover-green'
           style={{ cursor: 'pointer' }}
         >
-          <span className='padding5'>{invoice.data.invoiceId}</span>
-          <span className='padding5'>{invoice.data.amount + currencyChar(invoice.data.currency)}</span>
+          <span className='padding5'>{sale.id}</span>
+          <span className='padding5'>{sale.accountingData.amount + currencyChar(sale.accountingData.currency)}</span>
           <i className='padding5 icon-download' />
         </a>
+      </div>
+    </div>
+  )
+}
+
+function Support ({ product }) {
+  return (
+    <div className='row'>
+      <div>
+        <h3>SUPPORT</h3>
+      </div>
+      <div>
+        Please register to the{' '}
+        <a href='https://support.jsreport.net' target='_blank'>
+          support portal
+        </a>{' '}
+        and follow the instructions there.
+        <br />
+        <br />
+        You can also use email support@jsreport.net for support questions and incidents.
+        <br />
+        However, the support portal is the preferred way to contact us.
+        <br />
+        Please always mention your're support subscriber in case you decide to use the email.
+        <br />
+        <br />
       </div>
     </div>
   )
@@ -153,23 +179,36 @@ export default class Product extends React.Component {
         <div className='section bg-darkCyan'>
           <div className='text-center'>
             <h2 className='fg-white buy-title'>{products[this.state.code].name}</h2>
-            <small className='fg-grayLighter'>Purchased on {new Date(this.state.purchaseDate).toLocaleDateString()}</small>
+            <div>
+              <small className='fg-grayLighter'>Purchased on {new Date(this.state.sales[0].purchaseDate).toLocaleDateString()}</small>
+            </div>
+            <div>
+              <small>
+                <a className='fg-grayLighter' style={{ cursor: 'pointer' }} href={'/payments/customer/' + this.props.match.params.customer}>
+                  <i className='icon-arrow-left-3' /> Back to customer dashboard <i className='icon-arrow-left-3' />
+                </a>
+              </small>
+            </div>
           </div>
         </div>
         <div className='grid container small section text-center'>
-          <div className='row'>
-            <div>
-              <h3>LICENSE KEY</h3>
+          {this.state.isSupport ? (
+            <Support product={this.state} />
+          ) : (
+            <div className='row'>
+              <div>
+                <h3>LICENSE KEY</h3>
+              </div>
+              <LicenseKey licenseKey={this.state.licenseKey} />
             </div>
-            <LicenseKey licenseKey={this.state.licenseKey} />
-          </div>
+          )}
           <div className='row'>{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>
           <div className='row'>
             <div>
               <h3>Invoices</h3>
             </div>
-            {this.state.invoices.map(i => (
-              <Invoice invoice={i} customerId={this.props.match.params.customer} key={i.data.invoiceId} />
+            {this.state.sales.map(s => (
+              <Invoice sale={s} customerId={this.props.match.params.customer} key={s.id} />
             ))}
           </div>
         </div>

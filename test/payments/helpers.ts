@@ -11,7 +11,8 @@ export function createAccountingData(): AccountingData {
         price: 295,
         vatAmount: 0,
         vatRate: 0,
-        vatNumber: 'CZ0102'
+        vatNumber: 'CZ0102',
+        item: 'jsreport enterprise subscription'
     }
 }
 
@@ -21,6 +22,7 @@ export function createProduct(): Product {
         braintree: { subscription: { id: 'braintreesubscriptionid' } },
         code: 'enterpriseSubscription',
         id: 'id',
+        isSupport: false,
         isSubscription: true,
         licenseKey: 'licensekey',
         name: 'jsreport enterprise subscription',
@@ -30,14 +32,9 @@ export function createProduct(): Product {
             nextBillingDate: new Date()
         },
         sales: [{
-            invoice: {
-                buffer: Buffer.from('a'),
-                data: {
-                    accountingData: createAccountingData(),
-                    id: 'id',
-                    purchaseDate: new Date()
-                }
-            },
+            accountingData: createAccountingData(),
+            id: 'id',
+            blobName: 'id.pdf',
             purchaseDate: new Date()
         }]
     }

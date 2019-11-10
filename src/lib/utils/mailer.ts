@@ -3,7 +3,7 @@ import sendgrid from 'sendgrid'
 import * as logger from './logger.js'
 const helper = sendgrid.mail
 
-export type Mail = {
+export type Email = {
   to: string,
   subject: string,
   content: string
@@ -16,7 +16,7 @@ export const sendEmail = (Mail) => {
 
   const fromEmail = new helper.Email('support@jsreport.net')
   const toEmail = new helper.Email(Mail.to)
-  const contentEmail = new helper.Content('text/plain', Mail.content)
+  const contentEmail = new helper.Content('text/html', Mail.content)
   const mail = new helper.Mail(fromEmail, Mail.subject, toEmail, contentEmail)
 
   const request = sg.emptyRequest({

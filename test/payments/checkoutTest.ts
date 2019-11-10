@@ -1,6 +1,7 @@
 import databaseTest from './databaseTest'
 import { checkout, CheckoutRequest } from '../../src/lib/payments/checkout'
-import { Customer, CustomerRepository, AccountingData, InvoiceData, Invoice } from '../../src/lib/payments/customer'
+import { Customer, CustomerRepository, AccountingData, Product, Sale } from '../../src/lib/payments/customer'
+import { Email } from '../../src/lib/utils/mailer'
 import 'should'
 import { Db } from 'mongodb'
 
@@ -19,6 +20,7 @@ databaseTest((getDb) => {
             product: {
                 code: 'enterpriseSubscription',
                 isSubscription: true,
+                isSupport: false,
                 name: 'jsreport enterprise subscription',
                 permalink: 'permalink'
             },
@@ -37,7 +39,7 @@ databaseTest((getDb) => {
             customerRepository = new CustomerRepository(db)
         })
 
-        it('checkout subscription', async () => {
+        it('subscription', async () => {
             const checkoutData = createCheckoutData()
             const braintree: any = {}
 
@@ -53,19 +55,24 @@ databaseTest((getDb) => {
                 return { success: true, subscription: { nextBillingDate: new Date(2050, 1, 1) } }
             }
 
+            const emails: Array<Email> = []
+            let customer: Customer
 
             await checkout({
                 braintree,
                 customerRepository,
-                sendEmail: () => { },
-                notifyLicensingServer: async (o) => ({}),
-                render: async () => Buffer.from('a')
+                sendEmail: (e) => emails.push(e),
+                notifyLicensingServer: async (c: Customer, p: Product, s: Sale) => {
+                    c.email.should.be.eql(checkoutData.email)
+                    p.should.be.ok()
+                    s.should.be.ok()
+                },
+                renderInvoice: async () => { }
             })(checkoutData)
 
-            const customer: Customer = await db.collection('customers').findOne({})
+            customer = await db.collection('customers').findOne({})
             customer.email.should.be.eql(checkoutData.email)
             customer.creationDate.should.be.Date()
-            customer.products.should.have.length(1)
             const product = customer.products[0]
             product.licenseKey.should.be.ok()
             product.subscription.nextBillingDate.should.be.Date()
@@ -80,16 +87,21 @@ databaseTest((getDb) => {
             product.accountingData.vatAmount.should.be.eql(checkoutData.vatAmount)
             product.accountingData.vatNumber.should.be.eql(checkoutData.vatNumber)
             product.accountingData.vatRate.should.be.eql(checkoutData.vatRate)
+            product.braintree.paymentMethod.should.be.ok()
+            product.braintree.subscription.should.be.ok()
 
-            product.sales.should.have.length(1)
             const sale = product.sales[0]
-            sale.invoice.buffer.toString().should.be.eql('a')
-            sale.invoice.data.purchaseDate.should.be.Date()
             sale.purchaseDate.should.be.Date()
-            JSON.stringify(sale.invoice.data.accountingData).should.be.eql(JSON.stringify(product.accountingData))
+            sale.purchaseDate.should.be.Date()
+            JSON.stringify(sale.accountingData).should.be.eql(JSON.stringify(product.accountingData))
+
+            emails.should.have.length(2)
+            emails[0].to.should.be.eql(customer.email)
+            emails[0].subject.should.containEql('enterprise subscription')
+            emails[0].content.should.containEql(product.licenseKey)
         })
 
-        it('checkout onetime', async () => {
+        it('onetime', async () => {
             const checkoutData = createCheckoutData()
             checkoutData.product.isSubscription = false
 
@@ -104,7 +116,7 @@ databaseTest((getDb) => {
                 customerRepository,
                 sendEmail: () => { },
                 notifyLicensingServer: async (o) => ({}),
-                render: async () => Buffer.from('a')
+                renderInvoice: async () => { }
             })(checkoutData)
 
 

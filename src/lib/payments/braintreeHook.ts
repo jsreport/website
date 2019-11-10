@@ -1,61 +1,103 @@
 import * as logger from '../utils/logger'
 import { Services } from './services'
-import { Invoice } from './customer'
+import { interpolate } from '../utils/utils'
+import { Emails } from './emails'
 
 
-export default function (services: Services) {
-    async function processSubscriptionChargeNotif(payload) {
-        logger.info('Search for customer with subscription id ' + payload.subscription.id)
-        const customer = await services.customerRepository.findBySubscription(payload.subscription.id)
+export function braintreeHook(services: Services) {
+    async function processSubscriptionChargeNotif(subscription) {
+        logger.info('Search for customer with subscription id ' + subscription.id)
+        const customer = await services.customerRepository.findBySubscription(subscription.id)
 
         if (!customer) {
             throw Error('Unable to find customer with subscription')
         }
 
-        const product = customer.products.find(p => p.braintree.subscription.id === payload.subscription.id)
-        product.subscription.nextBillingDate = payload.subscription.nextBillingDate
-        product.braintree.subscription = payload.subscription
+        logger.info('Processing subscription successful charge notification for customer ' + customer.email)
 
-        const invoiceData = await services.customerRepository.createInvoiceData(product.accountingData)
-        const invoice: Invoice = {
-            buffer: await services.render(invoiceData),
-            data: invoiceData
-        }
+        const product = customer.products.find(p => p.braintree.subscription.id === subscription.id)
+        product.subscription.nextBillingDate = subscription.nextBillingDate
+        product.braintree.subscription = subscription
 
-        product.sales.push({
-            invoice,
-            purchaseDate: new Date()
-        })
+        const sale = await services.customerRepository.createSale(product.accountingData)
+        await services.renderInvoice(sale)
+        product.sales.push(sale)
 
         await services.customerRepository.update(customer)
+        await services.notifyLicensingServer(customer, product, sale)
 
-        /*
-        email: paymentInfo.email,
-        purchaseDate: paymentInfo.purchaseDate,
-        customer: paymentInfo.customer,
-        price: paymentInfo.amount,
-        currency: paymentInfo.currency,
-        invoiceId: paymentInfo.invoiceId,
-        license_key: paymentInfo.license_key,
-        braintree: true,
-        product_name: paymentInfo.product.name,
-        permalink: paymentInfo.product.permalink
-        */
+        await services.sendEmail({
+            to: customer.email,
+            content: interpolate(Emails.recurring.customer.content, { customer, product, sale }),
+            subject: interpolate(Emails.recurring.customer.subject, { customer, product, sale }),
+        })
 
-        /*
-      await notifyGumroadHook({
-        email: customer.email,
-        purchaseDate: new Date(),
-        braintree: true,
-        license_key: product.licenseKey,
-        product_name: product.name,
-        permalink: product.permalink,
-        ...invoiceData
-      })
-      */
+        await services.sendEmail({
+            to: 'jan.blaha@jsreport.net',
+            content: interpolate(Emails.recurring.us.content, { customer, product, sale }),
+            subject: interpolate(Emails.recurring.us.subject, { customer, product, sale }),
+        })
     }
 
-    async function processSubscriptionFailedChargeNotif(subscription) { }
+    async function processSubscriptionFailedChargeNotif(subscription) {
+        logger.info('Search for customer with subscription id ' + subscription.id)
+        const customer = await services.customerRepository.findBySubscription(subscription.id)
+
+        if (!customer) {
+            throw Error('Unable to find customer with subscription')
+        }
+
+        logger.info('Processing subscription failed charge notification for customer ' + customer.email)
+
+        const product = customer.products.find(p => p.braintree.subscription.id === subscription.id)
+        product.braintree.subscription = subscription
+        await services.customerRepository.update(customer)
+
+        await services.sendEmail({
+            to: customer.email,
+            content: interpolate(Emails.recurringFail.customer.content, { customer, product }),
+            subject: interpolate(Emails.recurringFail.customer.subject, { customer, product }),
+        })
+
+        await services.sendEmail({
+            to: 'jan.blaha@jsreport.net',
+            content: interpolate(Emails.recurringFail.us.content, { customer, product }),
+            subject: interpolate(Emails.recurringFail.us.subject, { customer, product }),
+        })
+    }
+
+    async function processSubscriptionCanceledNotif(subscription) {
+        logger.info('Search for customer with subscription id ' + subscription.id)
+        const customer = await services.customerRepository.findBySubscription(subscription.id)
+
+        if (!customer) {
+            throw Error('Unable to find customer with subscription')
+        }
+
+        logger.info('Processing subscription canceled notification for customer ' + customer.email)
+
+        const product = customer.products.find(p => p.braintree.subscription.id === subscription.id)
+
+        if (product.subscription.state !== 'active') {
+            logger.info('Subscription already canceled, skipping')
+            return
+        }
+
+        product.braintree.subscription = subscription
+        await services.customerRepository.update(customer)
+
+        await services.sendEmail({
+            to: customer.email,
+            content: interpolate(Emails.recurringCancel.customer.content, { customer, product }),
+            subject: interpolate(Emails.recurringCancel.customer.subject, { customer, product }),
+        })
+
+        await services.sendEmail({
+            to: 'jan.blaha@jsreport.net',
+            content: interpolate(Emails.recurringCancel.us.content, { customer, product }),
+            subject: interpolate(Emails.recurringCancel.us.subject, { customer, product }),
+        })
+    }
 
     return async function (signature, body) {
         const webhookNotification = await services.braintree.parseWebHook(signature, body)
@@ -67,6 +109,8 @@ export default function (services: Services) {
                     return processSubscriptionChargeNotif(webhookNotification.subscription)
                 case 'subscription_charged_unsuccessfully':
                     return processSubscriptionFailedChargeNotif(webhookNotification.subscription)
+                case 'subscription_canceled':
+                    return processSubscriptionCanceledNotif(webhookNotification.subscription)
                 default:
                     logger.info('skip processing ' + webhookNotification.kind)
             }

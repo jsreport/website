@@ -11,23 +11,15 @@ export type AccountingData = {
     currency: string,
     price: number,
     amount: number,
-    vatAmount: number
-}
-
-export type InvoiceData = {
-    id: string,
-    purchaseDate: Date,
-    accountingData: AccountingData
-}
-
-export type Invoice = {
-    data: InvoiceData
-    buffer: Buffer
+    vatAmount: number,
+    item: string
 }
 
 export type Sale = {
     purchaseDate: Date
-    invoice: Invoice
+    accountingData: AccountingData,
+    id: string,
+    blobName: string
 }
 
 export type Subscription = {
@@ -37,8 +29,9 @@ export type Subscription = {
 
 export type Product = {
     id: string
-    licenseKey: string
+    licenseKey?: string
     isSubscription: boolean
+    isSupport: boolean
     code: string
     permalink: string
     name: string
@@ -95,24 +88,24 @@ export class CustomerRepository {
         return this.db.collection('customers').updateOne({ _id: customer._id }, { $set: { ...customer } })
     }
 
-    async invoice(customerId, invoiceId) {
+    async findSale(customerId, saleId): Promise<Sale> {
         const customer = await this.find(customerId)
 
-        const invoice = Array.prototype.concat(...customer.products.map(p => p.sales)).find(s => s.invoice.id === invoiceId)
+        const sale = Array.prototype.concat(...customer.products.map(p => p.sales)).find(s => s.id === saleId)
 
-        if (!invoice) {
-            throw new Error('Invoice not found')
+        if (!sale) {
+            throw new Error(`Invoice ${saleId} not found`)
         }
 
-        return invoice.buffer.buffer
+        return sale
     }
 
     async findBySubscription(subscriptionId) {
-        const customer = await this.db.collection('customer').findOne({ products: { $elemMatch: { 'braintree.subscription.id': subscriptionId } } })
+        const customer = await this.db.collection('customers').findOne({ products: { $elemMatch: { 'braintree.subscription.id': subscriptionId } } })
         return <Customer>customer
     }
 
-    async createInvoiceData(data: AccountingData) {
+    async createSale(data: AccountingData) {
         await this.db.collection('invoiceCounter').updateOne(
             {},
             {
@@ -127,13 +120,14 @@ export class CustomerRepository {
         }
 
         const id = `${new Date().getFullYear()}-${counter.nextId}B`
-        const invoiceData: InvoiceData = {
+        const sale: Sale = {
             accountingData: data,
             id: id,
+            blobName: `${id}.pdf`,
             purchaseDate: new Date()
         }
 
-        return invoiceData
+        return sale
     }
 }
 

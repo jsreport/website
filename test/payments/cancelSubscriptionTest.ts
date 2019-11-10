@@ -4,6 +4,7 @@ import { CustomerRepository } from '../../src/lib/payments/customer'
 import 'should'
 import { Db } from 'mongodb'
 import { createProduct } from './helpers'
+import { Email } from '../../src/lib/utils/mailer'
 
 databaseTest((getDb) => {
     describe('cancelSubscription', () => {
@@ -28,13 +29,18 @@ databaseTest((getDb) => {
                 subscriptionId.should.be.eql(customer.products[0].braintree.subscription.id)
             }
 
+            const emails: Array<Email> = []
             await cancelSubscription({
                 customerRepository,
-                braintree
+                braintree,
+                sendEmail: async (m) => emails.push(m)
             })(customer.uuid, customer.products[0].id)
 
             const updatedCustomer = await customerRepository.find(customer.uuid)
             updatedCustomer.products[0].subscription.state.should.be.eql('canceled')
+
+            emails[0].to.should.be.eql(customer.email)
+            emails[0].content.should.containEql('canceled')
         })
     })
 })

@@ -1,5 +1,3 @@
-import { CustomerRepository } from "./customer"
-import Braintree from "./braintree"
 import * as logger from '../utils/logger'
 import { Services } from "./services"
 

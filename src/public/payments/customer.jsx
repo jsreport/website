@@ -14,18 +14,24 @@ function Product ({ product, onClick }) {
     <div className='list marked' onClick={onClick}>
       <div className='list-content'>
         <h3>
-          {products[product.code].name}
+          {products[product.code].name} {product.isSubscription && product.subscription.state === 'canceled' ? '( canceled )' : ''}
           <div>
-            <small>Purchased on {new Date(product.purchaseDate).toLocaleDateString()}</small>
+            <small>Purchased on {new Date(product.sales[0].purchaseDate).toLocaleDateString()}</small>
           </div>
         </h3>
 
-        <div className='padding5'>
+        {product.licenseKey ? (
           <div>
-            <span>License key</span>
+            <div className='padding5'>
+              <div>
+                <span>License key</span>
+              </div>
+            </div>
+            <LicenseKey licenseKey={product.licenseKey} />
           </div>
-        </div>
-        <LicenseKey licenseKey={product.licenseKey} />
+        ) : (
+          <div />
+        )}
       </div>
     </div>
   )
@@ -68,7 +74,7 @@ class Customer extends React.Component {
           <div className='row'>
             <div className='listview-outlook'>
               {products.map(p => (
-                <Product key={p.purchaseDate} product={p} onClick={() => this.openProductDetail(p)} />
+                <Product key={p.id} product={p} onClick={() => this.openProductDetail(p)} />
               ))}
             </div>
           </div>

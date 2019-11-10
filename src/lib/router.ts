@@ -114,7 +114,7 @@ export default function (payments, db) {
     },
 
     payments(req, res) {
-      return res.render('../dist/app.html', {
+      return res.render('../dist/public/app.html', {
         title: 'jsreport customers'
       })
     },
