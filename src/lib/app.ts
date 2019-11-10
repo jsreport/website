@@ -12,6 +12,7 @@ import * as logger from './utils/logger'
 import { MongoClient } from 'mongodb'
 import Payments from './payments/payments'
 import Posts from './posts'
+import rateLimit from 'express-rate-limit'
 
 const app = express()
 logger.init()
@@ -144,16 +145,21 @@ client.connect(err => {
     app.listen(process.env.PORT || 3000)
   }).catch(logger.error)
 
-  app.get('/payments/customer/:customerId/invoice/:invoiceId', router.invoice)
-  app.get('/payments/*', router.payments)
-  app.post('/api/checkout', bodyParser.json(), router.checkoutSubmit)
-  app.post('/api/validate-vat', bodyParser.json(), router.validateVat)
-  app.post('/api/customer-link', bodyParser.json(), router.customerLink)
-  app.get('/api/braintree-token', router.braintreeToken)
-  app.get('/api/customer/:id', router.customerApi)
-  app.delete('/api/customer/:customerId/subscription/:productId', router.cancelSubscription)
-  app.put('/api/customer/:customerId/subscription/:productId', bodyParser.json(), router.updatePaymentMethod)
-  app.post('/api/braintree/hook', bodyParser.urlencoded(), router.braintreeHook)
+  const limiter = rateLimit({
+    windowMs: 10000,
+    max: 20
+  })
+
+  app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice)
+  app.get('/payments/*', limiter, router.payments)
+  app.post('/api/checkout', [limiter, bodyParser.json()], router.checkoutSubmit)
+  app.post('/api/validate-vat', [limiter, bodyParser.json()], router.validateVat)
+  app.post('/api/customer-link', [limiter, bodyParser.json()], router.customerLink)
+  app.get('/api/braintree-token', limiter, router.braintreeToken)
+  app.get('/api/customer/:id', limiter, router.customerApi)
+  app.delete('/api/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription)
+  app.put('/api/customer/:customerId/subscription/:productId', [limiter, bodyParser.json()], router.updatePaymentMethod)
+  app.post('/api/braintree/hook', [limiter, bodyParser.urlencoded()], router.braintreeHook)
 
   app.use((err, req, res, next) => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)
