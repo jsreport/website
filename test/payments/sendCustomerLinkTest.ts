@@ -6,7 +6,7 @@ import { Db } from 'mongodb'
 import { Email } from '../../src/lib/utils/mailer'
 
 databaseTest((getDb) => {
-    describe.only('send customer link', () => {
+    describe('send customer link', () => {
         let db: Db
         let customerRepository: CustomerRepository
 

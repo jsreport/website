@@ -112,7 +112,7 @@ databaseTest((getDb) => {
         it('on cancel should skip for already canceled subscription', async () => {
             const customer = await customerRepository.findOrCreate('a@a.com')
             customer.products = [createProduct()]
-            customer.products[0].subscription.state = 'canceled'
+            customer.products[0].braintree.subscription.status = 'Canceled'
             await customerRepository.update(customer)
 
             const braintree = <any>{}

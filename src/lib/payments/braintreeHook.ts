@@ -15,8 +15,7 @@ export function braintreeHook(services: Services) {
 
         logger.info('Processing subscription successful charge notification for customer ' + customer.email)
 
-        const product = customer.products.find(p => p.braintree.subscription.id === subscription.id)
-        product.subscription.nextBillingDate = subscription.nextBillingDate
+        const product = customer.products.find(p => p.braintree.subscription && p.braintree.subscription.id === subscription.id)
         product.braintree.subscription = subscription
 
         const sale = await services.customerRepository.createSale(product.accountingData)
@@ -49,7 +48,7 @@ export function braintreeHook(services: Services) {
 
         logger.info('Processing subscription failed charge notification for customer ' + customer.email)
 
-        const product = customer.products.find(p => p.braintree.subscription.id === subscription.id)
+        const product = customer.products.find(p => p.braintree.subscription && p.braintree.subscription.id === subscription.id)
         product.braintree.subscription = subscription
         await services.customerRepository.update(customer)
 
@@ -76,9 +75,9 @@ export function braintreeHook(services: Services) {
 
         logger.info('Processing subscription canceled notification for customer ' + customer.email)
 
-        const product = customer.products.find(p => p.braintree.subscription.id === subscription.id)
+        const product = customer.products.find(p => p.braintree.subscription && p.braintree.subscription.id === subscription.id)
 
-        if (product.subscription.state !== 'active') {
+        if (product.braintree.subscription.status !== 'Active') {
             logger.info('Subscription already canceled, skipping')
             return
         }

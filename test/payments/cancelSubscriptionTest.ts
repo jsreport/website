@@ -37,7 +37,7 @@ databaseTest((getDb) => {
             })(customer.uuid, customer.products[0].id)
 
             const updatedCustomer = await customerRepository.find(customer.uuid)
-            updatedCustomer.products[0].subscription.state.should.be.eql('canceled')
+            updatedCustomer.products[0].braintree.subscription.status.should.be.eql('Canceled')
 
             emails[0].to.should.be.eql(customer.email)
             emails[0].content.should.containEql('canceled')

@@ -1,6 +1,6 @@
 import * as logger from '../utils/logger'
 import Uuid from 'uuid/v4'
-import { AccountingData, Product, Sale, Subscription } from './customer'
+import { AccountingData, Product } from './customer'
 import nanoid from 'nanoid'
 import { Emails } from './emails'
 import { Services } from './services'
@@ -36,7 +36,6 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
     const customer = await services.customerRepository.findOrCreate(checkoutData.email)
 
     let productBraintree: any = {}
-    let subscription: Subscription = null
 
     if (checkoutData.product.isSubscription) {
         if (customer.braintree == null) {
@@ -76,7 +75,6 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
 
         productBraintree.paymentMethod = pmr.paymentMethod
         productBraintree.subscription = sr.subscription
-        subscription = { state: 'active', nextBillingDate: sr.subscription.nextBillingDate }
     } else {
         await services.braintree.createSale({
             amount: checkoutData.amount,
@@ -110,15 +108,8 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
         id: nanoid(4),
         sales: [],
         braintree: productBraintree,
-        accountingData
-    }
-
-    if (!product.isSupport) {
-        product.licenseKey = uuid()
-    }
-
-    if (subscription) {
-        product.subscription = subscription
+        accountingData,
+        licenseKey: checkoutData.product.isSupport ? null : uuid()
     }
 
     const sale = await services.customerRepository.createSale(accountingData)

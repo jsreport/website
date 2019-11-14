@@ -8,7 +8,7 @@ export const cancelSubscription = (services: Services) => async (customerId, pro
 
     await services.braintree.cancelSubscription(product.braintree.subscription.id)
 
-    product.subscription.state = 'canceled'
+    product.braintree.subscription.status = 'Canceled'
     Object.assign(customer.products.find(p => p.id === productId), product)
     await services.customerRepository.update(customer)
 

@@ -98,10 +98,13 @@ export default class Product extends React.Component {
       }
 
       this.setState({
-        subscription: {
-          ...this.state.subscription,
-          state: 'canceled'
-        }
+        braintree: {
+          ...this.state.braintree,
+          subscription: {
+            ...this.state.braintree.subscription,
+            status: 'Canceled'
+          }
+        }       
       })
     } catch (e) {
       return alert(e.message)
@@ -126,24 +129,38 @@ export default class Product extends React.Component {
     this.load()
   }
 
+  renderBankCard () {
+    return (
+      <React.Fragment>
+        {this.state.braintree.paymentMethod.maskedNumber ? (
+          <span>
+            The current used bank card is {this.state.braintree.paymentMethod.maskedNumber} expiring on {this.state.braintree.paymentMethod.expirationMonth}/
+            {this.state.braintree.paymentMethod.expirationYear}
+          </span>
+        ) : (
+          <span>paypal account: {this.state.braintree.paymentMethod.email}</span>
+        )}
+      </React.Fragment>
+    )
+  }
+
   renderSubscrption () {
     return (
       <React.Fragment>
         <div>
           <h3>SUBSCRIPTION</h3>
         </div>
-        {this.state.subscription.state === 'active' ? (
+        {this.state.braintree.subscription.status !== 'Canceled' ? (
           <div>
             <p>
               The next payment is planned on {addYear(new Date(this.state.braintree.subscription.nextBillingDate)).toLocaleDateString()}
               <br />
-              The current used bank card is {this.state.braintree.paymentMethod.maskedNumber} expiring on {this.state.braintree.paymentMethod.expirationMonth}/
-              {this.state.braintree.paymentMethod.expirationYear}
+              {this.renderBankCard()}
             </p>
             {!this.state.updating ? (
               <React.Fragment>
                 <button className='button info' style={{ marginRight: '10px' }} onClick={() => this.setState({ updating: true })}>
-                  Update bank card
+                  Update payment
                 </button>
                 <button className='button danger' onClick={() => this.cancel()}>
                   Cancel
@@ -196,6 +213,11 @@ export default class Product extends React.Component {
                 <h3>LICENSE KEY</h3>
               </div>
               <LicenseKey licenseKey={this.state.licenseKey} />
+              <div>
+                <a href='https://jsreport.net/learn/faq#how-to-apply-license-key' target='_blank'>
+                  license key application instructions
+                </a>
+              </div>
             </div>
           )}
           <div className='row'>{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>

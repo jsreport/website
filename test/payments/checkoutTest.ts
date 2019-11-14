@@ -52,7 +52,7 @@ databaseTest((getDb) => {
             braintree.createSubscription = (s) => {
                 s.paymentMethodToken.should.be.eql('token')
                 s.planId.should.be.eql('enterpriseSubscription')
-                return { success: true, subscription: { nextBillingDate: new Date(2050, 1, 1) } }
+                return { success: true, subscription: { nextBillingDate: new Date(2050, 1, 1), status: 'Active', id: 'id' } }
             }
 
             const emails: Array<Email> = []
@@ -75,8 +75,7 @@ databaseTest((getDb) => {
             customer.creationDate.should.be.Date()
             const product = customer.products[0]
             product.licenseKey.should.be.ok()
-            product.subscription.nextBillingDate.should.be.Date()
-            product.subscription.state.should.be.eql('active')
+            product.braintree.subscription.status.should.be.eql('Active')
             product.accountingData.address.should.be.eql(checkoutData.address)
             product.accountingData.amount.should.be.eql(checkoutData.amount)
             product.accountingData.country.should.be.eql(checkoutData.country)

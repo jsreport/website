@@ -44,6 +44,9 @@ export default class Braintree extends React.Component {
     const token = await window.fetch('/api/braintree-token').then(res => res.text())
     this.braintreeInstance = await braintree.dropin.create({
       authorization: token,
+      paypal: {
+        flow: 'vault'
+      },
       container: '#dropin-container'
     })
     this.setState({

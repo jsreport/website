@@ -19,7 +19,7 @@ export function createAccountingData(): AccountingData {
 export function createProduct(): Product {
     return {
         accountingData: createAccountingData(),
-        braintree: { subscription: { id: 'braintreesubscriptionid' } },
+        braintree: { subscription: { id: 'braintreesubscriptionid', status: 'Active' }, paymentMethod: {} },
         code: 'enterpriseSubscription',
         id: 'id',
         isSupport: false,
@@ -27,10 +27,6 @@ export function createProduct(): Product {
         licenseKey: 'licensekey',
         name: 'jsreport enterprise subscription',
         permalink: 'permalink',
-        subscription: {
-            state: 'active',
-            nextBillingDate: new Date()
-        },
         sales: [{
             accountingData: createAccountingData(),
             id: 'id',

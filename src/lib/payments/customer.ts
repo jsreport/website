@@ -22,9 +22,16 @@ export type Sale = {
     blobName: string
 }
 
-export type Subscription = {
-    nextBillingDate: Date,
-    state: 'active' | 'canceled'
+export type SubscriptionBraintree = {
+    status: string
+    id: string
+    merchantAccountId?: string
+    planId?: string
+}
+
+export type ProductBraintree = {
+    subscription: SubscriptionBraintree,
+    paymentMethod: any
 }
 
 export type Product = {
@@ -36,8 +43,7 @@ export type Product = {
     permalink: string
     name: string
     sales: Array<Sale>
-    braintree: any
-    subscription?: Subscription
+    braintree: ProductBraintree
     accountingData: AccountingData
 }
 
