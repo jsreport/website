@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const logger = __importStar(require("../utils/logger"));
 const util_1 = require("util");
 const validate_vat_1 = __importDefault(require("validate-vat"));
+const unescape_1 = __importDefault(require("unescape"));
 const validateVatUtil = util_1.promisify(validate_vat_1.default);
 async function default_1(vatNumber = '') {
     logger.debug('validating vat ' + vatNumber);
@@ -22,8 +23,8 @@ async function default_1(vatNumber = '') {
     }
     return {
         country: r.countryCode,
-        name: r.name,
-        address: r.address
+        name: unescape_1.default(r.name),
+        address: unescape_1.default(r.address)
     };
 }
 exports.default = default_1;

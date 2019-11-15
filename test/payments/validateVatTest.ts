@@ -8,7 +8,14 @@ describe('validate vat', () => {
         res.address.should.be.eql('Jičínská 226/17, PRAHA 3 - ŽIŽKOV, 130 00  PRAHA 3')
     })
 
+    it('validateVat should unescape entities', async () => {
+        const res = await validateVat('PL8522350387')
+        res.name.should.be.eql('"FLUID DESK" SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ')
+    })
+
+
     it('validateVat should throw on invalid address', () => {
         return validateVat('wrong').should.be.rejected()
     })
 })
+

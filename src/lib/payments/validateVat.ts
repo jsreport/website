@@ -1,6 +1,7 @@
 import * as logger from '../utils/logger'
 import { promisify } from 'util'
 import ValidateVat from 'validate-vat'
+import decodeXML from 'unescape'
 const validateVatUtil = promisify(ValidateVat)
 
 export default async function (vatNumber = '') {
@@ -13,7 +14,7 @@ export default async function (vatNumber = '') {
 
     return {
         country: r.countryCode,
-        name: r.name,
-        address: r.address
+        name: decodeXML(r.name),
+        address: decodeXML(r.address)
     }
 }
