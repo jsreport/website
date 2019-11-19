@@ -84,7 +84,7 @@ function braintreeHook(services) {
     }
     return async function (signature, body) {
         const webhookNotification = await services.braintree.parseWebHook(signature, body);
-        logger.info('processing braintree hook of kind ' + webhookNotification.kind);
+        logger.info('processing braintree hook ' + JSON.stringify(webhookNotification));
         try {
             switch (webhookNotification.kind) {
                 case 'subscription_charged_successfully':

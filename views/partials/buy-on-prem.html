@@ -120,6 +120,7 @@
     function contact(type) {
         if (window.location.search.indexOf('v2') !== -1) {
             window.location.pathname = '/payments/checkout/' + type
+            return
         }
 
         if (contactEmailSet) {
