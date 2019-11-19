@@ -12,6 +12,7 @@ exports.notifyLicensingServer = function (customer, product, sale) {
         braintreeSale: {
             productId: product.id,
             saleId: sale.id,
+            customerId: customer.uuid
         },
         product_name: product.name,
         permalink: product.permalink

@@ -10,6 +10,7 @@ export const notifyLicensingServer = function (customer: Customer, product: Prod
         braintreeSale: {
             productId: product.id,
             saleId: sale.id,
+            customerId: customer.uuid
         },
         product_name: product.name,
         permalink: product.permalink
