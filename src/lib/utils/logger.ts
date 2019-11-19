@@ -1,10 +1,10 @@
 const winston = require('winston')
-require('winston-loggly')
+const Loggly = require('winston-loggly-bulk').Loggly
 
 
 let _logger
 
-export let init = ({ loggly = null } = {}) => {
+export let init = (loggly = null) => {
   _logger = winston.createLogger({
     level: 'debug',
     format: winston.format.simple()
@@ -15,13 +15,13 @@ export let init = ({ loggly = null } = {}) => {
   })
 
   if (loggly) {
-    _logger.add(new winston.transports.Loggly(), {
+    _logger.add(new Loggly({
       level: loggly.level,
       token: loggly.token,
       subdomain: loggly.subdomain,
       json: true,
       tags: ['website']
-    })
+    }))
   }
 }
 

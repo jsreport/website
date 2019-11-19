@@ -26,7 +26,11 @@ const payments_1 = __importDefault(require("./payments/payments"));
 const posts_1 = __importDefault(require("./posts"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const app = express_1.default();
-logger.init();
+logger.init({
+    level: process.env.LOGGLY_LEVEL,
+    token: process.env.LOGGLY_TOKEN,
+    subdomain: process.env.LOGGLY_SUBDOMAIN
+});
 let connectionString = 'mongodb://';
 if (process.env.mongodb_username) {
     connectionString += process.env.mongodb_username + ':' + process.env.mongodb_password + '@';

@@ -15,7 +15,11 @@ import Posts from './posts'
 import rateLimit from 'express-rate-limit'
 
 const app = express()
-logger.init()
+logger.init({
+  level: process.env.LOGGLY_LEVEL,
+  token: process.env.LOGGLY_TOKEN,
+  subdomain: process.env.LOGGLY_SUBDOMAIN
+})
 
 let connectionString = 'mongodb://'
 

@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const winston = require('winston');
-require('winston-loggly');
+const Loggly = require('winston-loggly-bulk').Loggly;
 let _logger;
-exports.init = ({ loggly = null } = {}) => {
+exports.init = (loggly = null) => {
     _logger = winston.createLogger({
         level: 'debug',
         format: winston.format.simple()
@@ -12,13 +12,13 @@ exports.init = ({ loggly = null } = {}) => {
         level: 'debug'
     });
     if (loggly) {
-        _logger.add(new winston.transports.Loggly(), {
+        _logger.add(new Loggly({
             level: loggly.level,
             token: loggly.token,
             subdomain: loggly.subdomain,
             json: true,
             tags: ['website']
-        });
+        }));
     }
 };
 exports.info = (...args) => _logger.info.apply(_logger, args);
