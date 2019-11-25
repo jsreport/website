@@ -1,12 +1,19 @@
 import * as logger from '../utils/logger'
-import * as azure from 'azure-storage'
 import JsreportClient from 'jsreport-client'
+import * as fs from 'fs'
 import Promise from 'bluebird'
-import stream from 'stream'
+import * as path from 'path'
+Promise.promisifyAll(fs)
 
 const jsreportClient = JsreportClient(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD)
-const blobServiceAsync = Promise.promisifyAll(azure.createBlobService())
 
+if (!fs.existsSync(path.join(process.cwd(), 'data'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'data'))
+}
+
+if (!fs.existsSync(path.join(process.cwd(), 'data', 'invoices'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'data', 'invoices'))
+}
 
 export const renderInvoice = async (data) => {
     logger.info('request invoice generation in jo')
@@ -18,19 +25,10 @@ export const renderInvoice = async (data) => {
     })
 
     const buffer = await renderResult.body()
-    return blobServiceAsync.createBlockBlobFromTextAsync('invoices', data.id + '.pdf', buffer)
+    return fs.writeFileSync(path.join(process.cwd(), 'data', 'invoices', data.id + '.pdf'), buffer)
 }
 
 export const readInvoice = async (blobName: string) => {
-    const data = []
-    const writingStream = new stream.Writable({
-        write: (chunk, encoding, next) => {
-            data.push(chunk)
-            next()
-        }
-    })
-
-    await blobServiceAsync.getBlobToStreamAsync('invoices', blobName, writingStream)
-    return Buffer.concat(data)
+    return fs.readFileSync(path.join(process.cwd(), 'data', 'invoices', blobName))
 }
 

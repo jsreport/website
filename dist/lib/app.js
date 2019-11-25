@@ -154,7 +154,7 @@ client.connect(err => {
     app.get('/api/customer/:id', limiter, router.customerApi);
     app.delete('/api/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription);
     app.put('/api/customer/:customerId/subscription/:productId', [limiter, body_parser_1.default.json()], router.updatePaymentMethod);
-    app.post('/api/braintree/hook', [limiter, body_parser_1.default.urlencoded({ extended: false })], router.braintreeHook);
+    app.post('/api/braintree/hook', [limiter, body_parser_1.default.urlencoded()], router.braintreeHook);
     app.use((err, req, res, next) => {
         logger.error('Error when processing ' + req.path + '; ' + err.stack);
         res.status(500).send({ error: err.message });

@@ -11,12 +11,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger = __importStar(require("../utils/logger"));
-const azure = __importStar(require("azure-storage"));
 const jsreport_client_1 = __importDefault(require("jsreport-client"));
+const fs = __importStar(require("fs"));
 const bluebird_1 = __importDefault(require("bluebird"));
-const stream_1 = __importDefault(require("stream"));
+const path = __importStar(require("path"));
+bluebird_1.default.promisifyAll(fs);
 const jsreportClient = jsreport_client_1.default(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD);
-const blobServiceAsync = bluebird_1.default.promisifyAll(azure.createBlobService());
+if (!fs.existsSync(path.join(process.cwd(), 'data'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'data'));
+}
+if (!fs.existsSync(path.join(process.cwd(), 'data', 'invoices'))) {
+    fs.mkdirSync(path.join(process.cwd(), 'data', 'invoices'));
+}
 exports.renderInvoice = async (data) => {
     logger.info('request invoice generation in jo');
     const renderResult = await jsreportClient.render({
@@ -26,17 +32,9 @@ exports.renderInvoice = async (data) => {
         data
     });
     const buffer = await renderResult.body();
-    return blobServiceAsync.createBlockBlobFromTextAsync('invoices', data.id + '.pdf', buffer);
+    return fs.writeFileSync(path.join(process.cwd(), 'data', 'invoices', data.id + '.pdf'), buffer);
 };
 exports.readInvoice = async (blobName) => {
-    const data = [];
-    const writingStream = new stream_1.default.Writable({
-        write: (chunk, encoding, next) => {
-            data.push(chunk);
-            next();
-        }
-    });
-    await blobServiceAsync.getBlobToStreamAsync('invoices', blobName, writingStream);
-    return Buffer.concat(data);
+    return fs.readFileSync(path.join(process.cwd(), 'data', 'invoices', blobName));
 };
 //# sourceMappingURL=renderInvoice.js.map
