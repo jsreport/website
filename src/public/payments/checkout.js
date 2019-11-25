@@ -14,7 +14,9 @@ export async function getUserCountry () {
 
 export async function validateVAT (vatNumber) {
   if (vatNumber == null) {
-    return false
+    return {
+      isValid: false
+    }
   }
 
   try {
@@ -29,12 +31,19 @@ export async function validateVAT (vatNumber) {
     const data = await r.json()
 
     if (data.error || data.valid === false) {
-      return false
+      return {
+        isValid: false
+      }
     } else {
-      return data
+      return {
+        isValid: true,
+        value: data
+      }
     }
   } catch (e) {
-    return false
+    return {
+      isValid: false
+    }
   }
 }
 

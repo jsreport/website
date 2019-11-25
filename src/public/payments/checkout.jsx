@@ -89,7 +89,7 @@ class Checkout extends React.Component {
   async submitCheckout (pm) {
     const { vatRate, vatAmount, amount } = calculatePrice({
       country: this.state.country,
-      isVATValid: this.state.isVATValid
+      isVATValid: this.state.isVATValid && this.state.vatNumber
     })
 
     const country = countries.find(c => c.code === this.state.country)
@@ -127,7 +127,7 @@ class Checkout extends React.Component {
   render () {
     const calculatedPrice = calculatePrice({
       country: this.state.country,
-      isVATValid: this.state.isVATValid
+      isVATValid: this.state.isVATValid && this.state.vatNumber
     })
 
     return (
@@ -152,14 +152,20 @@ class Checkout extends React.Component {
                   <Vat
                     value={this.state.vatNumber}
                     onChange={v => this.setState({ vatNumber: v.target.value })}
-                    onValidVAT={r =>
+                    onVATValidated={r => {
+                      if (!r.isValid) {
+                        return this.setState({
+                          isVATValid: false
+                        })
+                      }
+
                       this.setState({
                         isVATValid: true,
-                        address: r.address,
-                        country: r.country,
-                        name: r.name
+                        address: r.value.address,
+                        country: r.value.country,
+                        name: r.value.name
                       })
-                    }
+                    }}
                   />
                   <Country value={this.state.country} onChange={v => this.setState({ country: v.target.value })} />
                 </div>

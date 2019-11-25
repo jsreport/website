@@ -13,33 +13,36 @@ export default class Vat extends React.Component {
     this.props.onChange(e)
   }
 
-  validateVAT () {
-    validateVAT(this.props.value)
+  validateVAT (v) {
+    if (!v) {
+      return
+    }
+    console.log('validate vat ' + v)
+    validateVAT(v)
       .then(r => {
-        if (r === false) {
-          this.setState({
-            isValid: false
-          })
-        } else {
-          this.setState({
-            isValid: true
-          })
-          this.props.onValidVAT({
-            name: r.name,
-            address: r.address,
-            country: r.country
-          })
-        }
+        this.setState({
+          isValid: r.isValid
+        })
+
+        this.props.onVATValidated(r)
       })
       .catch(console.error.bind(console))
   }
 
   render () {
+    console.log('is valid ' + this.state.isValid)
     return (
       <div className='span4'>
         <label>VAT number (optional)</label>
         <small>
-          <input className='fg-gray' type='text' size='30' onChange={v => this.onChange(v)} onBlur={() => this.validateVAT()} value={this.props.value} />
+          <input
+            className='fg-gray'
+            type='text'
+            size='30'
+            onChange={v => this.onChange(v)}
+            onBlur={e => this.validateVAT(e.target.value)}
+            value={this.props.value}
+          />
         </small>
         <div>
           {this.state.isValid || !this.props.value ? (

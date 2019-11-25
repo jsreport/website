@@ -74,35 +74,3 @@ export default class Payments {
     return sendCustomerLink(this.services)(email)
   }
 }
-/*
-
-export default (braintree: Braintree, jsreportClient, db: Db, axios) => {
-  const customerRepository = new CustomerRepository(db)
-  const createInvoice = CreateInvoice(jsreportClient, db)
-  const notifyGumroad = NotifyGumroad(axios)
-
-
-
-    /*
-    const path = require('path')
-    const signature = decodeURIComponent(
-      require('fs')
-        .readFileSync(path.join(__dirname, 'signature.txt'))
-        .toString()
-    )
-    const body = decodeURIComponent(
-      require('fs')
-        .readFileSync(path.join(__dirname, 'body.txt'))
-        .toString()
-    )
-    gateway.webhookNotification.parse(signature, body, function (err, webhookNotification) {
-      console.log('[Webhook Received ' + webhookNotification.timestamp + '] | Kind: ' + webhookNotification.kind)
-
-      // Example values for webhook notification properties
-      console.log(webhookNotification.kind) // "subscriptionWentPastDue"
-      console.log(webhookNotification.timestamp) // Sun Jan 1 00:00:00 UTC 2012
-    })
-
-  }
-}
-*/

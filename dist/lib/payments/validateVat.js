@@ -17,16 +17,20 @@ const unescape_1 = __importDefault(require("unescape"));
 const validateVatUtil = util_1.promisify(validate_vat_1.default);
 async function default_1(vatNumber = '') {
     logger.debug('validating vat ' + vatNumber);
-    const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2));
-    logger.debug('vat validation finished');
-    if (r.valid !== true) {
-        throw new Error('Invalid VAT');
+    try {
+        const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2));
+        if (r.valid !== true) {
+            throw new Error('Invalid VAT');
+        }
+        return {
+            country: r.countryCode,
+            name: unescape_1.default(r.name),
+            address: unescape_1.default(r.address)
+        };
     }
-    return {
-        country: r.countryCode,
-        name: unescape_1.default(r.name),
-        address: unescape_1.default(r.address)
-    };
+    finally {
+        logger.debug('vat validation finished');
+    }
 }
 exports.default = default_1;
 //# sourceMappingURL=validateVat.js.map

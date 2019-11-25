@@ -41841,7 +41841,9 @@ function _validateVAT() {
               break;
             }
 
-            return _context2.abrupt("return", false);
+            return _context2.abrupt("return", {
+              isValid: false
+            });
 
           case 2:
             _context2.prev = 2;
@@ -41869,10 +41871,15 @@ function _validateVAT() {
               break;
             }
 
-            return _context2.abrupt("return", false);
+            return _context2.abrupt("return", {
+              isValid: false
+            });
 
           case 13:
-            return _context2.abrupt("return", data);
+            return _context2.abrupt("return", {
+              isValid: true,
+              value: data
+            });
 
           case 14:
             _context2.next = 19;
@@ -41881,7 +41888,9 @@ function _validateVAT() {
           case 16:
             _context2.prev = 16;
             _context2.t0 = _context2["catch"](2);
-            return _context2.abrupt("return", false);
+            return _context2.abrupt("return", {
+              isValid: false
+            });
 
           case 19:
           case "end":
@@ -41997,25 +42006,20 @@ function (_React$Component) {
     }
   }, {
     key: "validateVAT",
-    value: function validateVAT() {
+    value: function validateVAT(v) {
       var _this2 = this;
 
-      (0, _checkout.validateVAT)(this.props.value).then(function (r) {
-        if (r === false) {
-          _this2.setState({
-            isValid: false
-          });
-        } else {
-          _this2.setState({
-            isValid: true
-          });
+      if (!v) {
+        return;
+      }
 
-          _this2.props.onValidVAT({
-            name: r.name,
-            address: r.address,
-            country: r.country
-          });
-        }
+      console.log('validate vat ' + v);
+      (0, _checkout.validateVAT)(v).then(function (r) {
+        _this2.setState({
+          isValid: r.isValid
+        });
+
+        _this2.props.onVATValidated(r);
       }).catch(console.error.bind(console));
     }
   }, {
@@ -42023,6 +42027,7 @@ function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      console.log('is valid ' + this.state.isValid);
       return _react.default.createElement("div", {
         className: "span4"
       }, _react.default.createElement("label", null, "VAT number (optional)"), _react.default.createElement("small", null, _react.default.createElement("input", {
@@ -42032,8 +42037,8 @@ function (_React$Component) {
         onChange: function onChange(v) {
           return _this3.onChange(v);
         },
-        onBlur: function onBlur() {
-          return _this3.validateVAT();
+        onBlur: function onBlur(e) {
+          return _this3.validateVAT(e.target.value);
         },
         value: this.props.value
       })), _react.default.createElement("div", null, this.state.isValid || !this.props.value ? _react.default.createElement(_react.default.Fragment, null) : _react.default.createElement("small", null, _react.default.createElement("b", {
@@ -42726,7 +42731,7 @@ function (_React$Component) {
               case 0:
                 _calculatePrice = (0, _checkout.calculatePrice)({
                   country: this.state.country,
-                  isVATValid: this.state.isVATValid
+                  isVATValid: this.state.isVATValid && this.state.vatNumber
                 }), vatRate = _calculatePrice.vatRate, vatAmount = _calculatePrice.vatAmount, amount = _calculatePrice.amount;
                 country = _countries.default.find(function (c) {
                   return c.code === _this3.state.country;
@@ -42793,7 +42798,7 @@ function (_React$Component) {
 
       var calculatedPrice = (0, _checkout.calculatePrice)({
         country: this.state.country,
-        isVATValid: this.state.isVATValid
+        isVATValid: this.state.isVATValid && this.state.vatNumber
       });
       return _react.default.createElement("div", null, _react.default.createElement("div", {
         className: "section bg-darkCyan"
@@ -42831,12 +42836,18 @@ function (_React$Component) {
             vatNumber: v.target.value
           });
         },
-        onValidVAT: function onValidVAT(r) {
-          return _this4.setState({
+        onVATValidated: function onVATValidated(r) {
+          if (!r.isValid) {
+            return _this4.setState({
+              isVATValid: false
+            });
+          }
+
+          _this4.setState({
             isVATValid: true,
-            address: r.address,
-            country: r.country,
-            name: r.name
+            address: r.value.address,
+            country: r.value.country,
+            name: r.value.name
           });
         }
       }), _react.default.createElement(Country, {
