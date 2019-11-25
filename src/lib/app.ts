@@ -21,6 +21,8 @@ logger.init({
   subdomain: process.env.LOGGLY_SUBDOMAIN
 })
 
+logger.info('jsreport website starting')
+
 let connectionString = 'mongodb://'
 
 if (process.env.mongodb_username) {
@@ -40,7 +42,7 @@ client.connect(err => {
     process.exit()
   }
 
-  console.log('Connected successfully to mongodb server')
+  logger.info('jsreport website sucessfully connected to the mongo')
   db = client.db('website')
 
   const payments = new Payments(db)
@@ -169,4 +171,6 @@ client.connect(err => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)
     res.status(500).send({ error: err.message })
   })
+
+  logger.info('jsreport website initialized')
 })

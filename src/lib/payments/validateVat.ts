@@ -7,6 +7,7 @@ const validateVatUtil = promisify(ValidateVat)
 export default async function (vatNumber = '') {
     logger.debug('validating vat ' + vatNumber)
     const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2))
+    logger.debug('vat validation finished')
 
     if (r.valid !== true) {
         throw new Error('Invalid VAT')

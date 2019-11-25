@@ -31,6 +31,7 @@ logger.init({
     token: process.env.LOGGLY_TOKEN,
     subdomain: process.env.LOGGLY_SUBDOMAIN
 });
+logger.info('jsreport website starting');
 let connectionString = 'mongodb://';
 if (process.env.mongodb_username) {
     connectionString += process.env.mongodb_username + ':' + process.env.mongodb_password + '@';
@@ -47,7 +48,7 @@ client.connect(err => {
         console.error(err);
         process.exit();
     }
-    console.log('Connected successfully to mongodb server');
+    logger.info('jsreport website sucessfully connected to the mongo');
     db = client.db('website');
     const payments = new payments_1.default(db);
     const router = router_1.default(payments, db);
@@ -159,5 +160,6 @@ client.connect(err => {
         logger.error('Error when processing ' + req.path + '; ' + err.stack);
         res.status(500).send({ error: err.message });
     });
+    logger.info('jsreport website initialized');
 });
 //# sourceMappingURL=app.js.map

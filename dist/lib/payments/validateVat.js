@@ -18,6 +18,7 @@ const validateVatUtil = util_1.promisify(validate_vat_1.default);
 async function default_1(vatNumber = '') {
     logger.debug('validating vat ' + vatNumber);
     const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2));
+    logger.debug('vat validation finished');
     if (r.valid !== true) {
         throw new Error('Invalid VAT');
     }
