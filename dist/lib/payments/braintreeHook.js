@@ -12,6 +12,10 @@ const utils_1 = require("../utils/utils");
 const emails_1 = require("./emails");
 function braintreeHook(services) {
     async function processSubscriptionChargeNotif(subscription) {
+        if (subscription.currentBillingCycle === 1) {
+            logger.info(`Skip braintree hook for subscription ${subscription.id} because it is the first payment`);
+            return;
+        }
         logger.info('Search for customer with subscription id ' + subscription.id);
         const customer = await services.customerRepository.findBySubscription(subscription.id);
         if (!customer) {

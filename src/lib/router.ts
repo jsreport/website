@@ -1,6 +1,4 @@
-﻿import * as path from 'path'
-
-export default function (payments, db) {
+﻿export default function (payments, db) {
   return {
     onprem(req, res) {
       return res.render('onprem', {

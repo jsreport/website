@@ -55,11 +55,10 @@ class CustomerRepository {
             $inc: {
                 nextId: 1
             }
+        }, {
+            upsert: true
         });
         let counter = await this.db.collection('invoiceCounter').findOne({});
-        if (counter == null) {
-            counter = { nextId: 1 };
-        }
         const id = `${new Date().getFullYear()}-${counter.nextId}B`;
         const sale = {
             accountingData: data,
