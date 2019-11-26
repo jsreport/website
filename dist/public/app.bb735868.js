@@ -44468,7 +44468,7 @@ function AppRouter() {
     path: "/payments/customer/:customer",
     component: _customer.default
   }), _react.default.createElement(_reactRouterDom.Route, {
-    path: "/payments/customerLink",
+    path: "/payments/customer",
     component: _customerLink.default
   })));
 }
@@ -44515,7 +44515,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49478" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57718" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
