@@ -1,0 +1,1 @@
+{"version":3,"sources":["checkout.css"],"names":[],"mappings":"AAAA,gBACI,GACI,+BAAiC,CACjC,uBACJ,CACJ","file":"checkout.808e9e20.css","sourceRoot":"..\\..\\src\\public\\payments","sourcesContent":["@keyframes spin {\r\n    100% {  \r\n        -webkit-transform: rotate(360deg);\r\n        transform: rotate(360deg);\r\n    }\r\n}"]}
