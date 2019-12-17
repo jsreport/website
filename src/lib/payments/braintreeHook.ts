@@ -2,10 +2,11 @@ import * as logger from '../utils/logger'
 import { Services } from './services'
 import { interpolate } from '../utils/utils'
 import { Emails } from './emails'
+import { Subscription } from 'braintree'
 
 
 export function braintreeHook(services: Services) {
-    async function processSubscriptionChargeNotif(subscription) {
+    async function processSubscriptionChargeNotif(subscription: Subscription) {
         if (subscription.currentBillingCycle === 1) {
             logger.info(`Skip braintree hook for subscription ${subscription.id} because it is the first payment`)
             return
@@ -23,7 +24,7 @@ export function braintreeHook(services: Services) {
         const product = customer.products.find(p => p.braintree.subscription && p.braintree.subscription.id === subscription.id)
         product.braintree.subscription = subscription
 
-        const sale = await services.customerRepository.createSale(product.accountingData)
+        const sale = await services.customerRepository.createSale(product.accountingData, subscription.transactions[subscription.transactions.length - 1])
         await services.renderInvoice(sale)
         product.sales.push(sale)
 

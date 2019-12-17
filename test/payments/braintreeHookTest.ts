@@ -28,7 +28,10 @@ databaseTest((getDb) => {
                 return {
                     kind: 'subscription_charged_successfully',
                     subscription: {
-                        id: customer.products[0].braintree.subscription.id
+                        id: customer.products[0].braintree.subscription.id,
+                        transactions: [{
+                            id: 'tranid'
+                        }]
                     }
                 }
             }
@@ -48,6 +51,7 @@ databaseTest((getDb) => {
             product.sales.should.have.length(2)
             const sale = product.sales[1]
             sale.accountingData.address.should.be.eql(customer.products[0].accountingData.address)
+            sale.braintree.transaction.id.should.be.eql('tranid')
 
             emails[0].to.should.be.eql(customer.email)
             emails[0].content.should.containEql(`https://jsreport.net/payments/customer/${customer.uuid}`)

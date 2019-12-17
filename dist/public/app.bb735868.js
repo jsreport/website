@@ -41708,7 +41708,7 @@ exports.default = void 0;
 var _default = {
   enterprise: {
     code: 'enterprise',
-    name: 'jsreport enterprise license',
+    name: 'jsreport enterprise perpetual',
     infoLine: 'perpetual license - fully featured single server instance with no limitations',
     price: {
       usd: 645
@@ -41717,7 +41717,7 @@ var _default = {
   },
   enterpriseScale: {
     code: 'enterpriseScale',
-    name: 'jsreport enterprise scale license',
+    name: 'jsreport enterprise scale perpetual',
     infoLine: 'perpetual license - fully featured infinite amount of server instances with no limitations',
     price: {
       usd: 1995
@@ -41746,7 +41746,7 @@ var _default = {
   },
   supportSubscription: {
     code: 'supportSubscription',
-    name: 'jsreport enterprise support',
+    name: 'jsreport enterprise support subscription',
     infoLine: 'enterprise support service provided with the next business day response time',
     price: {
       usd: 895
@@ -44515,7 +44515,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57718" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49202" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

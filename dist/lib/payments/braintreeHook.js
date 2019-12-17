@@ -24,7 +24,7 @@ function braintreeHook(services) {
         logger.info('Processing subscription successful charge notification for customer ' + customer.email);
         const product = customer.products.find(p => p.braintree.subscription && p.braintree.subscription.id === subscription.id);
         product.braintree.subscription = subscription;
-        const sale = await services.customerRepository.createSale(product.accountingData);
+        const sale = await services.customerRepository.createSale(product.accountingData, subscription.transactions[subscription.transactions.length - 1]);
         await services.renderInvoice(sale);
         product.sales.push(sale);
         await services.customerRepository.update(customer);

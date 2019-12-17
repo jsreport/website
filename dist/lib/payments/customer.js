@@ -9,7 +9,9 @@ class CustomerRepository {
         this.db = db;
     }
     async find(customerId) {
-        const customer = await this.db.collection('customers').findOne({ uuid: customerId });
+        const customer = await this.db
+            .collection('customers')
+            .findOne({ uuid: customerId });
         if (!customer) {
             throw new Error('Customer not found');
         }
@@ -36,21 +38,29 @@ class CustomerRepository {
         return customer;
     }
     async update(customer) {
-        return this.db.collection('customers').updateOne({ _id: customer._id }, { $set: { ...customer } });
+        return this.db
+            .collection('customers')
+            .updateOne({ _id: customer._id }, { $set: { ...customer } });
     }
     async findSale(customerId, saleId) {
         const customer = await this.find(customerId);
-        const sale = Array.prototype.concat(...customer.products.map(p => p.sales)).find(s => s.id === saleId);
+        const sale = Array.prototype
+            .concat(...customer.products.map(p => p.sales))
+            .find(s => s.id === saleId);
         if (!sale) {
             throw new Error(`Invoice ${saleId} not found`);
         }
         return sale;
     }
     async findBySubscription(subscriptionId) {
-        const customer = await this.db.collection('customers').findOne({ products: { $elemMatch: { 'braintree.subscription.id': subscriptionId } } });
+        const customer = await this.db.collection('customers').findOne({
+            products: {
+                $elemMatch: { 'braintree.subscription.id': subscriptionId }
+            }
+        });
         return customer;
     }
-    async createSale(data) {
+    async createSale(data, transaction) {
         await this.db.collection('invoiceCounter').updateOne({}, {
             $inc: {
                 nextId: 1
@@ -64,7 +74,10 @@ class CustomerRepository {
             accountingData: data,
             id: id,
             blobName: `${id}.pdf`,
-            purchaseDate: new Date()
+            purchaseDate: new Date(),
+            braintree: {
+                transaction
+            }
         };
         return sale;
     }

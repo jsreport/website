@@ -23,11 +23,12 @@ databaseTest((getDb) => {
             sale.should.be.ok()
         })
 
-        it('creata sale', async () => {
-            const sale = await customerRepository.createSale(createProduct().accountingData)
+        it('create sale', async () => {
+            const sale = await customerRepository.createSale(createProduct().accountingData, { id: 'tranid' })
             sale.id.should.be.eql(`${new Date().getFullYear()}-1B`)
+            sale.braintree.transaction.id.should.be.eql('tranid')
 
-            const sale2 = await customerRepository.createSale(createProduct().accountingData)
+            const sale2 = await customerRepository.createSale(createProduct().accountingData, {})
             sale2.id.should.be.eql(`${new Date().getFullYear()}-2B`)
 
             const count = await db.collection('invoiceCounter').countDocuments({})

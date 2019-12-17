@@ -1,7 +1,7 @@
 export default {
   enterprise: {
     code: 'enterprise',
-    name: 'jsreport enterprise license',
+    name: 'jsreport enterprise perpetual',
     infoLine: 'perpetual license - fully featured single server instance with no limitations',
     price: {
       usd: 645
@@ -10,7 +10,7 @@ export default {
   },
   enterpriseScale: {
     code: 'enterpriseScale',
-    name: 'jsreport enterprise scale license',
+    name: 'jsreport enterprise scale perpetual',
     infoLine: 'perpetual license - fully featured infinite amount of server instances with no limitations',
     price: {
       usd: 1995
@@ -39,7 +39,7 @@ export default {
   },
   supportSubscription: {
     code: 'supportSubscription',
-    name: 'jsreport enterprise support',
+    name: 'jsreport enterprise support subscription',
     infoLine: 'enterprise support service provided with the next business day response time',
     price: {
       usd: 895

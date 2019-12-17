@@ -22,6 +22,7 @@ exports.checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
     const customer = await services.customerRepository.findOrCreate(checkoutData.email);
     let productBraintree = {};
+    let braintreeTransaction = {};
     if (checkoutData.product.isSubscription) {
         if (customer.braintree == null) {
             const customerRes = await services.braintree.createCustomer({
@@ -51,17 +52,22 @@ exports.checkout = (services) => async (checkoutData) => {
         if (sr.success === false) {
             throw new Error('Unable to create subscription ' + sr.message);
         }
+        braintreeTransaction = sr.transaction;
         productBraintree.paymentMethod = pmr.paymentMethod;
         productBraintree.subscription = sr.subscription;
     }
     else {
-        await services.braintree.createSale({
+        const sr = await services.braintree.createSale({
             amount: checkoutData.amount,
             paymentMethodNonce: checkoutData.nonce,
             options: {
                 submitForSettlement: true
             }
         });
+        if (sr.success === false) {
+            throw new Error('Unable to create sale ' + sr.message);
+        }
+        braintreeTransaction = sr.transaction;
     }
     const accountingData = {
         address: checkoutData.address,
@@ -88,23 +94,33 @@ exports.checkout = (services) => async (checkoutData) => {
         accountingData,
         licenseKey: checkoutData.product.isSupport ? null : uuid()
     };
-    const sale = await services.customerRepository.createSale(accountingData);
+    const sale = await services.customerRepository.createSale(accountingData, braintreeTransaction);
     await services.renderInvoice(sale);
     product.sales.push(sale);
     await services.notifyLicensingServer(customer, product, product.sales[0]);
     customer.products = customer.products || [];
     customer.products.push(product);
     await services.customerRepository.update(customer);
-    const mail = product.isSupport ? emails_1.Emails.checkout.support : emails_1.Emails.checkout.enterprise;
+    const mail = product.isSupport
+        ? emails_1.Emails.checkout.support
+        : emails_1.Emails.checkout.enterprise;
     await services.sendEmail({
         to: customer.email,
-        content: utils_1.interpolate(mail.customer.content, { customer, product, sale: product.sales[0] }),
-        subject: utils_1.interpolate(mail.customer.subject, { customer, product, sale: product.sales[0] }),
+        content: utils_1.interpolate(mail.customer.content, {
+            customer,
+            product,
+            sale: product.sales[0]
+        }),
+        subject: utils_1.interpolate(mail.customer.subject, {
+            customer,
+            product,
+            sale: product.sales[0]
+        })
     });
     await services.sendEmail({
         to: 'jan.blaha@jsreport.net',
         content: utils_1.interpolate(mail.us.content, { customer, product }),
-        subject: utils_1.interpolate(mail.us.subject, { customer, product }),
+        subject: utils_1.interpolate(mail.us.subject, { customer, product })
     });
     return customer;
 };
