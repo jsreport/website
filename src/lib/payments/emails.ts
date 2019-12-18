@@ -3,7 +3,7 @@ export const Emails = {
         enterprise: {
             us: {
                 subject: 'New sale ${product.name}',
-                content: '${customer.email}'
+                content: '${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}'
             },
             customer: {
                 subject: 'You bought ${product.name}',
@@ -32,7 +32,7 @@ jsreport team
         support: {
             us: {
                 subject: 'New sale ${product.name}',
-                content: '${customer.email}'
+                content: '${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}'
             },
             customer: {
                 subject: 'You bought ${product.name}',
@@ -58,7 +58,7 @@ jsreport team
         enterprise: {
             us: {
                 subject: '${product.name} canceled',
-                content: '${customer.email}'
+                content: '${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}'
             },
             customer: {
                 subject: '${product.name} canceled',
@@ -74,7 +74,7 @@ jsreport team
         support: {
             us: {
                 subject: '${product.name} canceled',
-                content: '${customer.email}'
+                content: '${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}'
             },
             customer: {
                 subject: '${product.name} canceled',
@@ -89,7 +89,7 @@ jsreport team
     recurring: {
         us: {
             subject: '${product.name} successful recurring charge',
-            content: '\${customer.email}'
+            content: '\${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}'
         },
         customer: {
             subject: '${product.name} renewal successful',
@@ -106,7 +106,7 @@ jsreport team`
     recurringFail: {
         us: {
             subject: '${product.name} renewal charge unsuccessful',
-            content: '${customer.email}'
+            content: '${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}'
         },
         customer: {
             subject: '${product.name} renewal charge unsuccessful',
@@ -124,7 +124,7 @@ jsreport team`
     recurringCancel: {
         us: {
             subject: '${product.name} canceled because of failed payments',
-            content: `\${customer.email} `
+            content: `\${customer.email}<br>https://jsreport.net/payments/customer/\${customer.uuid}`
         },
         customer: {
             subject: '${product.name} canceled because of failed payments',
