@@ -16,7 +16,7 @@ const helper = sendgrid_1.default.mail;
 exports.sendEmail = (Mail) => {
     const sg = sendgrid_1.default(process.env.SENDGRID);
     logger.info(`Sending email (${Mail.subject}) to ${Mail.to}`);
-    const fromEmail = new helper.Email('support@jsreport.net');
+    const fromEmail = new helper.Email('sales@jsreport.net');
     const toEmail = new helper.Email(Mail.to);
     const contentEmail = new helper.Content('text/html', Mail.content);
     const mail = new helper.Mail(fromEmail, Mail.subject, toEmail, contentEmail);
