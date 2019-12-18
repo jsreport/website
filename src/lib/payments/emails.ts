@@ -19,6 +19,9 @@ Please see how you can apply the license key here:<br>
 The invoice can be downloaded from your customer portal<br>
 <a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
 <br>
+Having a technical question? Please ask on our <a href='https://forum.jsreport.net'>forum</a>.<br>
+Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.<br>
+<br>
 Please download and read the end user license agreement:<br>
 <a href='http://jsreport.net/terms-of-use-commercial.txt'>http://jsreport.net/terms-of-use-commercial.txt</a><br>
 <br>
