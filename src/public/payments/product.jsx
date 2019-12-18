@@ -11,11 +11,6 @@ function currencyChar (currency) {
   return currency === 'usd' ? '$' : '€'
 }
 
-function addYear (d) {
-  d.setFullYear(d.getFullYear() + 1)
-  return d
-}
-
 function Invoice ({ sale, customerId }) {
   return (
     <div>
@@ -153,7 +148,7 @@ export default class Product extends React.Component {
         {this.state.braintree.subscription.status !== 'Canceled' ? (
           <div>
             <p>
-              The next payment is planned on {addYear(new Date(this.state.braintree.subscription.nextBillingDate)).toLocaleDateString()}
+              The next payment is planned on {new Date(this.state.braintree.subscription.nextBillingDate).toLocaleDateString()}
               <br />
               {this.renderBankCard()}
             </p>

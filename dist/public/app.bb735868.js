@@ -43742,11 +43742,6 @@ function currencyChar(currency) {
   return currency === 'usd' ? '$' : '€';
 }
 
-function addYear(d) {
-  d.setFullYear(d.getFullYear() + 1);
-  return d;
-}
-
 function Invoice(_ref) {
   var sale = _ref.sale,
       customerId = _ref.customerId;
@@ -43945,7 +43940,7 @@ function (_React$Component) {
     value: function renderSubscrption() {
       var _this3 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.braintree.subscription.status !== 'Canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", addYear(new Date(this.state.braintree.subscription.nextBillingDate)).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.braintree.subscription.status !== 'Canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", new Date(this.state.braintree.subscription.nextBillingDate).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
         className: "button info",
         style: {
           marginRight: '10px'
@@ -44515,7 +44510,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49202" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50466" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
