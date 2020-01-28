@@ -91,5 +91,6 @@
     "customize-docker-image": "Customize docker image",
     "pdf-meta": "Pdf meta",
     "studio": "Studio",
-    "office-preview": "Office preview"
+    "office-preview": "Office preview",
+    "office-password": "Office password"
 };
