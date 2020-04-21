@@ -85,6 +85,9 @@ export function doc(req, res) {
                 tocHTML += '<h3>table of contents</h3>';
                 tocHTML += '<div class="listview-outlook">';
                 toc.forEach(function (entry) {
+                    if (entry.level > 3) {
+                        return
+                    }
                     tocHTML += '<a class="list marked" href="#' + entry.anchor + '"><div class="list-content level-' + entry.level + '">' + entry.text + '</div></a>\n';
                 });
                 tocHTML += '</div></div>\n';
