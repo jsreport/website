@@ -92,5 +92,6 @@
     "pdf-meta": "Pdf meta",
     "studio": "Studio",
     "office-preview": "Office preview",
-    "office-password": "Office password"
+    "office-password": "Office password",
+    "docker": "Docker"
 };
