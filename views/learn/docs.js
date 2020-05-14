@@ -93,5 +93,6 @@
     "studio": "Studio",
     "office-preview": "Office preview",
     "office-password": "Office password",
-    "docker": "Docker"
+    "docker": "Docker",
+    "templating-engines": "Templating engines"
 };

@@ -109,7 +109,6 @@ client.connect(err => {
 
   app.get('/learn/dotnet', docs.dotnet)
   app.get('/learn/nodejs', docs.nodejs)
-  app.get('/learn/templating-engines', docs.engines)
   app.get('/learn/recipes', docs.recipes)
   app.get('/learn/extensions', docs.extensions)
   app.get('/learn/:doc', docs.doc)
