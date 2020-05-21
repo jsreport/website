@@ -649,3 +649,28 @@ h2.buy-title {
 .top30 {
 	margin-top: 30px
 }
+
+.docs-search-icon {
+	width: 24px;
+	height: 24px;
+	font-size: 24px;
+	line-height: 1;
+	position: absolute;
+	margin-top: -6px;
+	top: 50%;
+	left: 20px;
+	z-index: 2;
+	color: #999999;
+}
+
+.docs-search-input {
+	padding-left: 22px;
+	height: 25px;
+	margin-top: -3px
+}
+
+@media (max-width: 1450px) {
+	.docs-search-bar {
+		display: none !important
+	}
+}
