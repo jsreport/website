@@ -57,6 +57,7 @@ export const checkout = (services: Services) => async (
     }
 
     const pmr = await services.braintree.createPaymentMethod({
+
       customerId: customer.braintree.customerId,
       paymentMethodNonce: checkoutData.nonce,
       options: {

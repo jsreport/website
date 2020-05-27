@@ -14,7 +14,7 @@ class Braintree {
             environment: process.env.BRAINTREE_PRODUCTION ? braintree.Environment.Production : braintree.Environment.Sandbox,
             merchantId: process.env.BRAINTREE_MERCHANT_ID,
             publicKey: process.env.BRAINTREE_PUBLIC_KEY,
-            privateKey: process.env.BRAINTREE_PRIVATE_KEY
+            privateKey: process.env.BRAINTREE_PRIVATE_KEY,
         });
     }
     generateToken() {
@@ -27,13 +27,23 @@ class Braintree {
         return this._gateway.paymentMethod.create(obj);
     }
     createSubscription(obj) {
-        return this._gateway.subscription.create(obj);
+        return this._gateway.subscription.create({
+            ...obj,
+            merchantAccountId: process.env.BRAINTREE_MERCHANT_ACCOUNT_ID
+        });
     }
     createSale(obj) {
-        return this._gateway.transaction.sale(obj);
+        console.log('merchant account id', process.env.BRAINTREE_MERCHANT_ACCOUNT_ID);
+        return this._gateway.transaction.sale({
+            ...obj,
+            merchantAccountId: process.env.BRAINTREE_MERCHANT_ACCOUNT_ID
+        });
     }
     updateSubscription(id, obj) {
-        return this._gateway.subscription.update(id, obj);
+        return this._gateway.subscription.update(id, {
+            ...obj,
+            merchantAccountId: process.env.BRAINTREE_MERCHANT_ACCOUNT_ID
+        });
     }
     cancelSubscription(obj) {
         return this._gateway.subscription.cancel(obj);
