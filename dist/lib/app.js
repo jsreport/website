@@ -142,7 +142,7 @@ client.connect(err => {
         app.listen(process.env.PORT || 3000);
     }).catch(logger.error);
     const limiter = express_rate_limit_1.default({
-        windowMs: 10000,
+        windowMs: 5000,
         max: 20
     });
     app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice);

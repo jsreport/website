@@ -57,5 +57,14 @@ export default {
     },
     isSupport: true,
     permalink: 'DUeSe'
-  }
+  },
+  enterpriseDiscounted: {
+    code: 'enterpriseDiscounted',
+    name: 'jsreport enterprise perpetual',
+    infoLine: 'perpetual license - fully featured single server instance with no limitations',
+    price: {
+      usd: 1
+    },   
+    permalink: 'XOxVq'
+  },
 }

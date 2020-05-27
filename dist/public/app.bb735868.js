@@ -41268,7 +41268,8 @@ var _default = [{
   code: 'IQ'
 }, {
   name: 'Ireland',
-  code: 'IE'
+  code: 'IE',
+  eu: true
 }, {
   name: 'Isle of Man',
   code: 'IM'
@@ -41764,6 +41765,15 @@ var _default = {
     },
     isSupport: true,
     permalink: 'DUeSe'
+  },
+  enterpriseDiscounted: {
+    code: 'enterpriseDiscounted',
+    name: 'jsreport enterprise perpetual',
+    infoLine: 'perpetual license - fully featured single server instance with no limitations',
+    price: {
+      usd: 1
+    },
+    permalink: 'XOxVq'
   }
 };
 exports.default = _default;
@@ -42896,7 +42906,11 @@ function (_React$Component) {
         onSubmit: function onSubmit(pm) {
           return _this4.submitCheckout(pm);
         }
-      })))));
+      }), _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", {
+        className: "span12 fg-gray"
+      }, _react.default.createElement("small", null, "Do you have a problem with the purchase or want to ask something? Please contact us at sales@jsreport.net")))))));
     }
   }]);
 
@@ -44510,7 +44524,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55658" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

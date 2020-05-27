@@ -200,6 +200,13 @@ class Checkout extends React.Component {
               ) : (
                 <Braintree onSubmit={pm => this.submitCheckout(pm)} />
               )}
+              <div className='row'>
+              <div className='span12 fg-gray'>
+                <small>
+                  Do you have a problem with the purchase or want to ask something? Please contact us at sales@jsreport.net
+                </small>
+              </div>
+              </div>              
             </form>
           </div>
         </div>

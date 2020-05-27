@@ -151,7 +151,7 @@ client.connect(err => {
   }).catch(logger.error)
 
   const limiter = rateLimit({
-    windowMs: 10000,
+    windowMs: 5000,
     max: 20
   })
 

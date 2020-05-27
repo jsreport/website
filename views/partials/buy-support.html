@@ -1,25 +1,6 @@
-<a class="gumroad-button" id="buyEnterpriseSupport" href="https://gum.co/SVEKk"
-    style="position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
-</a>
-
-<a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs"
-    style="position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
-</a>
-
 <script>
     function buy(type) {
-        console.log('buy ' + type)
-        if (window.location.search.indexOf('v2') !== -1) {
-            window.location.pathname = '/payments/checkout/' + type
-        }
-
-        if (type === 'supportSubscription') {
-            return buyGumroad('#buyEnterpriseSupport')
-        }
-
-        if (type === 'supportStarter') {
-            return buyGumroad('#buyStarterSupport')
-        }
+        window.location.pathname = '/payments/checkout/' + type
     }
 </script>
 
@@ -151,50 +132,3 @@
         <a href="/support-service-agreement.txt" target="_blank">support service agreement</a> before subscribing
     </p>
 </div>
-<script type="text/javascript">
-    var button = $($('.gumroad-button')[0])
-    var linkToFetch = button.attr('href')
-    var iframe = document.createElement('iframe')
-    var tries = 0
-    var loaded = false
-    iframe.style.display = 'none'
-    iframe.onload = function () {
-        loaded = true
-    }
-    iframe.src = linkToFetch
-    document.body.appendChild(iframe)
-    function checkIfIframeWasLoaded() {
-        tries++
-        if (tries === 8 && !loaded) {
-            var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
-            gumroadMessageEl.style.display = 'block'
-        } else if (!loaded) {
-            setTimeout(checkIfIframeWasLoaded, 500)
-        }
-    }
-    setTimeout(checkIfIframeWasLoaded, 500)
-
-    document.addEventListener('click', printMousePos, true);
-    var cursorX
-    var cursorY
-    function printMousePos(e) {
-        cursorX = e.pageX
-        cursorY = e.pageY
-    }
-
-    function buyGumroad(selector) {
-        var btn = $(selector)
-            .css({
-                "left": (cursorX - 200) + 'px',
-                "top": (cursorY - 200) + 'px'
-            })
-
-        btn.click()
-
-        setTimeout(function () {
-            btn.css({
-                left: -3000
-            })
-        }, 2000)
-    }
-</script>

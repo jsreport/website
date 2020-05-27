@@ -103,7 +103,7 @@ export default [
   { name: 'Indonesia', code: 'ID' },
   { name: 'Iran, Islamic Republic Of', code: 'IR' },
   { name: 'Iraq', code: 'IQ' },
-  { name: 'Ireland', code: 'IE' },
+  { name: 'Ireland', code: 'IE', eu: true },
   { name: 'Isle of Man', code: 'IM' },
   { name: 'Israel', code: 'IL' },
   { name: 'Italy', code: 'IT' },
