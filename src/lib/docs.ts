@@ -98,7 +98,8 @@ export function doc(req, res) {
                 content: tocHTML + html,
                 url: "https://jsreport.net" + req.url,
                 id: req.params.doc,
-                learn: true
+                learn: true,
+                linkDocCss: true
             };
 
             res.render('learn/doc', cache[req.params.doc]);

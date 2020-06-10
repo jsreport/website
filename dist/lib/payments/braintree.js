@@ -33,7 +33,6 @@ class Braintree {
         });
     }
     createSale(obj) {
-        console.log('merchant account id', process.env.BRAINTREE_MERCHANT_ACCOUNT_ID);
         return this._gateway.transaction.sale({
             ...obj,
             merchantAccountId: process.env.BRAINTREE_MERCHANT_ACCOUNT_ID
