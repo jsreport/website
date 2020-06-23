@@ -41774,6 +41774,16 @@ var _default = {
       usd: 1
     },
     permalink: 'XOxVq'
+  },
+  enterpriseSubscriptionDiscounted: {
+    code: 'enterpriseSubscriptionDiscounted',
+    name: 'jsreport enterprise subscription',
+    infoLine: 'subscription - fully featured single server instance with no limitations',
+    price: {
+      usd: 1
+    },
+    isSubscription: true,
+    permalink: 'SBwu'
   }
 };
 exports.default = _default;
@@ -44524,7 +44534,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57138" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59578" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

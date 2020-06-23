@@ -67,4 +67,14 @@ export default {
     },   
     permalink: 'XOxVq'
   },
+  enterpriseSubscriptionDiscounted: {
+    code: 'enterpriseSubscriptionDiscounted',
+    name: 'jsreport enterprise subscription',
+    infoLine: 'subscription - fully featured single server instance with no limitations',
+    price: {
+      usd: 1
+    },
+    isSubscription: true,
+    permalink: 'SBwu'
+  },
 }

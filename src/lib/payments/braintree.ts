@@ -21,7 +21,13 @@ export default class Braintree {
   }
 
   createPaymentMethod(obj: braintree.PaymentMethodCreateRequest) {
-    return this._gateway.paymentMethod.create(obj)
+    return this._gateway.paymentMethod.create({
+      ...obj,
+      options: {
+        ...obj.options,
+        verificationMerchantAccountId: process.env.BRAINTREE_MERCHANT_ACCOUNT_ID
+      }
+    })
   }
 
   createSubscription(obj) {

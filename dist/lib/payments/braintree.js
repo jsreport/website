@@ -24,7 +24,13 @@ class Braintree {
         return this._gateway.customer.create(obj);
     }
     createPaymentMethod(obj) {
-        return this._gateway.paymentMethod.create(obj);
+        return this._gateway.paymentMethod.create({
+            ...obj,
+            options: {
+                ...obj.options,
+                verificationMerchantAccountId: process.env.BRAINTREE_MERCHANT_ACCOUNT_ID
+            }
+        });
     }
     createSubscription(obj) {
         return this._gateway.subscription.create({
