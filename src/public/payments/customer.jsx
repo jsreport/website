@@ -5,16 +5,16 @@ import { load, cancelSubscription } from './customer.js'
 import LicenseKey from './licenseKey'
 import products from './products'
 
-function currencyChar (currency) {
+function currencyChar(currency) {
   return currency === 'usd' ? '$' : '€'
 }
 
-function Product ({ product, onClick }) {
+function Product({ product, onClick }) {
   return (
-    <div className='list marked' onClick={onClick}>
-      <div className='list-content'>
+    <div className="list marked" onClick={onClick}>
+      <div className="list-content">
         <h3>
-          {products[product.code].name} {product.isSubscription && product.braintree.subscription.status === 'Canceled' ? '( canceled )' : ''}
+          {products[product.code].name} {product.isSubscription && product.stripe.subscription.status === 'canceled' ? '( canceled )' : ''}
           <div>
             <small>Purchased on {new Date(product.sales[0].purchaseDate).toLocaleDateString()}</small>
           </div>
@@ -22,7 +22,7 @@ function Product ({ product, onClick }) {
 
         {product.licenseKey ? (
           <div>
-            <div className='padding5'>
+            <div className="padding5">
               <div>
                 <span>License key</span>
               </div>
@@ -38,42 +38,42 @@ function Product ({ product, onClick }) {
 }
 
 class Customer extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
-      products: []
+      products: [],
     }
   }
 
-  componentDidMount () {
-    load().then(c => this.setState({ ...c }))
+  componentDidMount() {
+    load(this.props.match.params.customer).then((c) => this.setState({ ...c }))
   }
 
-  openProductDetail (p) {
+  openProductDetail(p) {
     this.props.history.push(`/payments/customer/${this.state.uuid}/product/${p.id}`)
   }
 
-  render () {
+  render() {
     const { products } = this.state
     products.reverse()
 
     return (
-      <div className='fg-gray'>
-        <div className='section bg-darkCyan'>
-          <div className='text-center'>
-            <h2 className='fg-white buy-title'>{this.state.email}</h2>
-            <small className='fg-grayLighter'>Created on {new Date(this.state.creationDate).toLocaleDateString()}</small>
+      <div className="fg-gray">
+        <div className="section bg-darkCyan">
+          <div className="text-center">
+            <h2 className="fg-white buy-title">{this.state.email}</h2>
+            <small className="fg-grayLighter">Created on {new Date(this.state.creationDate).toLocaleDateString()}</small>
           </div>
         </div>
-        <div className='grid container small section'>
-          <div className='row text-center'>
+        <div className="grid container small section">
+          <div className="row text-center">
             <div>
               <h3>PRODUCTS</h3>
             </div>
           </div>
-          <div className='row'>
-            <div className='listview-outlook'>
-              {products.map(p => (
+          <div className="row">
+            <div className="listview-outlook">
+              {products.map((p) => (
                 <Product key={p.id} product={p} onClick={() => this.openProductDetail(p)} />
               ))}
             </div>

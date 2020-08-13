@@ -1,12 +1,53 @@
-import { Services } from './services'
-
-export function braintreeHook (services: Services) {
-}
-/* import * as logger from '../utils/logger'
-import { Services } from './services'
-import { interpolate } from '../utils/utils'
-import { Emails } from './emails'
-import { Subscription } from 'braintree'
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.stripeHook = (services) => async (signature, data) => {
+    const event = services.stripe.parseWebHook(signature, data);
+    console.log('web hook received', event);
+    // Handle the event
+    // Review important events for Billing webhooks
+    // https://stripe.com/docs/billing/webhooks
+    // Remove comment to see the various objects sent for this sample
+    switch (event.type) {
+        case 'invoice.paid':
+            // Used to provision services after the trial has ended.
+            // The status of the invoice will show up as paid. Store the status in your
+            // database to reference when a user accesses your service to avoid hitting rate limits.
+            break;
+        case 'invoice.payment_failed':
+            // If the payment fails or the customer does not have a valid payment method,
+            //  an invoice.payment_failed event is sent, the subscription becomes past_due.
+            // Use this webhook to notify your user that their payment has
+            // failed and to retrieve new card details.
+            break;
+        case 'invoice.finalized':
+            // If you want to manually send out invoices to your customers
+            // or store them locally to reference to avoid hitting Stripe rate limits.
+            break;
+        case 'customer.subscription.deleted':
+            if (event.request != null) {
+                // handle a subscription cancelled by your request
+                // from above.
+            }
+            else {
+                // handle subscription cancelled automatically based
+                // upon your subscription settings.
+            }
+            break;
+        case 'customer.subscription.trial_will_end':
+            if (event.request != null) {
+                // handle a subscription cancelled by your request
+                // from above.
+            }
+            else {
+                // handle subscription cancelled automatically based
+                // upon your subscription settings.
+            }
+            break;
+        default:
+        // Unexpected event type
+    }
+};
+/*
 
 export function braintreeHook(services: Services) {
     async function processSubscriptionChargeNotif(subscription: Subscription) {
@@ -129,3 +170,4 @@ export function braintreeHook(services: Services) {
     }
 }
 */
+//# sourceMappingURL=stripeHook.js.map

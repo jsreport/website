@@ -1,19 +1,17 @@
 import * as logger from '../utils/logger'
 import { sendEmail } from '../utils/mailer'
 import { Db } from 'mongodb'
-import Braintree from './braintree'
+import StripeFacade from './stripe'
 import { CustomerRepository } from './customer'
 import validateVat from './validateVat'
 import { checkout, CheckoutRequest } from './checkout'
 import { notifyLicensingServer } from './notifyLicensingServer'
 import { updatePaymentMethod } from './updatePaymentMethod'
 import { cancelSubscription } from './cancelSubscription'
-import { braintreeHook } from './braintreeHook'
 import { Services } from './services'
 import { renderInvoice, readInvoice } from './renderInvoice'
 import { sendCustomerLink } from './sendCustomerLink'
-
-const braintree = new Braintree()
+import { stripeHook } from './stripeHook'
 
 export default class Payments {
   db: Db
@@ -26,15 +24,22 @@ export default class Payments {
 
     this.services = {
       customerRepository: this.customerRepository,
-      braintree,
+      stripe: new StripeFacade(),
       sendEmail,
       notifyLicensingServer,
-      renderInvoice
+      renderInvoice,
     }
   }
 
-  generateToken() {
-    return braintree.generateToken()
+  init() {
+    return this.services.stripe.init()
+  }
+
+  createPaymentIntent({ amount, email }) {
+    return this.services.stripe.createPaymentIntent({
+      amount: amount * 100,
+      email,
+    })
   }
 
   async validateVat(vatNumber = '') {
@@ -45,8 +50,8 @@ export default class Payments {
     return checkout(this.services)(checkoutData)
   }
 
-  async updatePaymentMethod(customerId, productId, pm) {
-    return updatePaymentMethod(this.services)(customerId, productId, pm)
+  async updatePaymentMethod(customerId, productId, si) {
+    return updatePaymentMethod(this.services)(customerId, productId, si)
   }
 
   async customer(id) {
@@ -64,13 +69,17 @@ export default class Payments {
     return cancelSubscription(this.services)(customerId, productId)
   }
 
-  braintreeHook(signature, body) {
-    logger.info('Parsing braintree hook')
-    return braintreeHook(this.services)(signature, body)
+  stripeHook(signature, body) {
+    logger.info('Parsing stripe hook')
+    return stripeHook(this.services)(signature, body)
   }
 
   customerLink(email) {
     logger.info('Request customer link ' + email)
     return sendCustomerLink(this.services)(email)
+  }
+
+  createSubscription(data) {
+    return this.services.stripe.createSubscription(data)
   }
 }

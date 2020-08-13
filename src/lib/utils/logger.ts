@@ -19,7 +19,7 @@ class DebugTransport extends Transport {
 
   log(info, callback) {
     setImmediate(() => this.emit('logged', info))
-    jsreportdebug(info.level + ' ' + info.message)
+    jsreportdebug(info.level + ' ' + info.message + ' ' + (info.stack || ''))
     callback()
   }
 }
@@ -27,27 +27,26 @@ class DebugTransport extends Transport {
 export let init = (loggly = null) => {
   _logger = winston.createLogger({
     level: 'debug',
-    format: winston.format.simple()
+    format: winston.format.simple(),
   })
 
   _logger.add(new DebugTransport())
 
   if (loggly) {
-    _logger.add(new Loggly({
-      level: loggly.level,
-      token: loggly.token,
-      subdomain: loggly.subdomain,
-      json: true,
-      tags: ['website']
-    }))
+    _logger.add(
+      new Loggly({
+        level: loggly.level,
+        token: loggly.token,
+        subdomain: loggly.subdomain,
+        json: true,
+        tags: ['website'],
+      })
+    )
   }
 }
-
 
 export let info = (...args) => _logger.info.apply(_logger, args)
 export let debug = (...args) => _logger.debug.apply(_logger, args)
 export let error = (...args) => _logger.error.apply(_logger, args)
 export let warn = (...args) => _logger.warn.apply(_logger, args)
 export let log = (...args) => _logger.log.apply(_logger, args)
-
-

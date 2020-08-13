@@ -1,29 +1,28 @@
 import '@babel/polyfill'
 import React from 'react'
-import ReactDOM from 'react-dom'
 import countries from './countries.js'
 import Vat from './vat'
-import Braintree from './braintree'
+import StripeForm from './stripeForm'
 import { getUserCountry, calculatePrice, product, currency, currencyChar, price } from './checkout.js'
 
-function Email ({ value, onChange }) {
+function Email({ value, onChange }) {
   return (
-    <div className='span4'>
+    <div className="span4">
       <label>Email</label>
       <small>
-        <input className='fg-gray' type='email' size='30' required value={value} onChange={onChange} />
+        <input className="fg-gray" type="email" size="30" required value={value} onChange={onChange} />
       </small>
     </div>
   )
 }
 
-function Country ({ value, onChange }) {
+function Country({ value, onChange }) {
   return (
-    <div className='span4'>
+    <div className="span4">
       <label>Country</label>
       <small>
-        <select className='fg-gray' onChange={onChange} required value={value}>
-          {countries.map(c => (
+        <select className="fg-gray" onChange={onChange} required value={value}>
+          {countries.map((c) => (
             <option key={c.code} value={c.code}>
               {c.name}
             </option>
@@ -34,30 +33,30 @@ function Country ({ value, onChange }) {
   )
 }
 
-function Name ({ value, onChange }) {
+function Name({ value, onChange }) {
   return (
-    <div className='span4'>
+    <div className="span4">
       <label>Company name (or personal name)</label>
       <small>
-        <input className='fg-gray' type='text' id='companyName' size='30' required value={value} onChange={onChange} />
+        <input className="fg-gray" type="text" id="companyName" size="30" required value={value} onChange={onChange} />
       </small>
     </div>
   )
 }
 
-function Address ({ value, onChange }) {
+function Address({ value, onChange }) {
   return (
-    <div className='span8'>
+    <div className="span8">
       <label>Address</label>
       <small>
-        <input className='fg-gray' type='text' id='companyAddress' size='40' required value={value} onChange={onChange} />
+        <input className="fg-gray" type="text" id="companyAddress" size="40" required value={value} onChange={onChange} />
       </small>
     </div>
   )
 }
 
 class Checkout extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       country: 'US',
@@ -65,35 +64,35 @@ class Checkout extends React.Component {
       email: '',
       vatNumber: '',
       name: '',
-      isVATValid: null
+      isVATValid: null,
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     getUserCountry()
-      .then(r => this.setState({ country: r }))
+      .then((r) => this.setState({ country: r }))
       .catch(console.error.bind(console))
   }
 
-  proceedCardDetails () {
+  proceedCardDetails() {
     if (!this.refs.paymentForm.checkValidity()) {
       this.refs.paymentForm.reportValidity()
       return
     }
 
     this.setState({
-      cardDetailsVisible: true
+      cardDetailsVisible: true,
     })
   }
 
-  async submitCheckout (pm) {
+  async submitCheckout(additionalCheckoutData) {
     const { vatRate, vatAmount, amount } = calculatePrice({
       country: this.state.country,
-      isVATValid: this.state.isVATValid && this.state.vatNumber
+      isVATValid: this.state.isVATValid && this.state.vatNumber,
     })
 
-    const country = countries.find(c => c.code === this.state.country)
-    const checkoutRes = await window.fetch('/api/checkout', {
+    const country = countries.find((c) => c.code === this.state.country)
+    const checkoutRes = await window.fetch('/api/payments/checkout', {
       method: 'POST',
       body: JSON.stringify({
         price: price(),
@@ -101,18 +100,18 @@ class Checkout extends React.Component {
         vatRate,
         vatAmount,
         email: this.state.email,
-        nonce: pm.nonce,
         product: product(),
         name: this.state.name,
         address: this.state.address,
         country: country.name,
         vatNumber: this.state.vatNumber,
         currency,
-        isEU: country.eu
+        isEU: country.eu,
+        ...additionalCheckoutData,
       }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     const resData = await checkoutRes.json()
@@ -124,38 +123,38 @@ class Checkout extends React.Component {
     this.props.history.push(`/payments/customer/${resData.uuid}`)
   }
 
-  render () {
+  render() {
     const calculatedPrice = calculatePrice({
       country: this.state.country,
-      isVATValid: this.state.isVATValid && this.state.vatNumber
+      isVATValid: this.state.isVATValid && this.state.vatNumber,
     })
 
     return (
       <div>
-        <div className='section bg-darkCyan'>
-          <div className='text-center'>
-            <h2 className='fg-white buy-title'>{product().name}</h2>
-            <small className='fg-grayLighter'>{product().infoLine}</small>
+        <div className="section bg-darkCyan">
+          <div className="text-center">
+            <h2 className="fg-white buy-title">{product().name}</h2>
+            <small className="fg-grayLighter">{product().infoLine}</small>
           </div>
         </div>
-        <div className='grid container small section'>
-          <div className='row text-center'>
-            <div className='fg-gray'>
+        <div className="grid container small section">
+          <div className="row text-center">
+            <div className="fg-gray">
               <h3>BILLING INFORMATION</h3>
             </div>
           </div>
-          <div className='row'>
-            <form ref='paymentForm'>
-              <div className='grid fg-gray'>
-                <div className='row'>
-                  <Email value={this.state.email} onChange={v => this.setState({ email: v.target.value })} />
+          <div className="row">
+            <form ref="paymentForm">
+              <div className="grid fg-gray">
+                <div className="row">
+                  <Email value={this.state.email} onChange={(v) => this.setState({ email: v.target.value })} />
                   <Vat
                     value={this.state.vatNumber}
-                    onChange={v => this.setState({ vatNumber: v.target.value })}
-                    onVATValidated={r => {
+                    onChange={(v) => this.setState({ vatNumber: v.target.value })}
+                    onVATValidated={(r) => {
                       if (!r.isValid) {
                         return this.setState({
-                          isVATValid: false
+                          isVATValid: false,
                         })
                       }
 
@@ -163,51 +162,49 @@ class Checkout extends React.Component {
                         isVATValid: true,
                         address: r.value.address,
                         country: r.value.country,
-                        name: r.value.name
+                        name: r.value.name,
                       })
                     }}
                   />
-                  <Country value={this.state.country} onChange={v => this.setState({ country: v.target.value })} />
+                  <Country value={this.state.country} onChange={(v) => this.setState({ country: v.target.value })} />
                 </div>
-                <div className='row'>
-                  <Name value={this.state.name} onChange={v => this.setState({ name: v.target.value })} />
-                  <Address value={this.state.address} onChange={v => this.setState({ address: v.target.value })} />
+                <div className="row">
+                  <Name value={this.state.name} onChange={(v) => this.setState({ name: v.target.value })} />
+                  <Address value={this.state.address} onChange={(v) => this.setState({ address: v.target.value })} />
                 </div>
               </div>
-              <div className='row'>
+              <div className="row">
                 <hr />
               </div>
-              <div className='row'>
-                <div className='span4'>
+              <div className="row">
+                <div className="span4">
                   <label>License price</label>
                   <h3>{price() + currencyChar}</h3>
                 </div>
-                <div className='span4'>
+                <div className="span4">
                   <label>VAT {calculatedPrice.vatRate + '%'}</label>
                   <h3>{calculatedPrice.vatAmount + currencyChar}</h3>
                 </div>
-                <div className='span4'>
+                <div className="span4">
                   <label>Amount to pay</label>
                   <h3>{calculatedPrice.amount + currencyChar}</h3>
                 </div>
               </div>
-              {!this.state.cardDetailsVisible ? (
-                <div className='row' onClick={() => this.proceedCardDetails()}>
-                  <a className='button text-center bg-green bg-hover-gray btn'>
-                    <span className='fg-white'>Proceed to card details</span>
-                  </a>
-                </div>
-              ) : (
-                <Braintree onSubmit={pm => this.submitCheckout(pm)} />
-              )}
-              <div className='row'>
-              <div className='span12 fg-gray'>
-                <small>
-                  Do you have a problem with the purchase or want to ask something? Please contact us at sales@jsreport.net
-                </small>
-              </div>
-              </div>              
             </form>
+            {!this.state.cardDetailsVisible ? (
+              <div className="row" onClick={() => this.proceedCardDetails()}>
+                <a className="button text-center bg-green bg-hover-gray btn">
+                  <span className="fg-white">Proceed to card details</span>
+                </a>
+              </div>
+            ) : (
+              <StripeForm amount={calculatedPrice.amount} email={this.state.email} product={product()} onSubmit={(p, s) => this.submitCheckout(p, s)} />
+            )}
+            <div className="row">
+              <div className="span12 fg-gray">
+                <small>Do you have a problem with the purchase or want to ask something? Please contact us at sales@jsreport.net</small>
+              </div>
+            </div>
           </div>
         </div>
       </div>

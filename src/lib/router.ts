@@ -4,7 +4,7 @@
       return res.render('onprem', {
         onprem: true,
         title: 'jsreport - report server',
-        description: 'Download jsreport on-prem version to your server in your company and use it without any limitations.'
+        description: 'Download jsreport on-prem version to your server in your company and use it without any limitations.',
       })
     },
 
@@ -12,7 +12,7 @@
       return res.render('playground', {
         playground: true,
         title: 'Try free jsreport online playground',
-        description: 'Try free jsreport online fiddling tool. Share your reports with others. Embed report generation into your website.'
+        description: 'Try free jsreport online fiddling tool. Share your reports with others. Embed report generation into your website.',
       })
     },
 
@@ -21,7 +21,7 @@
         buy: true,
         buyOnPrem: true,
         title: 'jsreport - buy',
-        description: 'Buy jsreport license'
+        description: 'Buy jsreport license',
       })
     },
 
@@ -30,7 +30,7 @@
         buy: true,
         buySupport: true,
         title: 'jsreport - buy',
-        description: 'Buy jsreport support'
+        description: 'Buy jsreport support',
       })
     },
 
@@ -39,7 +39,7 @@
         buy: true,
         buyOnline: true,
         title: 'jsreport - buy',
-        description: 'Buy jsreport online credits'
+        description: 'Buy jsreport online credits',
       })
     },
 
@@ -47,7 +47,7 @@
       return res.render('thank-you', {
         buy: true,
         title: 'jsreport - buy',
-        description: 'Thank you'
+        description: 'Thank you',
       })
     },
 
@@ -55,7 +55,7 @@
       return res.render('online', {
         online: true,
         title: 'jsreportonline - pdf reports as a service',
-        description: 'Do not install anything. Just register to cloud based jsreportonline service and start creating reports now.'
+        description: 'Do not install anything. Just register to cloud based jsreportonline service and start creating reports now.',
       })
     },
 
@@ -63,7 +63,7 @@
       return res.render('online-pricing', {
         online: true,
         title: 'jsreportonline - pdf reports as a service',
-        description: 'Do not install anything. Just register to cloud based jsreportonline service and start creating reports now.'
+        description: 'Do not install anything. Just register to cloud based jsreportonline service and start creating reports now.',
       })
     },
 
@@ -78,14 +78,14 @@
     embedding(req, res) {
       return res.render('embedding', {
         playground: true,
-        title: 'Embed jsreport to any page'
+        title: 'Embed jsreport to any page',
       })
     },
 
     showcases(req, res) {
       return res.render('showcases', {
         title: 'jsreport - showcases',
-        description: 'jsreport showcases'
+        description: 'jsreport showcases',
       })
     },
 
@@ -96,16 +96,16 @@
           date: new Date(),
           email: req.body.contactEmail,
           enabledNewsletter: req.body.enabledNewsletter === 'true',
-          type: req.body.type
+          type: req.body.type,
         })
         .then(() => {
           // expire in 30seconds
           res.cookie('jsreport-contact-email-set', 'true', {
-            maxAge: 30 * 60 * 1000
+            maxAge: 30 * 60 * 1000,
           })
           res.send('ok')
         })
-        .catch(e => {
+        .catch((e) => {
           console.error(e)
           res.send('error ' + e)
         })
@@ -113,42 +113,49 @@
 
     payments(req, res) {
       return res.render('../dist/public/app.html', {
-        title: 'jsreport customers'
+        title: 'jsreport customers',
       })
     },
 
     checkoutSubmit(req, res, next) {
       return payments
         .checkout(req.body)
-        .then(r => res.send(r))
+        .then((r) => res.send(r))
         .catch(next)
     },
 
-    braintreeToken(req, res, next) {
+    createPaymentIntent(req, res, next) {
       return payments
-        .generateToken()
-        .then(r => res.send(r))
+        .createPaymentIntent(req.body)
+        .then((r) => res.send(r))
+        .catch(next)
+    },
+
+    createSubscription(req, res, next) {
+      return payments
+        .createSubscription(req.body)
+        .then((r) => res.send(r))
         .catch(next)
     },
 
     validateVat(req, res) {
       return payments
         .validateVat(req.body.vatNumber)
-        .then(r => res.send(r))
-        .catch(r => res.send({ valid: false }))
+        .then((r) => res.send(r))
+        .catch((r) => res.send({ valid: false }))
     },
 
     customerApi(req, res, next) {
       return payments
         .customer(req.params.id)
-        .then(r => res.send(r))
+        .then((r) => res.send(r))
         .catch(next)
     },
 
     invoice(req, res, next) {
       return payments
         .invoice(req.params.customerId, req.params.invoiceId)
-        .then(buf => {
+        .then((buf) => {
           res.setHeader('Content-Type', 'application/pdf')
           res.setHeader('Content-Disposition', `inline; filename=${req.params.invoiceId}.pdf`)
           res.send(buf)
@@ -165,14 +172,14 @@
 
     updatePaymentMethod(req, res, next) {
       return payments
-        .updatePaymentMethod(req.params.customerId, req.params.productId, req.body.nonce)
+        .updatePaymentMethod(req.params.customerId, req.params.productId, req.body)
         .then(() => res.send({ result: 'ok' }))
         .catch(next)
     },
 
-    braintreeHook(req, res, next) {
+    stripeHook(req, res, next) {
       return payments
-        .braintreeHook(req.body.bt_signature, req.body.bt_payload)
+        .stripeHook(req.headers['stripe-signature'], req.body)
         .then(() => res.send('ok'))
         .catch(next)
     },
@@ -182,6 +189,6 @@
         .customerLink(req.body.email)
         .then(() => res.send('ok'))
         .catch(next)
-    }
+    },
   }
 }

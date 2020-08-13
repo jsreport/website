@@ -10,6 +10,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/*eslint-disable */
 require('dotenv').config();
 const express_1 = __importDefault(require("express"));
 const express3_handlebars_1 = __importDefault(require("express3-handlebars"));
@@ -25,11 +26,12 @@ const mongodb_1 = require("mongodb");
 const payments_1 = __importDefault(require("./payments/payments"));
 const posts_1 = __importDefault(require("./posts"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+/* eslint-enable */
 const app = express_1.default();
 logger.init({
     level: process.env.LOGGLY_LEVEL,
     token: process.env.LOGGLY_TOKEN,
-    subdomain: process.env.LOGGLY_SUBDOMAIN
+    subdomain: process.env.LOGGLY_SUBDOMAIN,
 });
 logger.info('jsreport website starting');
 let connectionString = 'mongodb://';
@@ -40,10 +42,10 @@ connectionString += process.env.mongodb_address || 'localhost:27017';
 connectionString += '/' + process.env.mongodb_authdb;
 const client = new mongodb_1.MongoClient(connectionString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 });
 let db;
-client.connect(err => {
+client.connect((err) => {
     if (err) {
         console.error(err);
         process.exit();
@@ -76,8 +78,8 @@ client.connect(err => {
             },
             toLongDate: function (date) {
                 return require('moment')(date).format('MM-DD-YYYY HH:mm');
-            }
-        }
+            },
+        },
     });
     app.engine('.html', hbs.engine);
     // app.disable('view cache');
@@ -100,7 +102,7 @@ client.connect(err => {
         res.render('home', {
             home: true,
             title: 'js' + 'report - javascript based reporting platform',
-            description: 'jsreport is an open source reporting platform where reports are designed using popular javascript templating engines.'
+            description: 'jsreport is an open source reporting platform where reports are designed using popular javascript templating engines.',
         });
     });
     app.get('/learn/dotnet', docs.dotnet);
@@ -125,7 +127,10 @@ client.connect(err => {
     app.get('/buy/thank-you', router.buyThankYou);
     app.get('/showcases', router.showcases);
     app.post('/contact-email', body_parser_1.default.urlencoded({ extended: true, limit: '2mb' }), router.contactEmail);
-    posts_1.default(app).then(function (poet) {
+    payments
+        .init()
+        .then(() => posts_1.default(app))
+        .then((poet) => {
         app.get('/sitemap*', function (req, res) {
             var postCount = poet.helpers.getPostCount();
             var posts = poet.helpers.getPosts(0, postCount);
@@ -133,28 +138,33 @@ client.connect(err => {
             res.render('sitemap', {
                 posts: posts,
                 layout: false,
-                docs: Object.keys(docs_1.default)
+                docs: Object.keys(docs_1.default),
             });
         });
         app.get('*', function (req, res) {
             res.status(404).render('404');
         });
         app.listen(process.env.PORT || 3000);
-    }).catch(logger.error);
+    })
+        .catch((e) => {
+        logger.error('Failed to start server', e);
+        process.exit();
+    });
     const limiter = express_rate_limit_1.default({
         windowMs: 5000,
-        max: 20
+        max: 20,
     });
     app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice);
     app.get('/payments/*', limiter, router.payments);
-    app.post('/api/checkout', [limiter, body_parser_1.default.json()], router.checkoutSubmit);
-    app.post('/api/validate-vat', [limiter, body_parser_1.default.json()], router.validateVat);
-    app.post('/api/customer-link', [limiter, body_parser_1.default.json()], router.customerLink);
-    app.get('/api/braintree-token', limiter, router.braintreeToken);
-    app.get('/api/customer/:id', limiter, router.customerApi);
-    app.delete('/api/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription);
-    app.put('/api/customer/:customerId/subscription/:productId', [limiter, body_parser_1.default.json()], router.updatePaymentMethod);
-    app.post('/api/braintree/hook', [limiter, body_parser_1.default.urlencoded()], router.braintreeHook);
+    app.post('/api/payments/checkout', [limiter, body_parser_1.default.json()], router.checkoutSubmit);
+    app.post('/api/payments/validate-vat', [limiter, body_parser_1.default.json()], router.validateVat);
+    app.post('/api/payments/customer-link', [limiter, body_parser_1.default.json()], router.customerLink);
+    app.post('/api/payments/payment-intent', [limiter, body_parser_1.default.json()], router.createPaymentIntent);
+    app.post('/api/payments/subscription', [limiter, body_parser_1.default.json()], router.createSubscription);
+    app.get('/api/payments/customer/:id', limiter, router.customerApi);
+    app.delete('/api/payments/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription);
+    app.put('/api/payments/customer/:customerId/subscription/:productId', [limiter, body_parser_1.default.json()], router.updatePaymentMethod);
+    app.post('/api/payments/stripe/hook', [limiter, body_parser_1.default.raw({ type: 'application/json' })], router.stripeHook);
     app.use((err, req, res, next) => {
         logger.error('Error when processing ' + req.path + '; ' + err.stack);
         res.status(500).send({ error: err.message });

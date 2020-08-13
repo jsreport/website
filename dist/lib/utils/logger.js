@@ -17,14 +17,14 @@ class DebugTransport extends winston_transport_1.default {
     }
     log(info, callback) {
         setImmediate(() => this.emit('logged', info));
-        jsreportdebug(info.level + ' ' + info.message);
+        jsreportdebug(info.level + ' ' + info.message + ' ' + (info.stack || ''));
         callback();
     }
 }
 exports.init = (loggly = null) => {
     _logger = winston_1.default.createLogger({
         level: 'debug',
-        format: winston_1.default.format.simple()
+        format: winston_1.default.format.simple(),
     });
     _logger.add(new DebugTransport());
     if (loggly) {
@@ -33,7 +33,7 @@ exports.init = (loggly = null) => {
             token: loggly.token,
             subdomain: loggly.subdomain,
             json: true,
-            tags: ['website']
+            tags: ['website'],
         }));
     }
 };
