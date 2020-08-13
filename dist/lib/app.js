@@ -160,7 +160,6 @@ client.connect((err) => {
     app.post('/api/payments/validate-vat', [limiter, body_parser_1.default.json()], router.validateVat);
     app.post('/api/payments/customer-link', [limiter, body_parser_1.default.json()], router.customerLink);
     app.post('/api/payments/payment-intent', [limiter, body_parser_1.default.json()], router.createPaymentIntent);
-    app.post('/api/payments/subscription', [limiter, body_parser_1.default.json()], router.createSubscription);
     app.get('/api/payments/customer/:id', limiter, router.customerApi);
     app.delete('/api/payments/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription);
     app.put('/api/payments/customer/:customerId/subscription/:productId', [limiter, body_parser_1.default.json()], router.updatePaymentMethod);

@@ -42858,119 +42858,7 @@ var global = arguments[3];
 
 })));
 
-},{"react":"../../../node_modules/react/index.js"}],"stripeForm.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fetchPaymentIntentSecret = fetchPaymentIntentSecret;
-exports.createSubscription = createSubscription;
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function fetchPaymentIntentSecret(_x, _x2) {
-  return _fetchPaymentIntentSecret.apply(this, arguments);
-}
-
-function _fetchPaymentIntentSecret() {
-  _fetchPaymentIntentSecret = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(email, amount) {
-    var res, json;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return window.fetch('/api/payments/payment-intent', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                amount: amount,
-                email: email
-              })
-            });
-
-          case 2:
-            res = _context.sent;
-            _context.next = 5;
-            return res.json();
-
-          case 5:
-            json = _context.sent;
-            return _context.abrupt("return", json.clientSecret);
-
-          case 7:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _fetchPaymentIntentSecret.apply(this, arguments);
-}
-
-function createSubscription(_x3) {
-  return _createSubscription.apply(this, arguments);
-}
-
-function _createSubscription() {
-  _createSubscription = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(_ref) {
-    var email, productName, paymentMethodId, vatApplied, res, json;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            email = _ref.email, productName = _ref.productName, paymentMethodId = _ref.paymentMethodId, vatApplied = _ref.vatApplied;
-            _context2.next = 3;
-            return window.fetch('/api/payments/subscription', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                email: email,
-                productName: productName,
-                paymentMethodId: paymentMethodId,
-                vatApplied: vatApplied
-              })
-            });
-
-          case 3:
-            res = _context2.sent;
-            _context2.next = 6;
-            return res.json();
-
-          case 6:
-            json = _context2.sent;
-
-            if (!res.ok) {
-              _context2.next = 9;
-              break;
-            }
-
-            return _context2.abrupt("return", json);
-
-          case 9:
-            throw new Error('Failed to create subscription on the server: ' + json.error);
-
-          case 10:
-          case "end":
-            return _context2.stop();
-        }
-      }
-    }, _callee2);
-  }));
-  return _createSubscription.apply(this, arguments);
-}
-},{}],"stripeForm.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js"}],"stripeForm.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42984,13 +42872,7 @@ var _stripeJs = require("@stripe/stripe-js");
 
 var _reactStripeJs = require("@stripe/react-stripe-js");
 
-var _stripeForm = require("./stripeForm.js");
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
@@ -42999,6 +42881,54 @@ function _nonIterableRest() { throw new TypeError("Invalid attempt to destructur
 function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function fetchPaymentIntentSecret(_x, _x2) {
+  return _fetchPaymentIntentSecret.apply(this, arguments);
+}
+
+function _fetchPaymentIntentSecret() {
+  _fetchPaymentIntentSecret = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(email, amount) {
+    var res, json;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return window.fetch('/api/payments/payment-intent', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                amount: amount,
+                email: email
+              })
+            });
+
+          case 2:
+            res = _context3.sent;
+            _context3.next = 5;
+            return res.json();
+
+          case 5:
+            json = _context3.sent;
+            return _context3.abrupt("return", json.clientSecret);
+
+          case 7:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _fetchPaymentIntentSecret.apply(this, arguments);
+}
 
 var promise = (0, _stripeJs.loadStripe)('pk_test_51H9xJkB3Af4o8hjcsukE4QyzIl5hvMwd82LTl68xKEh7uhcAIQuwVpSJi6kfVTCwkiJNzydjiHncRI87mTEygx2B00yA6rFrDL');
 
@@ -43054,11 +42984,7 @@ function CardForm(_ref2) {
   var stripe = (0, _reactStripeJs.useStripe)();
   var elements = (0, _reactStripeJs.useElements)();
   (0, _react.useEffect)(function () {
-    if (product.isSubscription) {
-      return;
-    }
-
-    (0, _stripeForm.fetchPaymentIntentSecret)(email, amount).then(setClientSecret);
+    fetchPaymentIntentSecret(email, amount).then(setClientSecret);
   }, []);
   var cardStyle = {
     style: {
@@ -43101,218 +43027,69 @@ function CardForm(_ref2) {
       }, _callee);
     }));
 
-    return function handleChange(_x) {
+    return function handleChange(_x3) {
       return _ref3.apply(this, arguments);
-    };
-  }();
-
-  var handleSubscription =
-  /*#__PURE__*/
-  function () {
-    var _ref4 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee2() {
-      var _ref5, _error, paymentMethod, subscription, paymentIntent, _ref6, confirmedPaymentIntent, _error2;
-
-      return regeneratorRuntime.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
-              return stripe.createPaymentMethod({
-                type: 'card',
-                card: elements.getElement(_reactStripeJs.CardElement)
-              });
-
-            case 3:
-              _ref5 = _context2.sent;
-              _error = _ref5.error;
-              paymentMethod = _ref5.paymentMethod;
-
-              if (!_error) {
-                _context2.next = 8;
-                break;
-              }
-
-              throw new Error(_error.message);
-
-            case 8:
-              _context2.next = 10;
-              return (0, _stripeForm.createSubscription)({
-                email: email,
-                productName: product.name,
-                vatApplied: vatApplied,
-                paymentMethodId: paymentMethod.id
-              });
-
-            case 10:
-              subscription = _context2.sent;
-              paymentIntent = subscription.latest_invoice.payment_intent;
-
-              if (!(subscription.status !== 'active')) {
-                _context2.next = 25;
-                break;
-              }
-
-              if (!(paymentIntent.status === 'requires_payment_method')) {
-                _context2.next = 15;
-                break;
-              }
-
-              throw new Error('Your card was declined');
-
-            case 15:
-              if (!(paymentIntent.status === 'requires_action')) {
-                _context2.next = 25;
-                break;
-              }
-
-              _context2.next = 18;
-              return stripe.confirmCardPayment(paymentIntent.client_secret, {
-                payment_method: paymentMethodId
-              });
-
-            case 18:
-              _ref6 = _context2.sent;
-              confirmedPaymentIntent = _ref6.confirmedPaymentIntent;
-              _error2 = _ref6.error;
-
-              if (!_error2) {
-                _context2.next = 23;
-                break;
-              }
-
-              throw new Error(_error2.message);
-
-            case 23:
-              if (!(confirmedPaymentIntent.status !== 'succeeded')) {
-                _context2.next = 25;
-                break;
-              }
-
-              throw new Error('Unexpected error, payment is in state ' + confirmedPaymentIntent.status);
-
-            case 25:
-              setError(null);
-              setProcessing(false);
-              setSucceeded(true);
-              return _context2.abrupt("return", onSubmit({
-                paymentIntentId: paymentIntent.id,
-                subscriptionId: subscription.id
-              }));
-
-            case 31:
-              _context2.prev = 31;
-              _context2.t0 = _context2["catch"](0);
-              console.error(_context2.t0);
-              setError("Subscription creation failed ".concat(_context2.t0));
-              setProcessing(false);
-              return _context2.abrupt("return");
-
-            case 37:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2, null, [[0, 31]]);
-    }));
-
-    return function handleSubscription() {
-      return _ref4.apply(this, arguments);
-    };
-  }();
-
-  var handleOneTime =
-  /*#__PURE__*/
-  function () {
-    var _ref7 = _asyncToGenerator(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee3() {
-      var _ref8, _error3, paymentIntent;
-
-      return regeneratorRuntime.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              _context3.next = 3;
-              return stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                  card: elements.getElement(_reactStripeJs.CardElement)
-                }
-              });
-
-            case 3:
-              _ref8 = _context3.sent;
-              _error3 = _ref8.error;
-              paymentIntent = _ref8.paymentIntent;
-
-              if (!_error3) {
-                _context3.next = 8;
-                break;
-              }
-
-              throw new Error(_error3.message);
-
-            case 8:
-              setError(null);
-              setProcessing(false);
-              setSucceeded(true);
-              onSubmit({
-                paymentIntentId: paymentIntent.id
-              });
-              _context3.next = 18;
-              break;
-
-            case 14:
-              _context3.prev = 14;
-              _context3.t0 = _context3["catch"](0);
-              setError("Payment failed ".concat(_context3.t0.message));
-              setProcessing(false);
-
-            case 18:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, null, [[0, 14]]);
-    }));
-
-    return function handleOneTime() {
-      return _ref7.apply(this, arguments);
     };
   }();
 
   var handleSubmit =
   /*#__PURE__*/
   function () {
-    var _ref9 = _asyncToGenerator(
+    var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee4(ev) {
-      return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    regeneratorRuntime.mark(function _callee2(ev) {
+      var _ref5, _error, paymentIntent;
+
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context2.prev = _context2.next) {
             case 0:
               ev.preventDefault();
               setProcessing(true);
+              _context2.prev = 2;
+              _context2.next = 5;
+              return stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                  card: elements.getElement(_reactStripeJs.CardElement)
+                }
+              });
 
-              if (product.isSubscription) {
-                handleSubscription();
-              } else {
-                handleOneTime();
+            case 5:
+              _ref5 = _context2.sent;
+              _error = _ref5.error;
+              paymentIntent = _ref5.paymentIntent;
+
+              if (!_error) {
+                _context2.next = 10;
+                break;
               }
 
-            case 3:
+              throw new Error(_error.message);
+
+            case 10:
+              setError(null);
+              setProcessing(false);
+              setSucceeded(true);
+              onSubmit(paymentIntent);
+              _context2.next = 20;
+              break;
+
+            case 16:
+              _context2.prev = 16;
+              _context2.t0 = _context2["catch"](2);
+              setError("Payment failed ".concat(_context2.t0.message));
+              setProcessing(false);
+
+            case 20:
             case "end":
-              return _context4.stop();
+              return _context2.stop();
           }
         }
-      }, _callee4);
+      }, _callee2, null, [[2, 16]]);
     }));
 
-    return function handleSubmit(_x2) {
-      return _ref9.apply(this, arguments);
+    return function handleSubmit(_x4) {
+      return _ref4.apply(this, arguments);
     };
   }();
 
@@ -43336,7 +43113,7 @@ function CardForm(_ref2) {
     role: "alert"
   }, error));
 }
-},{"react":"../../../node_modules/react/index.js","@stripe/stripe-js":"../../../node_modules/@stripe/stripe-js/dist/stripe.esm.js","@stripe/react-stripe-js":"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js","./stripeForm.js":"stripeForm.js"}],"checkout.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","@stripe/stripe-js":"../../../node_modules/@stripe/stripe-js/dist/stripe.esm.js","@stripe/react-stripe-js":"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"}],"checkout.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43612,12 +43389,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -43753,7 +43524,7 @@ function (_React$Component) {
     value: function () {
       var _submitCheckout = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(additionalCheckoutData) {
+      regeneratorRuntime.mark(function _callee(paymentIntent) {
         var _this3 = this;
 
         var _calculatePrice, vatRate, vatAmount, amount, country, checkoutRes, resData;
@@ -43772,7 +43543,7 @@ function (_React$Component) {
                 _context.next = 4;
                 return window.fetch('/api/payments/checkout', {
                   method: 'POST',
-                  body: JSON.stringify(_objectSpread({
+                  body: JSON.stringify({
                     price: (0, _checkout.price)(),
                     amount: amount,
                     vatRate: vatRate,
@@ -43784,8 +43555,9 @@ function (_React$Component) {
                     country: country.name,
                     vatNumber: this.state.vatNumber,
                     currency: _checkout.currency,
-                    isEU: country.eu
-                  }, additionalCheckoutData)),
+                    isEU: country.eu,
+                    paymentIntent: paymentIntent
+                  }),
                   headers: {
                     'Content-Type': 'application/json'
                   }
@@ -44645,7 +44417,7 @@ function Product(_ref) {
     onClick: onClick
   }, _react.default.createElement("div", {
     className: "list-content"
-  }, _react.default.createElement("h3", null, _products.default[product.code].name, " ", product.isSubscription && product.stripe.subscription.status === 'canceled' ? '( canceled )' : '', _react.default.createElement("div", null, _react.default.createElement("small", null, "Purchased on ", new Date(product.sales[0].purchaseDate).toLocaleDateString()))), product.licenseKey ? _react.default.createElement("div", null, _react.default.createElement("div", {
+  }, _react.default.createElement("h3", null, _products.default[product.code].name, " ", product.isSubscription && product.subscription.status === 'canceled' ? '( canceled )' : '', _react.default.createElement("div", null, _react.default.createElement("small", null, "Purchased on ", new Date(product.sales[0].purchaseDate).toLocaleDateString()))), product.licenseKey ? _react.default.createElement("div", null, _react.default.createElement("div", {
     className: "padding5"
   }, _react.default.createElement("div", null, _react.default.createElement("span", null, "License key"))), _react.default.createElement(_licenseKey.default, {
     licenseKey: product.licenseKey
@@ -44890,10 +44662,8 @@ function (_React$Component) {
 
               case 11:
                 this.setState({
-                  stripe: _objectSpread({}, this.state.stripe, {
-                    subscription: _objectSpread({}, this.state.stripe.subscription, {
-                      status: 'canceled'
-                    })
+                  subscription: _objectSpread({}, this.state.subscription, {
+                    status: 'canceled'
                   })
                 });
                 _context.next = 17;
@@ -44973,7 +44743,7 @@ function (_React$Component) {
   }, {
     key: "renderBankCard",
     value: function renderBankCard() {
-      var card = this.state.stripe.subscription.default_payment_method.card;
+      var card = this.state.sales[this.state.sales.length - 1].stripe.paymentIntent.payment_method.card;
       return _react.default.createElement("span", null, "The current used bank card is ****", card.last4, " expiring on ", card.exp_month, "/", card.exp_year);
     }
   }, {
@@ -44981,7 +44751,7 @@ function (_React$Component) {
     value: function renderSubscrption() {
       var _this3 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.stripe.subscription.status !== 'canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", new Date(this.state.stripe.subscription.current_period_end * 1000).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.subscription.status !== 'canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", new Date(this.state.subscription.nextCharge).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
         className: "button info",
         style: {
           marginRight: '10px'
@@ -44999,7 +44769,7 @@ function (_React$Component) {
       }, "Cancel")) : _react.default.createElement(_react.default.Fragment, null), this.state.updating ? _react.default.createElement(_stripeForm.default, {
         email: this.state.customer.email,
         amount: 35695,
-        onPaymentMethodUpdated: function onPaymentMethodUpdated(pm) {
+        onSubmit: function onSubmit(pm) {
           return _this3.updatePaymentMethod(pm);
         }
       }) : _react.default.createElement(_react.default.Fragment, null)) : _react.default.createElement("div", null, _react.default.createElement("span", {
@@ -45554,7 +45324,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64952" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54136" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

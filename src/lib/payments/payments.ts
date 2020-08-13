@@ -31,9 +31,7 @@ export default class Payments {
     }
   }
 
-  init() {
-    return this.services.stripe.init()
-  }
+  async init() {}
 
   createPaymentIntent({ amount, email }) {
     return this.services.stripe.createPaymentIntent({
@@ -77,9 +75,5 @@ export default class Payments {
   customerLink(email) {
     logger.info('Request customer link ' + email)
     return sendCustomerLink(this.services)(email)
-  }
-
-  createSubscription(data) {
-    return this.services.stripe.createSubscription(data)
   }
 }

@@ -46,14 +46,6 @@ class CustomerRepository {
         }
         return sale;
     }
-    async findBySubscription(subscriptionId) {
-        const customer = await this.db.collection('customers').findOne({
-            products: {
-                $elemMatch: { 'stripe.subscription.id': subscriptionId },
-            },
-        });
-        return customer;
-    }
     async createSale(data, paymentIntent) {
         await this.db.collection('invoiceCounter').updateOne({}, {
             $inc: {

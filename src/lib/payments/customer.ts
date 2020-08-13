@@ -28,8 +28,9 @@ export type SaleStripe = {
   paymentIntent: Stripe.PaymentIntent
 }
 
-export type ProductStripe = {
-  subscription: any
+export type Subscription = {
+  state: 'active' | 'canceled' | 'pastDue'
+  nextCharge: Date
 }
 
 export type Product = {
@@ -41,8 +42,8 @@ export type Product = {
   permalink: string
   name: string
   sales: Array<Sale>
-  stripe?: ProductStripe
   accountingData: AccountingData
+  subscription: Subscription
 }
 
 export type Customer = {
@@ -110,15 +111,6 @@ export class CustomerRepository {
     }
 
     return sale
-  }
-
-  async findBySubscription(subscriptionId) {
-    const customer = await this.db.collection('customers').findOne({
-      products: {
-        $elemMatch: { 'stripe.subscription.id': subscriptionId },
-      },
-    })
-    return <Customer>customer
   }
 
   async createSale(data: AccountingData, paymentIntent: Stripe.PaymentIntent) {

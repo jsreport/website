@@ -95,12 +95,9 @@ export default class Product extends React.Component {
       }
 
       this.setState({
-        stripe: {
-          ...this.state.stripe,
-          subscription: {
-            ...this.state.stripe.subscription,
-            status: 'canceled',
-          },
+        subscription: {
+          ...this.state.subscription,
+          status: 'canceled',
         },
       })
     } catch (e) {
@@ -127,7 +124,7 @@ export default class Product extends React.Component {
   }
 
   renderBankCard() {
-    const card = this.state.stripe.subscription.default_payment_method.card
+    const card = this.state.sales[this.state.sales.length - 1].stripe.paymentIntent.payment_method.card
     return (
       <span>
         The current used bank card is ****{card.last4} expiring on {card.exp_month}/{card.exp_year}
@@ -141,10 +138,10 @@ export default class Product extends React.Component {
         <div>
           <h3>SUBSCRIPTION</h3>
         </div>
-        {this.state.stripe.subscription.status !== 'canceled' ? (
+        {this.state.subscription.status !== 'canceled' ? (
           <div>
             <p>
-              The next payment is planned on {new Date(this.state.stripe.subscription.current_period_end * 1000).toLocaleDateString()}
+              The next payment is planned on {new Date(this.state.subscription.nextCharge).toLocaleDateString()}
               <br />
               {this.renderBankCard()}
             </p>
@@ -160,11 +157,7 @@ export default class Product extends React.Component {
             ) : (
               <></>
             )}
-            {this.state.updating ? (
-              <StripeForm email={this.state.customer.email} amount={35695} onPaymentMethodUpdated={(pm) => this.updatePaymentMethod(pm)} />
-            ) : (
-              <></>
-            )}
+            {this.state.updating ? <StripeForm email={this.state.customer.email} amount={35695} onSubmit={(pm) => this.updatePaymentMethod(pm)} /> : <></>}
           </div>
         ) : (
           <div>

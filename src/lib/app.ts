@@ -170,7 +170,6 @@ client.connect((err) => {
   app.post('/api/payments/validate-vat', [limiter, bodyParser.json()], router.validateVat)
   app.post('/api/payments/customer-link', [limiter, bodyParser.json()], router.customerLink)
   app.post('/api/payments/payment-intent', [limiter, bodyParser.json()], router.createPaymentIntent)
-  app.post('/api/payments/subscription', [limiter, bodyParser.json()], router.createSubscription)
   app.get('/api/payments/customer/:id', limiter, router.customerApi)
   app.delete('/api/payments/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription)
   app.put('/api/payments/customer/:customerId/subscription/:productId', [limiter, bodyParser.json()], router.updatePaymentMethod)

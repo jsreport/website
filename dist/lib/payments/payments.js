@@ -34,9 +34,7 @@ class Payments {
             renderInvoice: renderInvoice_1.renderInvoice,
         };
     }
-    init() {
-        return this.services.stripe.init();
-    }
+    async init() { }
     createPaymentIntent({ amount, email }) {
         return this.services.stripe.createPaymentIntent({
             amount: amount * 100,
@@ -71,9 +69,6 @@ class Payments {
     customerLink(email) {
         logger.info('Request customer link ' + email);
         return sendCustomerLink_1.sendCustomerLink(this.services)(email);
-    }
-    createSubscription(data) {
-        return this.services.stripe.createSubscription(data);
     }
 }
 exports.default = Payments;

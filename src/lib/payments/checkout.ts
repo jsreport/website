@@ -1,10 +1,12 @@
 import * as logger from '../utils/logger'
 import Uuid from 'uuid/v4'
-import { AccountingData, Product } from './customer'
+import { AccountingData, Product, Subscription } from './customer'
 import nanoid from 'nanoid'
 import { Emails } from './emails'
 import { Services } from './services'
 import { interpolate } from '../utils/utils'
+import moment from 'moment'
+
 const uuid = () => Uuid().toUpperCase()
 
 export type CheckoutRequest = {
@@ -20,8 +22,7 @@ export type CheckoutRequest = {
   price
   vatAmount
   nonce
-  paymentIntentId
-  subscriptionId
+  paymentIntent
   product: {
     name
     code
@@ -36,14 +37,18 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
 
   const customer = await services.customerRepository.findOrCreate(checkoutData.email)
 
-  const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId)
+  const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntent.id)
   const stripeCustomer = await services.stripe.findOrCreateCustomer(checkoutData.email)
 
-  await services.stripe.testCharge(stripeCustomer.id, stripePaymentIntent)
+  // await services.stripe.testCharge(stripeCustomer.id, stripePaymentIntent)
 
-  const stripeSubscription = checkoutData.product.isSubscription ? await services.stripe.findSubscription(checkoutData.subscriptionId) : null
-
-  // checkoutData.paymentIntent.payment_method = await services.stripe.findPaymentMethod(checkoutData.paymentIntent.payment_method)
+  let subscription: Subscription
+  if (checkoutData.product.isSubscription) {
+    subscription = {
+      state: 'active',
+      nextCharge: moment().add(1, 'years').toDate(),
+    }
+  }
 
   const accountingData: AccountingData = {
     address: checkoutData.address,
@@ -69,9 +74,7 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
     sales: [],
     accountingData,
     licenseKey: checkoutData.product.isSupport ? null : uuid(),
-    stripe: {
-      subscription: stripeSubscription,
-    },
+    subscription,
   }
 
   const sale = await services.customerRepository.createSale(accountingData, stripePaymentIntent)

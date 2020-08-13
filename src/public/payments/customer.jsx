@@ -14,7 +14,7 @@ function Product({ product, onClick }) {
     <div className="list marked" onClick={onClick}>
       <div className="list-content">
         <h3>
-          {products[product.code].name} {product.isSubscription && product.stripe.subscription.status === 'canceled' ? '( canceled )' : ''}
+          {products[product.code].name} {product.isSubscription && product.subscription.status === 'canceled' ? '( canceled )' : ''}
           <div>
             <small>Purchased on {new Date(product.sales[0].purchaseDate).toLocaleDateString()}</small>
           </div>

@@ -117,12 +117,6 @@ function default_1(payments, db) {
                 .then((r) => res.send(r))
                 .catch(next);
         },
-        createSubscription(req, res, next) {
-            return payments
-                .createSubscription(req.body)
-                .then((r) => res.send(r))
-                .catch(next);
-        },
         validateVat(req, res) {
             return payments
                 .validateVat(req.body.vatNumber)

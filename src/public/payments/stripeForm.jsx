@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import { fetchPaymentIntentSecret, createSubscription } from './stripeForm.js'
+
+async function fetchPaymentIntentSecret(email, amount) {
+  const res = await window.fetch('/api/payments/payment-intent', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ amount, email }),
+  })
+  const json = await res.json()
+  return json.clientSecret
+}
 
 const promise = loadStripe('pk_test_51H9xJkB3Af4o8hjcsukE4QyzIl5hvMwd82LTl68xKEh7uhcAIQuwVpSJi6kfVTCwkiJNzydjiHncRI87mTEygx2B00yA6rFrDL')
 export default function StripeForm({ amount, onSubmit, email, product, vatApplied }) {
@@ -21,9 +32,6 @@ function CardForm({ amount, onSubmit, email, product, vatApplied }) {
   const stripe = useStripe()
   const elements = useElements()
   useEffect(() => {
-    if (product.isSubscription) {
-      return
-    }
     fetchPaymentIntentSecret(email, amount).then(setClientSecret)
   }, [])
 
@@ -52,62 +60,10 @@ function CardForm({ amount, onSubmit, email, product, vatApplied }) {
     setError(event.error ? event.error.message : '')
   }
 
-  const handleSubscription = async () => {
-    try {
-      const { error, paymentMethod } = await stripe.createPaymentMethod({
-        type: 'card',
-        card: elements.getElement(CardElement),
-      })
+  const handleSubmit = async (ev) => {
+    ev.preventDefault()
+    setProcessing(true)
 
-      if (error) {
-        throw new Error(error.message)
-      }
-
-      const subscription = await createSubscription({
-        email,
-        productName: product.name,
-        vatApplied: vatApplied,
-        paymentMethodId: paymentMethod.id,
-      })
-
-      const paymentIntent = subscription.latest_invoice.payment_intent
-
-      if (subscription.status !== 'active') {
-        if (paymentIntent.status === 'requires_payment_method') {
-          throw new Error('Your card was declined')
-        }
-
-        if (paymentIntent.status === 'requires_action') {
-          const { confirmedPaymentIntent, error } = await stripe.confirmCardPayment(paymentIntent.client_secret, {
-            payment_method: paymentMethodId,
-          })
-
-          if (error) {
-            throw new Error(error.message)
-          }
-
-          if (confirmedPaymentIntent.status !== 'succeeded') {
-            throw new Error('Unexpected error, payment is in state ' + confirmedPaymentIntent.status)
-          }
-        }
-      }
-
-      setError(null)
-      setProcessing(false)
-      setSucceeded(true)
-      return onSubmit({
-        paymentIntentId: paymentIntent.id,
-        subscriptionId: subscription.id,
-      })
-    } catch (e) {
-      console.error(e)
-      setError(`Subscription creation failed ${e}`)
-      setProcessing(false)
-      return
-    }
-  }
-
-  const handleOneTime = async () => {
     try {
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -122,21 +78,10 @@ function CardForm({ amount, onSubmit, email, product, vatApplied }) {
       setError(null)
       setProcessing(false)
       setSucceeded(true)
-      onSubmit({ paymentIntentId: paymentIntent.id })
+      onSubmit(paymentIntent)
     } catch (e) {
       setError(`Payment failed ${e.message}`)
       setProcessing(false)
-    }
-  }
-
-  const handleSubmit = async (ev) => {
-    ev.preventDefault()
-    setProcessing(true)
-
-    if (product.isSubscription) {
-      handleSubscription()
-    } else {
-      handleOneTime()
     }
   }
 

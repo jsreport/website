@@ -85,7 +85,7 @@ class Checkout extends React.Component {
     })
   }
 
-  async submitCheckout(additionalCheckoutData) {
+  async submitCheckout(paymentIntent) {
     const { vatRate, vatAmount, amount } = calculatePrice({
       country: this.state.country,
       isVATValid: this.state.isVATValid && this.state.vatNumber,
@@ -107,7 +107,7 @@ class Checkout extends React.Component {
         vatNumber: this.state.vatNumber,
         currency,
         isEU: country.eu,
-        ...additionalCheckoutData,
+        paymentIntent,
       }),
       headers: {
         'Content-Type': 'application/json',
