@@ -6,9 +6,9 @@ export const cancelSubscription = (services: Services) => async (customerId, pro
   const customer = await services.customerRepository.find(customerId)
   const product = customer.products.find((p) => p.id === productId)
   product.subscription.state = 'canceled'
-  // await services.stripe.cancelSubscription(product.stripe.subscription.id)
-
-  // product.stripe.subscription.status = 'canceled'
+  product.subscription.nextPayment = null
+  product.subscription.retryPlannedPayment = null
+  product.subscription.plannedCancelation = null
 
   Object.assign(
     customer.products.find((p) => p.id === productId),

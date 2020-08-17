@@ -96,7 +96,7 @@ class CustomerCheckout extends React.Component {
         vatNumber: this.state.vatNumber,
         currency,
         isEU: country.eu,
-        paymentIntent,
+        paymentIntentId: paymentIntent.id,
       }),
       headers: {
         'Content-Type': 'application/json',

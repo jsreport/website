@@ -22,7 +22,7 @@ class CustomerRepository {
         }
         return customer;
     }
-    async findOrCreate(email, stripeCustomerId) {
+    async findOrCreate(email) {
         let customer = await this.db.collection('customers').findOne({ email });
         if (customer) {
             return customer;
@@ -31,9 +31,6 @@ class CustomerRepository {
             email,
             uuid: nanoid_1.default(16),
             creationDate: new Date(),
-            stripe: {
-                id: stripeCustomerId,
-            },
         };
         await this.db.collection('customers').insertOne(customer);
         return customer;

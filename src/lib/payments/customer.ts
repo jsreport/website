@@ -92,7 +92,7 @@ export class CustomerRepository {
     return <Customer>customer
   }
 
-  async findOrCreate(email, stripeCustomerId: string) {
+  async findOrCreate(email) {
     let customer = await this.db.collection('customers').findOne({ email })
 
     if (customer) {
@@ -103,9 +103,6 @@ export class CustomerRepository {
       email,
       uuid: nanoid(16),
       creationDate: new Date(),
-      stripe: {
-        id: stripeCustomerId,
-      },
     }
 
     await this.db.collection('customers').insertOne(customer)

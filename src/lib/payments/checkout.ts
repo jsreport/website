@@ -22,8 +22,7 @@ export type CheckoutRequest = {
   vatRate
   price
   vatAmount
-  nonce
-  paymentIntent
+  paymentIntentId
   product: {
     name
     code
@@ -38,7 +37,7 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
 
   const customer = await services.customerRepository.find(checkoutData.customerId)
 
-  const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntent.id)
+  const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId)
   const stripePaymentMethod: Stripe.PaymentMethod = <Stripe.PaymentMethod>stripePaymentIntent.payment_method
 
   let subscription: Subscription

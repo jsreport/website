@@ -20,7 +20,7 @@ const uuid = () => v4_1.default().toUpperCase();
 exports.checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
     const customer = await services.customerRepository.find(checkoutData.customerId);
-    const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntent.id);
+    const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId);
     const stripePaymentMethod = stripePaymentIntent.payment_method;
     let subscription;
     if (checkoutData.product.isSubscription) {

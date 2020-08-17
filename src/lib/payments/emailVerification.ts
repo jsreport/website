@@ -4,7 +4,7 @@ import { Emails } from './emails'
 
 export const emailVerification = (services: Services) => async (email: string, productCode) => {
   const stripeCustomer = await services.stripe.findOrCreateCustomer(email.toLowerCase())
-  const customer = await services.customerRepository.findOrCreate(email.toLocaleLowerCase(), stripeCustomer.id)
+  const customer = await services.customerRepository.findOrCreate(email.toLocaleLowerCase())
 
   await services.sendEmail({
     to: customer.email,

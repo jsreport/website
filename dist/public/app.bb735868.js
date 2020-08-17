@@ -43974,7 +43974,7 @@ function (_React$Component) {
                     vatNumber: this.state.vatNumber,
                     currency: _customerCheckout.currency,
                     isEU: country.eu,
-                    paymentIntent: paymentIntent
+                    paymentIntentId: paymentIntent.id
                   }),
                   headers: {
                     'Content-Type': 'application/json'
