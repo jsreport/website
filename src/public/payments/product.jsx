@@ -105,16 +105,23 @@ export default class Product extends React.Component {
     }
   }
 
-  async updatePaymentMethod(si) {
+  async updatePaymentMethod(i) {
     const res = await window.fetch(`/api/payments/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
       method: 'PUT',
-      body: JSON.stringify(si),
+      body: JSON.stringify({
+        paymentIntentId: this.state.subscription.plannedCancelation ? i.id : null,
+        setupIntentId: this.state.subscription.plannedCancelation ? null : i.id,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
 
     const resJson = await res.json()
+
+    if (this.state.subscription.plannedCancelation) {
+      alert('Payment successful, subscription is renewed.')
+    }
 
     if (!res.ok) {
       throw new Error(resJson && resJson.error ? resJson.error : res.statusText)
@@ -124,10 +131,10 @@ export default class Product extends React.Component {
   }
 
   renderBankCard() {
-    const card = this.state.sales[this.state.sales.length - 1].stripe.paymentIntent.payment_method.card
     return (
       <span>
-        The current used bank card is ****{card.last4} expiring on {card.exp_month}/{card.exp_year}
+        The current used bank card is ****{this.state.subscription.card.last4} expiring on {this.state.subscription.card.expMonth}/
+        {this.state.subscription.card.expYear}
       </span>
     )
   }
@@ -141,7 +148,7 @@ export default class Product extends React.Component {
         {this.state.subscription.status !== 'canceled' ? (
           <div>
             <p>
-              The next payment is planned on {new Date(this.state.subscription.nextCharge).toLocaleDateString()}
+              The next payment is planned on {new Date(this.state.subscription.nextPayment).toLocaleDateString()}
               <br />
               {this.renderBankCard()}
             </p>
@@ -157,7 +164,16 @@ export default class Product extends React.Component {
             ) : (
               <></>
             )}
-            {this.state.updating ? <StripeForm email={this.state.customer.email} amount={35695} onSubmit={(pm) => this.updatePaymentMethod(pm)} /> : <></>}
+            {this.state.updating ? (
+              <StripeForm
+                email={this.state.customer.email}
+                onSubmit={(i) => this.updatePaymentMethod(i)}
+                setupIntent={!this.state.subscription.plannedCancelation}
+                amount={this.state.sales[this.state.sales.length - 1].accountingData.amount}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         ) : (
           <div>

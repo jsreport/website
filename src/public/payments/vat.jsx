@@ -1,5 +1,5 @@
 import React from 'react'
-import { validateVAT } from './checkout.js'
+import { validateVAT } from './customerCheckout.js'
 
 export default class Vat extends React.Component {
   constructor() {
@@ -17,7 +17,7 @@ export default class Vat extends React.Component {
     if (!v) {
       return
     }
-    console.log('validate vat ' + v)
+
     validateVAT(v)
       .then((r) => {
         this.setState({
@@ -31,7 +31,7 @@ export default class Vat extends React.Component {
 
   render() {
     return (
-      <div className="span4">
+      <div className="coll2">
         <label>VAT number (optional)</label>
         <small>
           <input

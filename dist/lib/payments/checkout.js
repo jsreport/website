@@ -19,15 +19,22 @@ const moment_1 = __importDefault(require("moment"));
 const uuid = () => v4_1.default().toUpperCase();
 exports.checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
-    const customer = await services.customerRepository.findOrCreate(checkoutData.email);
+    const customer = await services.customerRepository.find(checkoutData.customerId);
     const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntent.id);
-    const stripeCustomer = await services.stripe.findOrCreateCustomer(checkoutData.email);
-    // await services.stripe.testCharge(stripeCustomer.id, stripePaymentIntent)
+    const stripePaymentMethod = stripePaymentIntent.payment_method;
     let subscription;
     if (checkoutData.product.isSubscription) {
         subscription = {
             state: 'active',
-            nextCharge: moment_1.default().add(1, 'years').toDate(),
+            nextPayment: moment_1.default().add(1, 'years').toDate(),
+            card: {
+                last4: stripePaymentMethod.card.last4,
+                expMonth: stripePaymentMethod.card.exp_month,
+                expYear: stripePaymentMethod.card.exp_year,
+            },
+            stripe: {
+                paymentMethodId: stripePaymentIntent.payment_method.id,
+            },
         };
     }
     const accountingData = {
@@ -55,7 +62,9 @@ exports.checkout = (services) => async (checkoutData) => {
         licenseKey: checkoutData.product.isSupport ? null : uuid(),
         subscription,
     };
-    const sale = await services.customerRepository.createSale(accountingData, stripePaymentIntent);
+    const sale = await services.customerRepository.createSale(accountingData, {
+        paymentIntentId: stripePaymentIntent.id,
+    });
     await services.renderInvoice(sale);
     product.sales.push(sale);
     await services.notifyLicensingServer(customer, product, product.sales[0]);

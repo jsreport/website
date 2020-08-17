@@ -117,6 +117,12 @@ function default_1(payments, db) {
                 .then((r) => res.send(r))
                 .catch(next);
         },
+        createSetupIntent(req, res, next) {
+            return payments
+                .createSetupIntent(req.body)
+                .then((r) => res.send(r))
+                .catch(next);
+        },
         validateVat(req, res) {
             return payments
                 .validateVat(req.body.vatNumber)
@@ -160,6 +166,12 @@ function default_1(payments, db) {
         customerLink(req, res, next) {
             return payments
                 .customerLink(req.body.email)
+                .then(() => res.send('ok'))
+                .catch(next);
+        },
+        emailVerification(req, res, next) {
+            return payments
+                .emailVerification(req.body.email, req.body.productCode)
                 .then(() => res.send('ok'))
                 .catch(next);
         },

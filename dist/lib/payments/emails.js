@@ -5,7 +5,7 @@ exports.Emails = {
         enterprise: {
             us: {
                 subject: 'New sale ${product.name}',
-                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
             },
             customer: {
                 subject: 'You bought ${product.name}',
@@ -29,13 +29,13 @@ Please download and read the end user license agreement:<br>
 <br>
 Thank you<br>
 jsreport team
-`
-            }
+`,
+            },
         },
         support: {
             us: {
                 subject: 'New sale ${product.name}',
-                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
             },
             customer: {
                 subject: 'You bought ${product.name}',
@@ -53,15 +53,15 @@ The invoice can be downloaded from your customer portal<br>
 <br>
 Thank you<br>
 jsreport team
-`
-            }
-        }
+`,
+            },
+        },
     },
     cancel: {
         enterprise: {
             us: {
                 subject: '${product.name} canceled',
-                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
             },
             customer: {
                 subject: '${product.name} canceled',
@@ -71,13 +71,13 @@ You can continue using the license key until the end of the period.<br>
 Since then the license key becomes invalid and server instances using it won't start.<br>
 <br>
 jsreport team
-`
-            }
+`,
+            },
         },
         support: {
             us: {
                 subject: '${product.name} canceled',
-                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
             },
             customer: {
                 subject: '${product.name} canceled',
@@ -85,14 +85,14 @@ jsreport team
 your \${product.name} has been canceled.<br>
 <br>
 jsreport team
-`
-            }
-        }
+`,
+            },
+        },
     },
     recurring: {
         us: {
             subject: '${product.name} successful recurring charge',
-            content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+            content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
         },
         customer: {
             subject: '${product.name} renewal successful',
@@ -103,39 +103,38 @@ The invoice can be downloaded from your customer portal <br>
 <a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
 <br>
 Thank you for using jsreport<br>
-jsreport team`
-        }
+jsreport team`,
+        },
     },
     recurringFail: {
         us: {
-            subject: '${product.name} renewal charge unsuccessful',
-            content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+            subject: '${product.name} renewal payment unsuccessful',
+            content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
         },
         customer: {
-            subject: '${product.name} renewal charge unsuccessful',
+            subject: '${product.name} renewal payment unsuccessful',
             content: `Hi,<br>
 we weren't able to charge your bank card for \${product.name} renewal.<br>
 <br>
 Please verify your bank credentials.<br>
 <a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}'>https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}</a><br>
 <br>
-We will automatically try to charge the card again in the three days before the subscription gets canceled.<br>
-<br>
-jsreport team`
-        }
+
+jsreport team`,
+        },
     },
     recurringCancel: {
         us: {
-            subject: '${product.name} canceled because of failed payments',
-            content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`
+            subject: '${product.name} was canceled because of failed payments',
+            content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
         },
         customer: {
-            subject: '${product.name} canceled because of failed payments',
+            subject: '${product.name} was canceled because of failed payments',
             content: `Hi,<br>
 \${product.name} was canceled because of multiple failed payments.<br>
 <br>
-jsreport team`
-        }
+jsreport team`,
+        },
     },
     customerLink: {
         subject: 'jsreport customer dashboard link',
@@ -144,7 +143,16 @@ you requested link to your jsreport customer dashboard. Here it is<br/><br/>
 <a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br/>
 <br/>
 jsreport team
-        `
-    }
+        `,
+    },
+    emailVerification: {
+        subject: 'jsreport email verification',
+        content: `Hi,<br/>        
+please continue the purchase here<br/><br/>
+<a href='https://jsreport.net/payments/customer/\${customer.uuid}/checkout/\${productCode}'>https://jsreport.net/payments/customer/\${customer.uuid}/checkout/\${productCode}</a><br/>
+<br/>
+jsreport team
+        `,
+    },
 };
 //# sourceMappingURL=emails.js.map

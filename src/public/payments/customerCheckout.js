@@ -47,7 +47,7 @@ export async function validateVAT(vatNumber) {
   }
 }
 
-export const productCode = () => window.location.pathname.replace('/payments/checkout/', '')
+export const productCode = () => window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
 export const product = () => products[productCode()]
 export const currency = 'usd'
 export const currencyChar = '$'

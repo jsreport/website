@@ -2,28 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
-async function fetchPaymentIntentSecret(email, amount) {
-  const res = await window.fetch('/api/payments/payment-intent', {
+async function fetchPaymentIntentSecret(customerId, amount, setupIntent) {
+  const res = await window.fetch('/api/payments/' + (setupIntent ? 'setup-intent' : 'payment-intent'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ amount, email }),
+    body: JSON.stringify({ amount, customerId }),
   })
-  const json = await res.json()
-  return json.clientSecret
+  return res.text()
 }
 
 const promise = loadStripe('pk_test_51H9xJkB3Af4o8hjcsukE4QyzIl5hvMwd82LTl68xKEh7uhcAIQuwVpSJi6kfVTCwkiJNzydjiHncRI87mTEygx2B00yA6rFrDL')
-export default function StripeForm({ amount, onSubmit, email, product, vatApplied }) {
+export default function StripeForm({ amount, onSubmit, customerId, product, setupIntent }) {
   return (
     <Elements stripe={promise}>
-      <CardForm amount={amount} onSubmit={onSubmit} email={email} product={product} vatApplied={vatApplied} />
+      <CardForm amount={amount} onSubmit={onSubmit} customerId={customerId} product={product} setupIntent={setupIntent} />
     </Elements>
   )
 }
 
-function CardForm({ amount, onSubmit, email, product, vatApplied }) {
+function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
@@ -32,7 +31,7 @@ function CardForm({ amount, onSubmit, email, product, vatApplied }) {
   const stripe = useStripe()
   const elements = useElements()
   useEffect(() => {
-    fetchPaymentIntentSecret(email, amount).then(setClientSecret)
+    fetchPaymentIntentSecret(customerId, amount, setupIntent).then(setClientSecret)
   }, [])
 
   const cardStyle = {
@@ -65,6 +64,23 @@ function CardForm({ amount, onSubmit, email, product, vatApplied }) {
     setProcessing(true)
 
     try {
+      if (setupIntent) {
+        const { error, setupIntent } = await stripe.confirmCardSetup(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        })
+
+        if (error) {
+          throw new Error(error.message)
+        }
+
+        setError(null)
+        setProcessing(false)
+        setSucceeded(true)
+        return onSubmit(setupIntent)
+      }
+
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),

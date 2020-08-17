@@ -1,17 +1,40 @@
 import * as logger from '../utils/logger'
 import { Services } from './services'
+import Stripe from 'stripe'
+import { Customer, Product } from './customer'
 
-export const updatePaymentMethod = (services: Services) => async (customerId: string, productId: string, si) => {
-  logger.info(`updating patyment method for customer: ${customerId}, productId: ${productId}`)
+export const updatePaymentMethod = (
+  services: Services,
+  processSuccessfullPayment: (customer: Customer, product: Product, paymentIntent: Stripe.PaymentIntent) => Promise<any>
+) => async (customerId: string, productId: string, data) => {
   const customer = await services.customerRepository.find(customerId)
   const product = customer.products.find((p) => p.id === productId)
-  const stripeCustomer = await services.stripe.findOrCreateCustomer(customer.email)
 
-  // product.stripe.subscription = await services.stripe.updateSubscription(product.stripe.subscription.id, stripeCustomer.id, si.payment_method)
+  if (data.setupIntentId) {
+    logger.info(`updating payment method for customer: ${customer.email}`)
+    const stripeSetupIntent = await services.stripe.findSetupIntent(data.setupIntentId)
+    const stripePaymentMethod = <Stripe.PaymentMethod>stripeSetupIntent.payment_method
 
-  Object.assign(
-    customer.products.find((p) => p.id === productId),
-    product
-  )
-  await services.customerRepository.update(customer)
+    product.subscription.card = {
+      last4: stripePaymentMethod.card.last4,
+      expMonth: stripePaymentMethod.card.exp_month,
+      expYear: stripePaymentMethod.card.exp_year,
+    }
+
+    product.subscription.stripe.paymentMethodId = stripePaymentMethod.id
+    await services.customerRepository.update(customer)
+    logger.info(`updating payment method for customer: ${customer.email} successfull`)
+  } else {
+    logger.info(`updating payment method for customer: ${customer.email} as immediate charge confirmation`)
+    const stripePaymentIntent = await services.stripe.findPaymentIntent(data.paymentIntentId)
+    const stripePaymentMethod = <Stripe.PaymentMethod>stripePaymentIntent.payment_method
+
+    product.subscription.card = {
+      last4: stripePaymentMethod.card.last4,
+      expMonth: stripePaymentMethod.card.exp_month,
+      expYear: stripePaymentMethod.card.exp_year,
+    }
+
+    return processSuccessfullPayment(customer, product, stripePaymentIntent)
+  }
 }

@@ -22,7 +22,7 @@ class CustomerRepository {
         }
         return customer;
     }
-    async findOrCreate(email) {
+    async findOrCreate(email, stripeCustomerId) {
         let customer = await this.db.collection('customers').findOne({ email });
         if (customer) {
             return customer;
@@ -31,6 +31,9 @@ class CustomerRepository {
             email,
             uuid: nanoid_1.default(16),
             creationDate: new Date(),
+            stripe: {
+                id: stripeCustomerId,
+            },
         };
         await this.db.collection('customers').insertOne(customer);
         return customer;
@@ -46,7 +49,7 @@ class CustomerRepository {
         }
         return sale;
     }
-    async createSale(data, paymentIntent) {
+    async createSale(data, saleStripe) {
         await this.db.collection('invoiceCounter').updateOne({}, {
             $inc: {
                 nextId: 1,
@@ -61,11 +64,26 @@ class CustomerRepository {
             id: id,
             blobName: `${id}.pdf`,
             purchaseDate: new Date(),
-            stripe: {
-                paymentIntent,
-            },
+            stripe: saleStripe,
         };
         return sale;
+    }
+    async findCustomersWithPastDueSubscriptions() {
+        return this.db
+            .collection('customers')
+            .find({
+            products: {
+                $elemMatch: {
+                    'subscription.nextPayment': {
+                        $lt: new Date(),
+                    },
+                    'subscription.state': {
+                        $ne: 'canceled',
+                    },
+                },
+            },
+        })
+            .toArray();
     }
 }
 exports.CustomerRepository = CustomerRepository;

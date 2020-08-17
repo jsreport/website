@@ -11,12 +11,14 @@ import { cancelSubscription } from './cancelSubscription'
 import { Services } from './services'
 import { renderInvoice, readInvoice } from './renderInvoice'
 import { sendCustomerLink } from './sendCustomerLink'
-import { stripeHook } from './stripeHook'
+import SubscriptionRenewal from './subscriptionRenewal'
+import { emailVerification } from './emailVerification'
 
 export default class Payments {
   db: Db
   customerRepository: CustomerRepository
   services: Services
+  subscriptionRenewal: SubscriptionRenewal
 
   constructor(db: Db) {
     this.db = db
@@ -29,15 +31,25 @@ export default class Payments {
       notifyLicensingServer,
       renderInvoice,
     }
+
+    this.subscriptionRenewal = new SubscriptionRenewal(this.services)
   }
 
-  async init() {}
+  async init() {
+    // this.subscriptionRenewal.start()
+  }
 
-  createPaymentIntent({ amount, email }) {
+  async createPaymentIntent({ amount, customerId }) {
+    const customer = await this.services.customerRepository.find(customerId)
     return this.services.stripe.createPaymentIntent({
-      amount: amount * 100,
-      email,
+      amount: amount,
+      email: customer.email,
     })
+  }
+
+  async createSetupIntent({ customerId }) {
+    const customer = await this.services.customerRepository.find(customerId)
+    return this.services.stripe.createSetupIntent({ email: customer.email })
   }
 
   async validateVat(vatNumber = '') {
@@ -49,7 +61,7 @@ export default class Payments {
   }
 
   async updatePaymentMethod(customerId, productId, si) {
-    return updatePaymentMethod(this.services)(customerId, productId, si)
+    return updatePaymentMethod(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))(customerId, productId, si)
   }
 
   async customer(id) {
@@ -67,13 +79,16 @@ export default class Payments {
     return cancelSubscription(this.services)(customerId, productId)
   }
 
-  stripeHook(signature, body) {
-    logger.info('Parsing stripe hook')
-    return stripeHook(this.services)(signature, body)
-  }
-
   customerLink(email) {
     logger.info('Request customer link ' + email)
     return sendCustomerLink(this.services)(email)
+  }
+
+  stripeHook() {
+    // nothing for now
+  }
+
+  emailVerification(email, productCode) {
+    return emailVerification(this.services)(email, productCode)
   }
 }

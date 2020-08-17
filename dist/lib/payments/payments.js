@@ -21,7 +21,8 @@ const updatePaymentMethod_1 = require("./updatePaymentMethod");
 const cancelSubscription_1 = require("./cancelSubscription");
 const renderInvoice_1 = require("./renderInvoice");
 const sendCustomerLink_1 = require("./sendCustomerLink");
-const stripeHook_1 = require("./stripeHook");
+const subscriptionRenewal_1 = __importDefault(require("./subscriptionRenewal"));
+const emailVerification_1 = require("./emailVerification");
 class Payments {
     constructor(db) {
         this.db = db;
@@ -33,13 +34,21 @@ class Payments {
             notifyLicensingServer: notifyLicensingServer_1.notifyLicensingServer,
             renderInvoice: renderInvoice_1.renderInvoice,
         };
+        this.subscriptionRenewal = new subscriptionRenewal_1.default(this.services);
     }
-    async init() { }
-    createPaymentIntent({ amount, email }) {
+    async init() {
+        // this.subscriptionRenewal.start()
+    }
+    async createPaymentIntent({ amount, customerId }) {
+        const customer = await this.services.customerRepository.find(customerId);
         return this.services.stripe.createPaymentIntent({
-            amount: amount * 100,
-            email,
+            amount: amount,
+            email: customer.email,
         });
+    }
+    async createSetupIntent({ customerId }) {
+        const customer = await this.services.customerRepository.find(customerId);
+        return this.services.stripe.createSetupIntent({ email: customer.email });
     }
     async validateVat(vatNumber = '') {
         return validateVat_1.default(vatNumber);
@@ -48,7 +57,7 @@ class Payments {
         return checkout_1.checkout(this.services)(checkoutData);
     }
     async updatePaymentMethod(customerId, productId, si) {
-        return updatePaymentMethod_1.updatePaymentMethod(this.services)(customerId, productId, si);
+        return updatePaymentMethod_1.updatePaymentMethod(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))(customerId, productId, si);
     }
     async customer(id) {
         return this.customerRepository.find(id);
@@ -62,13 +71,15 @@ class Payments {
         logger.info('Canceling subscription customerId:' + customerId + ' productId:' + productId);
         return cancelSubscription_1.cancelSubscription(this.services)(customerId, productId);
     }
-    stripeHook(signature, body) {
-        logger.info('Parsing stripe hook');
-        return stripeHook_1.stripeHook(this.services)(signature, body);
-    }
     customerLink(email) {
         logger.info('Request customer link ' + email);
         return sendCustomerLink_1.sendCustomerLink(this.services)(email);
+    }
+    stripeHook() {
+        // nothing for now
+    }
+    emailVerification(email, productCode) {
+        return emailVerification_1.emailVerification(this.services)(email, productCode);
     }
 }
 exports.default = Payments;

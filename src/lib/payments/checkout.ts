@@ -6,11 +6,12 @@ import { Emails } from './emails'
 import { Services } from './services'
 import { interpolate } from '../utils/utils'
 import moment from 'moment'
+import Stripe from 'stripe'
 
 const uuid = () => Uuid().toUpperCase()
 
 export type CheckoutRequest = {
-  email
+  customerId
   name
   address
   country
@@ -35,18 +36,24 @@ export type CheckoutRequest = {
 export const checkout = (services: Services) => async (checkoutData: CheckoutRequest) => {
   logger.info('Processing checkout ' + JSON.stringify(checkoutData))
 
-  const customer = await services.customerRepository.findOrCreate(checkoutData.email)
+  const customer = await services.customerRepository.find(checkoutData.customerId)
 
   const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntent.id)
-  const stripeCustomer = await services.stripe.findOrCreateCustomer(checkoutData.email)
-
-  // await services.stripe.testCharge(stripeCustomer.id, stripePaymentIntent)
+  const stripePaymentMethod: Stripe.PaymentMethod = <Stripe.PaymentMethod>stripePaymentIntent.payment_method
 
   let subscription: Subscription
   if (checkoutData.product.isSubscription) {
     subscription = {
       state: 'active',
-      nextCharge: moment().add(1, 'years').toDate(),
+      nextPayment: moment().add(1, 'years').toDate(),
+      card: {
+        last4: stripePaymentMethod.card.last4,
+        expMonth: stripePaymentMethod.card.exp_month,
+        expYear: stripePaymentMethod.card.exp_year,
+      },
+      stripe: {
+        paymentMethodId: (<any>stripePaymentIntent.payment_method).id,
+      },
     }
   }
 
@@ -77,7 +84,9 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
     subscription,
   }
 
-  const sale = await services.customerRepository.createSale(accountingData, stripePaymentIntent)
+  const sale = await services.customerRepository.createSale(accountingData, {
+    paymentIntentId: stripePaymentIntent.id,
+  })
 
   await services.renderInvoice(sale)
   product.sales.push(sale)

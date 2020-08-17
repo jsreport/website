@@ -1,6 +1,5 @@
 import { Db } from 'mongodb'
 import nanoid from 'nanoid'
-import Stripe from 'stripe'
 
 export type AccountingData = {
   name: string
@@ -25,12 +24,26 @@ export type Sale = {
 }
 
 export type SaleStripe = {
-  paymentIntent: Stripe.PaymentIntent
+  paymentIntentId: string
+}
+
+export type Card = {
+  last4: string
+  expMonth: number
+  expYear: number
+}
+
+export type SubscriptionStripe = {
+  paymentMethodId: string
 }
 
 export type Subscription = {
-  state: 'active' | 'canceled' | 'pastDue'
-  nextCharge: Date
+  state: 'active' | 'canceled'
+  nextPayment: Date
+  retryPlannedPayment?: Date
+  plannedCancelation?: Date
+  card: Card
+  stripe: SubscriptionStripe
 }
 
 export type Product = {
@@ -79,7 +92,7 @@ export class CustomerRepository {
     return <Customer>customer
   }
 
-  async findOrCreate(email) {
+  async findOrCreate(email, stripeCustomerId: string) {
     let customer = await this.db.collection('customers').findOne({ email })
 
     if (customer) {
@@ -90,6 +103,9 @@ export class CustomerRepository {
       email,
       uuid: nanoid(16),
       creationDate: new Date(),
+      stripe: {
+        id: stripeCustomerId,
+      },
     }
 
     await this.db.collection('customers').insertOne(customer)
@@ -113,7 +129,7 @@ export class CustomerRepository {
     return sale
   }
 
-  async createSale(data: AccountingData, paymentIntent: Stripe.PaymentIntent) {
+  async createSale(data: AccountingData, saleStripe: SaleStripe) {
     await this.db.collection('invoiceCounter').updateOne(
       {},
       {
@@ -134,11 +150,27 @@ export class CustomerRepository {
       id: id,
       blobName: `${id}.pdf`,
       purchaseDate: new Date(),
-      stripe: {
-        paymentIntent,
-      },
+      stripe: saleStripe,
     }
 
     return sale
+  }
+
+  async findCustomersWithPastDueSubscriptions() {
+    return this.db
+      .collection('customers')
+      .find({
+        products: {
+          $elemMatch: {
+            'subscription.nextPayment': {
+              $lt: new Date(),
+            },
+            'subscription.state': {
+              $ne: 'canceled',
+            },
+          },
+        },
+      })
+      .toArray()
   }
 }
