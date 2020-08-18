@@ -1,24 +1,24 @@
 import * as logger from '../utils/logger'
 import { sendEmail } from '../utils/mailer'
 import { Db } from 'mongodb'
-import Braintree from './braintree'
+import StripeFacade from './stripe'
 import { CustomerRepository } from './customer'
 import validateVat from './validateVat'
 import { checkout, CheckoutRequest } from './checkout'
 import { notifyLicensingServer } from './notifyLicensingServer'
 import { updatePaymentMethod } from './updatePaymentMethod'
 import { cancelSubscription } from './cancelSubscription'
-import { braintreeHook } from './braintreeHook'
 import { Services } from './services'
 import { renderInvoice, readInvoice } from './renderInvoice'
 import { sendCustomerLink } from './sendCustomerLink'
-
-const braintree = new Braintree()
+import SubscriptionRenewal from './subscriptionRenewal'
+import { emailVerification } from './emailVerification'
 
 export default class Payments {
   db: Db
   customerRepository: CustomerRepository
   services: Services
+  subscriptionRenewal: SubscriptionRenewal
 
   constructor(db: Db) {
     this.db = db
@@ -26,15 +26,30 @@ export default class Payments {
 
     this.services = {
       customerRepository: this.customerRepository,
-      braintree,
+      stripe: new StripeFacade(),
       sendEmail,
       notifyLicensingServer,
-      renderInvoice
+      renderInvoice,
     }
+
+    this.subscriptionRenewal = new SubscriptionRenewal(this.services)
   }
 
-  generateToken() {
-    return braintree.generateToken()
+  async init() {
+    this.subscriptionRenewal.start()
+  }
+
+  async createPaymentIntent({ amount, customerId }) {
+    const customer = await this.services.customerRepository.find(customerId)
+    return this.services.stripe.createPaymentIntent({
+      amount: amount,
+      email: customer.email,
+    })
+  }
+
+  async createSetupIntent({ customerId }) {
+    const customer = await this.services.customerRepository.find(customerId)
+    return this.services.stripe.createSetupIntent({ email: customer.email })
   }
 
   async validateVat(vatNumber = '') {
@@ -45,8 +60,8 @@ export default class Payments {
     return checkout(this.services)(checkoutData)
   }
 
-  async updatePaymentMethod(customerId, productId, pm) {
-    return updatePaymentMethod(this.services)(customerId, productId, pm)
+  async updatePaymentMethod(customerId, productId, si) {
+    return updatePaymentMethod(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))(customerId, productId, si)
   }
 
   async customer(id) {
@@ -64,13 +79,16 @@ export default class Payments {
     return cancelSubscription(this.services)(customerId, productId)
   }
 
-  braintreeHook(signature, body) {
-    logger.info('Parsing braintree hook')
-    return braintreeHook(this.services)(signature, body)
-  }
-
   customerLink(email) {
     logger.info('Request customer link ' + email)
     return sendCustomerLink(this.services)(email)
+  }
+
+  stripeHook() {
+    // nothing for now
+  }
+
+  emailVerification(email, productCode) {
+    return emailVerification(this.services)(email, productCode)
   }
 }

@@ -1,36 +1,45 @@
 import * as logger from '../utils/logger'
-import { Services } from "./services"
+import { Services } from './services'
+import Stripe from 'stripe'
+import { Customer, Product } from './customer'
 
-export const updatePaymentMethod = (services: Services) => async (customerId: string, productId: string, nonce: string) => {
-    logger.info(`updating patyment method for customer: ${customerId}, productId: ${productId}`)
-    const customer = await services.customerRepository.find(customerId)
-    const product = customer.products.find(p => p.id === productId)
+type SetupIntentOrPaymentIntent = {
+  setupIntentId?: string
+  paymentIntentId?: string
+}
 
-    const pmr = await services.braintree.createPaymentMethod({
-        customerId: customer.braintree.customerId,
-        paymentMethodNonce: nonce,
-        options: {
-            verifyCard: true
-        }
-    })
+export const updatePaymentMethod = (
+  services: Services,
+  processSuccessfullPayment: (customer: Customer, product: Product, paymentIntent: Stripe.PaymentIntent) => Promise<any>
+) => async (customerId: string, productId: string, data: SetupIntentOrPaymentIntent) => {
+  const customer = await services.customerRepository.find(customerId)
+  const product = customer.products.find((p) => p.id === productId)
 
-    if (pmr.success === false) {
-        throw new Error('Unable to register payment method: ' + pmr.message)
+  if (data.setupIntentId) {
+    logger.info(`updating payment method for customer: ${customer.email}`)
+    const stripeSetupIntent = await services.stripe.findSetupIntent(data.setupIntentId)
+    const stripePaymentMethod = <Stripe.PaymentMethod>stripeSetupIntent.payment_method
+
+    product.subscription.card = {
+      last4: stripePaymentMethod.card.last4,
+      expMonth: stripePaymentMethod.card.exp_month,
+      expYear: stripePaymentMethod.card.exp_year,
     }
 
-    const sres = await services.braintree.updateSubscription(product.braintree.subscription.id, {
-        paymentMethodToken: pmr.paymentMethod.token,
-        id: product.braintree.subscription.id,
-        merchantAccountId: product.braintree.subscription.merchantAccountId,
-        planId: product.braintree.subscription.planId
-    })
-
-    if (sres.success === false) {
-        throw new Error('Unable to udpdate payment ' + sres.message)
-    }
-
-    product.braintree.paymentMethod = pmr.paymentMethod
-
-    Object.assign(customer.products.find(p => p.id === productId), product)
+    product.subscription.stripe.paymentMethodId = stripePaymentMethod.id
     await services.customerRepository.update(customer)
+    logger.info(`updating payment method for customer: ${customer.email} successfull`)
+  } else {
+    logger.info(`updating payment method for customer: ${customer.email} as immediate charge confirmation`)
+    const stripePaymentIntent = await services.stripe.findPaymentIntent(data.paymentIntentId)
+    const stripePaymentMethod = <Stripe.PaymentMethod>stripePaymentIntent.payment_method
+
+    product.subscription.card = {
+      last4: stripePaymentMethod.card.last4,
+      expMonth: stripePaymentMethod.card.exp_month,
+      expYear: stripePaymentMethod.card.exp_year,
+    }
+
+    return processSuccessfullPayment(customer, product, stripePaymentIntent)
+  }
 }

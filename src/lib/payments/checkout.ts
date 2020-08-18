@@ -1,14 +1,17 @@
 import * as logger from '../utils/logger'
 import Uuid from 'uuid/v4'
-import { AccountingData, Product } from './customer'
+import { AccountingData, Product, Subscription } from './customer'
 import nanoid from 'nanoid'
 import { Emails } from './emails'
 import { Services } from './services'
 import { interpolate } from '../utils/utils'
+import moment from 'moment'
+import Stripe from 'stripe'
+
 const uuid = () => Uuid().toUpperCase()
 
 export type CheckoutRequest = {
-  email
+  customerId
   name
   address
   country
@@ -19,7 +22,7 @@ export type CheckoutRequest = {
   vatRate
   price
   vatAmount
-  nonce
+  paymentIntentId
   product: {
     name
     code
@@ -28,75 +31,29 @@ export type CheckoutRequest = {
     isSupport
   }
 }
-// the mock less solution is likely to fire just some events from the checkout script
-// like { action: 'sendEmail', data: { subject: '...' }}
 
-export const checkout = (services: Services) => async (
-  checkoutData: CheckoutRequest
-) => {
+export const checkout = (services: Services) => async (checkoutData: CheckoutRequest) => {
   logger.info('Processing checkout ' + JSON.stringify(checkoutData))
-  const customer = await services.customerRepository.findOrCreate(
-    checkoutData.email
-  )
 
-  let productBraintree: any = {}
-  let braintreeTransaction: any = {}
+  const customer = await services.customerRepository.find(checkoutData.customerId)
 
+  const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId)
+  const stripePaymentMethod: Stripe.PaymentMethod = <Stripe.PaymentMethod>stripePaymentIntent.payment_method
+
+  let subscription: Subscription
   if (checkoutData.product.isSubscription) {
-    if (customer.braintree == null) {
-      const customerRes = await services.braintree.createCustomer({
-        company: checkoutData.name,
-        email: checkoutData.email
-      })
-
-      if (customerRes.success === false) {
-        throw new Error('Unable to create customer: ' + customerRes.message)
-      }
-
-      customer.braintree = { customerId: customerRes.customer.id }
+    subscription = {
+      state: 'active',
+      nextPayment: moment().add(1, 'years').toDate(),
+      card: {
+        last4: stripePaymentMethod.card.last4,
+        expMonth: stripePaymentMethod.card.exp_month,
+        expYear: stripePaymentMethod.card.exp_year,
+      },
+      stripe: {
+        paymentMethodId: (<any>stripePaymentIntent.payment_method).id,
+      },
     }
-
-    const pmr = await services.braintree.createPaymentMethod({
-
-      customerId: customer.braintree.customerId,
-      paymentMethodNonce: checkoutData.nonce,
-      options: {
-        verifyCard: true
-      }
-    })
-
-    if (pmr.success === false) {
-      throw new Error('Unable to register payment method: ' + pmr.message)
-    }
-
-    const sr = await services.braintree.createSubscription({
-      paymentMethodToken: pmr.paymentMethod.token,
-      planId:
-        checkoutData.product.code + (checkoutData.vatRate !== 0 ? 'VAT' : ''),
-      merchantAccountId: 'jsreportusd'
-    })
-
-    if (sr.success === false) {
-      throw new Error('Unable to create subscription ' + sr.message)
-    }
-
-    braintreeTransaction = sr.transaction
-    productBraintree.paymentMethod = pmr.paymentMethod
-    productBraintree.subscription = sr.subscription
-  } else {
-    const sr = await services.braintree.createSale({
-      amount: checkoutData.amount,
-      paymentMethodNonce: checkoutData.nonce,
-      options: {
-        submitForSettlement: true
-      }
-    })
-
-    if (sr.success === false) {
-      throw new Error('Unable to create sale ' + sr.message)
-    }
-
-    braintreeTransaction = sr.transaction
   }
 
   const accountingData: AccountingData = {
@@ -110,7 +67,7 @@ export const checkout = (services: Services) => async (
     vatAmount: checkoutData.vatAmount,
     vatNumber: checkoutData.vatNumber,
     vatRate: checkoutData.vatRate,
-    item: checkoutData.product.name
+    item: checkoutData.product.name,
   }
 
   const product: Product = {
@@ -121,15 +78,15 @@ export const checkout = (services: Services) => async (
     isSupport: checkoutData.product.isSupport,
     id: nanoid(4),
     sales: [],
-    braintree: productBraintree,
     accountingData,
-    licenseKey: checkoutData.product.isSupport ? null : uuid()
+    licenseKey: checkoutData.product.isSupport ? null : uuid(),
+    subscription,
   }
 
-  const sale = await services.customerRepository.createSale(
-    accountingData,
-    braintreeTransaction
-  )
+  const sale = await services.customerRepository.createSale(accountingData, {
+    paymentIntentId: stripePaymentIntent.id,
+  })
+
   await services.renderInvoice(sale)
   product.sales.push(sale)
 
@@ -139,28 +96,26 @@ export const checkout = (services: Services) => async (
   customer.products.push(product)
   await services.customerRepository.update(customer)
 
-  const mail = product.isSupport
-    ? Emails.checkout.support
-    : Emails.checkout.enterprise
+  const mail = product.isSupport ? Emails.checkout.support : Emails.checkout.enterprise
 
   await services.sendEmail({
     to: customer.email,
     content: interpolate(mail.customer.content, {
       customer,
       product,
-      sale: product.sales[0]
+      sale: product.sales[0],
     }),
     subject: interpolate(mail.customer.subject, {
       customer,
       product,
-      sale: product.sales[0]
-    })
+      sale: product.sales[0],
+    }),
   })
 
   await services.sendEmail({
     to: 'jan.blaha@jsreport.net',
     content: interpolate(mail.us.content, { customer, product }),
-    subject: interpolate(mail.us.subject, { customer, product })
+    subject: interpolate(mail.us.subject, { customer, product }),
   })
 
   return customer

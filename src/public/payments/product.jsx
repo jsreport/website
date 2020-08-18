@@ -1,44 +1,45 @@
 import React from 'react'
 import LicenseKey from './licenseKey'
 import products from './products'
-import Braintree from './braintree'
+import StripeForm from './stripeForm'
 
-function loadCustomer (uuid) {
-  return window.fetch(`/api/customer/${uuid}`).then(r => r.json())
+function loadCustomer(uuid) {
+  return window.fetch(`/api/payments/customer/${uuid}`).then((r) => r.json())
 }
 
-function currencyChar (currency) {
+function currencyChar(currency) {
   return currency === 'usd' ? '$' : '€'
 }
 
-function Invoice ({ sale, customerId }) {
+function Invoice({ sale, customerId }) {
   return (
     <div>
       <div>
         <a
           href={`/payments/customer/${customerId}/invoice/${sale.id}`}
-          target='_blank'
-          className='text-center fg-cyan fg-hover-green'
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-center fg-cyan fg-hover-green"
           style={{ cursor: 'pointer' }}
         >
-          <span className='padding5'>{sale.id}</span>
-          <span className='padding5'>{sale.accountingData.amount + currencyChar(sale.accountingData.currency)}</span>
-          <i className='padding5 icon-download' />
+          <span className="padding5">{sale.id}</span>
+          <span className="padding5">{sale.accountingData.amount + currencyChar(sale.accountingData.currency)}</span>
+          <i className="padding5 icon-download" />
         </a>
       </div>
     </div>
   )
 }
 
-function Support ({ product }) {
+function Support({ product }) {
   return (
-    <div className='row'>
+    <div className="row">
       <div>
         <h3>SUPPORT</h3>
       </div>
       <div>
         Please register to the{' '}
-        <a href='https://support.jsreport.net' target='_blank'>
+        <a href="https://support.jsreport.net" target="_blank" rel="noopener noreferrer">
           support portal
         </a>{' '}
         and follow the instructions there.
@@ -57,33 +58,34 @@ function Support ({ product }) {
 }
 
 export default class Product extends React.Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {}
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.load()
   }
 
-  load () {
-    loadCustomer(this.props.match.params.customer).then(c => {
-      const product = c.products.find(p => p.id === this.props.match.params.product)
+  load() {
+    loadCustomer(this.props.match.params.customer).then((c) => {
+      const product = c.products.find((p) => p.id === this.props.match.params.product)
       this.setState({
         ...product,
-        updating: false
+        customer: c,
+        updating: false,
       })
     })
   }
 
-  async cancel () {
+  async cancel() {
     if (!window.confirm('Are you sure you want to cancel this subscription?')) {
       return
     }
 
     try {
-      const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
-        method: 'DELETE'
+      const res = await window.fetch(`/api/payments/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+        method: 'DELETE',
       })
 
       const resJson = await res.json()
@@ -93,29 +95,33 @@ export default class Product extends React.Component {
       }
 
       this.setState({
-        braintree: {
-          ...this.state.braintree,
-          subscription: {
-            ...this.state.braintree.subscription,
-            status: 'Canceled'
-          }
-        }       
+        subscription: {
+          ...this.state.subscription,
+          status: 'canceled',
+        },
       })
     } catch (e) {
       return alert(e.message)
     }
   }
 
-  async updatePaymentMethod (pm) {
-    const res = await window.fetch(`/api/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
+  async updatePaymentMethod(i) {
+    const res = await window.fetch(`/api/payments/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
       method: 'PUT',
-      body: JSON.stringify({ nonce: pm.nonce }),
+      body: JSON.stringify({
+        paymentIntentId: this.state.subscription.plannedCancelation ? i.id : null,
+        setupIntentId: this.state.subscription.plannedCancelation ? null : i.id,
+      }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     const resJson = await res.json()
+
+    if (this.state.subscription.plannedCancelation) {
+      alert('Payment successful, subscription is renewed.')
+    }
 
     if (!res.ok) {
       throw new Error(resJson && resJson.error ? resJson.error : res.statusText)
@@ -124,103 +130,106 @@ export default class Product extends React.Component {
     this.load()
   }
 
-  renderBankCard () {
+  renderBankCard() {
     return (
-      <React.Fragment>
-        {this.state.braintree.paymentMethod.maskedNumber ? (
-          <span>
-            The current used bank card is {this.state.braintree.paymentMethod.maskedNumber} expiring on {this.state.braintree.paymentMethod.expirationMonth}/
-            {this.state.braintree.paymentMethod.expirationYear}
-          </span>
-        ) : (
-          <span>paypal account: {this.state.braintree.paymentMethod.email}</span>
-        )}
-      </React.Fragment>
+      <span>
+        The current used bank card is ****{this.state.subscription.card.last4} expiring on {this.state.subscription.card.expMonth}/
+        {this.state.subscription.card.expYear}
+      </span>
     )
   }
 
-  renderSubscrption () {
+  renderSubscrption() {
     return (
-      <React.Fragment>
+      <>
         <div>
           <h3>SUBSCRIPTION</h3>
         </div>
-        {this.state.braintree.subscription.status !== 'Canceled' ? (
+        {this.state.subscription.status !== 'canceled' ? (
           <div>
             <p>
-              The next payment is planned on {new Date(this.state.braintree.subscription.nextBillingDate).toLocaleDateString()}
+              The next payment is planned on {new Date(this.state.subscription.nextPayment).toLocaleDateString()}
               <br />
               {this.renderBankCard()}
             </p>
             {!this.state.updating ? (
-              <React.Fragment>
-                <button className='button info' style={{ marginRight: '10px' }} onClick={() => this.setState({ updating: true })}>
+              <>
+                <button className="button info" style={{ marginRight: '10px' }} onClick={() => this.setState({ updating: true })}>
                   Update payment
                 </button>
-                <button className='button danger' onClick={() => this.cancel()}>
+                <button className="button danger" onClick={() => this.cancel()}>
                   Cancel
                 </button>
-              </React.Fragment>
+              </>
             ) : (
-              <React.Fragment />
+              <></>
             )}
-            {this.state.updating ? <Braintree onSubmit={pm => this.updatePaymentMethod(pm)} /> : <React.Fragment />}
+            {this.state.updating ? (
+              <StripeForm
+                email={this.state.customer.email}
+                onSubmit={(i) => this.updatePaymentMethod(i)}
+                setupIntent={!this.state.subscription.plannedCancelation}
+                amount={this.state.sales[this.state.sales.length - 1].accountingData.amount}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         ) : (
           <div>
-            <span className='bg-red fg-white' style={{ padding: '3px' }}>
+            <span className="bg-red fg-white" style={{ padding: '3px' }}>
               Canceled
             </span>
           </div>
         )}
-      </React.Fragment>
+      </>
     )
   }
 
-  renderOneTime () {
-    return <React.Fragment />
+  renderOneTime() {
+    return <></>
   }
 
-  renderProduct () {
+  renderProduct() {
     return (
-      <div className='fg-gray'>
-        <div className='section bg-darkCyan'>
-          <div className='text-center'>
-            <h2 className='fg-white buy-title'>{products[this.state.code].name}</h2>
+      <div className="fg-gray">
+        <div className="section bg-darkCyan">
+          <div className="text-center">
+            <h2 className="fg-white buy-title">{products[this.state.code].name}</h2>
             <div>
-              <small className='fg-grayLighter'>Purchased on {new Date(this.state.sales[0].purchaseDate).toLocaleDateString()}</small>
+              <small className="fg-grayLighter">Purchased on {new Date(this.state.sales[0].purchaseDate).toLocaleDateString()}</small>
             </div>
             <div>
               <small>
-                <a className='fg-grayLighter' style={{ cursor: 'pointer' }} href={'/payments/customer/' + this.props.match.params.customer}>
-                  <i className='icon-arrow-left-3' /> Back to customer dashboard <i className='icon-arrow-left-3' />
+                <a className="fg-grayLighter" style={{ cursor: 'pointer' }} href={'/payments/customer/' + this.props.match.params.customer}>
+                  <i className="icon-arrow-left-3" /> Back to customer dashboard <i className="icon-arrow-left-3" />
                 </a>
               </small>
             </div>
           </div>
         </div>
-        <div className='grid container small section text-center'>
+        <div className="grid container small section text-center">
           {this.state.isSupport ? (
             <Support product={this.state} />
           ) : (
-            <div className='row'>
+            <div className="row">
               <div>
                 <h3>LICENSE KEY</h3>
               </div>
               <LicenseKey licenseKey={this.state.licenseKey} />
               <div>
-                <a href='https://jsreport.net/learn/faq#how-to-apply-license-key' target='_blank'>
+                <a href="https://jsreport.net/learn/faq#how-to-apply-license-key" target="_blank" rel="noopener noreferrer">
                   license key application instructions
                 </a>
               </div>
             </div>
           )}
-          <div className='row'>{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>
-          <div className='row'>
+          <div className="row">{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>
+          <div className="row">
             <div>
               <h3>Invoices</h3>
             </div>
-            {this.state.sales.map(s => (
+            {this.state.sales.map((s) => (
               <Invoice sale={s} customerId={this.props.match.params.customer} key={s.id} />
             ))}
           </div>
@@ -229,11 +238,11 @@ export default class Product extends React.Component {
     )
   }
 
-  renderPlaceholder () {
+  renderPlaceholder() {
     return <div />
   }
 
-  render () {
+  render() {
     return this.state.code ? this.renderProduct() : this.renderPlaceholder()
   }
 }

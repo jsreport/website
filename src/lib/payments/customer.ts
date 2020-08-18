@@ -1,6 +1,5 @@
 import { Db } from 'mongodb'
 import nanoid from 'nanoid'
-import { Transaction } from 'braintree'
 
 export type AccountingData = {
   name: string
@@ -21,23 +20,30 @@ export type Sale = {
   accountingData: AccountingData
   id: string
   blobName: string
-  braintree?: SaleBraintree
+  stripe?: SaleStripe
 }
 
-export type SaleBraintree = {
-  transaction: Transaction
+export type SaleStripe = {
+  paymentIntentId: string
 }
 
-export type SubscriptionBraintree = {
-  status: string
-  id: string
-  merchantAccountId?: string
-  planId?: string
+export type Card = {
+  last4: string
+  expMonth: number
+  expYear: number
 }
 
-export type ProductBraintree = {
-  subscription: SubscriptionBraintree
-  paymentMethod: any
+export type SubscriptionStripe = {
+  paymentMethodId: string
+}
+
+export type Subscription = {
+  state: 'active' | 'canceled'
+  nextPayment: Date
+  retryPlannedPayment?: Date
+  plannedCancelation?: Date
+  card: Card
+  stripe: SubscriptionStripe
 }
 
 export type Product = {
@@ -49,8 +55,8 @@ export type Product = {
   permalink: string
   name: string
   sales: Array<Sale>
-  braintree: ProductBraintree
   accountingData: AccountingData
+  subscription: Subscription
 }
 
 export type Customer = {
@@ -59,7 +65,6 @@ export type Customer = {
   uuid: string
   creationDate: Date
   products: Array<Product>
-  braintree: any
 }
 
 export class CustomerRepository {
@@ -70,9 +75,7 @@ export class CustomerRepository {
   }
 
   async find(customerId) {
-    const customer = await this.db
-      .collection('customers')
-      .findOne({ uuid: customerId })
+    const customer = await this.db.collection('customers').findOne({ uuid: customerId })
     if (!customer) {
       throw new Error('Customer not found')
     }
@@ -99,7 +102,7 @@ export class CustomerRepository {
     customer = {
       email,
       uuid: nanoid(16),
-      creationDate: new Date()
+      creationDate: new Date(),
     }
 
     await this.db.collection('customers').insertOne(customer)
@@ -108,17 +111,13 @@ export class CustomerRepository {
   }
 
   async update(customer: Customer) {
-    return this.db
-      .collection('customers')
-      .updateOne({ _id: customer._id }, { $set: { ...customer } })
+    return this.db.collection('customers').updateOne({ _id: customer._id }, { $set: { ...customer } })
   }
 
   async findSale(customerId, saleId): Promise<Sale> {
     const customer = await this.find(customerId)
 
-    const sale = Array.prototype
-      .concat(...customer.products.map(p => p.sales))
-      .find(s => s.id === saleId)
+    const sale = Array.prototype.concat(...customer.products.map((p) => p.sales)).find((s) => s.id === saleId)
 
     if (!sale) {
       throw new Error(`Invoice ${saleId} not found`)
@@ -127,25 +126,16 @@ export class CustomerRepository {
     return sale
   }
 
-  async findBySubscription(subscriptionId) {
-    const customer = await this.db.collection('customers').findOne({
-      products: {
-        $elemMatch: { 'braintree.subscription.id': subscriptionId }
-      }
-    })
-    return <Customer>customer
-  }
-
-  async createSale(data: AccountingData, transaction) {
+  async createSale(data: AccountingData, saleStripe: SaleStripe) {
     await this.db.collection('invoiceCounter').updateOne(
       {},
       {
         $inc: {
-          nextId: 1
-        }
+          nextId: 1,
+        },
       },
       {
-        upsert: true
+        upsert: true,
       }
     )
 
@@ -157,11 +147,27 @@ export class CustomerRepository {
       id: id,
       blobName: `${id}.pdf`,
       purchaseDate: new Date(),
-      braintree: {
-        transaction
-      }
+      stripe: saleStripe,
     }
 
     return sale
+  }
+
+  async findCustomersWithPastDueSubscriptions() {
+    return this.db
+      .collection('customers')
+      .find({
+        products: {
+          $elemMatch: {
+            'subscription.nextPayment': {
+              $lt: new Date(),
+            },
+            'subscription.state': {
+              $ne: 'canceled',
+            },
+          },
+        },
+      })
+      .toArray()
   }
 }

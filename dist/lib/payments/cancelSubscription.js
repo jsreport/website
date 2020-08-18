@@ -4,10 +4,12 @@ const emails_1 = require("./emails");
 const utils_1 = require("../utils/utils");
 exports.cancelSubscription = (services) => async (customerId, productId) => {
     const customer = await services.customerRepository.find(customerId);
-    const product = customer.products.find(p => p.id === productId);
-    await services.braintree.cancelSubscription(product.braintree.subscription.id);
-    product.braintree.subscription.status = 'Canceled';
-    Object.assign(customer.products.find(p => p.id === productId), product);
+    const product = customer.products.find((p) => p.id === productId);
+    product.subscription.state = 'canceled';
+    product.subscription.nextPayment = null;
+    product.subscription.retryPlannedPayment = null;
+    product.subscription.plannedCancelation = null;
+    Object.assign(customer.products.find((p) => p.id === productId), product);
     await services.customerRepository.update(customer);
     const mail = product.isSupport ? emails_1.Emails.cancel.support : emails_1.Emails.cancel.enterprise;
     await services.sendEmail({

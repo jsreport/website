@@ -9,9 +9,7 @@ class CustomerRepository {
         this.db = db;
     }
     async find(customerId) {
-        const customer = await this.db
-            .collection('customers')
-            .findOne({ uuid: customerId });
+        const customer = await this.db.collection('customers').findOne({ uuid: customerId });
         if (!customer) {
             throw new Error('Customer not found');
         }
@@ -32,41 +30,29 @@ class CustomerRepository {
         customer = {
             email,
             uuid: nanoid_1.default(16),
-            creationDate: new Date()
+            creationDate: new Date(),
         };
         await this.db.collection('customers').insertOne(customer);
         return customer;
     }
     async update(customer) {
-        return this.db
-            .collection('customers')
-            .updateOne({ _id: customer._id }, { $set: { ...customer } });
+        return this.db.collection('customers').updateOne({ _id: customer._id }, { $set: { ...customer } });
     }
     async findSale(customerId, saleId) {
         const customer = await this.find(customerId);
-        const sale = Array.prototype
-            .concat(...customer.products.map(p => p.sales))
-            .find(s => s.id === saleId);
+        const sale = Array.prototype.concat(...customer.products.map((p) => p.sales)).find((s) => s.id === saleId);
         if (!sale) {
             throw new Error(`Invoice ${saleId} not found`);
         }
         return sale;
     }
-    async findBySubscription(subscriptionId) {
-        const customer = await this.db.collection('customers').findOne({
-            products: {
-                $elemMatch: { 'braintree.subscription.id': subscriptionId }
-            }
-        });
-        return customer;
-    }
-    async createSale(data, transaction) {
+    async createSale(data, saleStripe) {
         await this.db.collection('invoiceCounter').updateOne({}, {
             $inc: {
-                nextId: 1
-            }
+                nextId: 1,
+            },
         }, {
-            upsert: true
+            upsert: true,
         });
         let counter = await this.db.collection('invoiceCounter').findOne({});
         const id = `${new Date().getFullYear()}-${counter.nextId}B`;
@@ -75,11 +61,26 @@ class CustomerRepository {
             id: id,
             blobName: `${id}.pdf`,
             purchaseDate: new Date(),
-            braintree: {
-                transaction
-            }
+            stripe: saleStripe,
         };
         return sale;
+    }
+    async findCustomersWithPastDueSubscriptions() {
+        return this.db
+            .collection('customers')
+            .find({
+            products: {
+                $elemMatch: {
+                    'subscription.nextPayment': {
+                        $lt: new Date(),
+                    },
+                    'subscription.state': {
+                        $ne: 'canceled',
+                    },
+                },
+            },
+        })
+            .toArray();
     }
 }
 exports.CustomerRepository = CustomerRepository;

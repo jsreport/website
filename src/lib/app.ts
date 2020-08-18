@@ -1,3 +1,4 @@
+/*eslint-disable */
 require('dotenv').config()
 import express from 'express'
 import exphbs from 'express3-handlebars'
@@ -13,12 +14,13 @@ import { MongoClient } from 'mongodb'
 import Payments from './payments/payments'
 import Posts from './posts'
 import rateLimit from 'express-rate-limit'
+/* eslint-enable */
 
 const app = express()
 logger.init({
   level: process.env.LOGGLY_LEVEL,
   token: process.env.LOGGLY_TOKEN,
-  subdomain: process.env.LOGGLY_SUBDOMAIN
+  subdomain: process.env.LOGGLY_SUBDOMAIN,
 })
 
 logger.info('jsreport website starting')
@@ -33,10 +35,10 @@ connectionString += '/' + process.env.mongodb_authdb
 
 const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 })
 let db
-client.connect(err => {
+client.connect((err) => {
   if (err) {
     console.error(err)
     process.exit()
@@ -73,8 +75,8 @@ client.connect(err => {
       },
       toLongDate: function (date) {
         return require('moment')(date).format('MM-DD-YYYY HH:mm')
-      }
-    }
+      },
+    },
   })
 
   app.engine('.html', hbs.engine)
@@ -103,7 +105,7 @@ client.connect(err => {
     res.render('home', {
       home: true,
       title: 'js' + 'report - javascript based reporting platform',
-      description: 'jsreport is an open source reporting platform where reports are designed using popular javascript templating engines.'
+      description: 'jsreport is an open source reporting platform where reports are designed using popular javascript templating engines.',
     })
   })
 
@@ -131,40 +133,50 @@ client.connect(err => {
   app.get('/showcases', router.showcases)
   app.post('/contact-email', bodyParser.urlencoded({ extended: true, limit: '2mb' }), router.contactEmail)
 
-  Posts(app).then(function (poet) {
-    app.get('/sitemap*', function (req, res) {
-      var postCount = poet.helpers.getPostCount()
-      var posts = poet.helpers.getPosts(0, postCount)
-      res.setHeader('Content-Type', 'application/xml')
-      res.render('sitemap', {
-        posts: posts,
-        layout: false,
-        docs: Object.keys(learnDocs)
+  payments
+    .init()
+    .then(() => Posts(app))
+    .then((poet) => {
+      app.get('/sitemap*', function (req, res) {
+        var postCount = poet.helpers.getPostCount()
+        var posts = poet.helpers.getPosts(0, postCount)
+        res.setHeader('Content-Type', 'application/xml')
+        res.render('sitemap', {
+          posts: posts,
+          layout: false,
+          docs: Object.keys(learnDocs),
+        })
       })
-    })
 
-    app.get('*', function (req, res) {
-      res.status(404).render('404')
-    })
+      app.get('*', function (req, res) {
+        res.status(404).render('404')
+      })
 
-    app.listen(process.env.PORT || 3000)
-  }).catch(logger.error)
+      app.listen(process.env.PORT || 3000)
+    })
+    .catch((e) => {
+      logger.error('Failed to start server', e)
+      process.exit()
+    })
 
   const limiter = rateLimit({
     windowMs: 5000,
-    max: 20
+    max: 20,
   })
 
   app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice)
   app.get('/payments/*', limiter, router.payments)
-  app.post('/api/checkout', [limiter, bodyParser.json()], router.checkoutSubmit)
-  app.post('/api/validate-vat', [limiter, bodyParser.json()], router.validateVat)
-  app.post('/api/customer-link', [limiter, bodyParser.json()], router.customerLink)
-  app.get('/api/braintree-token', limiter, router.braintreeToken)
-  app.get('/api/customer/:id', limiter, router.customerApi)
-  app.delete('/api/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription)
-  app.put('/api/customer/:customerId/subscription/:productId', [limiter, bodyParser.json()], router.updatePaymentMethod)
-  app.post('/api/braintree/hook', [limiter, bodyParser.urlencoded()], router.braintreeHook)
+  app.post('/api/payments/checkout', [limiter, bodyParser.json()], router.checkoutSubmit)
+  app.post('/api/payments/validate-vat', [limiter, bodyParser.json()], router.validateVat)
+  app.post('/api/payments/customer-link', [limiter, bodyParser.json()], router.customerLink)
+  app.post('/api/payments/email-verification', [limiter, bodyParser.json()], router.emailVerification)
+  app.post('/api/payments/payment-intent', [limiter, bodyParser.json()], router.createPaymentIntent)
+  app.post('/api/payments/setup-intent', [limiter, bodyParser.json()], router.createSetupIntent)
+  app.get('/api/payments/customer/:id', limiter, router.customerApi)
+  app.delete('/api/payments/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription)
+  app.put('/api/payments/customer/:customerId/subscription/:productId', [limiter, bodyParser.json()], router.updatePaymentMethod)
+  app.post('/api/payments/stripe/hook', [limiter, bodyParser.raw({ type: 'application/json' })], router.stripeHook)
+  app.get('/api/payments/stripe/client-secret', limiter, router.stripeClientSecret)
 
   app.use((err, req, res, next) => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)

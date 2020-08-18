@@ -40933,7 +40933,502 @@ var global = arguments[3];
   })() || Function("return this")()
 );
 
-},{}],"countries.js":[function(require,module,exports) {
+},{}],"products.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  enterprise: {
+    code: 'enterprise',
+    name: 'jsreport enterprise perpetual',
+    infoLine: 'perpetual license - fully featured single server instance with no limitations',
+    price: {
+      usd: 645
+    },
+    permalink: 'XOxVq'
+  },
+  enterpriseScale: {
+    code: 'enterpriseScale',
+    name: 'jsreport enterprise scale perpetual',
+    infoLine: 'perpetual license - fully featured infinite amount of server instances with no limitations',
+    price: {
+      usd: 1995
+    },
+    permalink: 'onQk'
+  },
+  enterpriseSubscription: {
+    code: 'enterpriseSubscription',
+    name: 'jsreport enterprise subscription',
+    infoLine: 'subscription - fully featured single server instance with no limitations',
+    price: {
+      usd: 295
+    },
+    isSubscription: true,
+    permalink: 'SBwu'
+  },
+  enterpriseScaleSubscription: {
+    code: 'enterpriseScaleSubscription',
+    name: 'jsreport enterprise scale subscription',
+    infoLine: 'subscription - fully featured infinite amount of server instances with no limitations',
+    price: {
+      usd: 995
+    },
+    isSubscription: true,
+    permalink: 'SrfG'
+  },
+  supportSubscription: {
+    code: 'supportSubscription',
+    name: 'jsreport enterprise support subscription',
+    infoLine: 'enterprise support service provided with the next business day response time',
+    price: {
+      usd: 895
+    },
+    isSupport: true,
+    isSubscription: true,
+    permalink: 'SVEKk'
+  },
+  supportStarter: {
+    code: 'supportStarter',
+    name: 'jsreport enterprise support starter',
+    infoLine: 'enterprise support service valid for 2 months provided with the next business day response time',
+    price: {
+      usd: 395
+    },
+    isSupport: true,
+    permalink: 'DUeSe'
+  },
+  enterpriseDiscounted: {
+    code: 'enterpriseDiscounted',
+    name: 'jsreport enterprise perpetual',
+    infoLine: 'perpetual license - fully featured single server instance with no limitations',
+    price: {
+      usd: 1
+    },
+    permalink: 'XOxVq'
+  },
+  enterpriseSubscriptionDiscounted: {
+    code: 'enterpriseSubscriptionDiscounted',
+    name: 'jsreport enterprise subscription',
+    infoLine: 'subscription - fully featured single server instance with no limitations',
+    price: {
+      usd: 1
+    },
+    isSubscription: true,
+    permalink: 'SBwu'
+  }
+};
+exports.default = _default;
+},{}],"checkout.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+require("core-js/modules/es6.array.copy-within");
+
+require("core-js/modules/es6.array.fill");
+
+require("core-js/modules/es6.array.find");
+
+require("core-js/modules/es6.array.find-index");
+
+require("core-js/modules/es6.array.from");
+
+require("core-js/modules/es7.array.includes");
+
+require("core-js/modules/es6.array.iterator");
+
+require("core-js/modules/es6.array.of");
+
+require("core-js/modules/es6.array.sort");
+
+require("core-js/modules/es6.array.species");
+
+require("core-js/modules/es6.date.to-json");
+
+require("core-js/modules/es6.date.to-primitive");
+
+require("core-js/modules/es6.function.has-instance");
+
+require("core-js/modules/es6.function.name");
+
+require("core-js/modules/es6.map");
+
+require("core-js/modules/es6.math.acosh");
+
+require("core-js/modules/es6.math.asinh");
+
+require("core-js/modules/es6.math.atanh");
+
+require("core-js/modules/es6.math.cbrt");
+
+require("core-js/modules/es6.math.clz32");
+
+require("core-js/modules/es6.math.cosh");
+
+require("core-js/modules/es6.math.expm1");
+
+require("core-js/modules/es6.math.fround");
+
+require("core-js/modules/es6.math.hypot");
+
+require("core-js/modules/es6.math.imul");
+
+require("core-js/modules/es6.math.log1p");
+
+require("core-js/modules/es6.math.log10");
+
+require("core-js/modules/es6.math.log2");
+
+require("core-js/modules/es6.math.sign");
+
+require("core-js/modules/es6.math.sinh");
+
+require("core-js/modules/es6.math.tanh");
+
+require("core-js/modules/es6.math.trunc");
+
+require("core-js/modules/es6.number.constructor");
+
+require("core-js/modules/es6.number.epsilon");
+
+require("core-js/modules/es6.number.is-finite");
+
+require("core-js/modules/es6.number.is-integer");
+
+require("core-js/modules/es6.number.is-nan");
+
+require("core-js/modules/es6.number.is-safe-integer");
+
+require("core-js/modules/es6.number.max-safe-integer");
+
+require("core-js/modules/es6.number.min-safe-integer");
+
+require("core-js/modules/es6.number.parse-float");
+
+require("core-js/modules/es6.number.parse-int");
+
+require("core-js/modules/es6.object.assign");
+
+require("core-js/modules/es7.object.define-getter");
+
+require("core-js/modules/es7.object.define-setter");
+
+require("core-js/modules/es7.object.entries");
+
+require("core-js/modules/es6.object.freeze");
+
+require("core-js/modules/es6.object.get-own-property-descriptor");
+
+require("core-js/modules/es7.object.get-own-property-descriptors");
+
+require("core-js/modules/es6.object.get-own-property-names");
+
+require("core-js/modules/es6.object.get-prototype-of");
+
+require("core-js/modules/es7.object.lookup-getter");
+
+require("core-js/modules/es7.object.lookup-setter");
+
+require("core-js/modules/es6.object.prevent-extensions");
+
+require("core-js/modules/es6.object.is");
+
+require("core-js/modules/es6.object.is-frozen");
+
+require("core-js/modules/es6.object.is-sealed");
+
+require("core-js/modules/es6.object.is-extensible");
+
+require("core-js/modules/es6.object.keys");
+
+require("core-js/modules/es6.object.seal");
+
+require("core-js/modules/es6.object.set-prototype-of");
+
+require("core-js/modules/es7.object.values");
+
+require("core-js/modules/es6.promise");
+
+require("core-js/modules/es7.promise.finally");
+
+require("core-js/modules/es6.reflect.apply");
+
+require("core-js/modules/es6.reflect.construct");
+
+require("core-js/modules/es6.reflect.define-property");
+
+require("core-js/modules/es6.reflect.delete-property");
+
+require("core-js/modules/es6.reflect.get");
+
+require("core-js/modules/es6.reflect.get-own-property-descriptor");
+
+require("core-js/modules/es6.reflect.get-prototype-of");
+
+require("core-js/modules/es6.reflect.has");
+
+require("core-js/modules/es6.reflect.is-extensible");
+
+require("core-js/modules/es6.reflect.own-keys");
+
+require("core-js/modules/es6.reflect.prevent-extensions");
+
+require("core-js/modules/es6.reflect.set");
+
+require("core-js/modules/es6.reflect.set-prototype-of");
+
+require("core-js/modules/es6.regexp.constructor");
+
+require("core-js/modules/es6.regexp.flags");
+
+require("core-js/modules/es6.regexp.match");
+
+require("core-js/modules/es6.regexp.replace");
+
+require("core-js/modules/es6.regexp.split");
+
+require("core-js/modules/es6.regexp.search");
+
+require("core-js/modules/es6.regexp.to-string");
+
+require("core-js/modules/es6.set");
+
+require("core-js/modules/es6.symbol");
+
+require("core-js/modules/es7.symbol.async-iterator");
+
+require("core-js/modules/es6.string.anchor");
+
+require("core-js/modules/es6.string.big");
+
+require("core-js/modules/es6.string.blink");
+
+require("core-js/modules/es6.string.bold");
+
+require("core-js/modules/es6.string.code-point-at");
+
+require("core-js/modules/es6.string.ends-with");
+
+require("core-js/modules/es6.string.fixed");
+
+require("core-js/modules/es6.string.fontcolor");
+
+require("core-js/modules/es6.string.fontsize");
+
+require("core-js/modules/es6.string.from-code-point");
+
+require("core-js/modules/es6.string.includes");
+
+require("core-js/modules/es6.string.italics");
+
+require("core-js/modules/es6.string.iterator");
+
+require("core-js/modules/es6.string.link");
+
+require("core-js/modules/es7.string.pad-start");
+
+require("core-js/modules/es7.string.pad-end");
+
+require("core-js/modules/es6.string.raw");
+
+require("core-js/modules/es6.string.repeat");
+
+require("core-js/modules/es6.string.small");
+
+require("core-js/modules/es6.string.starts-with");
+
+require("core-js/modules/es6.string.strike");
+
+require("core-js/modules/es6.string.sub");
+
+require("core-js/modules/es6.string.sup");
+
+require("core-js/modules/es6.typed.array-buffer");
+
+require("core-js/modules/es6.typed.int8-array");
+
+require("core-js/modules/es6.typed.uint8-array");
+
+require("core-js/modules/es6.typed.uint8-clamped-array");
+
+require("core-js/modules/es6.typed.int16-array");
+
+require("core-js/modules/es6.typed.uint16-array");
+
+require("core-js/modules/es6.typed.int32-array");
+
+require("core-js/modules/es6.typed.uint32-array");
+
+require("core-js/modules/es6.typed.float32-array");
+
+require("core-js/modules/es6.typed.float64-array");
+
+require("core-js/modules/es6.weak-map");
+
+require("core-js/modules/es6.weak-set");
+
+require("core-js/modules/es7.array.flat-map");
+
+require("core-js/modules/web.timers");
+
+require("core-js/modules/web.immediate");
+
+require("core-js/modules/web.dom.iterable");
+
+require("regenerator-runtime/runtime");
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _products = _interopRequireDefault(require("./products"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _default(props) {
+  var _this = this;
+
+  var productCode = props.match.params.product;
+
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      email = _useState2[0],
+      setEmail = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(true),
+      _useState4 = _slicedToArray(_useState3, 2),
+      pending = _useState4[0],
+      setPending = _useState4[1];
+
+  var form = (0, _react.useRef)(null);
+
+  function verifyEmail(_x) {
+    return _verifyEmail.apply(this, arguments);
+  }
+
+  function _verifyEmail() {
+    _verifyEmail = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee(e) {
+      var r, text;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+
+              if (form.current.checkValidity()) {
+                _context.next = 4;
+                break;
+              }
+
+              form.current.reportValidity();
+              return _context.abrupt("return");
+
+            case 4:
+              _context.prev = 4;
+              _context.next = 7;
+              return window.fetch('/api/payments/email-verification', {
+                method: 'POST',
+                body: JSON.stringify({
+                  email: email,
+                  productCode: productCode
+                }),
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+
+            case 7:
+              r = _context.sent;
+              _context.next = 10;
+              return r.text();
+
+            case 10:
+              text = _context.sent;
+
+              if (r.ok) {
+                _context.next = 13;
+                break;
+              }
+
+              throw new Error(text);
+
+            case 13:
+              setPending(false);
+              _context.next = 19;
+              break;
+
+            case 16:
+              _context.prev = 16;
+              _context.t0 = _context["catch"](4);
+              alert(_context.t0.message);
+
+            case 19:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[4, 16]]);
+    }));
+    return _verifyEmail.apply(this, arguments);
+  }
+
+  return _react.default.createElement("div", null, _react.default.createElement("div", {
+    className: "section bg-darkCyan text-center"
+  }, _react.default.createElement("h2", {
+    className: "fg-white buy-title"
+  }, _products.default[productCode].name), _react.default.createElement("small", {
+    className: "fg-grayLighter"
+  }, _products.default[productCode].infoLine)), _react.default.createElement("form", {
+    ref: form,
+    onSubmit: function onSubmit() {
+      return _this.verifyEmail(e);
+    }
+  }, _react.default.createElement("div", {
+    className: "grid container small section"
+  }, _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "EMAIL"), _react.default.createElement("small", null, _react.default.createElement("p", null, "Please fill your email for the confirmation before the purchase.")))), _react.default.createElement("div", {
+    className: "row text-center fg-gray"
+  }, _react.default.createElement("small", null, _react.default.createElement("input", {
+    type: "email",
+    size: "40",
+    required: true,
+    value: email,
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
+    }
+  }))), _react.default.createElement("div", {
+    className: "row text-center"
+  }, pending ? _react.default.createElement("button", {
+    className: "button info",
+    onClick: function onClick(e) {
+      return verifyEmail(e);
+    }
+  }, "Send verification email") : _react.default.createElement("button", {
+    className: "button success"
+  }, "The verification email was sent...")))));
+}
+},{"core-js/modules/es6.array.copy-within":"../../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.fill":"../../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.find":"../../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index":"../../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es6.array.from":"../../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es7.array.includes":"../../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es6.array.iterator":"../../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.array.of":"../../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.sort":"../../../node_modules/core-js/modules/es6.array.sort.js","core-js/modules/es6.array.species":"../../../node_modules/core-js/modules/es6.array.species.js","core-js/modules/es6.date.to-json":"../../../node_modules/core-js/modules/es6.date.to-json.js","core-js/modules/es6.date.to-primitive":"../../../node_modules/core-js/modules/es6.date.to-primitive.js","core-js/modules/es6.function.has-instance":"../../../node_modules/core-js/modules/es6.function.has-instance.js","core-js/modules/es6.function.name":"../../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.map":"../../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.math.acosh":"../../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh":"../../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh":"../../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt":"../../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32":"../../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh":"../../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1":"../../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround":"../../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot":"../../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul":"../../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p":"../../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10":"../../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2":"../../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign":"../../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh":"../../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh":"../../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc":"../../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es6.number.constructor":"../../../node_modules/core-js/modules/es6.number.constructor.js","core-js/modules/es6.number.epsilon":"../../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.is-finite":"../../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer":"../../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-nan":"../../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.is-safe-integer":"../../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.max-safe-integer":"../../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.number.min-safe-integer":"../../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.parse-float":"../../../node_modules/core-js/modules/es6.number.parse-float.js","core-js/modules/es6.number.parse-int":"../../../node_modules/core-js/modules/es6.number.parse-int.js","core-js/modules/es6.object.assign":"../../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es7.object.define-getter":"../../../node_modules/core-js/modules/es7.object.define-getter.js","core-js/modules/es7.object.define-setter":"../../../node_modules/core-js/modules/es7.object.define-setter.js","core-js/modules/es7.object.entries":"../../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es6.object.freeze":"../../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.get-own-property-descriptor":"../../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es7.object.get-own-property-descriptors":"../../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es6.object.get-own-property-names":"../../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.get-prototype-of":"../../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es7.object.lookup-getter":"../../../node_modules/core-js/modules/es7.object.lookup-getter.js","core-js/modules/es7.object.lookup-setter":"../../../node_modules/core-js/modules/es7.object.lookup-setter.js","core-js/modules/es6.object.prevent-extensions":"../../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.is":"../../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.is-frozen":"../../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed":"../../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible":"../../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.keys":"../../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.seal":"../../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es6.object.set-prototype-of":"../../../node_modules/core-js/modules/es6.object.set-prototype-of.js","core-js/modules/es7.object.values":"../../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es6.promise":"../../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es7.promise.finally":"../../../node_modules/core-js/modules/es7.promise.finally.js","core-js/modules/es6.reflect.apply":"../../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct":"../../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property":"../../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property":"../../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get":"../../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor":"../../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of":"../../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has":"../../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible":"../../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys":"../../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions":"../../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set":"../../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of":"../../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.regexp.constructor":"../../../node_modules/core-js/modules/es6.regexp.constructor.js","core-js/modules/es6.regexp.flags":"../../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match":"../../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace":"../../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split":"../../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search":"../../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.regexp.to-string":"../../../node_modules/core-js/modules/es6.regexp.to-string.js","core-js/modules/es6.set":"../../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.symbol":"../../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es7.symbol.async-iterator":"../../../node_modules/core-js/modules/es7.symbol.async-iterator.js","core-js/modules/es6.string.anchor":"../../../node_modules/core-js/modules/es6.string.anchor.js","core-js/modules/es6.string.big":"../../../node_modules/core-js/modules/es6.string.big.js","core-js/modules/es6.string.blink":"../../../node_modules/core-js/modules/es6.string.blink.js","core-js/modules/es6.string.bold":"../../../node_modules/core-js/modules/es6.string.bold.js","core-js/modules/es6.string.code-point-at":"../../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.ends-with":"../../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.fixed":"../../../node_modules/core-js/modules/es6.string.fixed.js","core-js/modules/es6.string.fontcolor":"../../../node_modules/core-js/modules/es6.string.fontcolor.js","core-js/modules/es6.string.fontsize":"../../../node_modules/core-js/modules/es6.string.fontsize.js","core-js/modules/es6.string.from-code-point":"../../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.includes":"../../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.string.italics":"../../../node_modules/core-js/modules/es6.string.italics.js","core-js/modules/es6.string.iterator":"../../../node_modules/core-js/modules/es6.string.iterator.js","core-js/modules/es6.string.link":"../../../node_modules/core-js/modules/es6.string.link.js","core-js/modules/es7.string.pad-start":"../../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end":"../../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/es6.string.raw":"../../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.repeat":"../../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.small":"../../../node_modules/core-js/modules/es6.string.small.js","core-js/modules/es6.string.starts-with":"../../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.strike":"../../../node_modules/core-js/modules/es6.string.strike.js","core-js/modules/es6.string.sub":"../../../node_modules/core-js/modules/es6.string.sub.js","core-js/modules/es6.string.sup":"../../../node_modules/core-js/modules/es6.string.sup.js","core-js/modules/es6.typed.array-buffer":"../../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array":"../../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array":"../../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array":"../../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array":"../../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array":"../../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array":"../../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array":"../../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array":"../../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array":"../../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.weak-map":"../../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set":"../../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/es7.array.flat-map":"../../../node_modules/core-js/modules/es7.array.flat-map.js","core-js/modules/web.timers":"../../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate":"../../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable":"../../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime":"../../../node_modules/regenerator-runtime/runtime.js","react":"../../../node_modules/react/index.js","./products":"products.js"}],"countries.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41699,95 +42194,7 @@ var _default = [{
   code: 'ZW'
 }];
 exports.default = _default;
-},{}],"products.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  enterprise: {
-    code: 'enterprise',
-    name: 'jsreport enterprise perpetual',
-    infoLine: 'perpetual license - fully featured single server instance with no limitations',
-    price: {
-      usd: 645
-    },
-    permalink: 'XOxVq'
-  },
-  enterpriseScale: {
-    code: 'enterpriseScale',
-    name: 'jsreport enterprise scale perpetual',
-    infoLine: 'perpetual license - fully featured infinite amount of server instances with no limitations',
-    price: {
-      usd: 1995
-    },
-    permalink: 'onQk'
-  },
-  enterpriseSubscription: {
-    code: 'enterpriseSubscription',
-    name: 'jsreport enterprise subscription',
-    infoLine: 'subscription - fully featured single server instance with no limitations',
-    price: {
-      usd: 295
-    },
-    isSubscription: true,
-    permalink: 'SBwu'
-  },
-  enterpriseScaleSubscription: {
-    code: 'enterpriseScaleSubscription',
-    name: 'jsreport enterprise scale subscription',
-    infoLine: 'subscription - fully featured infinite amount of server instances with no limitations',
-    price: {
-      usd: 995
-    },
-    isSubscription: true,
-    permalink: 'SrfG'
-  },
-  supportSubscription: {
-    code: 'supportSubscription',
-    name: 'jsreport enterprise support subscription',
-    infoLine: 'enterprise support service provided with the next business day response time',
-    price: {
-      usd: 895
-    },
-    isSupport: true,
-    isSubscription: true,
-    permalink: 'SVEKk'
-  },
-  supportStarter: {
-    code: 'supportStarter',
-    name: 'jsreport enterprise support starter',
-    infoLine: 'enterprise support service valid for 2 months provided with the next business day response time',
-    price: {
-      usd: 395
-    },
-    isSupport: true,
-    permalink: 'DUeSe'
-  },
-  enterpriseDiscounted: {
-    code: 'enterpriseDiscounted',
-    name: 'jsreport enterprise perpetual',
-    infoLine: 'perpetual license - fully featured single server instance with no limitations',
-    price: {
-      usd: 1
-    },
-    permalink: 'XOxVq'
-  },
-  enterpriseSubscriptionDiscounted: {
-    code: 'enterpriseSubscriptionDiscounted',
-    name: 'jsreport enterprise subscription',
-    infoLine: 'subscription - fully featured single server instance with no limitations',
-    price: {
-      usd: 1
-    },
-    isSubscription: true,
-    permalink: 'SBwu'
-  }
-};
-exports.default = _default;
-},{}],"checkout.js":[function(require,module,exports) {
+},{}],"customerCheckout.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41868,7 +42275,7 @@ function _validateVAT() {
           case 2:
             _context2.prev = 2;
             _context2.next = 5;
-            return window.fetch('/api/validate-vat', {
+            return window.fetch('/api/payments/validate-vat', {
               method: 'POST',
               body: JSON.stringify({
                 vatNumber: vatNumber
@@ -41923,7 +42330,7 @@ function _validateVAT() {
 }
 
 var productCode = function productCode() {
-  return window.location.pathname.replace('/payments/checkout/', '');
+  return window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
 };
 
 exports.productCode = productCode;
@@ -41980,7 +42387,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _checkout = require("./checkout.js");
+var _customerCheckout = require("./customerCheckout.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42033,8 +42440,7 @@ function (_React$Component) {
         return;
       }
 
-      console.log('validate vat ' + v);
-      (0, _checkout.validateVAT)(v).then(function (r) {
+      (0, _customerCheckout.validateVAT)(v).then(function (r) {
         _this2.setState({
           isValid: r.isValid
         });
@@ -42047,9 +42453,8 @@ function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      console.log('is valid ' + this.state.isValid);
       return _react.default.createElement("div", {
-        className: "span4"
+        className: "coll2"
       }, _react.default.createElement("label", null, "VAT number (optional)"), _react.default.createElement("small", null, _react.default.createElement("input", {
         className: "fg-gray",
         type: "text",
@@ -42074,7 +42479,165 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = Vat;
-},{"react":"../../../node_modules/react/index.js","./checkout.js":"checkout.js"}],"spinner.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","./customerCheckout.js":"customerCheckout.js"}],"../../../node_modules/@stripe/stripe-js/dist/stripe.esm.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loadStripe = void 0;
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+}
+
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+var V3_URL = 'https://js.stripe.com/v3';
+var V3_URL_REGEX = /^https:\/\/js\.stripe\.com\/v3\/?(\?.*)?$/;
+var EXISTING_SCRIPT_MESSAGE = 'loadStripe.setLoadParameters was called but an existing Stripe.js script already exists in the document; existing script parameters will be used';
+
+var findScript = function findScript() {
+  var scripts = document.querySelectorAll("script[src^=\"".concat(V3_URL, "\"]"));
+
+  for (var i = 0; i < scripts.length; i++) {
+    var script = scripts[i];
+
+    if (!V3_URL_REGEX.test(script.src)) {
+      continue;
+    }
+
+    return script;
+  }
+
+  return null;
+};
+
+var injectScript = function injectScript(params) {
+  var queryString = params && !params.advancedFraudSignals ? '?advancedFraudSignals=false' : '';
+  var script = document.createElement('script');
+  script.src = "".concat(V3_URL).concat(queryString);
+  var headOrBody = document.head || document.body;
+
+  if (!headOrBody) {
+    throw new Error('Expected document.body not to be null. Stripe.js requires a <body> element.');
+  }
+
+  headOrBody.appendChild(script);
+  return script;
+};
+
+var registerWrapper = function registerWrapper(stripe) {
+  if (!stripe || !stripe._registerWrapper) {
+    return;
+  }
+
+  stripe._registerWrapper({
+    name: 'stripe-js',
+    version: "1.8.0"
+  });
+};
+
+var stripePromise = null;
+
+var loadScript = function loadScript(params) {
+  // Ensure that we only attempt to load Stripe.js at most once
+  if (stripePromise !== null) {
+    return stripePromise;
+  }
+
+  stripePromise = new Promise(function (resolve, reject) {
+    if (typeof window === 'undefined') {
+      // Resolve to null when imported server side. This makes the module
+      // safe to import in an isomorphic code base.
+      resolve(null);
+      return;
+    }
+
+    if (window.Stripe && params) {
+      console.warn(EXISTING_SCRIPT_MESSAGE);
+    }
+
+    if (window.Stripe) {
+      resolve(window.Stripe);
+      return;
+    }
+
+    try {
+      var script = findScript();
+
+      if (script && params) {
+        console.warn(EXISTING_SCRIPT_MESSAGE);
+      } else if (!script) {
+        script = injectScript(params);
+      }
+
+      script.addEventListener('load', function () {
+        if (window.Stripe) {
+          resolve(window.Stripe);
+        } else {
+          reject(new Error('Stripe.js not available'));
+        }
+      });
+      script.addEventListener('error', function () {
+        reject(new Error('Failed to load Stripe.js'));
+      });
+    } catch (error) {
+      reject(error);
+      return;
+    }
+  });
+  return stripePromise;
+};
+
+var initStripe = function initStripe(maybeStripe, args) {
+  if (maybeStripe === null) {
+    return null;
+  }
+
+  var stripe = maybeStripe.apply(void 0, _toConsumableArray(args));
+  registerWrapper(stripe);
+  return stripe;
+}; // own script injection.
+
+
+var stripePromise$1 = Promise.resolve().then(function () {
+  return loadScript(null);
+});
+var loadCalled = false;
+stripePromise$1["catch"](function (err) {
+  if (!loadCalled) {
+    console.warn(err);
+  }
+});
+
+var loadStripe = function loadStripe() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  loadCalled = true;
+  return stripePromise$1.then(function (maybeStripe) {
+    return initStripe(maybeStripe, args);
+  });
+};
+
+exports.loadStripe = loadStripe;
+},{}],"spinner.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42104,230 +42667,951 @@ function Spinner(_ref) {
     }
   }));
 }
-},{"react":"../../../node_modules/react/index.js"}],"braintree.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js"}],"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js":[function(require,module,exports) {
+var define;
+var global = arguments[3];
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+  (global = global || self, factory(global.ReactStripe = {}, global.React));
+}(this, (function (exports, React) { 'use strict';
+
+  React = React && React.hasOwnProperty('default') ? React['default'] : React;
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+
+    return target;
+  }
+
+  function _objectWithoutProperties(source, excluded) {
+    if (source == null) return {};
+
+    var target = _objectWithoutPropertiesLoose(source, excluded);
+
+    var key, i;
+
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+      for (i = 0; i < sourceSymbolKeys.length; i++) {
+        key = sourceSymbolKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+        target[key] = source[key];
+      }
+    }
+
+    return target;
+  }
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
+      return;
+    }
+
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  }
+
+  function createCommonjsModule(fn, module) {
+  	return module = { exports: {} }, fn(module, module.exports), module.exports;
+  }
+
+  /**
+   * Copyright (c) 2013-present, Facebook, Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   */
+
+  var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+  var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+
+  function emptyFunction() {}
+
+  function emptyFunctionWithReset() {}
+
+  emptyFunctionWithReset.resetWarningCache = emptyFunction;
+
+  var factoryWithThrowingShims = function () {
+    function shim(props, propName, componentName, location, propFullName, secret) {
+      if (secret === ReactPropTypesSecret_1) {
+        // It is still safe when called from React.
+        return;
+      }
+
+      var err = new Error('Calling PropTypes validators directly is not supported by the `prop-types` package. ' + 'Use PropTypes.checkPropTypes() to call them. ' + 'Read more at http://fb.me/use-check-prop-types');
+      err.name = 'Invariant Violation';
+      throw err;
+    }
+    shim.isRequired = shim;
+
+    function getShim() {
+      return shim;
+    }
+    // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+
+    var ReactPropTypes = {
+      array: shim,
+      bool: shim,
+      func: shim,
+      number: shim,
+      object: shim,
+      string: shim,
+      symbol: shim,
+      any: shim,
+      arrayOf: getShim,
+      element: shim,
+      elementType: shim,
+      instanceOf: getShim,
+      node: shim,
+      objectOf: getShim,
+      oneOf: getShim,
+      oneOfType: getShim,
+      shape: getShim,
+      exact: getShim,
+      checkPropTypes: emptyFunctionWithReset,
+      resetWarningCache: emptyFunction
+    };
+    ReactPropTypes.PropTypes = ReactPropTypes;
+    return ReactPropTypes;
+  };
+
+  var propTypes = createCommonjsModule(function (module) {
+  /**
+   * Copyright (c) 2013-present, Facebook, Inc.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   */
+  {
+    // By explicitly using `prop-types` you are opting into new production behavior.
+    // http://fb.me/prop-types-in-prod
+    module.exports = factoryWithThrowingShims();
+  }
+  });
+
+  var isUnknownObject = function isUnknownObject(raw) {
+    return raw !== null && _typeof(raw) === 'object';
+  };
+  var isPromise = function isPromise(raw) {
+    return isUnknownObject(raw) && typeof raw.then === 'function';
+  }; // We are using types to enforce the `stripe` prop in this lib,
+  // but in an untyped integration `stripe` could be anything, so we need
+  // to do some sanity validation to prevent type errors.
+
+  var isStripe = function isStripe(raw) {
+    return isUnknownObject(raw) && typeof raw.elements === 'function' && typeof raw.createToken === 'function' && typeof raw.createPaymentMethod === 'function' && typeof raw.confirmCardPayment === 'function';
+  };
+
+  var PLAIN_OBJECT_STR = '[object Object]';
+  var isEqual = function isEqual(left, right) {
+    if (!isUnknownObject(left) || !isUnknownObject(right)) {
+      return left === right;
+    }
+
+    var leftArray = Array.isArray(left);
+    var rightArray = Array.isArray(right);
+    if (leftArray !== rightArray) return false;
+    var leftPlainObject = Object.prototype.toString.call(left) === PLAIN_OBJECT_STR;
+    var rightPlainObject = Object.prototype.toString.call(right) === PLAIN_OBJECT_STR;
+    if (leftPlainObject !== rightPlainObject) return false;
+    if (!leftPlainObject && !leftArray) return false;
+    var leftKeys = Object.keys(left);
+    var rightKeys = Object.keys(right);
+    if (leftKeys.length !== rightKeys.length) return false;
+    var keySet = {};
+
+    for (var i = 0; i < leftKeys.length; i += 1) {
+      keySet[leftKeys[i]] = true;
+    }
+
+    for (var _i = 0; _i < rightKeys.length; _i += 1) {
+      keySet[rightKeys[_i]] = true;
+    }
+
+    var allKeys = Object.keys(keySet);
+
+    if (allKeys.length !== leftKeys.length) {
+      return false;
+    }
+
+    var l = left;
+    var r = right;
+
+    var pred = function pred(key) {
+      return isEqual(l[key], r[key]);
+    };
+
+    return allKeys.every(pred);
+  };
+
+  var usePrevious = function usePrevious(value) {
+    var ref = React.useRef(value);
+    React.useEffect(function () {
+      ref.current = value;
+    }, [value]);
+    return ref.current;
+  };
+
+  var INVALID_STRIPE_ERROR = 'Invalid prop `stripe` supplied to `Elements`. We recommend using the `loadStripe` utility from `@stripe/stripe-js`. See https://stripe.com/docs/stripe-js/react#elements-props-stripe for details.'; // We are using types to enforce the `stripe` prop in this lib, but in a real
+  // integration `stripe` could be anything, so we need to do some sanity
+  // validation to prevent type errors.
+
+  var validateStripe = function validateStripe(maybeStripe) {
+    if (maybeStripe === null || isStripe(maybeStripe)) {
+      return maybeStripe;
+    }
+
+    throw new Error(INVALID_STRIPE_ERROR);
+  };
+
+  var parseStripeProp = function parseStripeProp(raw) {
+    if (isPromise(raw)) {
+      return {
+        tag: 'async',
+        stripePromise: Promise.resolve(raw).then(validateStripe)
+      };
+    }
+
+    var stripe = validateStripe(raw);
+
+    if (stripe === null) {
+      return {
+        tag: 'empty'
+      };
+    }
+
+    return {
+      tag: 'sync',
+      stripe: stripe
+    };
+  };
+
+  var ElementsContext = React.createContext(null);
+  ElementsContext.displayName = 'ElementsContext';
+  var parseElementsContext = function parseElementsContext(ctx, useCase) {
+    if (!ctx) {
+      throw new Error("Could not find Elements context; You need to wrap the part of your app that ".concat(useCase, " in an <Elements> provider."));
+    }
+
+    return ctx;
+  };
+  /**
+   * The `Elements` provider allows you to use [Element components](https://stripe.com/docs/stripe-js/react#element-components) and access the [Stripe object](https://stripe.com/docs/js/initializing) in any nested component.
+   * Render an `Elements` provider at the root of your React app so that it is available everywhere you need it.
+   *
+   * To use the `Elements` provider, call `loadStripe` from `@stripe/stripe-js` with your publishable key.
+   * The `loadStripe` function will asynchronously load the Stripe.js script and initialize a `Stripe` object.
+   * Pass the returned `Promise` to `Elements`.
+   *
+   * @docs https://stripe.com/docs/stripe-js/react#elements-provider
+   */
+
+  var Elements = function Elements(_ref) {
+    var rawStripeProp = _ref.stripe,
+        options = _ref.options,
+        children = _ref.children;
+
+    var _final = React.useRef(false);
+
+    var isMounted = React.useRef(true);
+    var parsed = React.useMemo(function () {
+      return parseStripeProp(rawStripeProp);
+    }, [rawStripeProp]);
+
+    var _React$useState = React.useState(function () {
+      return {
+        stripe: null,
+        elements: null
+      };
+    }),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        ctx = _React$useState2[0],
+        setContext = _React$useState2[1];
+
+    var prevStripe = usePrevious(rawStripeProp);
+    var prevOptions = usePrevious(options);
+
+    if (prevStripe !== null) {
+      if (prevStripe !== rawStripeProp) {
+        console.warn('Unsupported prop change on Elements: You cannot change the `stripe` prop after setting it.');
+      }
+
+      if (!isEqual(options, prevOptions)) {
+        console.warn('Unsupported prop change on Elements: You cannot change the `options` prop after setting the `stripe` prop.');
+      }
+    }
+
+    if (!_final.current) {
+      if (parsed.tag === 'sync') {
+        _final.current = true;
+        setContext({
+          stripe: parsed.stripe,
+          elements: parsed.stripe.elements(options)
+        });
+      }
+
+      if (parsed.tag === 'async') {
+        _final.current = true;
+        parsed.stripePromise.then(function (stripe) {
+          if (stripe && isMounted.current) {
+            // Only update Elements context if the component is still mounted
+            // and stripe is not null. We allow stripe to be null to make
+            // handling SSR easier.
+            setContext({
+              stripe: stripe,
+              elements: stripe.elements(options)
+            });
+          }
+        });
+      }
+    }
+
+    React.useEffect(function () {
+      return function () {
+        isMounted.current = false;
+      };
+    }, []);
+    React.useEffect(function () {
+      var anyStripe = ctx.stripe;
+
+      if (!anyStripe || !anyStripe._registerWrapper) {
+        return;
+      }
+
+      anyStripe._registerWrapper({
+        name: 'react-stripe-js',
+        version: "1.1.2"
+      });
+    }, [ctx.stripe]);
+    return React.createElement(ElementsContext.Provider, {
+      value: ctx
+    }, children);
+  };
+  Elements.propTypes = {
+    stripe: propTypes.any,
+    options: propTypes.object
+  };
+  var useElementsContextWithUseCase = function useElementsContextWithUseCase(useCaseMessage) {
+    var ctx = React.useContext(ElementsContext);
+    return parseElementsContext(ctx, useCaseMessage);
+  };
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#useelements-hook
+   */
+
+  var useElements = function useElements() {
+    var _useElementsContextWi = useElementsContextWithUseCase('calls useElements()'),
+        elements = _useElementsContextWi.elements;
+
+    return elements;
+  };
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#usestripe-hook
+   */
+
+  var useStripe = function useStripe() {
+    var _useElementsContextWi2 = useElementsContextWithUseCase('calls useStripe()'),
+        stripe = _useElementsContextWi2.stripe;
+
+    return stripe;
+  };
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#elements-consumer
+   */
+
+  var ElementsConsumer = function ElementsConsumer(_ref2) {
+    var children = _ref2.children;
+    var ctx = useElementsContextWithUseCase('mounts <ElementsConsumer>'); // Assert to satisfy the busted React.FC return type (it should be ReactNode)
+
+    return children(ctx);
+  };
+  ElementsConsumer.propTypes = {
+    children: propTypes.func.isRequired
+  };
+
+  var useCallbackReference = function useCallbackReference(cb) {
+    var ref = React.useRef(cb);
+    React.useEffect(function () {
+      ref.current = cb;
+    }, [cb]);
+    return function () {
+      if (ref.current) {
+        ref.current.apply(ref, arguments);
+      }
+    };
+  };
+
+  var extractUpdateableOptions = function extractUpdateableOptions(options) {
+    if (!isUnknownObject(options)) {
+      return {};
+    }
+
+    var _ = options.paymentRequest,
+        rest = _objectWithoutProperties(options, ["paymentRequest"]);
+
+    return rest;
+  };
+
+  var noop = function noop() {};
+
+  var capitalized = function capitalized(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  var createElementComponent = function createElementComponent(type, isServer) {
+    var displayName = "".concat(capitalized(type), "Element");
+
+    var ClientElement = function ClientElement(_ref) {
+      var id = _ref.id,
+          className = _ref.className,
+          _ref$options = _ref.options,
+          options = _ref$options === void 0 ? {} : _ref$options,
+          _ref$onBlur = _ref.onBlur,
+          onBlur = _ref$onBlur === void 0 ? noop : _ref$onBlur,
+          _ref$onFocus = _ref.onFocus,
+          onFocus = _ref$onFocus === void 0 ? noop : _ref$onFocus,
+          _ref$onReady = _ref.onReady,
+          onReady = _ref$onReady === void 0 ? noop : _ref$onReady,
+          _ref$onChange = _ref.onChange,
+          onChange = _ref$onChange === void 0 ? noop : _ref$onChange,
+          _ref$onEscape = _ref.onEscape,
+          onEscape = _ref$onEscape === void 0 ? noop : _ref$onEscape,
+          _ref$onClick = _ref.onClick,
+          onClick = _ref$onClick === void 0 ? noop : _ref$onClick;
+
+      var _useElementsContextWi = useElementsContextWithUseCase("mounts <".concat(displayName, ">")),
+          elements = _useElementsContextWi.elements;
+
+      var elementRef = React.useRef(null);
+      var domNode = React.useRef(null);
+      var callOnReady = useCallbackReference(onReady);
+      var callOnBlur = useCallbackReference(onBlur);
+      var callOnFocus = useCallbackReference(onFocus);
+      var callOnClick = useCallbackReference(onClick);
+      var callOnChange = useCallbackReference(onChange);
+      var callOnEscape = useCallbackReference(onEscape);
+      React.useLayoutEffect(function () {
+        if (elementRef.current == null && elements && domNode.current != null) {
+          var element = elements.create(type, options);
+          elementRef.current = element;
+          element.mount(domNode.current);
+          element.on('ready', function () {
+            return callOnReady(element);
+          });
+          element.on('change', callOnChange);
+          element.on('blur', callOnBlur);
+          element.on('focus', callOnFocus);
+          element.on('escape', callOnEscape); // Users can pass an an onClick prop on any Element component
+          // just as they could listen for the `click` event on any Element,
+          // but only the PaymentRequestButton will actually trigger the event.
+
+          element.on('click', callOnClick);
+        }
+      });
+      var prevOptions = React.useRef(options);
+      React.useEffect(function () {
+        if (prevOptions.current && prevOptions.current.paymentRequest !== options.paymentRequest) {
+          console.warn('Unsupported prop change: options.paymentRequest is not a customizable property.');
+        }
+
+        var updateableOptions = extractUpdateableOptions(options);
+
+        if (Object.keys(updateableOptions).length !== 0 && !isEqual(updateableOptions, extractUpdateableOptions(prevOptions.current))) {
+          if (elementRef.current) {
+            elementRef.current.update(updateableOptions);
+            prevOptions.current = options;
+          }
+        }
+      }, [options]);
+      React.useEffect(function () {
+        return function () {
+          if (elementRef.current) {
+            elementRef.current.destroy();
+          }
+        };
+      }, []);
+      return React.createElement("div", {
+        id: id,
+        className: className,
+        ref: domNode
+      });
+    }; // Only render the Element wrapper in a server environment.
+
+
+    var ServerElement = function ServerElement(props) {
+      // Validate that we are in the right context by calling useElementsContextWithUseCase.
+      useElementsContextWithUseCase("mounts <".concat(displayName, ">"));
+      var id = props.id,
+          className = props.className;
+      return React.createElement("div", {
+        id: id,
+        className: className
+      });
+    };
+
+    var Element = isServer ? ServerElement : ClientElement;
+    Element.propTypes = {
+      id: propTypes.string,
+      className: propTypes.string,
+      onChange: propTypes.func,
+      onBlur: propTypes.func,
+      onFocus: propTypes.func,
+      onReady: propTypes.func,
+      onClick: propTypes.func,
+      options: propTypes.object
+    };
+    Element.displayName = displayName;
+    Element.__elementType = type;
+    return Element;
+  };
+
+  var isServer = typeof window === 'undefined';
+  /**
+   * Requires beta access:
+   * Contact [Stripe support](https://support.stripe.com/) for more information.
+   *
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var AuBankAccountElement = createElementComponent('auBankAccount', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var CardElement = createElementComponent('card', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var CardNumberElement = createElementComponent('cardNumber', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var CardExpiryElement = createElementComponent('cardExpiry', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var CardCvcElement = createElementComponent('cardCvc', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var FpxBankElement = createElementComponent('fpxBank', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var IbanElement = createElementComponent('iban', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var IdealBankElement = createElementComponent('idealBank', isServer);
+  /**
+   * @docs https://stripe.com/docs/stripe-js/react#element-components
+   */
+
+  var PaymentRequestButtonElement = createElementComponent('paymentRequestButton', isServer);
+
+  exports.AuBankAccountElement = AuBankAccountElement;
+  exports.CardCvcElement = CardCvcElement;
+  exports.CardElement = CardElement;
+  exports.CardExpiryElement = CardExpiryElement;
+  exports.CardNumberElement = CardNumberElement;
+  exports.Elements = Elements;
+  exports.ElementsConsumer = ElementsConsumer;
+  exports.FpxBankElement = FpxBankElement;
+  exports.IbanElement = IbanElement;
+  exports.IdealBankElement = IdealBankElement;
+  exports.PaymentRequestButtonElement = PaymentRequestButtonElement;
+  exports.useElements = useElements;
+  exports.useStripe = useStripe;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+},{"react":"../../../node_modules/react/index.js"}],"stripeForm.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = StripeForm;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
+
+var _stripeJs = require("@stripe/stripe-js");
 
 var _spinner = _interopRequireDefault(require("./spinner"));
 
+var _reactStripeJs = require("@stripe/react-stripe-js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function Error(_ref) {
-  var error = _ref.error;
-
-  if (!error) {
-    return null;
-  }
-
-  return _react.default.createElement("div", {
-    className: "row"
-  }, _react.default.createElement("b", {
-    style: {
-      color: 'red'
-    }
-  }, error));
+function fetchPaymentIntentSecret(_x, _x2, _x3) {
+  return _fetchPaymentIntentSecret.apply(this, arguments);
 }
 
-function SubmitButton(_ref2) {
-  var visible = _ref2.visible,
-      onSubmit = _ref2.onSubmit;
+function _fetchPaymentIntentSecret() {
+  _fetchPaymentIntentSecret = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee3(customerId, amount, setupIntent) {
+    var res;
+    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return window.fetch('/api/payments/' + (setupIntent ? 'setup-intent' : 'payment-intent'), {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                amount: amount,
+                customerId: customerId
+              })
+            });
 
-  if (!visible) {
-    return null;
-  }
+          case 2:
+            res = _context3.sent;
+            return _context3.abrupt("return", res.text());
 
-  return _react.default.createElement("div", {
-    className: "row"
-  }, _react.default.createElement("a", {
-    onClick: function onClick() {
-      return onSubmit();
-    },
-    className: "button text-center bg-green bg-hover-gray btn"
-  }, _react.default.createElement("span", {
-    className: "fg-white"
-  }, "Submit")));
-}
-
-var Braintree =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(Braintree, _React$Component);
-
-  function Braintree() {
-    var _this;
-
-    _classCallCheck(this, Braintree);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Braintree).call(this));
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(Braintree, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      return this.load();
-    }
-  }, {
-    key: "load",
-    value: function () {
-      var _load = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
-        var token;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                this.setState({
-                  loading: true
-                });
-                _context.next = 3;
-                return window.fetch('/api/braintree-token').then(function (res) {
-                  return res.text();
-                });
-
-              case 3:
-                token = _context.sent;
-                _context.next = 6;
-                return braintree.dropin.create({
-                  authorization: token,
-                  paypal: {
-                    flow: 'vault'
-                  },
-                  container: '#dropin-container'
-                });
-
-              case 6:
-                this.braintreeInstance = _context.sent;
-                this.setState({
-                  loading: false
-                });
-
-              case 8:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function load() {
-        return _load.apply(this, arguments);
-      }
-
-      return load;
-    }()
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      if (this.braintreeInstance) {
-        return this.braintreeInstance.teardown();
-      }
-    }
-  }, {
-    key: "submit",
-    value: function () {
-      var _submit = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2() {
-        var paymentMethod;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                this.setState({
-                  loading: true
-                });
-                _context2.next = 4;
-                return this.braintreeInstance.requestPaymentMethod();
-
-              case 4:
-                paymentMethod = _context2.sent;
-                _context2.next = 7;
-                return this.props.onSubmit(paymentMethod);
-
-              case 7:
-                _context2.next = 14;
-                break;
-
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](0);
-                this.braintreeInstance.teardown();
-                this.setState({
-                  error: _context2.t0.message
-                });
-                this.load();
-
-              case 14:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[0, 9]]);
-      }));
-
-      function submit() {
-        return _submit.apply(this, arguments);
-      }
-
-      return submit;
-    }()
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(Error, {
-        error: this.state.error
-      }), _react.default.createElement(_spinner.default, {
-        loading: this.state.loading
-      }), _react.default.createElement("div", null), _react.default.createElement("div", {
-        id: "dropin-container"
-      }), _react.default.createElement(SubmitButton, {
-        visible: !this.state.loading,
-        onSubmit: function onSubmit() {
-          return _this2.submit();
+          case 4:
+          case "end":
+            return _context3.stop();
         }
-      }));
+      }
+    }, _callee3);
+  }));
+  return _fetchPaymentIntentSecret.apply(this, arguments);
+}
+
+var promise = window.fetch('/api/payments/stripe/client-secret', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}).then(function (r) {
+  return r.text();
+}).then(function (c) {
+  return (0, _stripeJs.loadStripe)(c);
+}).catch(console.error);
+
+function StripeForm(_ref) {
+  var amount = _ref.amount,
+      onSubmit = _ref.onSubmit,
+      customerId = _ref.customerId,
+      product = _ref.product,
+      setupIntent = _ref.setupIntent;
+  return _react.default.createElement(_reactStripeJs.Elements, {
+    stripe: promise
+  }, _react.default.createElement(CardForm, {
+    amount: amount,
+    onSubmit: onSubmit,
+    customerId: customerId,
+    product: product,
+    setupIntent: setupIntent
+  }));
+}
+
+function CardForm(_ref2) {
+  var amount = _ref2.amount,
+      onSubmit = _ref2.onSubmit,
+      customerId = _ref2.customerId,
+      product = _ref2.product,
+      setupIntent = _ref2.setupIntent;
+
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      succeeded = _useState2[0],
+      setSucceeded = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      error = _useState4[0],
+      setError = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      processing = _useState6[0],
+      setProcessing = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      disabled = _useState8[0],
+      setDisabled = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      clientSecret = _useState10[0],
+      setClientSecret = _useState10[1];
+
+  var stripe = (0, _reactStripeJs.useStripe)();
+  var elements = (0, _reactStripeJs.useElements)();
+  (0, _react.useEffect)(function () {
+    fetchPaymentIntentSecret(customerId, amount, setupIntent).then(setClientSecret);
+  }, []);
+  var cardStyle = {
+    style: {
+      base: {
+        color: '#000000',
+        fontWeight: 400,
+        fontFamily: 'Segoe UI_,Open Sans,Verdana,Arial,Helvetica,sans-serif',
+        fontSize: '16px',
+        fontSmoothing: 'antialiased',
+        '::placeholder': {
+          color: '#000000'
+        },
+        ':-webkit-autofill': {
+          color: '#000000'
+        }
+      },
+      invalid: {
+        color: '#E25950',
+        '::placeholder': {
+          color: '#FFCCA5'
+        }
+      }
     }
-  }]);
+  };
 
-  return Braintree;
-}(_react.default.Component);
+  var handleChange =
+  /*#__PURE__*/
+  function () {
+    var _ref3 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee(event) {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // Listen for changes in the CardElement
+              // and display any errors as the customer types their card details
+              setDisabled(event.empty);
+              setError(event.error ? event.error.message : '');
 
-exports.default = Braintree;
-},{"react":"../../../node_modules/react/index.js","./spinner":"spinner.jsx"}],"checkout.jsx":[function(require,module,exports) {
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function handleChange(_x4) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  var handleSubmit =
+  /*#__PURE__*/
+  function () {
+    var _ref4 = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee2(ev) {
+      var _ref5, _error2, _setupIntent, _ref6, _error, paymentIntent;
+
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              ev.preventDefault();
+              setProcessing(true);
+              _context2.prev = 2;
+
+              if (!setupIntent) {
+                _context2.next = 16;
+                break;
+              }
+
+              _context2.next = 6;
+              return stripe.confirmCardSetup(clientSecret, {
+                payment_method: {
+                  card: elements.getElement(_reactStripeJs.CardElement)
+                }
+              });
+
+            case 6:
+              _ref5 = _context2.sent;
+              _error2 = _ref5.error;
+              _setupIntent = _ref5.setupIntent;
+
+              if (!_error2) {
+                _context2.next = 11;
+                break;
+              }
+
+              throw new Error(_error2.message);
+
+            case 11:
+              _context2.next = 13;
+              return onSubmit(_setupIntent);
+
+            case 13:
+              setError(null);
+              setProcessing(false);
+              setSucceeded(true);
+
+            case 16:
+              _context2.next = 18;
+              return stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                  card: elements.getElement(_reactStripeJs.CardElement)
+                }
+              });
+
+            case 18:
+              _ref6 = _context2.sent;
+              _error = _ref6.error;
+              paymentIntent = _ref6.paymentIntent;
+
+              if (!_error) {
+                _context2.next = 23;
+                break;
+              }
+
+              throw new Error(_error.message);
+
+            case 23:
+              _context2.next = 25;
+              return onSubmit(paymentIntent);
+
+            case 25:
+              setError(null);
+              setProcessing(false);
+              setSucceeded(true);
+              _context2.next = 34;
+              break;
+
+            case 30:
+              _context2.prev = 30;
+              _context2.t0 = _context2["catch"](2);
+              setError("Payment failed ".concat(_context2.t0.message));
+              setProcessing(false);
+
+            case 34:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[2, 30]]);
+    }));
+
+    return function handleSubmit(_x5) {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+
+  return _react.default.createElement("form", {
+    id: "payment-form",
+    onSubmit: handleSubmit
+  }, _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, _react.default.createElement(_reactStripeJs.CardElement, {
+    id: "card-element",
+    options: cardStyle,
+    onChange: handleChange
+  }))), processing ? _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, _react.default.createElement(_spinner.default, {
+    loading: processing
+  }))) : _react.default.createElement(_react.default.Fragment, null), _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, _react.default.createElement("button", {
+    disabled: processing || disabled || succeeded,
+    className: "button success"
+  }, "Confirm"))), error && _react.default.createElement("div", {
+    className: "row text-center card-error"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, error)));
+}
+},{"react":"../../../node_modules/react/index.js","@stripe/stripe-js":"../../../node_modules/@stripe/stripe-js/dist/stripe.esm.js","./spinner":"spinner.jsx","@stripe/react-stripe-js":"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"}],"customerCheckout.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42591,15 +43875,13 @@ require("regenerator-runtime/runtime");
 
 var _react = _interopRequireDefault(require("react"));
 
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
 var _countries = _interopRequireDefault(require("./countries.js"));
 
 var _vat = _interopRequireDefault(require("./vat"));
 
-var _braintree = _interopRequireDefault(require("./braintree"));
+var _stripeForm = _interopRequireDefault(require("./stripeForm"));
 
-var _checkout = require("./checkout.js");
+var _customerCheckout = require("./customerCheckout.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42625,26 +43907,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-function Email(_ref) {
+function Country(_ref) {
   var value = _ref.value,
       onChange = _ref.onChange;
   return _react.default.createElement("div", {
-    className: "span4"
-  }, _react.default.createElement("label", null, "Email"), _react.default.createElement("small", null, _react.default.createElement("input", {
-    className: "fg-gray",
-    type: "email",
-    size: "30",
-    required: true,
-    value: value,
-    onChange: onChange
-  })));
-}
-
-function Country(_ref2) {
-  var value = _ref2.value,
-      onChange = _ref2.onChange;
-  return _react.default.createElement("div", {
-    className: "span4"
+    className: "coll2"
   }, _react.default.createElement("label", null, "Country"), _react.default.createElement("small", null, _react.default.createElement("select", {
     className: "fg-gray",
     onChange: onChange,
@@ -42658,11 +43925,11 @@ function Country(_ref2) {
   }))));
 }
 
-function Name(_ref3) {
-  var value = _ref3.value,
-      onChange = _ref3.onChange;
+function Name(_ref2) {
+  var value = _ref2.value,
+      onChange = _ref2.onChange;
   return _react.default.createElement("div", {
-    className: "span4"
+    className: "coll2"
   }, _react.default.createElement("label", null, "Company name (or personal name)"), _react.default.createElement("small", null, _react.default.createElement("input", {
     className: "fg-gray",
     type: "text",
@@ -42674,11 +43941,11 @@ function Name(_ref3) {
   })));
 }
 
-function Address(_ref4) {
-  var value = _ref4.value,
-      onChange = _ref4.onChange;
+function Address(_ref3) {
+  var value = _ref3.value,
+      onChange = _ref3.onChange;
   return _react.default.createElement("div", {
-    className: "span8"
+    className: "coll2"
   }, _react.default.createElement("label", null, "Address"), _react.default.createElement("small", null, _react.default.createElement("input", {
     className: "fg-gray",
     type: "text",
@@ -42690,34 +43957,34 @@ function Address(_ref4) {
   })));
 }
 
-var Checkout =
+var CustomerCheckout =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Checkout, _React$Component);
+  _inherits(CustomerCheckout, _React$Component);
 
-  function Checkout(props) {
+  function CustomerCheckout(props) {
     var _this;
 
-    _classCallCheck(this, Checkout);
+    _classCallCheck(this, CustomerCheckout);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Checkout).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomerCheckout).call(this, props));
     _this.state = {
       country: 'US',
       address: '',
-      email: '',
       vatNumber: '',
       name: '',
       isVATValid: null
     };
+    _this.paymentForm = _react.default.createRef();
     return _this;
   }
 
-  _createClass(Checkout, [{
+  _createClass(CustomerCheckout, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
-      (0, _checkout.getUserCountry)().then(function (r) {
+      (0, _customerCheckout.getUserCountry)().then(function (r) {
         return _this2.setState({
           country: r
         });
@@ -42726,8 +43993,8 @@ function (_React$Component) {
   }, {
     key: "proceedCardDetails",
     value: function proceedCardDetails() {
-      if (!this.refs.paymentForm.checkValidity()) {
-        this.refs.paymentForm.reportValidity();
+      if (!this.paymentForm.current.checkValidity()) {
+        this.paymentForm.current.reportValidity();
         return;
       }
 
@@ -42740,7 +44007,7 @@ function (_React$Component) {
     value: function () {
       var _submitCheckout = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee(pm) {
+      regeneratorRuntime.mark(function _callee(paymentIntent) {
         var _this3 = this;
 
         var _calculatePrice, vatRate, vatAmount, amount, country, checkoutRes, resData;
@@ -42749,7 +44016,7 @@ function (_React$Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _calculatePrice = (0, _checkout.calculatePrice)({
+                _calculatePrice = (0, _customerCheckout.calculatePrice)({
                   country: this.state.country,
                   isVATValid: this.state.isVATValid && this.state.vatNumber
                 }), vatRate = _calculatePrice.vatRate, vatAmount = _calculatePrice.vatAmount, amount = _calculatePrice.amount;
@@ -42757,22 +44024,22 @@ function (_React$Component) {
                   return c.code === _this3.state.country;
                 });
                 _context.next = 4;
-                return window.fetch('/api/checkout', {
+                return window.fetch('/api/payments/checkout', {
                   method: 'POST',
                   body: JSON.stringify({
-                    price: (0, _checkout.price)(),
+                    price: (0, _customerCheckout.price)(),
                     amount: amount,
                     vatRate: vatRate,
                     vatAmount: vatAmount,
-                    email: this.state.email,
-                    nonce: pm.nonce,
-                    product: (0, _checkout.product)(),
+                    customerId: this.props.match.params.customer,
+                    product: (0, _customerCheckout.product)(),
                     name: this.state.name,
                     address: this.state.address,
                     country: country.name,
                     vatNumber: this.state.vatNumber,
-                    currency: _checkout.currency,
-                    isEU: country.eu
+                    currency: _customerCheckout.currency,
+                    isEU: country.eu,
+                    paymentIntentId: paymentIntent.id
                   }),
                   headers: {
                     'Content-Type': 'application/json'
@@ -42816,7 +44083,7 @@ function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var calculatedPrice = (0, _checkout.calculatePrice)({
+      var calculatedPrice = (0, _customerCheckout.calculatePrice)({
         country: this.state.country,
         isVATValid: this.state.isVATValid && this.state.vatNumber
       });
@@ -42826,30 +44093,20 @@ function (_React$Component) {
         className: "text-center"
       }, _react.default.createElement("h2", {
         className: "fg-white buy-title"
-      }, (0, _checkout.product)().name), _react.default.createElement("small", {
+      }, (0, _customerCheckout.product)().name), _react.default.createElement("small", {
         className: "fg-grayLighter"
-      }, (0, _checkout.product)().infoLine))), _react.default.createElement("div", {
-        className: "grid container small section"
+      }, (0, _customerCheckout.product)().infoLine))), _react.default.createElement("div", {
+        className: "grid text-center container small section"
       }, _react.default.createElement("div", {
-        className: "row text-center"
+        className: "row"
       }, _react.default.createElement("div", {
         className: "fg-gray"
-      }, _react.default.createElement("h3", null, "BILLING INFORMATION"))), _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement("form", {
-        ref: "paymentForm"
-      }, _react.default.createElement("div", {
-        className: "grid fg-gray"
+      }, _react.default.createElement("h3", null, "BILLING INFORMATION"))), _react.default.createElement("form", {
+        ref: this.paymentForm,
+        className: "fg-gray text-center"
       }, _react.default.createElement("div", {
         className: "row"
-      }, _react.default.createElement(Email, {
-        value: this.state.email,
-        onChange: function onChange(v) {
-          return _this4.setState({
-            email: v.target.value
-          });
-        }
-      }), _react.default.createElement(_vat.default, {
+      }, _react.default.createElement(_vat.default, {
         value: this.state.vatNumber,
         onChange: function onChange(v) {
           return _this4.setState({
@@ -42893,17 +44150,20 @@ function (_React$Component) {
             address: v.target.value
           });
         }
-      }))), _react.default.createElement("div", {
+      })), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("hr", null)), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", {
-        className: "span4"
-      }, _react.default.createElement("label", null, "License price"), _react.default.createElement("h3", null, (0, _checkout.price)() + _checkout.currencyChar)), _react.default.createElement("div", {
-        className: "span4"
-      }, _react.default.createElement("label", null, "VAT ", calculatedPrice.vatRate + '%'), _react.default.createElement("h3", null, calculatedPrice.vatAmount + _checkout.currencyChar)), _react.default.createElement("div", {
-        className: "span4"
-      }, _react.default.createElement("label", null, "Amount to pay"), _react.default.createElement("h3", null, calculatedPrice.amount + _checkout.currencyChar))), !this.state.cardDetailsVisible ? _react.default.createElement("div", {
+        className: "coll3"
+      }, _react.default.createElement("label", null, "License price"), _react.default.createElement("h3", null, (0, _customerCheckout.price)() + _customerCheckout.currencyChar)), _react.default.createElement("div", {
+        className: "coll3"
+      }, _react.default.createElement("label", null, "VAT ", calculatedPrice.vatRate + '%'), _react.default.createElement("h3", null, calculatedPrice.vatAmount + _customerCheckout.currencyChar)), _react.default.createElement("div", {
+        className: "coll3"
+      }, _react.default.createElement("div", {
+        className: "spinner",
+        id: "spinner"
+      }), _react.default.createElement("label", null, "Amount to pay"), _react.default.createElement("h3", null, calculatedPrice.amount + _customerCheckout.currencyChar)))), !this.state.cardDetailsVisible ? _react.default.createElement("div", {
         className: "row",
         onClick: function onClick() {
           return _this4.proceedCardDetails();
@@ -42912,24 +44172,27 @@ function (_React$Component) {
         className: "button text-center bg-green bg-hover-gray btn"
       }, _react.default.createElement("span", {
         className: "fg-white"
-      }, "Proceed to card details"))) : _react.default.createElement(_braintree.default, {
-        onSubmit: function onSubmit(pm) {
-          return _this4.submitCheckout(pm);
+      }, "Proceed to card details"))) : _react.default.createElement(_stripeForm.default, {
+        amount: calculatedPrice.amount,
+        customerId: this.props.match.params.customer,
+        product: (0, _customerCheckout.product)(),
+        onSubmit: function onSubmit(p, s) {
+          return _this4.submitCheckout(p, s);
         }
       }), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", {
-        className: "span12 fg-gray"
-      }, _react.default.createElement("small", null, "Do you have a problem with the purchase or want to ask something? Please contact us at sales@jsreport.net")))))));
+        className: "fg-gray"
+      }, _react.default.createElement("small", null, "Do you have a problem with the purchase or want to ask something? Please contact us at sales@jsreport.net")))));
     }
   }]);
 
-  return Checkout;
+  return CustomerCheckout;
 }(_react.default.Component);
 
-var _default = Checkout;
+var _default = CustomerCheckout;
 exports.default = _default;
-},{"core-js/modules/es6.array.copy-within":"../../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.fill":"../../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.find":"../../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index":"../../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es6.array.from":"../../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es7.array.includes":"../../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es6.array.iterator":"../../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.array.of":"../../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.sort":"../../../node_modules/core-js/modules/es6.array.sort.js","core-js/modules/es6.array.species":"../../../node_modules/core-js/modules/es6.array.species.js","core-js/modules/es6.date.to-json":"../../../node_modules/core-js/modules/es6.date.to-json.js","core-js/modules/es6.date.to-primitive":"../../../node_modules/core-js/modules/es6.date.to-primitive.js","core-js/modules/es6.function.has-instance":"../../../node_modules/core-js/modules/es6.function.has-instance.js","core-js/modules/es6.function.name":"../../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.map":"../../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.math.acosh":"../../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh":"../../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh":"../../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt":"../../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32":"../../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh":"../../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1":"../../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround":"../../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot":"../../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul":"../../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p":"../../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10":"../../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2":"../../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign":"../../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh":"../../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh":"../../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc":"../../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es6.number.constructor":"../../../node_modules/core-js/modules/es6.number.constructor.js","core-js/modules/es6.number.epsilon":"../../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.is-finite":"../../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer":"../../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-nan":"../../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.is-safe-integer":"../../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.max-safe-integer":"../../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.number.min-safe-integer":"../../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.parse-float":"../../../node_modules/core-js/modules/es6.number.parse-float.js","core-js/modules/es6.number.parse-int":"../../../node_modules/core-js/modules/es6.number.parse-int.js","core-js/modules/es6.object.assign":"../../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es7.object.define-getter":"../../../node_modules/core-js/modules/es7.object.define-getter.js","core-js/modules/es7.object.define-setter":"../../../node_modules/core-js/modules/es7.object.define-setter.js","core-js/modules/es7.object.entries":"../../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es6.object.freeze":"../../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.get-own-property-descriptor":"../../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es7.object.get-own-property-descriptors":"../../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es6.object.get-own-property-names":"../../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.get-prototype-of":"../../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es7.object.lookup-getter":"../../../node_modules/core-js/modules/es7.object.lookup-getter.js","core-js/modules/es7.object.lookup-setter":"../../../node_modules/core-js/modules/es7.object.lookup-setter.js","core-js/modules/es6.object.prevent-extensions":"../../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.is":"../../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.is-frozen":"../../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed":"../../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible":"../../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.keys":"../../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.seal":"../../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es6.object.set-prototype-of":"../../../node_modules/core-js/modules/es6.object.set-prototype-of.js","core-js/modules/es7.object.values":"../../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es6.promise":"../../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es7.promise.finally":"../../../node_modules/core-js/modules/es7.promise.finally.js","core-js/modules/es6.reflect.apply":"../../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct":"../../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property":"../../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property":"../../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get":"../../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor":"../../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of":"../../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has":"../../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible":"../../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys":"../../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions":"../../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set":"../../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of":"../../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.regexp.constructor":"../../../node_modules/core-js/modules/es6.regexp.constructor.js","core-js/modules/es6.regexp.flags":"../../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match":"../../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace":"../../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split":"../../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search":"../../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.regexp.to-string":"../../../node_modules/core-js/modules/es6.regexp.to-string.js","core-js/modules/es6.set":"../../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.symbol":"../../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es7.symbol.async-iterator":"../../../node_modules/core-js/modules/es7.symbol.async-iterator.js","core-js/modules/es6.string.anchor":"../../../node_modules/core-js/modules/es6.string.anchor.js","core-js/modules/es6.string.big":"../../../node_modules/core-js/modules/es6.string.big.js","core-js/modules/es6.string.blink":"../../../node_modules/core-js/modules/es6.string.blink.js","core-js/modules/es6.string.bold":"../../../node_modules/core-js/modules/es6.string.bold.js","core-js/modules/es6.string.code-point-at":"../../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.ends-with":"../../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.fixed":"../../../node_modules/core-js/modules/es6.string.fixed.js","core-js/modules/es6.string.fontcolor":"../../../node_modules/core-js/modules/es6.string.fontcolor.js","core-js/modules/es6.string.fontsize":"../../../node_modules/core-js/modules/es6.string.fontsize.js","core-js/modules/es6.string.from-code-point":"../../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.includes":"../../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.string.italics":"../../../node_modules/core-js/modules/es6.string.italics.js","core-js/modules/es6.string.iterator":"../../../node_modules/core-js/modules/es6.string.iterator.js","core-js/modules/es6.string.link":"../../../node_modules/core-js/modules/es6.string.link.js","core-js/modules/es7.string.pad-start":"../../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end":"../../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/es6.string.raw":"../../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.repeat":"../../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.small":"../../../node_modules/core-js/modules/es6.string.small.js","core-js/modules/es6.string.starts-with":"../../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.strike":"../../../node_modules/core-js/modules/es6.string.strike.js","core-js/modules/es6.string.sub":"../../../node_modules/core-js/modules/es6.string.sub.js","core-js/modules/es6.string.sup":"../../../node_modules/core-js/modules/es6.string.sup.js","core-js/modules/es6.typed.array-buffer":"../../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array":"../../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array":"../../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array":"../../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array":"../../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array":"../../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array":"../../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array":"../../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array":"../../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array":"../../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.weak-map":"../../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set":"../../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/es7.array.flat-map":"../../../node_modules/core-js/modules/es7.array.flat-map.js","core-js/modules/web.timers":"../../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate":"../../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable":"../../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime":"../../../node_modules/regenerator-runtime/runtime.js","react":"../../../node_modules/react/index.js","react-dom":"../../../node_modules/react-dom/index.js","./countries.js":"countries.js","./vat":"vat.jsx","./braintree":"braintree.jsx","./checkout.js":"checkout.js"}],"customer.js":[function(require,module,exports) {
+},{"core-js/modules/es6.array.copy-within":"../../../node_modules/core-js/modules/es6.array.copy-within.js","core-js/modules/es6.array.fill":"../../../node_modules/core-js/modules/es6.array.fill.js","core-js/modules/es6.array.find":"../../../node_modules/core-js/modules/es6.array.find.js","core-js/modules/es6.array.find-index":"../../../node_modules/core-js/modules/es6.array.find-index.js","core-js/modules/es6.array.from":"../../../node_modules/core-js/modules/es6.array.from.js","core-js/modules/es7.array.includes":"../../../node_modules/core-js/modules/es7.array.includes.js","core-js/modules/es6.array.iterator":"../../../node_modules/core-js/modules/es6.array.iterator.js","core-js/modules/es6.array.of":"../../../node_modules/core-js/modules/es6.array.of.js","core-js/modules/es6.array.sort":"../../../node_modules/core-js/modules/es6.array.sort.js","core-js/modules/es6.array.species":"../../../node_modules/core-js/modules/es6.array.species.js","core-js/modules/es6.date.to-json":"../../../node_modules/core-js/modules/es6.date.to-json.js","core-js/modules/es6.date.to-primitive":"../../../node_modules/core-js/modules/es6.date.to-primitive.js","core-js/modules/es6.function.has-instance":"../../../node_modules/core-js/modules/es6.function.has-instance.js","core-js/modules/es6.function.name":"../../../node_modules/core-js/modules/es6.function.name.js","core-js/modules/es6.map":"../../../node_modules/core-js/modules/es6.map.js","core-js/modules/es6.math.acosh":"../../../node_modules/core-js/modules/es6.math.acosh.js","core-js/modules/es6.math.asinh":"../../../node_modules/core-js/modules/es6.math.asinh.js","core-js/modules/es6.math.atanh":"../../../node_modules/core-js/modules/es6.math.atanh.js","core-js/modules/es6.math.cbrt":"../../../node_modules/core-js/modules/es6.math.cbrt.js","core-js/modules/es6.math.clz32":"../../../node_modules/core-js/modules/es6.math.clz32.js","core-js/modules/es6.math.cosh":"../../../node_modules/core-js/modules/es6.math.cosh.js","core-js/modules/es6.math.expm1":"../../../node_modules/core-js/modules/es6.math.expm1.js","core-js/modules/es6.math.fround":"../../../node_modules/core-js/modules/es6.math.fround.js","core-js/modules/es6.math.hypot":"../../../node_modules/core-js/modules/es6.math.hypot.js","core-js/modules/es6.math.imul":"../../../node_modules/core-js/modules/es6.math.imul.js","core-js/modules/es6.math.log1p":"../../../node_modules/core-js/modules/es6.math.log1p.js","core-js/modules/es6.math.log10":"../../../node_modules/core-js/modules/es6.math.log10.js","core-js/modules/es6.math.log2":"../../../node_modules/core-js/modules/es6.math.log2.js","core-js/modules/es6.math.sign":"../../../node_modules/core-js/modules/es6.math.sign.js","core-js/modules/es6.math.sinh":"../../../node_modules/core-js/modules/es6.math.sinh.js","core-js/modules/es6.math.tanh":"../../../node_modules/core-js/modules/es6.math.tanh.js","core-js/modules/es6.math.trunc":"../../../node_modules/core-js/modules/es6.math.trunc.js","core-js/modules/es6.number.constructor":"../../../node_modules/core-js/modules/es6.number.constructor.js","core-js/modules/es6.number.epsilon":"../../../node_modules/core-js/modules/es6.number.epsilon.js","core-js/modules/es6.number.is-finite":"../../../node_modules/core-js/modules/es6.number.is-finite.js","core-js/modules/es6.number.is-integer":"../../../node_modules/core-js/modules/es6.number.is-integer.js","core-js/modules/es6.number.is-nan":"../../../node_modules/core-js/modules/es6.number.is-nan.js","core-js/modules/es6.number.is-safe-integer":"../../../node_modules/core-js/modules/es6.number.is-safe-integer.js","core-js/modules/es6.number.max-safe-integer":"../../../node_modules/core-js/modules/es6.number.max-safe-integer.js","core-js/modules/es6.number.min-safe-integer":"../../../node_modules/core-js/modules/es6.number.min-safe-integer.js","core-js/modules/es6.number.parse-float":"../../../node_modules/core-js/modules/es6.number.parse-float.js","core-js/modules/es6.number.parse-int":"../../../node_modules/core-js/modules/es6.number.parse-int.js","core-js/modules/es6.object.assign":"../../../node_modules/core-js/modules/es6.object.assign.js","core-js/modules/es7.object.define-getter":"../../../node_modules/core-js/modules/es7.object.define-getter.js","core-js/modules/es7.object.define-setter":"../../../node_modules/core-js/modules/es7.object.define-setter.js","core-js/modules/es7.object.entries":"../../../node_modules/core-js/modules/es7.object.entries.js","core-js/modules/es6.object.freeze":"../../../node_modules/core-js/modules/es6.object.freeze.js","core-js/modules/es6.object.get-own-property-descriptor":"../../../node_modules/core-js/modules/es6.object.get-own-property-descriptor.js","core-js/modules/es7.object.get-own-property-descriptors":"../../../node_modules/core-js/modules/es7.object.get-own-property-descriptors.js","core-js/modules/es6.object.get-own-property-names":"../../../node_modules/core-js/modules/es6.object.get-own-property-names.js","core-js/modules/es6.object.get-prototype-of":"../../../node_modules/core-js/modules/es6.object.get-prototype-of.js","core-js/modules/es7.object.lookup-getter":"../../../node_modules/core-js/modules/es7.object.lookup-getter.js","core-js/modules/es7.object.lookup-setter":"../../../node_modules/core-js/modules/es7.object.lookup-setter.js","core-js/modules/es6.object.prevent-extensions":"../../../node_modules/core-js/modules/es6.object.prevent-extensions.js","core-js/modules/es6.object.is":"../../../node_modules/core-js/modules/es6.object.is.js","core-js/modules/es6.object.is-frozen":"../../../node_modules/core-js/modules/es6.object.is-frozen.js","core-js/modules/es6.object.is-sealed":"../../../node_modules/core-js/modules/es6.object.is-sealed.js","core-js/modules/es6.object.is-extensible":"../../../node_modules/core-js/modules/es6.object.is-extensible.js","core-js/modules/es6.object.keys":"../../../node_modules/core-js/modules/es6.object.keys.js","core-js/modules/es6.object.seal":"../../../node_modules/core-js/modules/es6.object.seal.js","core-js/modules/es6.object.set-prototype-of":"../../../node_modules/core-js/modules/es6.object.set-prototype-of.js","core-js/modules/es7.object.values":"../../../node_modules/core-js/modules/es7.object.values.js","core-js/modules/es6.promise":"../../../node_modules/core-js/modules/es6.promise.js","core-js/modules/es7.promise.finally":"../../../node_modules/core-js/modules/es7.promise.finally.js","core-js/modules/es6.reflect.apply":"../../../node_modules/core-js/modules/es6.reflect.apply.js","core-js/modules/es6.reflect.construct":"../../../node_modules/core-js/modules/es6.reflect.construct.js","core-js/modules/es6.reflect.define-property":"../../../node_modules/core-js/modules/es6.reflect.define-property.js","core-js/modules/es6.reflect.delete-property":"../../../node_modules/core-js/modules/es6.reflect.delete-property.js","core-js/modules/es6.reflect.get":"../../../node_modules/core-js/modules/es6.reflect.get.js","core-js/modules/es6.reflect.get-own-property-descriptor":"../../../node_modules/core-js/modules/es6.reflect.get-own-property-descriptor.js","core-js/modules/es6.reflect.get-prototype-of":"../../../node_modules/core-js/modules/es6.reflect.get-prototype-of.js","core-js/modules/es6.reflect.has":"../../../node_modules/core-js/modules/es6.reflect.has.js","core-js/modules/es6.reflect.is-extensible":"../../../node_modules/core-js/modules/es6.reflect.is-extensible.js","core-js/modules/es6.reflect.own-keys":"../../../node_modules/core-js/modules/es6.reflect.own-keys.js","core-js/modules/es6.reflect.prevent-extensions":"../../../node_modules/core-js/modules/es6.reflect.prevent-extensions.js","core-js/modules/es6.reflect.set":"../../../node_modules/core-js/modules/es6.reflect.set.js","core-js/modules/es6.reflect.set-prototype-of":"../../../node_modules/core-js/modules/es6.reflect.set-prototype-of.js","core-js/modules/es6.regexp.constructor":"../../../node_modules/core-js/modules/es6.regexp.constructor.js","core-js/modules/es6.regexp.flags":"../../../node_modules/core-js/modules/es6.regexp.flags.js","core-js/modules/es6.regexp.match":"../../../node_modules/core-js/modules/es6.regexp.match.js","core-js/modules/es6.regexp.replace":"../../../node_modules/core-js/modules/es6.regexp.replace.js","core-js/modules/es6.regexp.split":"../../../node_modules/core-js/modules/es6.regexp.split.js","core-js/modules/es6.regexp.search":"../../../node_modules/core-js/modules/es6.regexp.search.js","core-js/modules/es6.regexp.to-string":"../../../node_modules/core-js/modules/es6.regexp.to-string.js","core-js/modules/es6.set":"../../../node_modules/core-js/modules/es6.set.js","core-js/modules/es6.symbol":"../../../node_modules/core-js/modules/es6.symbol.js","core-js/modules/es7.symbol.async-iterator":"../../../node_modules/core-js/modules/es7.symbol.async-iterator.js","core-js/modules/es6.string.anchor":"../../../node_modules/core-js/modules/es6.string.anchor.js","core-js/modules/es6.string.big":"../../../node_modules/core-js/modules/es6.string.big.js","core-js/modules/es6.string.blink":"../../../node_modules/core-js/modules/es6.string.blink.js","core-js/modules/es6.string.bold":"../../../node_modules/core-js/modules/es6.string.bold.js","core-js/modules/es6.string.code-point-at":"../../../node_modules/core-js/modules/es6.string.code-point-at.js","core-js/modules/es6.string.ends-with":"../../../node_modules/core-js/modules/es6.string.ends-with.js","core-js/modules/es6.string.fixed":"../../../node_modules/core-js/modules/es6.string.fixed.js","core-js/modules/es6.string.fontcolor":"../../../node_modules/core-js/modules/es6.string.fontcolor.js","core-js/modules/es6.string.fontsize":"../../../node_modules/core-js/modules/es6.string.fontsize.js","core-js/modules/es6.string.from-code-point":"../../../node_modules/core-js/modules/es6.string.from-code-point.js","core-js/modules/es6.string.includes":"../../../node_modules/core-js/modules/es6.string.includes.js","core-js/modules/es6.string.italics":"../../../node_modules/core-js/modules/es6.string.italics.js","core-js/modules/es6.string.iterator":"../../../node_modules/core-js/modules/es6.string.iterator.js","core-js/modules/es6.string.link":"../../../node_modules/core-js/modules/es6.string.link.js","core-js/modules/es7.string.pad-start":"../../../node_modules/core-js/modules/es7.string.pad-start.js","core-js/modules/es7.string.pad-end":"../../../node_modules/core-js/modules/es7.string.pad-end.js","core-js/modules/es6.string.raw":"../../../node_modules/core-js/modules/es6.string.raw.js","core-js/modules/es6.string.repeat":"../../../node_modules/core-js/modules/es6.string.repeat.js","core-js/modules/es6.string.small":"../../../node_modules/core-js/modules/es6.string.small.js","core-js/modules/es6.string.starts-with":"../../../node_modules/core-js/modules/es6.string.starts-with.js","core-js/modules/es6.string.strike":"../../../node_modules/core-js/modules/es6.string.strike.js","core-js/modules/es6.string.sub":"../../../node_modules/core-js/modules/es6.string.sub.js","core-js/modules/es6.string.sup":"../../../node_modules/core-js/modules/es6.string.sup.js","core-js/modules/es6.typed.array-buffer":"../../../node_modules/core-js/modules/es6.typed.array-buffer.js","core-js/modules/es6.typed.int8-array":"../../../node_modules/core-js/modules/es6.typed.int8-array.js","core-js/modules/es6.typed.uint8-array":"../../../node_modules/core-js/modules/es6.typed.uint8-array.js","core-js/modules/es6.typed.uint8-clamped-array":"../../../node_modules/core-js/modules/es6.typed.uint8-clamped-array.js","core-js/modules/es6.typed.int16-array":"../../../node_modules/core-js/modules/es6.typed.int16-array.js","core-js/modules/es6.typed.uint16-array":"../../../node_modules/core-js/modules/es6.typed.uint16-array.js","core-js/modules/es6.typed.int32-array":"../../../node_modules/core-js/modules/es6.typed.int32-array.js","core-js/modules/es6.typed.uint32-array":"../../../node_modules/core-js/modules/es6.typed.uint32-array.js","core-js/modules/es6.typed.float32-array":"../../../node_modules/core-js/modules/es6.typed.float32-array.js","core-js/modules/es6.typed.float64-array":"../../../node_modules/core-js/modules/es6.typed.float64-array.js","core-js/modules/es6.weak-map":"../../../node_modules/core-js/modules/es6.weak-map.js","core-js/modules/es6.weak-set":"../../../node_modules/core-js/modules/es6.weak-set.js","core-js/modules/es7.array.flat-map":"../../../node_modules/core-js/modules/es7.array.flat-map.js","core-js/modules/web.timers":"../../../node_modules/core-js/modules/web.timers.js","core-js/modules/web.immediate":"../../../node_modules/core-js/modules/web.immediate.js","core-js/modules/web.dom.iterable":"../../../node_modules/core-js/modules/web.dom.iterable.js","regenerator-runtime/runtime":"../../../node_modules/regenerator-runtime/runtime.js","react":"../../../node_modules/react/index.js","./countries.js":"countries.js","./vat":"vat.jsx","./stripeForm":"stripeForm.jsx","./customerCheckout.js":"customerCheckout.js"}],"customer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42944,19 +44207,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var paths = window.location.pathname.split('/');
 var customerId = paths[paths.length - 1];
 
-function load() {
+function load(_x) {
   return _load.apply(this, arguments);
 }
 
 function _load() {
   _load = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee() {
+  regeneratorRuntime.mark(function _callee(uuid) {
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            return _context.abrupt("return", window.fetch('/api' + window.location.pathname.replace('/payments', '')).then(function (r) {
+            return _context.abrupt("return", window.fetch("/api/payments/customer/".concat(uuid)).then(function (r) {
               return r.json();
             }));
 
@@ -43630,7 +44893,7 @@ function Product(_ref) {
     onClick: onClick
   }, _react.default.createElement("div", {
     className: "list-content"
-  }, _react.default.createElement("h3", null, _products.default[product.code].name, " ", product.isSubscription && product.braintree.subscription.status === 'Canceled' ? '( canceled )' : '', _react.default.createElement("div", null, _react.default.createElement("small", null, "Purchased on ", new Date(product.sales[0].purchaseDate).toLocaleDateString()))), product.licenseKey ? _react.default.createElement("div", null, _react.default.createElement("div", {
+  }, _react.default.createElement("h3", null, _products.default[product.code].name, " ", product.isSubscription && product.subscription.status === 'canceled' ? '( canceled )' : '', _react.default.createElement("div", null, _react.default.createElement("small", null, "Purchased on ", new Date(product.sales[0].purchaseDate).toLocaleDateString()))), product.licenseKey ? _react.default.createElement("div", null, _react.default.createElement("div", {
     className: "padding5"
   }, _react.default.createElement("div", null, _react.default.createElement("span", null, "License key"))), _react.default.createElement(_licenseKey.default, {
     licenseKey: product.licenseKey
@@ -43659,7 +44922,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      (0, _customer.load)().then(function (c) {
+      (0, _customer.load)(this.props.match.params.customer).then(function (c) {
         return _this2.setState(_objectSpread({}, c));
       });
     }
@@ -43724,7 +44987,7 @@ var _licenseKey = _interopRequireDefault(require("./licenseKey"));
 
 var _products = _interopRequireDefault(require("./products"));
 
-var _braintree = _interopRequireDefault(require("./braintree"));
+var _stripeForm = _interopRequireDefault(require("./stripeForm"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -43757,7 +45020,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function loadCustomer(uuid) {
-  return window.fetch("/api/customer/".concat(uuid)).then(function (r) {
+  return window.fetch("/api/payments/customer/".concat(uuid)).then(function (r) {
     return r.json();
   });
 }
@@ -43772,6 +45035,7 @@ function Invoice(_ref) {
   return _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement("a", {
     href: "/payments/customer/".concat(customerId, "/invoice/").concat(sale.id),
     target: "_blank",
+    rel: "noopener noreferrer",
     className: "text-center fg-cyan fg-hover-green",
     style: {
       cursor: 'pointer'
@@ -43791,7 +45055,8 @@ function Support(_ref2) {
     className: "row"
   }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUPPORT")), _react.default.createElement("div", null, "Please register to the", ' ', _react.default.createElement("a", {
     href: "https://support.jsreport.net",
-    target: "_blank"
+    target: "_blank",
+    rel: "noopener noreferrer"
   }, "support portal"), ' ', "and follow the instructions there.", _react.default.createElement("br", null), _react.default.createElement("br", null), "You can also use email support@jsreport.net for support questions and incidents.", _react.default.createElement("br", null), "However, the support portal is the preferred way to contact us.", _react.default.createElement("br", null), "Please always mention your're support subscriber in case you decide to use the email.", _react.default.createElement("br", null), _react.default.createElement("br", null)));
 }
 
@@ -43826,6 +45091,7 @@ function (_React$Component) {
         });
 
         _this2.setState(_objectSpread({}, product, {
+          customer: c,
           updating: false
         }));
       });
@@ -43851,7 +45117,7 @@ function (_React$Component) {
               case 2:
                 _context.prev = 2;
                 _context.next = 5;
-                return window.fetch("/api/customer/".concat(this.props.match.params.customer, "/subscription/").concat(this.state.id), {
+                return window.fetch("/api/payments/customer/".concat(this.props.match.params.customer, "/subscription/").concat(this.state.id), {
                   method: 'DELETE'
                 });
 
@@ -43872,10 +45138,8 @@ function (_React$Component) {
 
               case 11:
                 this.setState({
-                  braintree: _objectSpread({}, this.state.braintree, {
-                    subscription: _objectSpread({}, this.state.braintree.subscription, {
-                      status: 'Canceled'
-                    })
+                  subscription: _objectSpread({}, this.state.subscription, {
+                    status: 'canceled'
                   })
                 });
                 _context.next = 17;
@@ -43905,17 +45169,18 @@ function (_React$Component) {
     value: function () {
       var _updatePaymentMethod = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(pm) {
+      regeneratorRuntime.mark(function _callee2(i) {
         var res, resJson;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return window.fetch("/api/customer/".concat(this.props.match.params.customer, "/subscription/").concat(this.state.id), {
+                return window.fetch("/api/payments/customer/".concat(this.props.match.params.customer, "/subscription/").concat(this.state.id), {
                   method: 'PUT',
                   body: JSON.stringify({
-                    nonce: pm.nonce
+                    paymentIntentId: this.state.subscription.plannedCancelation ? i.id : null,
+                    setupIntentId: this.state.subscription.plannedCancelation ? null : i.id
                   }),
                   headers: {
                     'Content-Type': 'application/json'
@@ -43930,17 +45195,21 @@ function (_React$Component) {
               case 5:
                 resJson = _context2.sent;
 
+                if (this.state.subscription.plannedCancelation) {
+                  alert('Payment successful, subscription is renewed.');
+                }
+
                 if (res.ok) {
-                  _context2.next = 8;
+                  _context2.next = 9;
                   break;
                 }
 
                 throw new Error(resJson && resJson.error ? resJson.error : res.statusText);
 
-              case 8:
+              case 9:
                 this.load();
 
-              case 9:
+              case 10:
               case "end":
                 return _context2.stop();
             }
@@ -43957,14 +45226,14 @@ function (_React$Component) {
   }, {
     key: "renderBankCard",
     value: function renderBankCard() {
-      return _react.default.createElement(_react.default.Fragment, null, this.state.braintree.paymentMethod.maskedNumber ? _react.default.createElement("span", null, "The current used bank card is ", this.state.braintree.paymentMethod.maskedNumber, " expiring on ", this.state.braintree.paymentMethod.expirationMonth, "/", this.state.braintree.paymentMethod.expirationYear) : _react.default.createElement("span", null, "paypal account: ", this.state.braintree.paymentMethod.email));
+      return _react.default.createElement("span", null, "The current used bank card is ****", this.state.subscription.card.last4, " expiring on ", this.state.subscription.card.expMonth, "/", this.state.subscription.card.expYear);
     }
   }, {
     key: "renderSubscrption",
     value: function renderSubscrption() {
       var _this3 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.braintree.subscription.status !== 'Canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", new Date(this.state.braintree.subscription.nextBillingDate).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.subscription.status !== 'canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", new Date(this.state.subscription.nextPayment).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
         className: "button info",
         style: {
           marginRight: '10px'
@@ -43979,10 +45248,13 @@ function (_React$Component) {
         onClick: function onClick() {
           return _this3.cancel();
         }
-      }, "Cancel")) : _react.default.createElement(_react.default.Fragment, null), this.state.updating ? _react.default.createElement(_braintree.default, {
-        onSubmit: function onSubmit(pm) {
-          return _this3.updatePaymentMethod(pm);
-        }
+      }, "Cancel")) : _react.default.createElement(_react.default.Fragment, null), this.state.updating ? _react.default.createElement(_stripeForm.default, {
+        email: this.state.customer.email,
+        onSubmit: function onSubmit(i) {
+          return _this3.updatePaymentMethod(i);
+        },
+        setupIntent: !this.state.subscription.plannedCancelation,
+        amount: this.state.sales[this.state.sales.length - 1].accountingData.amount
       }) : _react.default.createElement(_react.default.Fragment, null)) : _react.default.createElement("div", null, _react.default.createElement("span", {
         className: "bg-red fg-white",
         style: {
@@ -44030,7 +45302,8 @@ function (_React$Component) {
         licenseKey: this.state.licenseKey
       }), _react.default.createElement("div", null, _react.default.createElement("a", {
         href: "https://jsreport.net/learn/faq#how-to-apply-license-key",
-        target: "_blank"
+        target: "_blank",
+        rel: "noopener noreferrer"
       }, "license key application instructions"))), _react.default.createElement("div", {
         className: "row"
       }, this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()), _react.default.createElement("div", {
@@ -44059,7 +45332,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.default = Product;
-},{"react":"../../../node_modules/react/index.js","./licenseKey":"licenseKey.jsx","./products":"products.js","./braintree":"braintree.jsx"}],"customerLink.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","./licenseKey":"licenseKey.jsx","./products":"products.js","./stripeForm":"stripeForm.jsx"}],"customerLink.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44377,7 +45650,7 @@ function (_React$Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return window.fetch('/api/customer-link', {
+                return window.fetch('/api/payments/customer-link', {
                   method: 'POST',
                   body: JSON.stringify({
                     email: this.state.email
@@ -44468,6 +45741,8 @@ var _reactRouterDom = require("react-router-dom");
 
 var _checkout = _interopRequireDefault(require("./checkout.jsx"));
 
+var _customerCheckout = _interopRequireDefault(require("./customerCheckout.jsx"));
+
 var _customer = _interopRequireDefault(require("./customer.jsx"));
 
 var _product = _interopRequireDefault(require("./product.jsx"));
@@ -44478,6 +45753,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function AppRouter() {
   return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
+    path: "/payments/customer/:customer/checkout/:product",
+    component: _customerCheckout.default
+  }), _react.default.createElement(_reactRouterDom.Route, {
     path: "/payments/checkout/:product",
     component: _checkout.default
   }), _react.default.createElement(_reactRouterDom.Route, {
@@ -44494,7 +45772,7 @@ function AppRouter() {
 
 var _default = AppRouter;
 exports.default = _default;
-},{"react":"../../../node_modules/react/index.js","react-router-dom":"../../../node_modules/react-router-dom/esm/react-router-dom.js","./checkout.jsx":"checkout.jsx","./customer.jsx":"customer.jsx","./product.jsx":"product.jsx","./customerLink.jsx":"customerLink.jsx"}],"app.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","react-router-dom":"../../../node_modules/react-router-dom/esm/react-router-dom.js","./checkout.jsx":"checkout.jsx","./customerCheckout.jsx":"customerCheckout.jsx","./customer.jsx":"customer.jsx","./product.jsx":"product.jsx","./customerLink.jsx":"customerLink.jsx"}],"app.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -44534,7 +45812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59578" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62337" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

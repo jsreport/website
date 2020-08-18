@@ -1,200 +1,164 @@
-<a class="gumroad-button" id="buyEnterpriseSupport" href="https://gum.co/SVEKk"
-    style="position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
-</a>
-
-<a class="gumroad-button" id="buyStarterSupport" href="https://gum.co/ayTDs"
-    style="position:absolute;width:400px;height:400px;left:-3000px;opacity:0.01;display:block">Buy my product
-</a>
-
 <script>
-    function buy(type) {
-        console.log('buy ' + type)
-        if (window.location.search.indexOf('v2') !== -1) {
-            window.location.pathname = '/payments/checkout/' + type
-        }
-
-        if (type === 'supportSubscription') {
-            return buyGumroad('#buyEnterpriseSupport')
-        }
-
-        if (type === 'supportStarter') {
-            return buyGumroad('#buyStarterSupport')
-        }
-    }
+  function buy (type) {
+    window.location.pathname = '/payments/checkout/' + type
+  }
 </script>
 
-<div id="gumroad-does-not-work-in-your-country" class="row" style="display: none;">
-    <p class="description padding20 bg-grayLighter subtitle">
-        <i class="icon-warning fg-yellow" style="font-size:45px; float:left; margin-right:10px" alt="warning"></i>
-        It looks like our reseller <a href="https://gumroad.com/">gumroad</a> isn't supported in your country.
-        However, fortunately, you can buy the license directly from us. Please send your inquiry to email <a
-            href="mailto:support@jsreport.net">support@jsreport.net</a> if the <b>"Subscribe"</b> or <b>"Buy"</b>
-        buttons doesn't work.
-    </p>
+<div
+  id="gumroad-does-not-work-in-your-country"
+  class="row"
+  style="display: none;"
+>
+  <p class="description padding20 bg-grayLighter subtitle">
+    <i
+      class="icon-warning fg-yellow"
+      style="font-size:45px; float:left; margin-right:10px"
+      alt="warning"
+    ></i>
+    It looks like our reseller <a href="https://gumroad.com/">gumroad</a> isn't
+    supported in your country. However, fortunately, you can buy the license
+    directly from us. Please send your inquiry to email
+    <a href="mailto:support@jsreport.net">support@jsreport.net</a> if the
+    <b>"Subscribe"</b> or <b>"Buy"</b>
+    buttons doesn't work.
+  </p>
 </div>
 
 <div class="row">
-    <h2>support plans</h2>
+  <h2>support plans</h2>
 
-    <p class="description padding20 subtitle">
-        <i class="icon-support fg-cyan" style="font-size:45px; float:left; margin-right:10px" alt="support"></i>
-        The support isn't part of the license and needs to be purchased extra here.
-        You can also rely on the free community support, but this has no guarantees and no benefits like paid support
-        contract.
-        The paid contract ships with SLA and enables access to the <a href="https://support.jsreport.net">private
-            support portal</a> and direct priority access to jsreport developers.
-    </p>
+  <p class="description padding20 subtitle">
+    <i
+      class="icon-support fg-cyan"
+      style="font-size:45px; float:left; margin-right:10px"
+      alt="support"
+    ></i>
+    The support isn't part of the license and needs to be purchased extra here.
+    You can also rely on the free community support, but this has no guarantees
+    and no benefits like paid support contract. The paid contract ships with SLA
+    and enables access to the
+    <a href="https://support.jsreport.net">private support portal</a> and direct
+    priority access to jsreport developers.
+  </p>
 </div>
 
 <div class="row yearly">
-    <div class="span4 grid text-center bg-grayLighter">
-        <div class="row padding5">
-            <h2 class="fg-darker buy-title">community</h2>
-            <small>active public forum</small>
-            <div class="buy-line fg-grayLight"></div>
-        </div>
-        <div class="row pricing-row">
-            <div>
-                <small>free</small>
-            </div>
-            <div>
-                <small>administrated by jsreport developers</small>
-            </div>
-            <div class="buy-line fg-grayLight"></div>
-        </div>
-        <div class="row pricing-row">
-            <small>1153 topics and 5412 posts already submitted to forum</small>
-            <div class="buy-line fg-grayLight"></div>
-        </div>
-        <div class="row pricing-row">
-            <h3 class="fg-grayDark">0 $</h3>
-        </div>
-        <div class="row pricing-row">
-            <a href="https://forum.jsreport.net" class="button text-center bg-green bg-hover-gray">
-                <span class="fg-white">Access</span>
-            </a>
-        </div>
-        <div class="row"></div>
+  <div class="span4 grid text-center bg-grayLighter">
+    <div class="row padding5">
+      <h2 class="fg-darker buy-title">community</h2>
+      <small>active public forum</small>
+      <div class="buy-line fg-grayLight"></div>
     </div>
-    <div class="span4 grid text-center bg-mauve">
-        <div class="row padding5">
-            <h2 class="fg-white buy-title">starter</h2>
-            <small class="fg-grayLighter">
-                affordable help with jsreport integration
-            </small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <div>
-                <small class="fg-grayLighter">priority bug fixes</small>
-            </div>
-            <div>
-                <small class="fg-grayLighter">valid for 2 months</small>
-            </div>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <small class="fg-grayLighter">2 hours of custom implementations and skype sessions</small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <h3 class="fg-white">395 $</h3>
-        </div>
-        <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="buy('supportStarter')">
-                <span class="padding10 fg-white">Buy</span>
-            </a>
-        </div>
-        <div class="row"></div>
+    <div class="row pricing-row">
+      <div>
+        <small>free</small>
+      </div>
+      <div>
+        <small>administrated by jsreport developers</small>
+      </div>
+      <div class="buy-line fg-grayLight"></div>
     </div>
-    <div class="span4 grid text-center bg-darkCyan">
-        <div class="row padding5">
-            <h2 class="fg-white buy-title">enterprise</h2>
-            <small class="fg-grayLighter">
-                get support from jsreport core team
-            </small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <div>
-                <small class="fg-grayLighter">next day response *</small>
-            </div>
-            <div>
-                <small class="fg-grayLighter">Mon-Fri | 09:00-19:00 GMT</small>
-            </div>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <small class="fg-grayLighter">3 hours of custom implementations and skype sessions</small>
-            <div class="buy-line fg-grayLighter"></div>
-        </div>
-        <div class="row pricing-row">
-            <h3 class="fg-white">895 $ / year</h3>
-        </div>
-        <div class="row pricing-row">
-            <a class="button text-center bg-amber bg-hover-gray btn" onclick="buy('supportSubscription')">
-                <span class="padding10 fg-white">Subscribe</span>
-            </a>
-        </div>
-        <div class="row"></div>
+    <div class="row pricing-row">
+      <small>1153 topics and 5412 posts already submitted to forum</small>
+      <div class="buy-line fg-grayLight"></div>
     </div>
+    <div class="row pricing-row">
+      <h3 class="fg-grayDark">0 $</h3>
+    </div>
+    <div class="row pricing-row">
+      <a
+        href="https://forum.jsreport.net"
+        class="button text-center bg-green bg-hover-gray"
+      >
+        <span class="fg-white">Access</span>
+      </a>
+    </div>
+    <div class="row"></div>
+  </div>
+  <div class="span4 grid text-center bg-mauve">
+    <div class="row padding5">
+      <h2 class="fg-white buy-title">starter</h2>
+      <small class="fg-grayLighter">
+        affordable help with jsreport integration
+      </small>
+      <div class="buy-line fg-grayLighter"></div>
+    </div>
+    <div class="row pricing-row">
+      <div>
+        <small class="fg-grayLighter">priority bug fixes</small>
+      </div>
+      <div>
+        <small class="fg-grayLighter">valid for 2 months</small>
+      </div>
+      <div class="buy-line fg-grayLighter"></div>
+    </div>
+    <div class="row pricing-row">
+      <small class="fg-grayLighter"
+        >2 hours of custom implementations and skype sessions</small
+      >
+      <div class="buy-line fg-grayLighter"></div>
+    </div>
+    <div class="row pricing-row">
+      <h3 class="fg-white">395 $</h3>
+    </div>
+    <div class="row pricing-row">
+      <a
+        class="button text-center bg-amber bg-hover-gray btn"
+        onclick="buy('supportStarter')"
+      >
+        <span class="padding10 fg-white">Buy</span>
+      </a>
+    </div>
+    <div class="row"></div>
+  </div>
+  <div class="span4 grid text-center bg-darkCyan">
+    <div class="row padding5">
+      <h2 class="fg-white buy-title">enterprise</h2>
+      <small class="fg-grayLighter">
+        get support from jsreport core team
+      </small>
+      <div class="buy-line fg-grayLighter"></div>
+    </div>
+    <div class="row pricing-row">
+      <div>
+        <small class="fg-grayLighter">next day response *</small>
+      </div>
+      <div>
+        <small class="fg-grayLighter">Mon-Fri | 09:00-19:00 GMT</small>
+      </div>
+      <div class="buy-line fg-grayLighter"></div>
+    </div>
+    <div class="row pricing-row">
+      <small class="fg-grayLighter"
+        >3 hours of custom implementations and skype sessions</small
+      >
+      <div class="buy-line fg-grayLighter"></div>
+    </div>
+    <div class="row pricing-row">
+      <h3 class="fg-white">895 $ / year</h3>
+    </div>
+    <div class="row pricing-row">
+      <a
+        class="button text-center bg-amber bg-hover-gray btn"
+        onclick="buy('supportSubscription')"
+      >
+        <span class="padding10 fg-white">Subscribe</span>
+      </a>
+    </div>
+    <div class="row"></div>
+  </div>
 </div>
-
 
 <div class="row">
-    <p class="description padding20 bg-grayLighter subtitle">
-        Please open <a href="https://support.jsreport.net">support portal</a> and follow the instructions if you already
-        purchased the support package.
-    </p>
-    <p class="description padding20 bg-grayLighter subtitle">
-        * Please read and understand
-        <a href="/support-service-agreement.txt" target="_blank">support service agreement</a> before subscribing
-    </p>
+  <p class="description padding20 bg-grayLighter subtitle">
+    Please open <a href="https://support.jsreport.net">support portal</a> and
+    follow the instructions if you already purchased the support package.
+  </p>
+  <p class="description padding20 bg-grayLighter subtitle">
+    * Please read and understand
+    <a href="/support-service-agreement.txt" target="_blank"
+      >support service agreement</a
+    >
+    before subscribing
+  </p>
 </div>
-<script type="text/javascript">
-    var button = $($('.gumroad-button')[0])
-    var linkToFetch = button.attr('href')
-    var iframe = document.createElement('iframe')
-    var tries = 0
-    var loaded = false
-    iframe.style.display = 'none'
-    iframe.onload = function () {
-        loaded = true
-    }
-    iframe.src = linkToFetch
-    document.body.appendChild(iframe)
-    function checkIfIframeWasLoaded() {
-        tries++
-        if (tries === 8 && !loaded) {
-            var gumroadMessageEl = document.getElementById('gumroad-does-not-work-in-your-country')
-            gumroadMessageEl.style.display = 'block'
-        } else if (!loaded) {
-            setTimeout(checkIfIframeWasLoaded, 500)
-        }
-    }
-    setTimeout(checkIfIframeWasLoaded, 500)
-
-    document.addEventListener('click', printMousePos, true);
-    var cursorX
-    var cursorY
-    function printMousePos(e) {
-        cursorX = e.pageX
-        cursorY = e.pageY
-    }
-
-    function buyGumroad(selector) {
-        var btn = $(selector)
-            .css({
-                "left": (cursorX - 200) + 'px',
-                "top": (cursorY - 200) + 'px'
-            })
-
-        btn.click()
-
-        setTimeout(function () {
-            btn.css({
-                left: -3000
-            })
-        }, 2000)
-    }
-</script>
