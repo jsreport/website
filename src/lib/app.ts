@@ -176,6 +176,7 @@ client.connect((err) => {
   app.delete('/api/payments/customer/:customerId/subscription/:productId', limiter, router.cancelSubscription)
   app.put('/api/payments/customer/:customerId/subscription/:productId', [limiter, bodyParser.json()], router.updatePaymentMethod)
   app.post('/api/payments/stripe/hook', [limiter, bodyParser.raw({ type: 'application/json' })], router.stripeHook)
+  app.get('/api/payments/stripe/client-secret', limiter, router.stripeClientSecret)
 
   app.use((err, req, res, next) => {
     logger.error('Error when processing ' + req.path + '; ' + err.stack)

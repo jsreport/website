@@ -171,6 +171,7 @@ class CustomerCheckout extends React.Component {
                 <h3>{calculatedPrice.vatAmount + currencyChar}</h3>
               </div>
               <div className="coll3">
+                <div className="spinner" id="spinner" />
                 <label>Amount to pay</label>
                 <h3>{calculatedPrice.amount + currencyChar}</h3>
               </div>

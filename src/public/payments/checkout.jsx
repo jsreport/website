@@ -47,7 +47,7 @@ export default function (props) {
             <div>
               <h3>EMAIL</h3>
               <small>
-                <p>Please fill your email, we send you confirmation email with link to the secure purchase.</p>
+                <p>Please fill your email for the confirmation before the purchase.</p>
               </small>
             </div>
           </div>

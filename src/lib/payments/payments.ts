@@ -36,7 +36,7 @@ export default class Payments {
   }
 
   async init() {
-    // this.subscriptionRenewal.start()
+    this.subscriptionRenewal.start()
   }
 
   async createPaymentIntent({ amount, customerId }) {

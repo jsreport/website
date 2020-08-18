@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
+import Spinner from './spinner'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
 async function fetchPaymentIntentSecret(customerId, amount, setupIntent) {
@@ -13,7 +14,17 @@ async function fetchPaymentIntentSecret(customerId, amount, setupIntent) {
   return res.text()
 }
 
-const promise = loadStripe('pk_test_51H9xJkB3Af4o8hjcsukE4QyzIl5hvMwd82LTl68xKEh7uhcAIQuwVpSJi6kfVTCwkiJNzydjiHncRI87mTEygx2B00yA6rFrDL')
+const promise = window
+  .fetch('/api/payments/stripe/client-secret', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then((r) => r.text())
+  .then((c) => loadStripe(c))
+  .catch(console.error)
+
 export default function StripeForm({ amount, onSubmit, customerId, product, setupIntent }) {
   return (
     <Elements stripe={promise}>
@@ -37,17 +48,24 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
   const cardStyle = {
     style: {
       base: {
-        color: '#32325d',
-        fontFamily: 'Arial, sans-serif',
-        fontSmoothing: 'antialiased',
+        color: '#000000',
+        fontWeight: 400,
+        fontFamily: 'Segoe UI_,Open Sans,Verdana,Arial,Helvetica,sans-serif',
         fontSize: '16px',
+        fontSmoothing: 'antialiased',
         '::placeholder': {
-          color: '#32325d',
+          color: '#000000',
+        },
+        ':-webkit-autofill': {
+          color: '#000000',
         },
       },
       invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a',
+        color: '#E25950',
+
+        '::placeholder': {
+          color: '#FFCCA5',
+        },
       },
     },
   }
@@ -75,10 +93,10 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
           throw new Error(error.message)
         }
 
+        await onSubmit(setupIntent)
         setError(null)
         setProcessing(false)
         setSucceeded(true)
-        return onSubmit(setupIntent)
       }
 
       const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
@@ -91,10 +109,10 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
         throw new Error(error.message)
       }
 
+      await onSubmit(paymentIntent)
       setError(null)
       setProcessing(false)
       setSucceeded(true)
-      onSubmit(paymentIntent)
     } catch (e) {
       setError(`Payment failed ${e.message}`)
       setProcessing(false)
@@ -103,14 +121,33 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
-      <button disabled={processing || disabled || succeeded} id="submit">
-        <span id="button-text">{processing ? <div className="spinner" id="spinner" /> : 'Pay'}</span>
-      </button>
-      {/* Show any error that happens when processing the payment */}
+      <div className="row text-center">
+        <div className="coll2">
+          <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
+        </div>
+      </div>
+
+      {processing ? (
+        <div className="row text-center">
+          <div className="coll2">
+            <Spinner loading={processing} />
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
+
+      <div className="row text-center">
+        <div className="coll2">
+          <button disabled={processing || disabled || succeeded} className="button success">
+            Confirm
+          </button>
+        </div>
+      </div>
+
       {error && (
-        <div className="card-error" role="alert">
-          {error}
+        <div className="row text-center card-error">
+          <div className="coll2">{error}</div>
         </div>
       )}
     </form>

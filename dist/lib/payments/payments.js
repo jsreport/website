@@ -37,7 +37,7 @@ class Payments {
         this.subscriptionRenewal = new subscriptionRenewal_1.default(this.services);
     }
     async init() {
-        // this.subscriptionRenewal.start()
+        this.subscriptionRenewal.start();
     }
     async createPaymentIntent({ amount, customerId }) {
         const customer = await this.services.customerRepository.find(customerId);

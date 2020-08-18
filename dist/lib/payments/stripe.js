@@ -11,6 +11,9 @@ class StripeFacade {
         });
     }
     async createPaymentIntent({ amount, email }) {
+        if (amount > 2000) {
+            throw new Error('Something went wrong');
+        }
         let customer = await this.findOrCreateCustomer(email);
         const r = await this.stripe.paymentIntents.create({
             amount: amount * 100,
@@ -37,27 +40,10 @@ class StripeFacade {
         }
         return existingCustomers.data[0];
     }
-    async testCharge(customerId, pi) {
-        try {
-            console.log('creating test charge', pi.payment_method);
-            const paymentIntent = await this.stripe.paymentIntents.create({
-                amount: 9000,
-                currency: 'usd',
-                customer: customerId,
-                payment_method: pi.payment_method,
-                off_session: true,
-                confirm: true,
-            });
-            console.log('done', paymentIntent);
-        }
-        catch (err) {
-            // Error code will be authentication_required if authentication is needed
-            console.log('Error code is: ', err.code);
-            const paymentIntentRetrieved = await this.stripe.paymentIntents.retrieve(err.raw.payment_intent.id);
-            console.log('PI retrieved: ', paymentIntentRetrieved.id);
-        }
-    }
     async createConfirmedPaymentIntent(customerId, paymentMethodId, amount) {
+        if (amount > 2000) {
+            throw new Error('Something went wrong');
+        }
         return this.stripe.paymentIntents.create({
             amount: amount * 100,
             currency: 'usd',

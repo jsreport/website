@@ -41407,7 +41407,7 @@ function _default(props) {
     className: "grid container small section"
   }, _react.default.createElement("div", {
     className: "row text-center"
-  }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "EMAIL"), _react.default.createElement("small", null, _react.default.createElement("p", null, "Please fill your email, we send you confirmation email with link to the secure purchase.")))), _react.default.createElement("div", {
+  }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "EMAIL"), _react.default.createElement("small", null, _react.default.createElement("p", null, "Please fill your email for the confirmation before the purchase.")))), _react.default.createElement("div", {
     className: "row text-center fg-gray"
   }, _react.default.createElement("small", null, _react.default.createElement("input", {
     type: "email",
@@ -42637,7 +42637,37 @@ var loadStripe = function loadStripe() {
 };
 
 exports.loadStripe = loadStripe;
-},{}],"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js":[function(require,module,exports) {
+},{}],"spinner.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Spinner;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Spinner(_ref) {
+  var loading = _ref.loading;
+
+  if (!loading) {
+    return null;
+  }
+
+  return _react.default.createElement("div", {
+    className: "row"
+  }, _react.default.createElement("i", {
+    className: "icon-spin fg-gray",
+    id: "spinner",
+    style: {
+      animation: 'spin 1s linear infinite',
+      fontSize: '3rem'
+    }
+  }));
+}
+},{"react":"../../../node_modules/react/index.js"}],"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 (function (global, factory) {
@@ -43276,7 +43306,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _stripeJs = require("@stripe/stripe-js");
 
+var _spinner = _interopRequireDefault(require("./spinner"));
+
 var _reactStripeJs = require("@stripe/react-stripe-js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -43331,7 +43365,16 @@ function _fetchPaymentIntentSecret() {
   return _fetchPaymentIntentSecret.apply(this, arguments);
 }
 
-var promise = (0, _stripeJs.loadStripe)('pk_test_51H9xJkB3Af4o8hjcsukE4QyzIl5hvMwd82LTl68xKEh7uhcAIQuwVpSJi6kfVTCwkiJNzydjiHncRI87mTEygx2B00yA6rFrDL');
+var promise = window.fetch('/api/payments/stripe/client-secret', {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}).then(function (r) {
+  return r.text();
+}).then(function (c) {
+  return (0, _stripeJs.loadStripe)(c);
+}).catch(console.error);
 
 function StripeForm(_ref) {
   var amount = _ref.amount,
@@ -43390,17 +43433,23 @@ function CardForm(_ref2) {
   var cardStyle = {
     style: {
       base: {
-        color: '#32325d',
-        fontFamily: 'Arial, sans-serif',
-        fontSmoothing: 'antialiased',
+        color: '#000000',
+        fontWeight: 400,
+        fontFamily: 'Segoe UI_,Open Sans,Verdana,Arial,Helvetica,sans-serif',
         fontSize: '16px',
+        fontSmoothing: 'antialiased',
         '::placeholder': {
-          color: '#32325d'
+          color: '#000000'
+        },
+        ':-webkit-autofill': {
+          color: '#000000'
         }
       },
       invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
+        color: '#E25950',
+        '::placeholder': {
+          color: '#FFCCA5'
+        }
       }
     }
   };
@@ -43450,7 +43499,7 @@ function CardForm(_ref2) {
               _context2.prev = 2;
 
               if (!setupIntent) {
-                _context2.next = 15;
+                _context2.next = 16;
                 break;
               }
 
@@ -43474,51 +43523,57 @@ function CardForm(_ref2) {
               throw new Error(_error2.message);
 
             case 11:
+              _context2.next = 13;
+              return onSubmit(_setupIntent);
+
+            case 13:
               setError(null);
               setProcessing(false);
               setSucceeded(true);
-              return _context2.abrupt("return", onSubmit(_setupIntent));
 
-            case 15:
-              _context2.next = 17;
+            case 16:
+              _context2.next = 18;
               return stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                   card: elements.getElement(_reactStripeJs.CardElement)
                 }
               });
 
-            case 17:
+            case 18:
               _ref6 = _context2.sent;
               _error = _ref6.error;
               paymentIntent = _ref6.paymentIntent;
 
               if (!_error) {
-                _context2.next = 22;
+                _context2.next = 23;
                 break;
               }
 
               throw new Error(_error.message);
 
-            case 22:
+            case 23:
+              _context2.next = 25;
+              return onSubmit(paymentIntent);
+
+            case 25:
               setError(null);
               setProcessing(false);
               setSucceeded(true);
-              onSubmit(paymentIntent);
-              _context2.next = 32;
+              _context2.next = 34;
               break;
 
-            case 28:
-              _context2.prev = 28;
+            case 30:
+              _context2.prev = 30;
               _context2.t0 = _context2["catch"](2);
               setError("Payment failed ".concat(_context2.t0.message));
               setProcessing(false);
 
-            case 32:
+            case 34:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[2, 28]]);
+      }, _callee2, null, [[2, 30]]);
     }));
 
     return function handleSubmit(_x5) {
@@ -43529,24 +43584,34 @@ function CardForm(_ref2) {
   return _react.default.createElement("form", {
     id: "payment-form",
     onSubmit: handleSubmit
+  }, _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", {
+    className: "coll2"
   }, _react.default.createElement(_reactStripeJs.CardElement, {
     id: "card-element",
     options: cardStyle,
     onChange: handleChange
-  }), _react.default.createElement("button", {
+  }))), processing ? _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, _react.default.createElement(_spinner.default, {
+    loading: processing
+  }))) : _react.default.createElement(_react.default.Fragment, null), _react.default.createElement("div", {
+    className: "row text-center"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, _react.default.createElement("button", {
     disabled: processing || disabled || succeeded,
-    id: "submit"
-  }, _react.default.createElement("span", {
-    id: "button-text"
-  }, processing ? _react.default.createElement("div", {
-    className: "spinner",
-    id: "spinner"
-  }) : 'Pay')), error && _react.default.createElement("div", {
-    className: "card-error",
-    role: "alert"
-  }, error));
+    className: "button success"
+  }, "Confirm"))), error && _react.default.createElement("div", {
+    className: "row text-center card-error"
+  }, _react.default.createElement("div", {
+    className: "coll2"
+  }, error)));
 }
-},{"react":"../../../node_modules/react/index.js","@stripe/stripe-js":"../../../node_modules/@stripe/stripe-js/dist/stripe.esm.js","@stripe/react-stripe-js":"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"}],"customerCheckout.jsx":[function(require,module,exports) {
+},{"react":"../../../node_modules/react/index.js","@stripe/stripe-js":"../../../node_modules/@stripe/stripe-js/dist/stripe.esm.js","./spinner":"spinner.jsx","@stripe/react-stripe-js":"../../../node_modules/@stripe/react-stripe-js/dist/react-stripe.umd.js"}],"customerCheckout.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44095,7 +44160,10 @@ function (_React$Component) {
         className: "coll3"
       }, _react.default.createElement("label", null, "VAT ", calculatedPrice.vatRate + '%'), _react.default.createElement("h3", null, calculatedPrice.vatAmount + _customerCheckout.currencyChar)), _react.default.createElement("div", {
         className: "coll3"
-      }, _react.default.createElement("label", null, "Amount to pay"), _react.default.createElement("h3", null, calculatedPrice.amount + _customerCheckout.currencyChar)))), !this.state.cardDetailsVisible ? _react.default.createElement("div", {
+      }, _react.default.createElement("div", {
+        className: "spinner",
+        id: "spinner"
+      }), _react.default.createElement("label", null, "Amount to pay"), _react.default.createElement("h3", null, calculatedPrice.amount + _customerCheckout.currencyChar)))), !this.state.cardDetailsVisible ? _react.default.createElement("div", {
         className: "row",
         onClick: function onClick() {
           return _this4.proceedCardDetails();
@@ -45744,7 +45812,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53615" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62337" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

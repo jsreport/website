@@ -175,6 +175,9 @@ function default_1(payments, db) {
                 .then(() => res.send('ok'))
                 .catch(next);
         },
+        stripeClientSecret(req, res, next) {
+            return res.send(process.env['STRIPE_CLIENT_SECRET_KEY']);
+        },
     };
 }
 exports.default = default_1;
