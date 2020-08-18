@@ -58,24 +58,24 @@ class SubscriptionRenewal {
         const lastSale = product.sales[product.sales.length - 1];
         let paymentIntent;
         try {
-            logger.info(`Initiating charge for ${product.name} for ${customer.email} of ${lastSale.accountingData.amount}USD`);
+            logger.info(`Initiating charge for ${product.name} for ${customer.email} of ${lastSale.accountingData.amount} USD`);
             const stripeCustomer = await this.services.stripe.findOrCreateCustomer(customer.email);
             paymentIntent = await this.services.stripe.createConfirmedPaymentIntent(stripeCustomer.id, product.subscription.stripe.paymentMethodId, lastSale.accountingData.amount);
         }
         catch (e) {
             if (product.subscription.retryPlannedPayment) {
-                return this._processFirstFailedPayment(customer, product, e);
+                return this._processSecondFailedPayment(customer, product, e);
             }
             else {
                 logger.warn(`Processing subscription renewal of ${product.name} for ${customer.email} errored but will retry`, e);
-                product.subscription.retryPlannedPayment = moment_1.default(product.subscription.nextPayment).add(1, 'days').toDate();
+                product.subscription.retryPlannedPayment = moment_1.default().add(1, 'days').toDate();
                 await this.services.customerRepository.update(customer);
             }
             return;
         }
         return this.processSucesfullPayment(customer, product, paymentIntent);
     }
-    async _processFirstFailedPayment(customer, product, e) {
+    async _processSecondFailedPayment(customer, product, e) {
         logger.warn(`Processing subscription renewal of ${product.name} for ${customer.email} errored and waiting for user`, e);
         product.subscription.retryPlannedPayment = null;
         product.subscription.plannedCancelation = moment_1.default(product.subscription.nextPayment).add(1, 'months').toDate();

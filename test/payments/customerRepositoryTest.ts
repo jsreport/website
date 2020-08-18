@@ -3,6 +3,7 @@ import { CustomerRepository } from '../../src/lib/payments/customer'
 import 'should'
 import { Db } from 'mongodb'
 import { createProduct } from './helpers'
+import moment from 'moment'
 
 databaseTest((getDb) => {
   describe('customer repository', () => {
@@ -33,6 +34,30 @@ databaseTest((getDb) => {
 
       const count = await db.collection('invoiceCounter').countDocuments({})
       count.should.be.eql(1)
+    })
+
+    it('findCustomersWithPastDueSubscriptions should filter out subscriptions in the future and canceled', async () => {
+      const canceled = await customerRepository.findOrCreate('canceled')
+      const canceledProduct = createProduct()
+      canceledProduct.subscription.state = 'canceled'
+      canceled.products = [canceledProduct]
+      await customerRepository.update(canceled)
+
+      const future = await customerRepository.findOrCreate('future')
+      const futureProduct = createProduct()
+      futureProduct.subscription.nextPayment = moment().add(1, 'days').toDate()
+      future.products = [futureProduct]
+      await customerRepository.update(future)
+
+      const ok = await customerRepository.findOrCreate('ok')
+      const okProduct = createProduct()
+      okProduct.subscription.nextPayment = moment().add(-1, 'days').toDate()
+      ok.products = [okProduct]
+      await customerRepository.update(ok)
+
+      const customers = await customerRepository.findCustomersWithPastDueSubscriptions()
+      customers.should.have.length(1)
+      customers[0].email.should.be.eql('ok')
     })
   })
 })

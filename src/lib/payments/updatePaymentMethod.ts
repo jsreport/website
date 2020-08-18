@@ -3,10 +3,15 @@ import { Services } from './services'
 import Stripe from 'stripe'
 import { Customer, Product } from './customer'
 
+type SetupIntentOrPaymentIntent = {
+  setupIntentId?: string
+  paymentIntentId?: string
+}
+
 export const updatePaymentMethod = (
   services: Services,
   processSuccessfullPayment: (customer: Customer, product: Product, paymentIntent: Stripe.PaymentIntent) => Promise<any>
-) => async (customerId: string, productId: string, data) => {
+) => async (customerId: string, productId: string, data: SetupIntentOrPaymentIntent) => {
   const customer = await services.customerRepository.find(customerId)
   const product = customer.products.find((p) => p.id === productId)
 
