@@ -17,11 +17,16 @@ const emails_1 = require("./emails");
 class SubscriptionRenewal {
     constructor(services, interval) {
         this.services = services;
-        this.interval = interval || moment_1.default.duration(1, 'minute');
+        this.interval = interval || moment_1.default.duration(10, 'minute');
     }
     start() {
-        logger.info(`Initializing subscriptions timer to ${this.interval.asMinutes()}min`);
-        this.intervalRef = setInterval(() => this.process(), this.interval.asMilliseconds());
+        if (process.env.SUBSCRIPTIN_RENEWAL_ENABLED) {
+            logger.info(`Initializing subscriptions timer to ${this.interval.asMinutes()}min`);
+            this.intervalRef = setInterval(() => this.process(), this.interval.asMilliseconds());
+        }
+        else {
+            logger.info(`Subscription renewal interval disabled`);
+        }
     }
     stop() {
         this.intervalRef.unref();

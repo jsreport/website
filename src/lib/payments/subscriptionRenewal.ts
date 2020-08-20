@@ -12,12 +12,16 @@ export default class SubscriptionRenewal {
 
   constructor(services: Services, interval?: Duration) {
     this.services = services
-    this.interval = interval || moment.duration(1, 'minute')
+    this.interval = interval || moment.duration(10, 'minute')
   }
 
   start() {
-    logger.info(`Initializing subscriptions timer to ${this.interval.asMinutes()}min`)
-    this.intervalRef = setInterval(() => this.process(), this.interval.asMilliseconds())
+    if (process.env.SUBSCRIPTIN_RENEWAL_ENABLED) {
+      logger.info(`Initializing subscriptions timer to ${this.interval.asMinutes()}min`)
+      this.intervalRef = setInterval(() => this.process(), this.interval.asMilliseconds())
+    } else {
+      logger.info(`Subscription renewal interval disabled`)
+    }
   }
 
   stop() {
