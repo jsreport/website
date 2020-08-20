@@ -33,7 +33,7 @@ exports.init = (loggly = null) => {
             token: loggly.token,
             subdomain: loggly.subdomain,
             json: true,
-            tags: ['website'],
+            tags: [process.env.LOGGLY_TAG],
         }));
     }
 };
