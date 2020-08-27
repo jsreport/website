@@ -43,7 +43,7 @@ class CustomerLink extends React.Component {
                   <small>
                     <p>
                         Please note customers that purchased through gumroad needs to request login <a href='https://gumroad.com' target='_blank'>here</a>.<br></br>
-                        There are typically all customers that purchased before 08/2020.
+                        These are typically all customers that purchased before 08/2020.
                     </p>
                   </small>
                 </div>
