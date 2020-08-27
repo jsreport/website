@@ -32,7 +32,7 @@ export default class Vat extends React.Component {
   render() {
     return (
       <div className="coll2">
-        <label>VAT number (optional)</label>
+        <label>VAT number (only EU companies)</label>
         <small>
           <input
             className="fg-gray"

@@ -42455,7 +42455,7 @@ function (_React$Component) {
 
       return _react.default.createElement("div", {
         className: "coll2"
-      }, _react.default.createElement("label", null, "VAT number (optional)"), _react.default.createElement("small", null, _react.default.createElement("input", {
+      }, _react.default.createElement("label", null, "VAT number (only EU companies)"), _react.default.createElement("small", null, _react.default.createElement("input", {
         className: "fg-gray",
         type: "text",
         size: "30",
@@ -45698,10 +45698,15 @@ function (_React$Component) {
         className: "row text-center"
       }, "The email with link was sent to ", this.state.email) : _react.default.createElement("div", null, _react.default.createElement("div", {
         className: "row text-center"
-      }, _react.default.createElement("label", null, "Email"), _react.default.createElement("small", null, _react.default.createElement("input", {
+      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "EMAIL"), _react.default.createElement("small", null, _react.default.createElement("p", null, "Please note customers that purchased through gumroad needs to request login ", _react.default.createElement("a", {
+        href: "https://gumroad.com",
+        target: "_blank"
+      }, "here"), ".", _react.default.createElement("br", null), "There are typically all customers that purchased before 08/2020.")))), _react.default.createElement("div", {
+        className: "row text-center fg-gray"
+      }, _react.default.createElement("small", null, _react.default.createElement("input", {
         className: "fg-gray",
         type: "email",
-        size: "30",
+        size: "40",
         required: true,
         value: this.state.email,
         onChange: function onChange(v) {
@@ -45812,7 +45817,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56943" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49545" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

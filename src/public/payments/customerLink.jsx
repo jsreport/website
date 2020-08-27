@@ -38,12 +38,22 @@ class CustomerLink extends React.Component {
           ) : (
             <div>
               <div className="row text-center">
-                <label>Email</label>
+                <div>
+                  <h3>EMAIL</h3>
+                  <small>
+                    <p>
+                        Please note customers that purchased through gumroad needs to request login <a href='https://gumroad.com' target='_blank'>here</a>.<br></br>
+                        There are typically all customers that purchased before 08/2020.
+                    </p>
+                  </small>
+                </div>
+              </div>
+              <div className="row text-center fg-gray">
                 <small>
                   <input
                     className="fg-gray"
                     type="email"
-                    size="30"
+                    size="40"
                     required
                     value={this.state.email}
                     onChange={(v) => this.setState({ email: v.target.value })}

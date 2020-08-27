@@ -11,7 +11,7 @@ class StripeFacade {
         });
     }
     async createPaymentIntent({ amount, email }) {
-        if (amount > 2000) {
+        if (amount > 2500) {
             throw new Error('Something went wrong');
         }
         let customer = await this.findOrCreateCustomer(email);
@@ -41,7 +41,7 @@ class StripeFacade {
         return existingCustomers.data[0];
     }
     async createConfirmedPaymentIntent(customerId, paymentMethodId, amount) {
-        if (amount > 2000) {
+        if (amount > 2500) {
             throw new Error('Something went wrong');
         }
         return this.stripe.paymentIntents.create({
