@@ -94,5 +94,6 @@
     "office-preview": "Office preview",
     "office-password": "Office password",
     "docker": "Docker",
-    "templating-engines": "Templating engines"
+    "templating-engines": "Templating engines",
+    "azure-functions-serverless": "Azure Functions serverless",
 };
