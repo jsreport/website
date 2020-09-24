@@ -38,6 +38,7 @@ Now create a basic java project and use [maven](https://maven.apache.org/) to in
 <dependency>
 	<groupId>io.github.hedoncz</groupId>
 	<artifactId>jsreport-javaclient</artifactId>
+    <version>1.0.2</version>
 </dependency>
 ```
 
