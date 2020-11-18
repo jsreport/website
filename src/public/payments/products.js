@@ -77,4 +77,13 @@ export default {
     isSubscription: true,
     permalink: 'SBwu'
   },
+  enterpriseUpgrade: {
+    code: 'enterpriseUpgrade',
+    name: 'jsreport enterprise upgrade',
+    infoLine: 'Upgrade an existing jsreport enterprise license key to be eligible to the current the latest version and another 6 months of free updates.',
+    price: {
+      usd: 495
+    }, 
+    permalink: 'NCCKu'
+  }
 }

@@ -96,7 +96,7 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
   customer.products.push(product)
   await services.customerRepository.update(customer)
 
-  const mail = product.isSupport ? Emails.checkout.support : Emails.checkout.enterprise
+  const mail = product.isSupport ? Emails.checkout.support : (product.code === 'enterpriseUpgrade' ? Emails.checkout.upgrade : Emails.checkout.enterprise)
 
   await services.sendEmail({
     to: customer.email,

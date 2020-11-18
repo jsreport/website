@@ -71,7 +71,7 @@ exports.checkout = (services) => async (checkoutData) => {
     customer.products = customer.products || [];
     customer.products.push(product);
     await services.customerRepository.update(customer);
-    const mail = product.isSupport ? emails_1.Emails.checkout.support : emails_1.Emails.checkout.enterprise;
+    const mail = product.isSupport ? emails_1.Emails.checkout.support : (product.code === 'enterpriseUpgrade' ? emails_1.Emails.checkout.upgrade : emails_1.Emails.checkout.enterprise);
     await services.sendEmail({
         to: customer.email,
         content: utils_1.interpolate(mail.customer.content, {

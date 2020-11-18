@@ -56,6 +56,26 @@ jsreport team
 `,
             },
         },
+        upgrade: {
+            us: {
+                subject: 'New sale ${product.name}',
+                content: `\${customer.email}<br><a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a>`,
+            },
+            customer: {
+                subject: 'You bought ${product.name}',
+                content: `Hi,<br>
+thank you for purchasing \${product.name}.<br>
+<br>
+Please wait until our support team process your current license upgrade.
+We will contact you shortly.
+<br>
+The invoice can be downloaded from your customer portal<br>
+<a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
+Thank you<br>
+jsreport team
+`,
+            },
+        }
     },
     cancel: {
         enterprise: {
