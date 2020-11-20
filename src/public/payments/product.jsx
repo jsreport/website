@@ -145,7 +145,7 @@ export default class Product extends React.Component {
         <div>
           <h3>SUBSCRIPTION</h3>
         </div>
-        {this.state.subscription.status !== 'canceled' ? (
+        {this.state.subscription.state !== 'canceled' ? (
           <div>
             <p>
               The next payment is planned on {new Date(this.state.subscription.nextPayment).toLocaleDateString()}
