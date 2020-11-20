@@ -7,7 +7,7 @@ see [jsreport.net](http://jsreport.net)
 
 (The MIT License)
 
-Copyright (c) 2014 Jan Blaha &lt;jan.blaha@hotmail.com&gt;
+Copyright (c) 2020 Jan Blaha &lt;jan.blaha@hotmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
@@ -19,6 +19,7 @@ the following conditions:
 
 The above copyright notice and this permission notice shall be
 included in all copies or substantial portions of the Software.
+
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
