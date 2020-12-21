@@ -75,6 +75,7 @@
     "prism-languages": "0.3.3",
     "prismjs": "1.6.0",
     "reap2": "1.0.1",
+    "rimraf": "^3.0.2",
     "sendgrid": "5.2.3",
     "source-map-support": "0.5.13",
     "stripe": "8.81.0",
