@@ -1,5 +1,6 @@
 import { Db } from 'mongodb'
 import nanoid from 'nanoid'
+import moment from 'moment'
 
 export type AccountingData = {
   name: string
@@ -12,12 +13,16 @@ export type AccountingData = {
   price: number
   amount: number
   vatAmount: number
-  item: string
+  item: string,
+  currencyRate?: number,
+  isExpense?: boolean,
+  countryCode?: string,
+  email: string
 }
 
 export type Sale = {
   purchaseDate: Date
-  accountingData: AccountingData
+  accountingData: Partial<AccountingData>
   id: string
   blobName: string
   stripe?: SaleStripe
@@ -153,7 +158,7 @@ export class CustomerRepository {
     return sale
   }
 
-  async findCustomersWithPastDueSubscriptions() {
+  async findCustomersWithPastDueSubscriptions() {    
     return this.db
       .collection('customers')
       .find({
@@ -165,6 +170,25 @@ export class CustomerRepository {
             'subscription.state': {
               $ne: 'canceled',
             },
+          },
+        },
+      })
+      .toArray()
+  }
+
+  async findCustomersWithInvoicesLastMonth() {
+    const startOfMonth = moment().add(-1, 'M').startOf('month').toDate()
+    const endOfMonth   = moment().add(-1, 'M').endOf('month').toDate()
+
+    return this.db
+      .collection('customers')
+      .find({
+        'products.sales': {
+          $elemMatch: {
+            purchaseDate: {
+              $lt: endOfMonth,
+              $gt: startOfMonth
+            }
           },
         },
       })

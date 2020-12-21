@@ -23,16 +23,16 @@ if (!fs.existsSync(path.join(process.cwd(), 'data'))) {
 if (!fs.existsSync(path.join(process.cwd(), 'data', 'invoices'))) {
     fs.mkdirSync(path.join(process.cwd(), 'data', 'invoices'));
 }
-exports.renderInvoice = async (data) => {
+exports.renderInvoice = async (data, templatePath = '/payments/invoice', fileExtension = 'pdf') => {
     logger.info('request invoice generation in jo');
     const renderResult = await jsreportClient.render({
         template: {
-            name: '/payments/invoice'
+            name: templatePath
         },
         data
     });
     const buffer = await renderResult.body();
-    return fs.writeFileSync(path.join(process.cwd(), 'data', 'invoices', data.id + '.pdf'), buffer);
+    return fs.writeFileSync(path.join(process.cwd(), 'data', 'invoices', data.id + '.' + fileExtension), buffer);
 };
 exports.readInvoice = async (blobName) => {
     return fs.readFileSync(path.join(process.cwd(), 'data', 'invoices', blobName));

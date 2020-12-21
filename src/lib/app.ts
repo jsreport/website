@@ -14,6 +14,7 @@ import { MongoClient } from 'mongodb'
 import Payments from './payments/payments'
 import Posts from './posts'
 import rateLimit from 'express-rate-limit'
+import basicAuth from 'express-basic-auth'
 /* eslint-enable */
 
 const app = express()
@@ -163,6 +164,14 @@ client.connect((err) => {
     windowMs: 5000,
     max: 20,
   })
+
+  const auth = basicAuth({
+    users: { [process.env.USER]: process.env.PASSWORD },
+    challenge: true,
+  })
+
+  app.get('/payments/taxes', [limiter, auth], router.taxes)  
+  app.post('/api/payments/taxes', [limiter, auth, bodyParser.json()], router.createTaxes)
 
   app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice)
   app.get('/payments/*', limiter, router.payments)

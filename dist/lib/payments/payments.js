@@ -23,6 +23,7 @@ const renderInvoice_1 = require("./renderInvoice");
 const sendCustomerLink_1 = require("./sendCustomerLink");
 const subscriptionRenewal_1 = __importDefault(require("./subscriptionRenewal"));
 const emailVerification_1 = require("./emailVerification");
+const taxes_js_1 = require("./taxes/taxes.js");
 class Payments {
     constructor(db) {
         this.db = db;
@@ -33,6 +34,7 @@ class Payments {
             sendEmail: mailer_1.sendEmail,
             notifyLicensingServer: notifyLicensingServer_1.notifyLicensingServer,
             renderInvoice: renderInvoice_1.renderInvoice,
+            readInvoice: renderInvoice_1.readInvoice
         };
         this.subscriptionRenewal = new subscriptionRenewal_1.default(this.services);
     }
@@ -80,6 +82,9 @@ class Payments {
     }
     emailVerification(email, productCode) {
         return emailVerification_1.emailVerification(this.services)(email, productCode);
+    }
+    createTaxes(data) {
+        return taxes_js_1.createTaxes(this.services)(data);
     }
 }
 exports.default = Payments;

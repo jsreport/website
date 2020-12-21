@@ -7,6 +7,7 @@ export type Services = {
   stripe?: StripeFacade,
   notifyLicensingServer?: (customer: Customer, product: Product, sale: Sale) => Promise<any>,
   customerRepository?: CustomerRepository,
-  renderInvoice?: (sale: Sale) => Promise<any>,
+  renderInvoice?: (sale: Sale, templatePath?: String, extension?: String) => Promise<any>,
+  readInvoice?: (blobName: string) => Promise<Buffer>
   db?: Db
 }

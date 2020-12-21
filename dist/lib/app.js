@@ -26,6 +26,7 @@ const mongodb_1 = require("mongodb");
 const payments_1 = __importDefault(require("./payments/payments"));
 const posts_1 = __importDefault(require("./posts"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
+const express_basic_auth_1 = __importDefault(require("express-basic-auth"));
 /* eslint-enable */
 const app = express_1.default();
 logger.init({
@@ -154,6 +155,12 @@ client.connect((err) => {
         windowMs: 5000,
         max: 20,
     });
+    const auth = express_basic_auth_1.default({
+        users: { [process.env.USER]: process.env.PASSWORD },
+        challenge: true,
+    });
+    app.get('/payments/taxes', [limiter, auth], router.taxes);
+    app.post('/api/payments/taxes', [limiter, auth, body_parser_1.default.json()], router.createTaxes);
     app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice);
     app.get('/payments/*', limiter, router.payments);
     app.post('/api/payments/checkout', [limiter, body_parser_1.default.json()], router.checkoutSubmit);

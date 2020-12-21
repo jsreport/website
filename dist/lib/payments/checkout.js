@@ -49,6 +49,7 @@ exports.checkout = (services) => async (checkoutData) => {
         vatNumber: checkoutData.vatNumber,
         vatRate: checkoutData.vatRate,
         item: checkoutData.product.name,
+        email: customer.email
     };
     const product = {
         code: checkoutData.product.code,

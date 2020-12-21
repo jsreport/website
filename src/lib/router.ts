@@ -201,5 +201,22 @@
     stripeClientSecret(req, res, next) {
       return res.send(process.env['STRIPE_CLIENT_SECRET_KEY'])
     },
+
+    createTaxes(req, res, next) {
+      if (req.query.secret !== process.env.TAXES_SECRET) {
+        return next(new Error('Wrong secret'))
+      }
+
+      return payments
+        .createTaxes(req.body)
+        .then((r) => r.pipe(res))
+        .catch(next)
+    },
+
+    taxes(req, res, next) {
+      return res.render('../dist/public/app.html', {
+        title: 'jsreport taxes',
+      })
+    }
   }
 }

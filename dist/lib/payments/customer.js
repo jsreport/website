@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const nanoid_1 = __importDefault(require("nanoid"));
+const moment_1 = __importDefault(require("moment"));
 class CustomerRepository {
     constructor(db) {
         this.db = db;
@@ -77,6 +78,23 @@ class CustomerRepository {
                     'subscription.state': {
                         $ne: 'canceled',
                     },
+                },
+            },
+        })
+            .toArray();
+    }
+    async findCustomersWithInvoicesLastMonth() {
+        const startOfMonth = moment_1.default().add(-1, 'M').startOf('month').toDate();
+        const endOfMonth = moment_1.default().add(-1, 'M').endOf('month').toDate();
+        return this.db
+            .collection('customers')
+            .find({
+            'products.sales': {
+                $elemMatch: {
+                    purchaseDate: {
+                        $lt: endOfMonth,
+                        $gt: startOfMonth
+                    }
                 },
             },
         })

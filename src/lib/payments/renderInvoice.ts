@@ -15,17 +15,17 @@ if (!fs.existsSync(path.join(process.cwd(), 'data', 'invoices'))) {
   fs.mkdirSync(path.join(process.cwd(), 'data', 'invoices'))
 }
 
-export const renderInvoice = async (data) => {
+export const renderInvoice = async (data, templatePath = '/payments/invoice', fileExtension = 'pdf') => {
   logger.info('request invoice generation in jo')
   const renderResult = await jsreportClient.render({
     template: {
-      name: '/payments/invoice'
+      name: templatePath
     },
     data
   })
 
   const buffer = await renderResult.body()
-  return fs.writeFileSync(path.join(process.cwd(), 'data', 'invoices', data.id + '.pdf'), buffer)
+  return fs.writeFileSync(path.join(process.cwd(), 'data', 'invoices', data.id + '.' + fileExtension), buffer)
 }
 
 export const readInvoice = async (blobName: string) => {

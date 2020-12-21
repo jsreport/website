@@ -3,6 +3,7 @@ import moment from 'moment'
 
 export function createAccountingData(): AccountingData {
   return {
+    email: 'test@test.com',
     address: 'address',
     country: 'cz',
     amount: 295,

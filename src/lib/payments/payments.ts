@@ -13,6 +13,7 @@ import { renderInvoice, readInvoice } from './renderInvoice'
 import { sendCustomerLink } from './sendCustomerLink'
 import SubscriptionRenewal from './subscriptionRenewal'
 import { emailVerification } from './emailVerification'
+import { createTaxes } from './taxes/taxes.js'
 
 export default class Payments {
   db: Db
@@ -30,6 +31,7 @@ export default class Payments {
       sendEmail,
       notifyLicensingServer,
       renderInvoice,
+      readInvoice
     }
 
     this.subscriptionRenewal = new SubscriptionRenewal(this.services)
@@ -90,5 +92,9 @@ export default class Payments {
 
   emailVerification(email, productCode) {
     return emailVerification(this.services)(email, productCode)
+  }
+
+  createTaxes(data) { 
+    return createTaxes(this.services)(data)
   }
 }
