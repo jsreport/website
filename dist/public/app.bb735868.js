@@ -41026,7 +41026,18 @@ var _default = {
     price: {
       usd: 495
     },
+    hasLicenseKey: false,
     permalink: 'NCCKu'
+  },
+  enterpriseScaleUpgradeSubscription: {
+    code: 'enterpriseScaleUpgradeSubscription',
+    name: 'jsreport enterprise scale license updates',
+    infoLine: 'Receive updates to the enterprise scale license for the yearly fee',
+    price: {
+      usd: 495
+    },
+    hasLicenseKey: false,
+    isSubscription: true
   }
 };
 exports.default = _default;
@@ -45278,6 +45289,34 @@ function (_React$Component) {
       return _react.default.createElement(_react.default.Fragment, null);
     }
   }, {
+    key: "renderLicenseKey",
+    value: function renderLicenseKey() {
+      return _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "LICENSE KEY")), _react.default.createElement(_licenseKey.default, {
+        licenseKey: this.state.licenseKey
+      }), _react.default.createElement("div", null, _react.default.createElement("a", {
+        href: "https://jsreport.net/learn/faq#how-to-apply-license-key",
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }, "license key application instructions")));
+    }
+  }, {
+    key: "renderProductInner",
+    value: function renderProductInner() {
+      if (this.state.isSupport) {
+        return _react.default.createElement(Support, {
+          product: this.state
+        });
+      }
+
+      if (this.state.licenseKey) {
+        return this.renderLicenseKey();
+      }
+
+      return _react.default.createElement(_react.default.Fragment, null);
+    }
+  }, {
     key: "renderProduct",
     value: function renderProduct() {
       var _this4 = this;
@@ -45304,17 +45343,7 @@ function (_React$Component) {
         className: "icon-arrow-left-3"
       })))))), _react.default.createElement("div", {
         className: "grid container small section text-center"
-      }, this.state.isSupport ? _react.default.createElement(Support, {
-        product: this.state
-      }) : _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "LICENSE KEY")), _react.default.createElement(_licenseKey.default, {
-        licenseKey: this.state.licenseKey
-      }), _react.default.createElement("div", null, _react.default.createElement("a", {
-        href: "https://jsreport.net/learn/faq#how-to-apply-license-key",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, "license key application instructions"))), _react.default.createElement("div", {
+      }, this.renderProductInner(), _react.default.createElement("div", {
         className: "row"
       }, this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()), _react.default.createElement("div", {
         className: "row"
@@ -51530,7 +51559,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63963" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51309" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

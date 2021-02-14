@@ -60,7 +60,7 @@ exports.checkout = (services) => async (checkoutData) => {
         id: nanoid_1.default(4),
         sales: [],
         accountingData,
-        licenseKey: checkoutData.product.isSupport ? null : uuid(),
+        licenseKey: (checkoutData.product.isSupport || checkoutData.product.hasLicenseKey === false) ? null : uuid(),
         subscription,
     };
     const sale = await services.customerRepository.createSale(accountingData, {
@@ -72,7 +72,13 @@ exports.checkout = (services) => async (checkoutData) => {
     customer.products = customer.products || [];
     customer.products.push(product);
     await services.customerRepository.update(customer);
-    const mail = product.isSupport ? emails_1.Emails.checkout.support : (product.code === 'enterpriseUpgrade' ? emails_1.Emails.checkout.upgrade : emails_1.Emails.checkout.enterprise);
+    let mail = emails_1.Emails.checkout.custom;
+    if (product.isSupport) {
+        mail = emails_1.Emails.checkout.support;
+    }
+    if (product.licenseKey) {
+        mail = emails_1.Emails.checkout.enterprise;
+    }
     await services.sendEmail({
         to: customer.email,
         content: utils_1.interpolate(mail.customer.content, {

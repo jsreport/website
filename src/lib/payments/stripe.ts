@@ -18,7 +18,7 @@ export default class StripeFacade {
     let customer = await this.findOrCreateCustomer(email)
 
     const r = await this.stripe.paymentIntents.create({
-      amount: amount * 100,
+      amount: Math.round(amount * 100),
       currency: 'usd',
       customer: customer.id,
       setup_future_usage: 'off_session',

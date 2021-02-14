@@ -11,7 +11,7 @@ exports.cancelSubscription = (services) => async (customerId, productId) => {
     product.subscription.plannedCancelation = null;
     Object.assign(customer.products.find((p) => p.id === productId), product);
     await services.customerRepository.update(customer);
-    const mail = product.isSupport ? emails_1.Emails.cancel.support : emails_1.Emails.cancel.enterprise;
+    const mail = product.licenseKey ? emails_1.Emails.cancel.enterprise : emails_1.Emails.cancel.custom;
     await services.sendEmail({
         to: customer.email,
         content: utils_1.interpolate(mail.customer.content, { customer, product }),

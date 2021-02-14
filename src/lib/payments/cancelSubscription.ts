@@ -16,7 +16,7 @@ export const cancelSubscription = (services: Services) => async (customerId, pro
   )
   await services.customerRepository.update(customer)
 
-  const mail = product.isSupport ? Emails.cancel.support : Emails.cancel.enterprise
+  const mail = product.licenseKey ? Emails.cancel.enterprise : Emails.cancel.custom
 
   await services.sendEmail({
     to: customer.email,

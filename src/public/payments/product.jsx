@@ -184,9 +184,35 @@ export default class Product extends React.Component {
         )}
       </>
     )
-  }
+  } 
 
   renderOneTime() {
+    return <></>
+  }
+
+  renderLicenseKey() {
+    return <div className="row">
+      <div>
+        <h3>LICENSE KEY</h3>
+      </div>
+      <LicenseKey licenseKey={this.state.licenseKey} />
+      <div>
+        <a href="https://jsreport.net/learn/faq#how-to-apply-license-key" target="_blank" rel="noopener noreferrer">
+          license key application instructions
+        </a>
+      </div>
+    </div>
+  }
+
+  renderProductInner() {
+    if (this.state.isSupport) {
+      return <Support product={this.state} />
+    }
+
+    if (this.state.licenseKey) {
+      return this.renderLicenseKey()
+    }
+
     return <></>
   }
 
@@ -208,22 +234,8 @@ export default class Product extends React.Component {
             </div>
           </div>
         </div>
-        <div className="grid container small section text-center">
-          {this.state.isSupport ? (
-            <Support product={this.state} />
-          ) : (
-            <div className="row">
-              <div>
-                <h3>LICENSE KEY</h3>
-              </div>
-              <LicenseKey licenseKey={this.state.licenseKey} />
-              <div>
-                <a href="https://jsreport.net/learn/faq#how-to-apply-license-key" target="_blank" rel="noopener noreferrer">
-                  license key application instructions
-                </a>
-              </div>
-            </div>
-          )}
+        <div className="grid container small section text-center">          
+          {this.renderProductInner()}
           <div className="row">{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>
           <div className="row">
             <div>
