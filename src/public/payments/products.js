@@ -87,15 +87,15 @@ export default {
     hasLicenseKey: false,
     permalink: 'NCCKu'
   },
-  enterpriseScaleUpgradeSubscription: {
-    code: 'enterpriseScaleUpgradeSubscription',
-    name: 'jsreport enterprise scale license updates',
-    infoLine: 'Receive updates to the enterprise scale license for the yearly fee',
+  supportSubscriptionWithScaleUpdates: {
+    code: 'supportSubscriptionWithScaleUpdates',
+    name: 'enterprise support subscription including updates',
+    infoLine: 'enterprise support service provided with the next business day response time and including software updates to a purchased perpetual license',
     price: {
-      usd: 495
-    }, 
-    hasLicenseKey: false,
+      usd: 1390
+    },
+    isSupport: true,
     isSubscription: true,
-    permalink: 'XXXXx'   
+    permalink: 'XXXXx' 
   }
 }

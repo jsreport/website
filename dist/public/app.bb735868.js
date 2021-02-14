@@ -41029,15 +41029,16 @@ var _default = {
     hasLicenseKey: false,
     permalink: 'NCCKu'
   },
-  enterpriseScaleUpgradeSubscription: {
-    code: 'enterpriseScaleUpgradeSubscription',
-    name: 'jsreport enterprise scale license updates',
-    infoLine: 'Receive updates to the enterprise scale license for the yearly fee',
+  supportSubscriptionWithScaleUpdates: {
+    code: 'supportSubscriptionWithScaleUpdates',
+    name: 'enterprise support subscription including updates',
+    infoLine: 'enterprise support service provided with the next business day response time and including software updates to a purchased perpetual license',
     price: {
-      usd: 495
+      usd: 1390
     },
-    hasLicenseKey: false,
-    isSubscription: true
+    isSupport: true,
+    isSubscription: true,
+    permalink: 'XXXXx'
   }
 };
 exports.default = _default;
@@ -51559,7 +51560,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51309" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52165" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
