@@ -29,7 +29,7 @@ export type CheckoutRequest = {
     permalink
     isSubscription
     isSupport
-    hasLicenseKey
+    hasLicenseKey?
   }
 }
 
