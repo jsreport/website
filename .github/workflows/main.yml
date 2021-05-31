@@ -25,4 +25,4 @@ jobs:
       - run: npm test
       - run: |    
           chmod +x "deploy.sh"
-          "deploy.sh"
+          "${GITHUB_WORKSPACE}/deploy.sh"
