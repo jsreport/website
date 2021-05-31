@@ -1,5 +1,5 @@
 #!/bin/bash
-TRAVIS_TAG = "1.0.0"
+export TRAVIS_TAG="1.0.0"
 printenv
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker build -t website .
