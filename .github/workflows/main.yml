@@ -27,7 +27,8 @@ jobs:
       - shell: bash
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
-          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}        
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}        
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
         run: |    
           chmod +x "deploy.sh"
           "${GITHUB_WORKSPACE}/deploy.sh"
