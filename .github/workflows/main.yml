@@ -23,6 +23,11 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm test
-      - run: |    
+    
+      - shell: bash
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}        
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}        
+        run: |    
           chmod +x "deploy.sh"
           "${GITHUB_WORKSPACE}/deploy.sh"
