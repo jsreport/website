@@ -1,4 +1,5 @@
 #!/bin/bash
+printenv
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 docker build -t website .
 docker tag website jsreport/website:1.0.0
