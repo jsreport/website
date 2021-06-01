@@ -41,6 +41,9 @@ jobs:
           git clone https://github.com/pofider/kubernetes.git
           cd kubernetes 
           git checkout -b website-1.0.0         
+          git config --global user.name "pofider"
+          git config --global user.email "honza.pofider@seznam.cz"
+
           sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"1.0.0"'/' ./config/staging/website.yaml
           sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"1.0.0"'/' ./config/prod/website.yaml
           git add config/staging/website.yaml
