@@ -41,8 +41,8 @@ jobs:
           git clone https://github.com/pofider/kubernetes.git
           cd kubernetes 
           git checkout -b website-1.0.0         
-          sed -i 's/'"jsreport/website"'\:\(.*\)/'"jsreport/website"'\:'"1.0.0"'/' ./config/staging/website.yaml
-          sed -i 's/'"jsreport/website"'\:\(.*\)/'"jsreport/website"'\:'"1.0.0"'/' ./config/prod/website.yaml
+          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"1.0.0"'/' ./config/staging/website.yaml
+          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"1.0.0"'/' ./config/prod/website.yaml
           git add config/staging/website.yaml
           git add config/prod/website.yaml
           git commit -m "Update the website application"
