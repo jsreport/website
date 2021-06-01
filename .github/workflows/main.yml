@@ -38,7 +38,7 @@ jobs:
     
       - shell: bash   
         env:     
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+          KUBERNETES: ${{ secrets.KUBERNETES }}        
         run: |    
           git clone https://github.com/pofider/kubernetes.git
           cd kubernetes 
@@ -52,5 +52,5 @@ jobs:
           git add config/prod/website.yaml
           git commit -m "Update the website application"
 
-          remote_repo="https://pofider:${GITHUB_TOKEN}@github.com/pofider/kubernetes.git"
+          remote_repo="https://pofider:${KUBERNETES}@github.com/pofider/kubernetes.git"
           git push "${remote_repo}" HEAD:website-1.0.0      
