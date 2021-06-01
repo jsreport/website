@@ -49,4 +49,6 @@ jobs:
           git add config/staging/website.yaml
           git add config/prod/website.yaml
           git commit -m "Update the website application"
-          git push -u origin website-1.0.0
+
+          remote_repo="https://pofider:${GITHUB_TOKEN}@github.com/kubernetes.git"
+          git push "${remote_repo}" HEAD:website-1.0.0      
