@@ -1,6 +1,9 @@
 name: main 
 
-on: [push]
+on: 
+  release:
+    types:
+      - published
 
 jobs:
   build:
@@ -34,23 +37,24 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: jsreport/website:1.0.0
+          tags: jsreport/website:${{ github.event.release.tag_name }}
     
       - shell: bash   
         env:     
-          KUBERNETES: ${{ secrets.KUBERNETES }}        
+          KUBERNETES: ${{ secrets.KUBERNETES }} 
+          TAG: ${{ github.event.release.tag_name }}       
         run: |    
           git clone https://github.com/pofider/kubernetes.git
           cd kubernetes 
-          git checkout -b website-1.0.0         
+          git checkout -b website-${TAG}       
           git config --global user.name "pofider"
           git config --global user.email "honza.pofider@seznam.cz"
 
-          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"1.0.0"'/' ./config/staging/website.yaml
-          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"1.0.0"'/' ./config/prod/website.yaml
+          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"${TAG}"'/' ./config/staging/website.yaml
+          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"${TAG}"'/' ./config/prod/website.yaml
           git add config/staging/website.yaml
           git add config/prod/website.yaml
           git commit -m "Update the website application"
 
           remote_repo="https://pofider:${KUBERNETES}@github.com/pofider/kubernetes.git"
-          git push "${remote_repo}" HEAD:website-1.0.0      
+          git push "${remote_repo}" HEAD:website-${TAG}      
