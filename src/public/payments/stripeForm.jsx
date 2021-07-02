@@ -33,7 +33,7 @@ export default function StripeForm({ amount, onSubmit, customerId, product, setu
   )
 }
 
-function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
+function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {  
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [processing, setProcessing] = useState('')
@@ -41,9 +41,9 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
   const [clientSecret, setClientSecret] = useState('')
   const stripe = useStripe()
   const elements = useElements()
-  useEffect(() => {
+  useEffect(() => {    
     fetchPaymentIntentSecret(customerId, amount, setupIntent).then(setClientSecret)
-  }, [])
+  }, [customerId, amount, setupIntent])
 
   const cardStyle = {
     style: {
@@ -69,7 +69,7 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
       },
     },
   }
-
+ 
   const handleChange = async (event) => {
     // Listen for changes in the CardElement
     // and display any errors as the customer types their card details

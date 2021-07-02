@@ -43450,7 +43450,7 @@ function CardForm(_ref2) {
   var elements = (0, _reactStripeJs.useElements)();
   (0, _react.useEffect)(function () {
     fetchPaymentIntentSecret(customerId, amount, setupIntent).then(setClientSecret);
-  }, []);
+  }, [customerId, amount, setupIntent]);
   var cardStyle = {
     style: {
       base: {
@@ -51559,7 +51559,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56768" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59798" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

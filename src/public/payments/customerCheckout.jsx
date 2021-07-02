@@ -112,7 +112,7 @@ class CustomerCheckout extends React.Component {
     this.props.history.push(`/payments/customer/${resData.uuid}`)
   }
 
-  render() {
+  render() {    
     const calculatedPrice = calculatePrice({
       country: this.state.country,
       isVATValid: this.state.isVATValid && this.state.vatNumber,
