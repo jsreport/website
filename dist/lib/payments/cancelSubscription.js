@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.cancelSubscription = void 0;
 const emails_1 = require("./emails");
 const utils_1 = require("../utils/utils");
-exports.cancelSubscription = (services) => async (customerId, productId) => {
+const cancelSubscription = (services) => async (customerId, productId) => {
     const customer = await services.customerRepository.find(customerId);
     const product = customer.products.find((p) => p.id === productId);
     product.subscription.state = 'canceled';
@@ -23,4 +24,5 @@ exports.cancelSubscription = (services) => async (customerId, productId) => {
         subject: utils_1.interpolate(mail.us.subject, { customer, product }),
     });
 };
+exports.cancelSubscription = cancelSubscription;
 //# sourceMappingURL=cancelSubscription.js.map

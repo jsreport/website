@@ -1,15 +1,28 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.checkout = void 0;
 const logger = __importStar(require("../utils/logger"));
 const v4_1 = __importDefault(require("uuid/v4"));
 const nanoid_1 = __importDefault(require("nanoid"));
@@ -17,7 +30,7 @@ const emails_1 = require("./emails");
 const utils_1 = require("../utils/utils");
 const moment_1 = __importDefault(require("moment"));
 const uuid = () => v4_1.default().toUpperCase();
-exports.checkout = (services) => async (checkoutData) => {
+const checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
     const customer = await services.customerRepository.find(checkoutData.customerId);
     const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId);
@@ -99,4 +112,5 @@ exports.checkout = (services) => async (checkoutData) => {
     });
     return customer;
 };
+exports.checkout = checkout;
 //# sourceMappingURL=checkout.js.map

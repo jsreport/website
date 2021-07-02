@@ -42170,8 +42170,7 @@ var _default = [{
   code: 'AE'
 }, {
   name: 'United Kingdom',
-  code: 'GB',
-  eu: true
+  code: 'GB'
 }, {
   name: 'United States',
   code: 'US'
@@ -51560,7 +51559,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52165" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56768" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

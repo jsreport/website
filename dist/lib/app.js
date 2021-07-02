@@ -1,13 +1,25 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
     return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /*eslint-disable */
@@ -15,12 +27,12 @@ require('dotenv').config();
 const express_1 = __importDefault(require("express"));
 const express3_handlebars_1 = __importDefault(require("express3-handlebars"));
 const router_1 = __importDefault(require("./router"));
-const docs = __importStar(require("./docs"));
-const docs_1 = __importDefault(require("../../views/learn/docs"));
+const docs = __importStar(require("./docs/routes"));
 const multer_1 = __importDefault(require("multer"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const reap2_1 = __importDefault(require("reap2"));
 const path = __importStar(require("path"));
+const fs = __importStar(require("fs"));
 const logger = __importStar(require("./utils/logger"));
 const mongodb_1 = require("mongodb");
 const payments_1 = __importDefault(require("./payments/payments"));
@@ -80,6 +92,12 @@ client.connect((err) => {
             toLongDate: function (date) {
                 return require('moment')(date).format('MM-DD-YYYY HH:mm');
             },
+            ifEql: function (a, b, o) {
+                return a === b ? o.fn(this) : o.inverse(this);
+            },
+            dump: function (data) {
+                return 'dump' + JSON.stringify(data);
+            }
         },
     });
     app.engine('.html', hbs.engine);
@@ -110,11 +128,10 @@ client.connect((err) => {
     app.get('/learn/nodejs', docs.nodejs);
     app.get('/learn/recipes', docs.recipes);
     app.get('/learn/extensions', docs.extensions);
+    app.get('/learn/pull', docs.pull);
     app.get('/learn/:doc', docs.doc);
     app.get('/learn', docs.learn);
-    app.get('/examples/certificates', function (req, res) {
-        return res.render('examples/certificates');
-    });
+    app.get('/learn/static-resources/:file', docs.staticResources);
     app.get('/online', router.online);
     app.get('/playground', router.playground);
     app.get('/on-prem', router.onprem);
@@ -128,18 +145,22 @@ client.connect((err) => {
     app.get('/buy/thank-you', router.buyThankYou);
     app.get('/showcases', router.showcases);
     app.post('/contact-email', body_parser_1.default.urlencoded({ extended: true, limit: '2mb' }), router.contactEmail);
+    let learnDocs;
     payments
         .init()
         .then(() => posts_1.default(app))
         .then((poet) => {
         app.get('/sitemap*', function (req, res) {
+            if (!learnDocs) {
+                learnDocs = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'views', 'learn', 'docs', 'latest', 'docs', 'docs.json')).toString());
+            }
             var postCount = poet.helpers.getPostCount();
             var posts = poet.helpers.getPosts(0, postCount);
             res.setHeader('Content-Type', 'application/xml');
             res.render('sitemap', {
                 posts: posts,
                 layout: false,
-                docs: Object.keys(docs_1.default),
+                docs: Object.keys(learnDocs),
             });
         });
         app.get('*', function (req, res) {

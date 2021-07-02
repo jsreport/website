@@ -36,6 +36,47 @@
             }, Math.random() * 14000);
         });
 
+        function getUrlVars()
+        {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }     
+
+        $("#docsVersionSelect").change(function () {
+            var version = $(this).val()                     
+            if (version === 'latest') {
+                window.location = window.location.pathname
+            } else {
+                window.location = window.location + '?version=' + version
+            }            
+        })
+
+        if (window.location.pathname.indexOf('/learn') > -1) {
+            var version = getUrlVars().version         
+            $('a').each(function () {
+                var href = $(this).attr('href')            
+                if (href && href.indexOf('/learn') > -1) {
+                    var newHref = href.split('?')[0] + (version ? ('?version=' + version) : '')                 
+                    $(this).attr('href', newHref)
+                }
+            })
+
+            $('img').each(function () {
+                var src = $(this).attr('src')            
+                if (src && src.indexOf('/learn') > -1) {
+                    var newSrc = src.split('?')[0] + (version ? ('?version=' + version) : '')                 
+                    $(this).attr('src', newSrc)
+                }
+            })
+        }
+
         function scrollToc() {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
             $(".toc").css("padding-top", Math.max(120 - scrollTop, 0) + "px")
