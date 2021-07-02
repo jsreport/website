@@ -19,7 +19,7 @@ node_modules
 
 key.txt
 
-views/learn/docs/*.*
+views/learn/docs
 .env
 .cache
 
