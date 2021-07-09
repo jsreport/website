@@ -56,26 +56,7 @@
             } else {
                 window.location = window.location + '?version=' + version
             }            
-        })
-
-        if (window.location.pathname.indexOf('/learn') > -1) {
-            var version = getUrlVars().version         
-            $('a').each(function () {
-                var href = $(this).attr('href')            
-                if (href && href.indexOf('/learn') > -1) {
-                    var newHref = href.split('?')[0] + (version ? ('?version=' + version) : '')                 
-                    $(this).attr('href', newHref)
-                }
-            })
-
-            $('img').each(function () {
-                var src = $(this).attr('src')            
-                if (src && src.indexOf('/learn') > -1) {
-                    var newSrc = src.split('?')[0] + (version ? ('?version=' + version) : '')                 
-                    $(this).attr('src', newSrc)
-                }
-            })
-        }
+        })    
 
         function scrollToc() {
             var scrollTop = document.documentElement.scrollTop || document.body.scrollTop

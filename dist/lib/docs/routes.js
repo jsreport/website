@@ -31,6 +31,34 @@ const prism_languages_1 = __importDefault(require("prism-languages"));
 const pull_1 = __importDefault(require("./pull"));
 const process_1 = __importDefault(require("process"));
 const logger = __importStar(require("../utils/logger"));
+const cheerio_1 = __importDefault(require("cheerio"));
+function fixDocsVersion(html, req) {
+    // remove BOM
+    html = html.charCodeAt(0) === 0xfeff ? html.slice(1) : html;
+    const version = req.query.version || "latest";
+    const $ = cheerio_1.default.load(html);
+    function fixUrl(url, version) {
+        const base = url.split('?')[0].split('#')[0];
+        const hash = url.split('#')[1];
+        const search = version !== 'latest' ? '?version=' + version : '';
+        return base + search + (hash ? '#' + hash : '');
+    }
+    $('a').each((index, a) => {
+        const a$ = $(a);
+        const href = a$.attr('href');
+        if (href && href.indexOf('/learn') > -1) {
+            a$.attr('href', fixUrl(href, version));
+        }
+    });
+    $('img').each((index, img) => {
+        const img$ = $(img);
+        const src = img$.attr('src');
+        if (src && src.indexOf('/learn') > -1) {
+            img$.attr('src', fixUrl(src, version));
+        }
+    });
+    return $.html();
+}
 let cache = {};
 let versions = ['latest'];
 pull_1.default().then((vs) => {
@@ -47,39 +75,69 @@ function highlight(code, lang, callback) {
         callback(err);
     }
 }
-function extensions(req, res) {
+function extensions(req, res, next) {
     const version = req.query.version || "latest";
-    res.render(`learn/docs/${version}/pages/extensions`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/extensions`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err);
+        }
+        res.send(fixDocsVersion(html, req));
+    });
 }
 exports.extensions = extensions;
 ;
-function dotnet(req, res) {
+function dotnet(req, res, next) {
     const version = req.query.version || "latest";
-    res.render(`learn/docs/${version}/pages/dotnet`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/dotnet`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err);
+        }
+        res.send(fixDocsVersion(html, req));
+    });
 }
 exports.dotnet = dotnet;
 ;
-function recipes(req, res) {
+function recipes(req, res, next) {
     const version = req.query.version || "latest";
-    res.render(`learn/docs/${version}/pages/recipes`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/recipes`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err);
+        }
+        res.send(fixDocsVersion(html, req));
+    });
 }
 exports.recipes = recipes;
 ;
-function nodejs(req, res) {
+function nodejs(req, res, next) {
     const version = req.query.version || "latest";
-    res.render(`learn/docs/${version}/pages/nodejs`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/nodejs`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err);
+        }
+        res.send(fixDocsVersion(html, req));
+    });
 }
 exports.nodejs = nodejs;
 ;
-function engines(req, res) {
+function engines(req, res, next) {
     const version = req.query.version || "latest";
-    res.render(`learn/docs/${version}/pages/engines`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/engines`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err);
+        }
+        res.send(fixDocsVersion(html, req));
+    });
 }
 exports.engines = engines;
 ;
-function learn(req, res) {
+function learn(req, res, next) {
     const version = req.query.version || "latest";
-    res.render(`learn/docs/${version}/pages/learn`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/learn`, { learn: true, versions, version, title: 'Learn jsreport' }, (err, html) => {
+        if (err) {
+            return next(err);
+        }
+        res.send(fixDocsVersion(html, req));
+    });
 }
 exports.learn = learn;
 ;
@@ -102,14 +160,10 @@ async function pull(req, res, next) {
 }
 exports.pull = pull;
 ;
-function doc(req, res) {
+function doc(req, res, next) {
     const version = req.query.version || "latest";
     if (cache[req.params.doc + '-' + version]) {
-        return res.render(`learn/docs/${version}/pages/doc`, {
-            ...cache[req.params.doc + '-' + version],
-            versions,
-            version
-        });
+        // return cache[req.params.doc + '-' + version]        
     }
     const docsTitlesPath = path.join(process_1.default.cwd(), "views", "learn", "docs", version, "docs", "docs.json");
     const docs = JSON.parse(fs.readFileSync(docsTitlesPath).toString());
@@ -144,6 +198,7 @@ function doc(req, res) {
             return renderer;
         })();
         marked_1.default(content, { renderer: renderer, highlight: highlight }, function (err, html) {
+            html = fixDocsVersion(html, req);
             var tocHTML = `<div class='toc'>`;
             if (toc.length > 3 && req.params.doc !== 'faq' && req.params.doc !== 'online-faq') {
                 tocHTML += '<h3>table of contents</h3>';
@@ -157,18 +212,22 @@ function doc(req, res) {
                 tocHTML += '</div>';
             }
             tocHTML += '</div>';
-            cache[req.params.doc + '-' + version] = {
+            res.render(`learn/docs/${version}/pages/doc`, {
                 title: docs[req.params.doc],
                 content: tocHTML + html,
                 url: "https://jsreport.net" + req.url,
                 id: req.params.doc,
                 learn: true,
-                linkDocCss: true
-            };
-            res.render(`learn/docs/${version}/pages/doc`, {
-                ...cache[req.params.doc + '-' + version],
+                linkDocCss: true,
                 versions,
                 version
+            }, (err, html) => {
+                if (err) {
+                    return next(err);
+                }
+                html = fixDocsVersion(html, req);
+                cache[req.params.doc + '-' + version] = html;
+                return res.send(html);
             });
         });
     });

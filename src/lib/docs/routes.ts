@@ -6,6 +6,40 @@ import languages from 'prism-languages'
 import pullDocs from './pull'
 import process from 'process'
 import * as logger from '../utils/logger'
+import cheerio from 'cheerio'
+
+function fixDocsVersion(html, req) {
+    // remove BOM
+    html = html.charCodeAt(0) === 0xfeff ? html.slice(1) : html
+    const version = req.query.version || "latest"
+    const $ = cheerio.load(html)
+
+    function fixUrl(url, version) {
+        const base = url.split('?')[0].split('#')[0]
+        const hash = url.split('#')[1]
+        const search = version !== 'latest' ? '?version=' + version : ''
+        return base + search + (hash ? '#' + hash : '')
+    }
+
+    $('a').each((index, a) => {
+        const a$ = $(a)
+        const href = a$.attr('href')
+        if (href && href.indexOf('/learn') > -1) {
+            a$.attr('href', fixUrl(href, version))
+        }
+    })
+
+    $('img').each((index, img) => {
+        const img$ = $(img)
+        const src = img$.attr('src')
+        if (src && src.indexOf('/learn') > -1) {
+            img$.attr('src', fixUrl(src, version))
+        }
+    })
+
+    return $.html()
+}
+
 let cache = {}
 
 let versions = ['latest']
@@ -24,34 +58,64 @@ function highlight(code, lang, callback) {
     }
 }
 
-export function extensions(req, res) {
+export function extensions(req, res, next) {
     const version = req.query.version || "latest"
-    res.render(`learn/docs/${version}/pages/extensions`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/extensions`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(fixDocsVersion(html, req))
+    })
 };
 
-export function dotnet(req, res) {
+export function dotnet(req, res, next) {
     const version = req.query.version || "latest"
-    res.render(`learn/docs/${version}/pages/dotnet`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/dotnet`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(fixDocsVersion(html, req))
+    })
 };
 
-export function recipes(req, res) {
+export function recipes(req, res, next) {
     const version = req.query.version || "latest"
-    res.render(`learn/docs/${version}/pages/recipes`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/recipes`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(fixDocsVersion(html, req))
+    })
 };
 
-export function nodejs(req, res) {
+export function nodejs(req, res, next) {
     const version = req.query.version || "latest"
-    res.render(`learn/docs/${version}/pages/nodejs`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/nodejs`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(fixDocsVersion(html, req))
+    })
 };
 
-export function engines(req, res) {
+export function engines(req, res, next) {
     const version = req.query.version || "latest"
-    res.render(`learn/docs/${version}/pages/engines`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/engines`, { learn: true, versions, version }, (err, html) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(fixDocsVersion(html, req))
+    })
 };
 
-export function learn(req, res) {
+export function learn(req, res, next) {
     const version = req.query.version || "latest"
-    res.render(`learn/docs/${version}/pages/learn`, { learn: true, versions, version });
+    res.render(`learn/docs/${version}/pages/learn`, { learn: true, versions, version, title: 'Learn jsreport' }, (err, html) => {
+        if (err) {
+            return next(err)
+        }
+        res.send(fixDocsVersion(html, req))
+    })
 };
 
 export function staticResources(req, res) {
@@ -72,15 +136,11 @@ export async function pull(req, res, next) {
 };
 
 
-export function doc(req, res) {
+export function doc(req, res, next) {
     const version = req.query.version || "latest"
 
     if (cache[req.params.doc + '-' + version]) {
-        return res.render(`learn/docs/${version}/pages/doc`, {
-            ...cache[req.params.doc + '-' + version],
-            versions,
-            version
-        });
+        // return cache[req.params.doc + '-' + version]        
     }
 
     const docsTitlesPath = path.join(process.cwd(), "views", "learn", "docs", version, "docs", "docs.json");
@@ -120,6 +180,8 @@ export function doc(req, res) {
         })();
 
         marked(content, { renderer: renderer, highlight: highlight }, function (err, html) {
+            html = fixDocsVersion(html, req)
+
             var tocHTML = `<div class='toc'>`
 
             if (toc.length > 3 && req.params.doc !== 'faq' && req.params.doc !== 'online-faq') {
@@ -136,19 +198,23 @@ export function doc(req, res) {
 
             tocHTML += '</div>'
 
-            cache[req.params.doc + '-' + version] = {
+
+            res.render(`learn/docs/${version}/pages/doc`, {
                 title: docs[req.params.doc],
                 content: tocHTML + html,
                 url: "https://jsreport.net" + req.url,
                 id: req.params.doc,
                 learn: true,
-                linkDocCss: true
-            };
-
-            res.render(`learn/docs/${version}/pages/doc`, {
-                ...cache[req.params.doc + '-' + version],
+                linkDocCss: true,
                 versions,
                 version
+            }, (err, html) => {
+                if (err) {
+                    return next(err)
+                }
+                html = fixDocsVersion(html, req)
+                cache[req.params.doc + '-' + version] = html;
+                return res.send(html)
             });
         });
     });
