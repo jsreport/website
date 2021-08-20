@@ -1,7 +1,7 @@
 
 {{{
     "title"    : "jsreport v3 beta released",      
-    "date"     : "08-18-2021 14:32" 
+    "date"     : "08-20-2021 21:17" 
 }}}
 
 

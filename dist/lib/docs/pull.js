@@ -13,7 +13,7 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
 const version_sort_1 = __importDefault(require("version-sort"));
 const tmpRepoDir = path_1.default.join(os_1.default.tmpdir(), 'jsreport', 'temp', 'docsRepo');
 async function pull(docsPath = 'views/learn/docs') {
-    return ['latest', '3.0.0'];
+    // return ['latest', '3.0.0']
     fs_1.default.rmdirSync(tmpRepoDir, { recursive: true });
     fs_1.default.mkdirSync(tmpRepoDir, { recursive: true });
     const fullDocsPath = path_1.default.isAbsolute(docsPath) ? docsPath : path_1.default.join(process_1.default.cwd(), docsPath);

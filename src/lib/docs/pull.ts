@@ -10,7 +10,7 @@ import versionSort from 'version-sort'
 const tmpRepoDir = path.join(os.tmpdir(), 'jsreport', 'temp', 'docsRepo')
 
 export default async function pull(docsPath = 'views/learn/docs') {
-    return ['latest', '3.0.0']
+    // return ['latest', '3.0.0']
     fs.rmdirSync(tmpRepoDir, { recursive: true })
     fs.mkdirSync(tmpRepoDir, { recursive: true })
 
