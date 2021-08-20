@@ -16,7 +16,6 @@ import Posts from './posts'
 import rateLimit from 'express-rate-limit'
 import basicAuth from 'express-basic-auth'
 /* eslint-enable */
-
 const app = express()
 logger.init({
   level: process.env.LOGGLY_LEVEL,

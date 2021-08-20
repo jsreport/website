@@ -1,28 +1,11 @@
 import winston from 'winston'
 import Transport from 'winston-transport'
-import Debug from 'debug'
 import { Loggly } from 'winston-loggly-bulk'
 
 let _logger
 
-const jsreportdebug = Debug('jsreport')
 
-class DebugTransport extends Transport {
-  name
-  level
 
-  constructor() {
-    super()
-    this.name = 'debug'
-    this.level = 'debug'
-  }
-
-  log(info, callback) {
-    setImmediate(() => this.emit('logged', info))
-    jsreportdebug(info.level + ' ' + info.message + ' ' + (info.stack || ''))
-    callback()
-  }
-}
 
 export let init = (loggly = null) => {
   _logger = winston.createLogger({
@@ -30,7 +13,7 @@ export let init = (loggly = null) => {
     format: winston.format.simple(),
   })
 
-  _logger.add(new DebugTransport())
+  _logger.add(new winston.transports.Console());
 
   if (loggly) {
     _logger.add(
@@ -43,6 +26,7 @@ export let init = (loggly = null) => {
       })
     )
   }
+  _logger.info('logger initialized')
 }
 
 export let info = (...args) => _logger.info.apply(_logger, args)

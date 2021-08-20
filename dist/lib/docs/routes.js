@@ -61,12 +61,16 @@ function fixDocsVersion(html, req) {
 }
 let cache = {};
 let versions = ['latest'];
-pull_1.default().then((vs) => {
-    versions = vs;
-}).catch(e => {
-    logger.error('pulling docs failed', e);
-    process_1.default.exit(1);
-});
+setTimeout(() => {
+    logger.info('pulling logs');
+    pull_1.default().then((vs) => {
+        logger.info('docs pulled');
+        versions = vs;
+    }).catch(e => {
+        logger.error('pulling docs failed', e);
+        process_1.default.exit(1);
+    });
+}, 30000);
 function highlight(code, lang, callback) {
     try {
         return callback(null, prismjs_1.default.highlight(code, prism_languages_1.default[lang]));
@@ -163,7 +167,7 @@ exports.pull = pull;
 function doc(req, res, next) {
     const version = req.query.version || "latest";
     if (cache[req.params.doc + '-' + version]) {
-        // return cache[req.params.doc + '-' + version]        
+        return cache[req.params.doc + '-' + version];
     }
     const docsTitlesPath = path.join(process_1.default.cwd(), "views", "learn", "docs", version, "docs", "docs.json");
     const docs = JSON.parse(fs.readFileSync(docsTitlesPath).toString());

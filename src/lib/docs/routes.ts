@@ -43,12 +43,17 @@ function fixDocsVersion(html, req) {
 let cache = {}
 
 let versions = ['latest']
-pullDocs().then((vs) => {
-    versions = vs
-}).catch(e => {
-    logger.error('pulling docs failed', e)
-    process.exit(1)
-})
+setTimeout(() => {
+    logger.info('pulling logs')
+    pullDocs().then((vs) => {
+        logger.info('docs pulled')
+        versions = vs
+    }).catch(e => {
+        logger.error('pulling docs failed', e)
+        process.exit(1)
+    })
+}, 30000)
+
 
 function highlight(code, lang, callback) {
     try {
@@ -140,7 +145,7 @@ export function doc(req, res, next) {
     const version = req.query.version || "latest"
 
     if (cache[req.params.doc + '-' + version]) {
-        // return cache[req.params.doc + '-' + version]        
+        return cache[req.params.doc + '-' + version]
     }
 
     const docsTitlesPath = path.join(process.cwd(), "views", "learn", "docs", version, "docs", "docs.json");
