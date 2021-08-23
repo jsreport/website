@@ -145,7 +145,7 @@ export function doc(req, res, next) {
     const version = req.query.version || "latest"
 
     if (cache[req.params.doc + '-' + version]) {
-        return cache[req.params.doc + '-' + version]
+        return res.send(cache[req.params.doc + '-' + version])
     }
 
     const docsTitlesPath = path.join(process.cwd(), "views", "learn", "docs", version, "docs", "docs.json");
