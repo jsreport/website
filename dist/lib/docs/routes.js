@@ -167,7 +167,7 @@ exports.pull = pull;
 function doc(req, res, next) {
     const version = req.query.version || "latest";
     if (cache[req.params.doc + '-' + version]) {
-        return cache[req.params.doc + '-' + version];
+        return res.send(cache[req.params.doc + '-' + version]);
     }
     const docsTitlesPath = path.join(process_1.default.cwd(), "views", "learn", "docs", version, "docs", "docs.json");
     const docs = JSON.parse(fs.readFileSync(docsTitlesPath).toString());
