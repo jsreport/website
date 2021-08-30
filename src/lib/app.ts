@@ -85,6 +85,10 @@ client.connect((err) => {
     },
   })
 
+  app.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'DENY')
+    next()
+  })
   app.engine('.html', hbs.engine)
   // app.disable('view cache');
   app.set('view engine', '.html')
@@ -161,6 +165,7 @@ client.connect((err) => {
         res.status(404).render('404')
       })
 
+      logger.info('App running on port ' + (process.env.PORT || 3000))
       app.listen(process.env.PORT || 3000)
     })
     .catch((e) => {
