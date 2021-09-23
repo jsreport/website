@@ -55,14 +55,18 @@ class Payments {
     }
     async createPaymentIntent({ amount, customerId }) {
         const customer = await this.services.customerRepository.find(customerId);
-        return this.services.stripe.createPaymentIntent({
-            amount: amount,
-            email: customer.email,
-        });
+        return {
+            intent: await this.services.stripe.createPaymentIntent({
+                amount: amount,
+                email: customer.email,
+            })
+        };
     }
     async createSetupIntent({ customerId }) {
         const customer = await this.services.customerRepository.find(customerId);
-        return this.services.stripe.createSetupIntent({ email: customer.email });
+        return {
+            intent: await this.services.stripe.createSetupIntent({ email: customer.email })
+        };
     }
     async validateVat(vatNumber = '') {
         return validateVat_1.default(vatNumber);

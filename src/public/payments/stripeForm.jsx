@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js'
 import Spinner from './spinner'
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
 
-async function fetchPaymentIntentSecret(customerId, amount, setupIntent) {
+async function fetchPaymentIntentSecret(customerId, amount, setupIntent) { 
   const res = await window.fetch('/api/payments/' + (setupIntent ? 'setup-intent' : 'payment-intent'), {
     method: 'POST',
     headers: {
@@ -11,7 +11,14 @@ async function fetchPaymentIntentSecret(customerId, amount, setupIntent) {
     },
     body: JSON.stringify({ amount, customerId }),
   })
-  return res.text()
+
+  const resData = await res.json()
+  
+  if (!res.ok) {
+    throw new Error(resData && resData.error ? resData.error : res.statusText)
+  }
+  
+  return resData.intent
 }
 
 const promise = window
@@ -36,13 +43,16 @@ export default function StripeForm({ amount, onSubmit, customerId, product, setu
 function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {  
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
+  const [loadError, setLoadError] = useState(null)
   const [processing, setProcessing] = useState('')
   const [disabled, setDisabled] = useState(true)
   const [clientSecret, setClientSecret] = useState('')
   const stripe = useStripe()
   const elements = useElements()
-  useEffect(() => {    
-    fetchPaymentIntentSecret(customerId, amount, setupIntent).then(setClientSecret)
+  useEffect(() => {
+    fetchPaymentIntentSecret(customerId, amount, setupIntent)
+      .then((r) =>setClientSecret(r))
+      .catch((e) => setLoadError(e.message))
   }, [customerId, amount, setupIntent])
 
   const cardStyle = {
@@ -77,7 +87,7 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
     setError(event.error ? event.error.message : '')
   }
 
-  const handleSubmit = async (ev) => {
+  const handleSubmit = async (ev) => {    
     ev.preventDefault()
     setProcessing(true)
 
@@ -97,30 +107,37 @@ function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {
         setError(null)
         setProcessing(false)
         setSucceeded(true)
+      } else  {      
+        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        })
+
+        if (error) {
+          throw new Error(error.message)
+        }
+      
+        await onSubmit(paymentIntent)
+        
+        setError(null)
+        setProcessing(false)
+        setSucceeded(true)
       }
-
-      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-        },
-      })
-
-      if (error) {
-        throw new Error(error.message)
-      }
-
-      await onSubmit(paymentIntent)
-      setError(null)
-      setProcessing(false)
-      setSucceeded(true)
     } catch (e) {
       setError(`Payment failed ${e.message}`)
       setProcessing(false)
     }
   }
 
-  return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+  if (loadError) {
+    return <div className="row text-center">
+        We were unable to initialize the payment form. Please reload and try again.
+        error: {loadError}
+    </div>
+  }
+  return (    
+    <form id="payment-form" onSubmit={handleSubmit}>        
       <div className="row text-center">
         <div className="coll2">
           <CardElement id="card-element" options={cardStyle} onChange={handleChange} />

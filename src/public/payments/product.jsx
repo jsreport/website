@@ -169,6 +169,7 @@ export default class Product extends React.Component {
                 email={this.state.customer.email}
                 onSubmit={(i) => this.updatePaymentMethod(i)}
                 setupIntent={!this.state.subscription.plannedCancelation}
+                customerId={this.props.match.params.customer}
                 amount={this.state.sales[this.state.sales.length - 1].accountingData.amount}
               />
             ) : (

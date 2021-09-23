@@ -3,7 +3,7 @@ import os from 'os'
 import path from 'path'
 import fs from 'fs'
 
-describe.only('docs pull', () => {
+describe('docs pull', () => {
     const testDir = path.join(os.tmpdir(), 'jsreport', 'test')
     beforeEach(() => {
         fs.rmdirSync(testDir, {
