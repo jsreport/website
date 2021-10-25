@@ -44,14 +44,14 @@
         <div class="text-center">
             <div class="row text-center">
                 <h3 class="fg-gray">FULL INSTALLATION</h3>
-                <button id='tryBeta' class='bg-orange fg-white ani-shake'>TRY V3 BETA</button>
+                <!--<button id='tryBeta' class='bg-orange fg-white ani-shake'>TRY V3 BETA</button>-->
             </div>
         </div>
         <div class="row">
             <p>
-                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 8.9) on the target
+                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 16.11) on the target
                 machine.
-                The installation is then initiated using <a href="https://www.npmjs.com/">npm</a> (>= 6.x).
+                The installation is then initiated using <a href="https://www.npmjs.com/">npm</a>.
             </p>
         </div>
         <div class="cmd">
@@ -63,7 +63,8 @@
             </div>
 
             <div class="cmd-content bg-grayDarker fg-white padding10 text-left">
-                npm install jsreport-cli -g<br />mkdir jsreportapp<br />cd jsreportapp<br />jsreport init<br /> jsreport
+                npm install @jsreport/jsreport-cli -g<br />mkdir jsreportapp<br />cd jsreportapp<br />jsreport
+                init<br /> jsreport
                 configure<br /> jsreport
                 start
             </div>
@@ -108,6 +109,7 @@
     </div>
 </div>
 
+<!--
 <script>
     $(() => {
         $('#tryBeta').on('click', () => {
@@ -125,9 +127,10 @@
         if (window.location.hash === '#beta') {
             $('#normalInstructions').hide();
             $('#betaInstructions').show();
-        }
+        }*
     })
 </script>
+
 
 <div class="bg-white section small text-center" style='display:none' id='betaInstructions'>
     <div class="grid container">
@@ -139,7 +142,7 @@
         </div>
         <div class="row">
             <p>
-                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 14.17.5) on the target
+                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 16.11.0) on the target
                 machine.
             </p>
         </div>
@@ -198,6 +201,7 @@
         </div>
     </div>
 </div>
+-->
 
 <div class="bg-grayLighter section small text-center">
     <div class="grid container">
