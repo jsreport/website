@@ -27,7 +27,7 @@ In most cases, the migration shouldn't need manual updating of your existing tem
 
 ## Highlights
 
-In the jsreport 3.0.0, you can use new profiler, components or enjoy improved performance. Please refer to details in the blog post [announcing v3 beta](/blog/jsreport-v3-beta-released) or to the updated [documentation](/learn/documentation)
+In the jsreport 3.0.0, you can use new profiler, components or enjoy improved performance. Please refer to details in the blog post [announcing v3 beta](/blog/jsreport-v3-beta-released) or to the updated [documentation](/learn)
 
 ## Conclusion
 There is no need to update when you have jsreport v2 already running and happy with it. However, in case you are just starting or looking forward to trying great new features, the jsreport v3 is the way to go.
