@@ -54,7 +54,7 @@
             if (version === 'latest') {
                 window.location = window.location.pathname
             } else {
-                window.location = window.location + '?version=' + version
+                window.location = window.location.pathname + '?version=' + version
             }            
         })    
 
