@@ -42477,6 +42477,7 @@ function (_React$Component) {
       return _react.default.createElement("div", {
         className: "coll2"
       }, _react.default.createElement("label", null, "VAT number (only EU companies)"), _react.default.createElement("small", null, _react.default.createElement("input", {
+        disabled: this.props.disabled,
         className: "fg-gray",
         type: "text",
         size: "30",
@@ -43963,14 +43964,16 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function Country(_ref) {
   var value = _ref.value,
-      onChange = _ref.onChange;
+      onChange = _ref.onChange,
+      disabled = _ref.disabled;
   return _react.default.createElement("div", {
     className: "coll2"
   }, _react.default.createElement("label", null, "Country"), _react.default.createElement("small", null, _react.default.createElement("select", {
     className: "fg-gray",
     onChange: onChange,
     required: true,
-    value: value
+    value: value,
+    disabled: disabled
   }, _countries.default.map(function (c) {
     return _react.default.createElement("option", {
       key: c.code,
@@ -44161,6 +44164,7 @@ function (_React$Component) {
       }, _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement(_vat.default, {
+        disabled: this.state.cardDetailsVisible,
         value: this.state.vatNumber,
         onChange: function onChange(v) {
           return _this4.setState({
@@ -44182,6 +44186,7 @@ function (_React$Component) {
           });
         }
       }), _react.default.createElement(Country, {
+        disabled: this.state.cardDetailsVisible,
         value: this.state.country,
         onChange: function onChange(v) {
           return _this4.setState({
@@ -51593,7 +51598,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62362" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61787" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

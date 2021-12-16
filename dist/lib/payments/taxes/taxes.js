@@ -146,7 +146,7 @@ function createFeeSale(price) {
             vatRate: 21,
             currency: 'czk',
             price: price,
-            amount: price + vatAmount,
+            amount: utils_1.round(price + vatAmount),
             vatAmount,
             item: 'Fees for the sold jsreport licenses',
             vatNumber: 'CZ8501274529',

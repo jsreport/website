@@ -52,7 +52,10 @@ if (process.env.mongodb_username) {
     connectionString += process.env.mongodb_username + ':' + process.env.mongodb_password + '@';
 }
 connectionString += process.env.mongodb_address || 'localhost:27017';
-connectionString += '/' + process.env.mongodb_authdb;
+if (process.env.mongodb_authdb) {
+    connectionString += '/' + process.env.mongodb_authdb;
+}
+console.log('connect to', connectionString);
 const client = new mongodb_1.MongoClient(connectionString, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
