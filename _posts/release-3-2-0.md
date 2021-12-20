@@ -20,4 +20,4 @@ The support for user groups also brings new workflow to the [Single Sign-On](/le
 
 You can now preview components from the studio toolbar. You can also associate the sample data with components and speed up your components' development.
 
-![component-preview](/blob/component-preview.png)
+![component-preview](/blog/component-preview.png)
