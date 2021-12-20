@@ -1,7 +1,7 @@
 ﻿
 {{{
     "title": "Release 3.2.0",
-    "date": "12-20-2020 16:21"
+    "date": "12-20-2021 16:21"
 }}}
 
 **The jsreport 3.2.0 is here.**
