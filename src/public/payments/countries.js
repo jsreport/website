@@ -227,7 +227,7 @@ export default [
   { name: 'Uganda', code: 'UG' },
   { name: 'Ukraine', code: 'UA' },
   { name: 'United Arab Emirates', code: 'AE' },
-  { name: 'United Kingdom', code: 'GB', eu: true },
+  { name: 'United Kingdom', code: 'GB' },
   { name: 'United States', code: 'US' },
   { name: 'United States Minor Outlying Islands', code: 'UM' },
   { name: 'Uruguay', code: 'UY' },

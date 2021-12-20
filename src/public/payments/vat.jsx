@@ -35,6 +35,7 @@ export default class Vat extends React.Component {
         <label>VAT number (only EU companies)</label>
         <small>
           <input
+            disabled={this.props.disabled}
             className="fg-gray"
             type="text"
             size="30"

@@ -1,0 +1,60 @@
+name: main 
+
+on: 
+  release:
+    types:
+      - published
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.5.0
+        with:
+          mongodb-version: '4.2'
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: jsreport/website:${{ github.event.release.tag_name }}
+    
+      - shell: bash   
+        env:     
+          KUBERNETES: ${{ secrets.KUBERNETES }} 
+          TAG: ${{ github.event.release.tag_name }}       
+        run: |    
+          git clone https://github.com/pofider/kubernetes.git
+          cd kubernetes 
+          git checkout -b website-${TAG}       
+          git config --global user.name "pofider"
+          git config --global user.email "honza.pofider@seznam.cz"
+
+          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"${TAG}"'/' ./config/staging/website.yaml
+          sed -i 's/'"jsreport\/website"'\:\(.*\)/'"jsreport\/website"'\:'"${TAG}"'/' ./config/prod/website.yaml
+          git add config/staging/website.yaml
+          git add config/prod/website.yaml
+          git commit -m "Update the website application"
+
+          remote_repo="https://pofider:${KUBERNETES}@github.com/pofider/kubernetes.git"
+          git push "${remote_repo}" HEAD:website-${TAG}      

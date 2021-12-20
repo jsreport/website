@@ -43,15 +43,19 @@ export default class Payments {
 
   async createPaymentIntent({ amount, customerId }) {
     const customer = await this.services.customerRepository.find(customerId)
-    return this.services.stripe.createPaymentIntent({
-      amount: amount,
-      email: customer.email,
-    })
+    return {
+      intent: await this.services.stripe.createPaymentIntent({
+        amount: amount,
+        email: customer.email,
+      })
+    }
   }
 
   async createSetupIntent({ customerId }) {
     const customer = await this.services.customerRepository.find(customerId)
-    return this.services.stripe.createSetupIntent({ email: customer.email })
+    return {
+      intent: await this.services.stripe.createSetupIntent({ email: customer.email })
+    }
   }
 
   async validateVat(vatNumber = '') {
@@ -94,7 +98,7 @@ export default class Payments {
     return emailVerification(this.services)(email, productCode)
   }
 
-  createTaxes(data) { 
+  createTaxes(data) {
     return createTaxes(this.services)(data)
   }
 }

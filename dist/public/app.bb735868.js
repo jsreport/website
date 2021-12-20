@@ -41026,7 +41026,19 @@ var _default = {
     price: {
       usd: 495
     },
+    hasLicenseKey: false,
     permalink: 'NCCKu'
+  },
+  supportSubscriptionWithScaleUpdates: {
+    code: 'supportSubscriptionWithScaleUpdates',
+    name: 'enterprise support subscription including updates',
+    infoLine: 'enterprise support service provided with the next business day response time and including software updates to a purchased perpetual license',
+    price: {
+      usd: 1390
+    },
+    isSupport: true,
+    isSubscription: true,
+    permalink: 'XXXXx'
   }
 };
 exports.default = _default;
@@ -42158,8 +42170,7 @@ var _default = [{
   code: 'AE'
 }, {
   name: 'United Kingdom',
-  code: 'GB',
-  eu: true
+  code: 'GB'
 }, {
   name: 'United States',
   code: 'US'
@@ -42466,6 +42477,7 @@ function (_React$Component) {
       return _react.default.createElement("div", {
         className: "coll2"
       }, _react.default.createElement("label", null, "VAT number (only EU companies)"), _react.default.createElement("small", null, _react.default.createElement("input", {
+        disabled: this.props.disabled,
         className: "fg-gray",
         type: "text",
         size: "30",
@@ -43344,7 +43356,7 @@ function _fetchPaymentIntentSecret() {
   _fetchPaymentIntentSecret = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee3(customerId, amount, setupIntent) {
-    var res;
+    var res, resData;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -43363,9 +43375,23 @@ function _fetchPaymentIntentSecret() {
 
           case 2:
             res = _context3.sent;
-            return _context3.abrupt("return", res.text());
+            _context3.next = 5;
+            return res.json();
 
-          case 4:
+          case 5:
+            resData = _context3.sent;
+
+            if (res.ok) {
+              _context3.next = 8;
+              break;
+            }
+
+            throw new Error(resData && resData.error ? resData.error : res.statusText);
+
+          case 8:
+            return _context3.abrupt("return", resData.intent);
+
+          case 9:
           case "end":
             return _context3.stop();
         }
@@ -43420,26 +43446,35 @@ function CardForm(_ref2) {
       error = _useState4[0],
       setError = _useState4[1];
 
-  var _useState5 = (0, _react.useState)(''),
+  var _useState5 = (0, _react.useState)(null),
       _useState6 = _slicedToArray(_useState5, 2),
-      processing = _useState6[0],
-      setProcessing = _useState6[1];
+      loadError = _useState6[0],
+      setLoadError = _useState6[1];
 
-  var _useState7 = (0, _react.useState)(true),
+  var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      disabled = _useState8[0],
-      setDisabled = _useState8[1];
+      processing = _useState8[0],
+      setProcessing = _useState8[1];
 
-  var _useState9 = (0, _react.useState)(''),
+  var _useState9 = (0, _react.useState)(true),
       _useState10 = _slicedToArray(_useState9, 2),
-      clientSecret = _useState10[0],
-      setClientSecret = _useState10[1];
+      disabled = _useState10[0],
+      setDisabled = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      clientSecret = _useState12[0],
+      setClientSecret = _useState12[1];
 
   var stripe = (0, _reactStripeJs.useStripe)();
   var elements = (0, _reactStripeJs.useElements)();
   (0, _react.useEffect)(function () {
-    fetchPaymentIntentSecret(customerId, amount, setupIntent).then(setClientSecret);
-  }, []);
+    fetchPaymentIntentSecret(customerId, amount, setupIntent).then(function (r) {
+      return setClientSecret(r);
+    }).catch(function (e) {
+      return setLoadError(e.message);
+    });
+  }, [customerId, amount, setupIntent]);
   var cardStyle = {
     style: {
       base: {
@@ -43498,7 +43533,7 @@ function CardForm(_ref2) {
     var _ref4 = _asyncToGenerator(
     /*#__PURE__*/
     regeneratorRuntime.mark(function _callee2(ev) {
-      var _ref5, _error2, _setupIntent, _ref6, _error, paymentIntent;
+      var _ref5, _error, _setupIntent, _ref6, _error2, paymentIntent;
 
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
@@ -43509,7 +43544,7 @@ function CardForm(_ref2) {
               _context2.prev = 2;
 
               if (!setupIntent) {
-                _context2.next = 16;
+                _context2.next = 18;
                 break;
               }
 
@@ -43522,15 +43557,15 @@ function CardForm(_ref2) {
 
             case 6:
               _ref5 = _context2.sent;
-              _error2 = _ref5.error;
+              _error = _ref5.error;
               _setupIntent = _ref5.setupIntent;
 
-              if (!_error2) {
+              if (!_error) {
                 _context2.next = 11;
                 break;
               }
 
-              throw new Error(_error2.message);
+              throw new Error(_error.message);
 
             case 11:
               _context2.next = 13;
@@ -43540,56 +43575,66 @@ function CardForm(_ref2) {
               setError(null);
               setProcessing(false);
               setSucceeded(true);
+              _context2.next = 30;
+              break;
 
-            case 16:
-              _context2.next = 18;
+            case 18:
+              _context2.next = 20;
               return stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                   card: elements.getElement(_reactStripeJs.CardElement)
                 }
               });
 
-            case 18:
+            case 20:
               _ref6 = _context2.sent;
-              _error = _ref6.error;
+              _error2 = _ref6.error;
               paymentIntent = _ref6.paymentIntent;
 
-              if (!_error) {
-                _context2.next = 23;
+              if (!_error2) {
+                _context2.next = 25;
                 break;
               }
 
-              throw new Error(_error.message);
-
-            case 23:
-              _context2.next = 25;
-              return onSubmit(paymentIntent);
+              throw new Error(_error2.message);
 
             case 25:
+              _context2.next = 27;
+              return onSubmit(paymentIntent);
+
+            case 27:
               setError(null);
               setProcessing(false);
               setSucceeded(true);
-              _context2.next = 34;
-              break;
 
             case 30:
-              _context2.prev = 30;
+              _context2.next = 36;
+              break;
+
+            case 32:
+              _context2.prev = 32;
               _context2.t0 = _context2["catch"](2);
               setError("Payment failed ".concat(_context2.t0.message));
               setProcessing(false);
 
-            case 34:
+            case 36:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[2, 30]]);
+      }, _callee2, null, [[2, 32]]);
     }));
 
     return function handleSubmit(_x5) {
       return _ref4.apply(this, arguments);
     };
   }();
+
+  if (loadError) {
+    return _react.default.createElement("div", {
+      className: "row text-center"
+    }, "We were unable to initialize the payment form. Please reload and try again. error: ", loadError);
+  }
 
   return _react.default.createElement("form", {
     id: "payment-form",
@@ -43919,14 +43964,16 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 function Country(_ref) {
   var value = _ref.value,
-      onChange = _ref.onChange;
+      onChange = _ref.onChange,
+      disabled = _ref.disabled;
   return _react.default.createElement("div", {
     className: "coll2"
   }, _react.default.createElement("label", null, "Country"), _react.default.createElement("small", null, _react.default.createElement("select", {
     className: "fg-gray",
     onChange: onChange,
     required: true,
-    value: value
+    value: value,
+    disabled: disabled
   }, _countries.default.map(function (c) {
     return _react.default.createElement("option", {
       key: c.code,
@@ -44117,6 +44164,7 @@ function (_React$Component) {
       }, _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement(_vat.default, {
+        disabled: this.state.cardDetailsVisible,
         value: this.state.vatNumber,
         onChange: function onChange(v) {
           return _this4.setState({
@@ -44138,6 +44186,7 @@ function (_React$Component) {
           });
         }
       }), _react.default.createElement(Country, {
+        disabled: this.state.cardDetailsVisible,
         value: this.state.country,
         onChange: function onChange(v) {
           return _this4.setState({
@@ -45264,6 +45313,7 @@ function (_React$Component) {
           return _this3.updatePaymentMethod(i);
         },
         setupIntent: !this.state.subscription.plannedCancelation,
+        customerId: this.props.match.params.customer,
         amount: this.state.sales[this.state.sales.length - 1].accountingData.amount
       }) : _react.default.createElement(_react.default.Fragment, null)) : _react.default.createElement("div", null, _react.default.createElement("span", {
         className: "bg-red fg-white",
@@ -45275,6 +45325,34 @@ function (_React$Component) {
   }, {
     key: "renderOneTime",
     value: function renderOneTime() {
+      return _react.default.createElement(_react.default.Fragment, null);
+    }
+  }, {
+    key: "renderLicenseKey",
+    value: function renderLicenseKey() {
+      return _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "LICENSE KEY")), _react.default.createElement(_licenseKey.default, {
+        licenseKey: this.state.licenseKey
+      }), _react.default.createElement("div", null, _react.default.createElement("a", {
+        href: "https://jsreport.net/learn/faq#how-to-apply-license-key",
+        target: "_blank",
+        rel: "noopener noreferrer"
+      }, "license key application instructions")));
+    }
+  }, {
+    key: "renderProductInner",
+    value: function renderProductInner() {
+      if (this.state.isSupport) {
+        return _react.default.createElement(Support, {
+          product: this.state
+        });
+      }
+
+      if (this.state.licenseKey) {
+        return this.renderLicenseKey();
+      }
+
       return _react.default.createElement(_react.default.Fragment, null);
     }
   }, {
@@ -45304,17 +45382,7 @@ function (_React$Component) {
         className: "icon-arrow-left-3"
       })))))), _react.default.createElement("div", {
         className: "grid container small section text-center"
-      }, this.state.isSupport ? _react.default.createElement(Support, {
-        product: this.state
-      }) : _react.default.createElement("div", {
-        className: "row"
-      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "LICENSE KEY")), _react.default.createElement(_licenseKey.default, {
-        licenseKey: this.state.licenseKey
-      }), _react.default.createElement("div", null, _react.default.createElement("a", {
-        href: "https://jsreport.net/learn/faq#how-to-apply-license-key",
-        target: "_blank",
-        rel: "noopener noreferrer"
-      }, "license key application instructions"))), _react.default.createElement("div", {
+      }, this.renderProductInner(), _react.default.createElement("div", {
         className: "row"
       }, this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()), _react.default.createElement("div", {
         className: "row"
@@ -51530,7 +51598,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63963" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61787" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

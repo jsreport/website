@@ -27,7 +27,7 @@ const tmpPath = path.join(os.tmpdir(), 'jsreport', 'taxes')
 async function renderSale(services: Services, sale: Sale, templatePath: string) {
     await services.renderInvoice(sale, templatePath)
     const invoiceBuffer = await services.readInvoice(sale.id + '.pdf')
-    fs.writeFileSync(path.join(tmpPath, 'data', sale.id + '.pdf'), invoiceBuffer)    
+    fs.writeFileSync(path.join(tmpPath, 'data', sale.id + '.pdf'), invoiceBuffer)
 }
 
 async function calculateFees(stripeSales: Array<Sale>, gumroadInvoices: Array<Invoice>) {
@@ -39,18 +39,18 @@ async function calculateFees(stripeSales: Array<Sale>, gumroadInvoices: Array<In
     for (const gumroadInvoice of gumroadInvoices) {
         incomes += gumroadInvoice.amount
     }
-  
-    const rate = await quotation(moment().format('DD.MM.YYYY'), 'USD')     
+
+    const rate = await quotation(moment().format('DD.MM.YYYY'), 'USD')
     const fee = round(round(incomes * rate) * 0.23)
-   
+
     return fee
 }
 
 async function findStripeSales(services: Services) {
-    const customers = await services.customerRepository.findCustomersWithInvoicesLastMonth() 
+    const customers = await services.customerRepository.findCustomersWithInvoicesLastMonth()
 
     const startOfMonth = moment().add(-1, 'M').startOf('month').toDate()
-    const endOfMonth   = moment().add(-1, 'M').endOf('month').toDate()
+    const endOfMonth = moment().add(-1, 'M').endOf('month').toDate()
 
     const sales = []
     for (const customer of customers) {
@@ -62,7 +62,7 @@ async function findStripeSales(services: Services) {
             }
         }
     }
-   
+
     return sales
 }
 
@@ -70,26 +70,26 @@ async function downloadStripeInvoices(services: Services, stripeSales: Array<Sal
     for (const sale of stripeSales) {
         const invoiceBuffer = await services.readInvoice(sale.blobName)
         fs.writeFileSync(path.join(tmpPath, 'data', sale.blobName), invoiceBuffer)
-    }    
+    }
 }
 
-async function renderInvoicesXml(services: Services, sales: Array<Sale>) { 
-    const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'POHODA'   
+async function renderInvoicesXml(services: Services, sales: Array<Sale>) {
+    const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'POHODA'
 
     for (const s of sales) {
         const countryEnum = countries.find(c => c.name === s.accountingData.country)
-        s.accountingData.countryCode = countryEnum ? countryEnum.code : s.accountingData.country       
+        s.accountingData.countryCode = countryEnum ? countryEnum.code : s.accountingData.country
 
-        if (s.accountingData.currency === 'usd') {            
-            s.accountingData.currencyRate = await quotation(moment(s.purchaseDate).format('DD.MM.YYYY'), 'USD')           
-        }   
+        if (s.accountingData.currency === 'usd') {
+            s.accountingData.currencyRate = await quotation(moment(s.purchaseDate).format('DD.MM.YYYY'), 'USD')
+        }
     }
-    
+
     await services.renderInvoice(<any>{
         id,
         items: sales
     }, '/payments/pohoda', 'xml')
-    const invoicesXml = await services.readInvoice(`${id}.xml`)    
+    const invoicesXml = await services.readInvoice(`${id}.xml`)
     fs.writeFileSync(path.join(tmpPath, 'data', `${id}.xml`), iconv.encode(invoicesXml.toString(), 'win1250'))
 }
 
@@ -106,15 +106,15 @@ function convertGumroadInvoiceToSale(invoice: Invoice): Sale {
             vatRate: 0,
             currency: 'usd',
             price: invoice.amount,
-            amount: invoice.amount,             
+            amount: invoice.amount,
             item: 'Fees for the sold jsreport licenses',
             vatAmount: 0,
-            vatNumber: null,                      
+            vatNumber: null,
         }
     }
 }
 
-function convertPeruInvoiceToSale(invoice: Invoice): Sale {      
+function convertPeruInvoiceToSale(invoice: Invoice): Sale {
     return {
         purchaseDate: new Date(invoice.date),
         id: invoice.id,
@@ -127,23 +127,23 @@ function convertPeruInvoiceToSale(invoice: Invoice): Sale {
             vatRate: 0,
             currency: 'usd',
             price: invoice.amount,
-            amount: invoice.amount,             
+            amount: invoice.amount,
             item: 'jsreport implementation',
             vatAmount: 0,
-            vatNumber: null,    
-            isExpense: true                  
+            vatNumber: null,
+            isExpense: true
         }
-    }   
+    }
 }
 
 function createFeeSale(price): Sale {
-    const vatAmount =  round(price * 0.21)
-    const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'F'   
+    const vatAmount = round(price * 0.21)
+    const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'F'
     return {
         purchaseDate: new Date(),
         id: id,
         blobName: id + '.pdf',
-        accountingData: {     
+        accountingData: {
             name: 'Jan Blaha',
             address: 'U Sluncové 603/9, 186 00 Praha',
             country: 'Czech Republic',
@@ -151,16 +151,16 @@ function createFeeSale(price): Sale {
             vatRate: 21,
             currency: 'czk',
             price: price,
-            amount: price + vatAmount,                       
-            vatAmount,    
-            item: 'Fees for the sold jsreport licenses',           
-            vatNumber: 'CZ8501274529',                
+            amount: round(price + vatAmount),
+            vatAmount,
+            item: 'Fees for the sold jsreport licenses',
+            vatNumber: 'CZ8501274529',
             isExpense: true
         }
     }
 }
 
-export const createTaxes = (services: Services) => async (data: TaxesRequest) => {        
+export const createTaxes = (services: Services) => async (data: TaxesRequest) => {
     await rimraf(tmpPath)
     mkdirp.sync(path.join(tmpPath, 'data'))
 
@@ -171,15 +171,15 @@ export const createTaxes = (services: Services) => async (data: TaxesRequest) =>
 
     for (const gs of gumroadSales) {
         await renderSale(services, gs, '/payments/invoice gumroad')
-    }    
+    }
 
     const stripeSales = await findStripeSales(services)
     const feesAmount = await calculateFees(stripeSales, data.gumroadInvoices)
     const feeSale = createFeeSale(feesAmount)
-    await renderSale(services, feeSale,  '/payments/invoice fee')
-    
-    await downloadStripeInvoices(services, stripeSales)    
-    await renderInvoicesXml(services, [peruSale, ...gumroadSales, ...stripeSales, feeSale])           
+    await renderSale(services, feeSale, '/payments/invoice fee')
+
+    await downloadStripeInvoices(services, stripeSales)
+    await renderInvoicesXml(services, [peruSale, ...gumroadSales, ...stripeSales, feeSale])
 
     const archive = archiver('zip')
     const output = fs.createWriteStream(path.join(tmpPath, 'taxes.zip'))

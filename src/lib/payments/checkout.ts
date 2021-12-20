@@ -29,6 +29,7 @@ export type CheckoutRequest = {
     permalink
     isSubscription
     isSupport
+    hasLicenseKey?
   }
 }
 
@@ -80,7 +81,7 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
     id: nanoid(4),
     sales: [],
     accountingData,
-    licenseKey: checkoutData.product.isSupport ? null : uuid(),
+    licenseKey: (checkoutData.product.isSupport || checkoutData.product.hasLicenseKey === false) ? null : uuid(),
     subscription,
   }
 
@@ -97,7 +98,13 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
   customer.products.push(product)
   await services.customerRepository.update(customer)
 
-  const mail = product.isSupport ? Emails.checkout.support : (product.code === 'enterpriseUpgrade' ? Emails.checkout.upgrade : Emails.checkout.enterprise)
+  let mail = Emails.checkout.custom
+  if (product.isSupport) {
+    mail = Emails.checkout.support
+  }
+  if (product.licenseKey) {
+    mail = Emails.checkout.enterprise
+  }
 
   await services.sendEmail({
     to: customer.email,

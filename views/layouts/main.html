@@ -9,8 +9,8 @@
     {{/if}}
     <link rel="shortcut icon" href="/img/favicon.ico">
     <title>{{#if title}}{{{title}}}{{else}}jsreport: javascript based reporting platform{{/if}}</title>
-    <script src="/jsreport.min.js?v=18"> </script>
-    <link href="/jsreport.min.css?v=42" rel="stylesheet">
+    <script src="/jsreport.min.js?v=19"> </script>
+    <link href="/jsreport.min.css?v=43" rel="stylesheet">
     {{#if learn}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
     {{/if}}
@@ -49,9 +49,19 @@
     </div>
     <div id="footer" class="bg-dark">
         <div class="container fg-white">
-            &copy; 2020 <a href="/" class="fg-blue">jsreport&reg;</a> All rights reserved.
+            &copy; 2021 <a href="/" class="fg-blue">jsreport&reg;</a> All rights reserved.
         </div>
     </div>
+    {{#if learn}}
+    <div class='docs-version'>
+        <div class='fg-white'>jsreport version</div>
+        <select id='docsVersionSelect' class='fg-gray' style='width:150px'>
+            {{#each versions}}
+            <option {{#ifEql ../version this}}selected{{/ifEql}}>{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+    {{/if}}
     <!-- /.container -->
     <!-- JavaScript -->
     <!-- <script src="/js/metro.min.js"> </script>         -->
@@ -62,7 +72,7 @@
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script'
             , '//www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-49012894-1'
-                , 'jsreport.net'); ga('send', 'pageview'); </script>
+                , 'jsreport.net'); ga('send', 'pageview');</script>
 
 
     {{#if learn}}

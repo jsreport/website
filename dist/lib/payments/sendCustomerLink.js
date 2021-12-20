@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.sendCustomerLink = void 0;
 const emails_1 = require("./emails");
 const utils_1 = require("../utils/utils");
-exports.sendCustomerLink = (services) => async (email) => {
+const sendCustomerLink = (services) => async (email) => {
     let customer;
     try {
         customer = await services.customerRepository.findByEmail(email);
@@ -16,4 +17,5 @@ exports.sendCustomerLink = (services) => async (email) => {
         content: utils_1.interpolate(emails_1.Emails.customerLink.content, { customer })
     });
 };
+exports.sendCustomerLink = sendCustomerLink;
 //# sourceMappingURL=sendCustomerLink.js.map

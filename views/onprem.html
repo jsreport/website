@@ -12,18 +12,46 @@
     </div>
 </div>
 
-<div class="bg-white section small text-center">
+<style>
+    #tryBeta {
+        /* Start the shake animation and make the animation last for 0.5 seconds */
+        animation: pulse 1s;
+
+        /* When the animation is finished, start again */
+        animation-iteration-count: 6;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+        }
+
+        70% {
+            transform: scale(1);
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+        }
+
+        100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        }
+    }
+</style>
+
+<div class="bg-white section small text-center" id='normalInstructions'>
     <div class="grid container">
         <div class="text-center">
             <div class="row text-center">
                 <h3 class="fg-gray">FULL INSTALLATION</h3>
+                <!--<button id='tryBeta' class='bg-orange fg-white ani-shake'>TRY V3 BETA</button>-->
             </div>
         </div>
         <div class="row">
             <p>
-                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 8.9) on the target
+                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 16.11) on the target
                 machine.
-                The installation is then initiated using <a href="https://www.npmjs.com/">npm</a> (>= 6.x).
+                The installation is then initiated using <a href="https://www.npmjs.com/">npm</a>.
             </p>
         </div>
         <div class="cmd">
@@ -35,7 +63,8 @@
             </div>
 
             <div class="cmd-content bg-grayDarker fg-white padding10 text-left">
-                npm install jsreport-cli -g<br />mkdir jsreportapp<br />cd jsreportapp<br />jsreport init<br /> jsreport
+                npm install @jsreport/jsreport-cli -g<br />mkdir jsreportapp<br />cd jsreportapp<br />jsreport
+                init<br /> jsreport
                 configure<br /> jsreport
                 start
             </div>
@@ -79,6 +108,100 @@
         </div>
     </div>
 </div>
+
+<!--
+<script>
+    $(() => {
+        $('#tryBeta').on('click', () => {
+            window.location.hash = '#beta';
+            $('#normalInstructions').hide();
+            $('#betaInstructions').show();
+        })
+
+        $('#stabeInstall').on('click', () => {
+            window.location.hash = '';
+            $('#normalInstructions').show();
+            $('#betaInstructions').hide();
+        })
+
+        if (window.location.hash === '#beta') {
+            $('#normalInstructions').hide();
+            $('#betaInstructions').show();
+        }*
+    })
+</script>
+
+
+<div class="bg-white section small text-center" style='display:none' id='betaInstructions'>
+    <div class="grid container">
+        <div class="text-center">
+            <div class="row text-center">
+                <h3 class="fg-gray">FULL INSTALLATION V3 BETA </h3>
+                <button id='stabeInstall' class='bg-green fg-white'>BACK TO STABLE VERSION</button>
+            </div>
+        </div>
+        <div class="row">
+            <p>
+                The only prerequisite is presence of <a href="https://nodejs.org">node.js</a> (>= 16.11.0) on the target
+                machine.
+            </p>
+        </div>
+        <div class="cmd">
+            <div class="cmd-toolbar">
+                <i class="red"></i>
+                <i class="yellow"></i>
+                <i class="green"></i>
+                <span>cmd</span>
+            </div>
+
+            <div class="cmd-content bg-grayDarker fg-white padding10 text-left">
+                npm install @jsreport/jsreport-cli@beta -g<br />mkdir jsreportapp<br />cd jsreportapp<br />jsreport
+                init beta<br /> jsreport
+                configure<br /> jsreport
+                start
+            </div>
+        </div>
+        <div>
+            <p>
+                Now you can reach jsreport on default port 5488. See the <a
+                    href="/learn/configuration?version=3.0.0">configuration
+                    documentation
+                </a> for changing the port and other options. <br /> Updating already installed application can be done
+                through
+                npm. See <a href='/learn/faq#update-server?version=3.0.0'>update steps in FAQ</a>.
+            </p>
+        </div>
+        <div class="row">
+            <div class="text-center">
+                <p>
+                    popular platforms installation manuals:
+                </p>
+            </div>
+            <div class='platform-link'>
+                <a href='learn/windows?version=3.0.0'><img src='/img/windows.png' /></a>
+            </div>
+            <div class='platform-link'>
+                <a href='/learn/ubuntu?version=3.0.0'><img src='/img/ubuntu.png' /></a>
+            </div>
+            <div class='platform-link'>
+                <a href='/learn/centos?version=3.0.0'><img src='/img/centos.png' /></a>
+            </div>
+            <div class='platform-link'>
+                <a href='/learn/aws?version=3.0.0'><img src='/img/aws.png' /></a>
+            </div>
+            <div class='platform-link'>
+                <a href='/learn/azure?version=3.0.0'><img src='/img/azure.png' /></a>
+            </div>
+            <div class='platform-link'>
+                <a href='/learn/docker?version=3.0.0'><img src='/img/docker.png' /></a>
+            </div>
+            <div class='platform-link'>
+                <a href='/learn/rancher?version=3.0.0'><img src='/img/rancher.png' /></a>
+            </div>
+        </div>
+    </div>
+</div>
+-->
 
 <div class="bg-grayLighter section small text-center">
     <div class="grid container">

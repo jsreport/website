@@ -123,6 +123,7 @@ export default class SubscriptionRenewal {
     await this.services.renderInvoice(sale)
     product.sales.push(sale)
 
+    product.subscription.plannedCancelation = null
     product.subscription.nextPayment = moment(product.subscription.nextPayment).add(1, 'years').toDate()
     product.subscription.state = 'active'
     product.subscription.retryPlannedPayment = null

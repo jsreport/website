@@ -5,12 +5,12 @@ import Vat from './vat'
 import StripeForm from './stripeForm'
 import { getUserCountry, calculatePrice, product, currency, currencyChar, price } from './customerCheckout.js'
 
-function Country({ value, onChange }) {
+function Country({ value, onChange, disabled }) {
   return (
     <div className="coll2">
       <label>Country</label>
       <small>
-        <select className="fg-gray" onChange={onChange} required value={value}>
+        <select className="fg-gray" onChange={onChange} required value={value} disabled={disabled}>
           {countries.map((c) => (
             <option key={c.code} value={c.code}>
               {c.name}
@@ -112,7 +112,7 @@ class CustomerCheckout extends React.Component {
     this.props.history.push(`/payments/customer/${resData.uuid}`)
   }
 
-  render() {
+  render() {    
     const calculatedPrice = calculatePrice({
       country: this.state.country,
       isVATValid: this.state.isVATValid && this.state.vatNumber,
@@ -134,7 +134,8 @@ class CustomerCheckout extends React.Component {
           </div>
           <form ref={this.paymentForm} className="fg-gray text-center">
             <div className="row">
-              <Vat
+              <Vat     
+                disabled={this.state.cardDetailsVisible}           
                 value={this.state.vatNumber}
                 onChange={(v) => this.setState({ vatNumber: v.target.value })}
                 onVATValidated={(r) => {
@@ -152,7 +153,7 @@ class CustomerCheckout extends React.Component {
                   })
                 }}
               />
-              <Country value={this.state.country} onChange={(v) => this.setState({ country: v.target.value })} />
+              <Country disabled={this.state.cardDetailsVisible} value={this.state.country} onChange={(v) => this.setState({ country: v.target.value })} />
             </div>
             <div className="row">
               <Name value={this.state.name} onChange={(v) => this.setState({ name: v.target.value })} />

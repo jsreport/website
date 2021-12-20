@@ -9,7 +9,7 @@ export type Email = {
   content: string
 }
 
-export const sendEmail = (Mail) => {
+export const sendEmail = (Mail: Email) => {
   const sg = sendgrid(process.env.SENDGRID)
 
   logger.info(`Sending email (${Mail.subject}) to ${Mail.to}`)

@@ -3,12 +3,12 @@ require('dotenv').config()
 import express from 'express'
 import exphbs from 'express3-handlebars'
 import Router from './router'
-import * as docs from './docs'
-import learnDocs from '../../views/learn/docs'
+import * as docs from './docs/routes'
 import multer from 'multer'
 import bodyParser from 'body-parser'
 import Reaper from 'reap2'
 import * as path from 'path'
+import * as fs from 'fs'
 import * as logger from './utils/logger'
 import { MongoClient } from 'mongodb'
 import Payments from './payments/payments'
@@ -16,7 +16,6 @@ import Posts from './posts'
 import rateLimit from 'express-rate-limit'
 import basicAuth from 'express-basic-auth'
 /* eslint-enable */
-
 const app = express()
 logger.init({
   level: process.env.LOGGLY_LEVEL,
@@ -32,8 +31,11 @@ if (process.env.mongodb_username) {
   connectionString += process.env.mongodb_username + ':' + process.env.mongodb_password + '@'
 }
 connectionString += process.env.mongodb_address || 'localhost:27017'
-connectionString += '/' + process.env.mongodb_authdb
+if (process.env.mongodb_authdb) {
+  connectionString += '/' + process.env.mongodb_authdb
+}
 
+console.log('connect to', connectionString)
 const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -77,9 +79,19 @@ client.connect((err) => {
       toLongDate: function (date) {
         return require('moment')(date).format('MM-DD-YYYY HH:mm')
       },
+      ifEql: function (a, b, o) {
+        return a === b ? o.fn(this) : o.inverse(this)
+      },
+      dump: function (data) {
+        return 'dump' + JSON.stringify(data)
+      }
     },
   })
 
+  app.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'DENY')
+    next()
+  })
   app.engine('.html', hbs.engine)
   // app.disable('view cache');
   app.set('view engine', '.html')
@@ -114,11 +126,10 @@ client.connect((err) => {
   app.get('/learn/nodejs', docs.nodejs)
   app.get('/learn/recipes', docs.recipes)
   app.get('/learn/extensions', docs.extensions)
+  app.get('/learn/pull', docs.pull)
   app.get('/learn/:doc', docs.doc)
   app.get('/learn', docs.learn)
-  app.get('/examples/certificates', function (req, res) {
-    return res.render('examples/certificates')
-  })
+  app.get('/learn/static-resources/:file', docs.staticResources)
 
   app.get('/online', router.online)
   app.get('/playground', router.playground)
@@ -134,11 +145,15 @@ client.connect((err) => {
   app.get('/showcases', router.showcases)
   app.post('/contact-email', bodyParser.urlencoded({ extended: true, limit: '2mb' }), router.contactEmail)
 
+  let learnDocs
   payments
     .init()
     .then(() => Posts(app))
     .then((poet) => {
       app.get('/sitemap*', function (req, res) {
+        if (!learnDocs) {
+          learnDocs = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'views', 'learn', 'docs', 'latest', 'docs', 'docs.json')).toString())
+        }
         var postCount = poet.helpers.getPostCount()
         var posts = poet.helpers.getPosts(0, postCount)
         res.setHeader('Content-Type', 'application/xml')
@@ -153,6 +168,7 @@ client.connect((err) => {
         res.status(404).render('404')
       })
 
+      logger.info('App running on port ' + (process.env.PORT || 3000))
       app.listen(process.env.PORT || 3000)
     })
     .catch((e) => {
@@ -170,7 +186,7 @@ client.connect((err) => {
     challenge: true,
   })
 
-  app.get('/payments/taxes', [limiter, auth], router.taxes)  
+  app.get('/payments/taxes', [limiter, auth], router.taxes)
   app.post('/api/payments/taxes', [limiter, auth, bodyParser.json()], router.createTaxes)
 
   app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice)
