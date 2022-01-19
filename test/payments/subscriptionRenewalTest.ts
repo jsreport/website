@@ -26,7 +26,7 @@ databaseTest((getDb) => {
         customerRepository,
         stripe,
         sendEmail: async (m) => emails.push(m),
-        renderInvoice: async (s: Sale) => {},
+        renderInvoice: async (s: Sale) => { },
         notifyLicensingServer: async (customer, product, sale) => {
           licensingServerNotifications.push({
             customer,
@@ -41,6 +41,8 @@ databaseTest((getDb) => {
       let customer = await customerRepository.findOrCreate('a@a.com')
       const product = createProduct()
       const originalNextPayment = (product.subscription.nextPayment = moment().add('-1', 'days').toDate())
+      product.accountingData.email = 'different@email.com'
+      product.accountingData.vatNumber = 'DIFERENT'
       customer.products = [product]
       await customerRepository.update(customer)
 
@@ -74,7 +76,9 @@ databaseTest((getDb) => {
       emails[0].to.should.be.eql(customer.email)
       emails[0].content.should.containEql('renewed')
 
-      customer.products[0].sales[1].accountingData.amount.should.be.eql(customer.products[0].sales[0].accountingData.amount)
+      customer.products[0].sales[1].accountingData.amount.should.be.eql(customer.products[0].accountingData.amount)
+      customer.products[0].sales[1].accountingData.email.should.be.eql(customer.products[0].accountingData.email)
+      customer.products[0].sales[1].accountingData.vatNumber.should.be.eql(customer.products[0].accountingData.vatNumber)
 
       licensingServerNotifications[0].customer.email.should.be.eql(customer.email)
     })

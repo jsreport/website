@@ -72,12 +72,11 @@ class SubscriptionRenewal {
         if (product.subscription.plannedCancelation) {
             return this._processCancellation(customer, product);
         }
-        const lastSale = product.sales[product.sales.length - 1];
         let paymentIntent;
         try {
-            logger.info(`Initiating charge for ${product.name} for ${customer.email} of ${lastSale.accountingData.amount} USD`);
+            logger.info(`Initiating charge for ${product.name} for ${customer.email} of ${product.accountingData.amount} USD`);
             const stripeCustomer = await this.services.stripe.findOrCreateCustomer(customer.email);
-            paymentIntent = await this.services.stripe.createConfirmedPaymentIntent(stripeCustomer.id, product.subscription.stripe.paymentMethodId, lastSale.accountingData.amount);
+            paymentIntent = await this.services.stripe.createConfirmedPaymentIntent(stripeCustomer.id, product.subscription.stripe.paymentMethodId, product.accountingData.amount);
         }
         catch (e) {
             if (product.subscription.retryPlannedPayment) {
@@ -116,8 +115,7 @@ class SubscriptionRenewal {
         return this.services.customerRepository.update(customer);
     }
     async processSucesfullPayment(customer, product, paymentIntent) {
-        const lastSale = product.sales[product.sales.length - 1];
-        const sale = await this.services.customerRepository.createSale(lastSale.accountingData, {
+        const sale = await this.services.customerRepository.createSale(product.accountingData, {
             paymentIntentId: paymentIntent.id,
         });
         await this.services.renderInvoice(sale);
