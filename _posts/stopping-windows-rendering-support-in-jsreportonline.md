@@ -1,4 +1,5 @@
-﻿{{{
+﻿
+{{{
     "title"    : "Stopping windows rendering support in jsreportonline",      
     "date"     : "02-15-2022 08:13"
 }}}
@@ -7,10 +8,12 @@
 **On 26th April 2022 jsreportonline will stop supporting the windows based rendering.**    
 (This date could be shifted to the future if there will be a strong demand) 
 
+This action will change the pdf outputs if you use the old Windows-based rendering because Linux recipes produce different sizes.
+
 ## Why do we do this?
 - the technical solution of the windows rendering doesn't provide such isolation as the Linux so it has unpredictable performance.
-- we carry the costs of additional windows servers for just a few last customers and the deprecation was announced 2 years ago.
-- This step will help us to move forwards [jsreport v3](https://jsreport.net/blog/jsreport-v3-beta-released) in jsreportonline.
+- we replaced Windows with Linux in 2016 and since then we carry the costs of maintaining the old infrastructure just for the last few customers now
+- this step will help us to move forwards [jsreport v3](https://jsreport.net/blog/jsreport-v3-beta-released) in jsreportonline.
 
 ## Who is affected?
 Everyone who uses [phantom-pdf](https://jsreport.net/learn/phantom-pdf) or [wkhtmltopdf](https://jsreport.net/learn/wkhtmltopdf) recipe and in the template's properties has selected the windows based version.
@@ -85,9 +88,6 @@ We appologize for this inconvenience. We stalled this for many years, but now we
 
 Please don't hesitate to reach us at support@jsreport.net
 We will do our best to help you with the transition.
-
-
-
 
 
 
