@@ -32,7 +32,6 @@ The sizing of the elements when switching the recipe or platform changes. Theref
 
 - add chrome margin to 1cm to all sides
 - change the page format to A4
-- set chrome media type to screen
 - add the following style
 
 ```html
