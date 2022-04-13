@@ -82,7 +82,7 @@ export default {
     name: 'jsreport enterprise upgrade',
     infoLine: 'Upgrade an existing jsreport enterprise license key to be eligible to the current the latest version and another 6 months of free updates.',
     price: {
-      usd: 495
+      usd: 445
     },
     hasLicenseKey: false,
     permalink: 'NCCKu'
