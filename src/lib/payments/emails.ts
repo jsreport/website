@@ -10,20 +10,16 @@ export const Emails = {
         content: `Hi,<br>
 thank you for purchasing \${product.name}.<br>
 <br>
-Your license key is:<br>
+This is your license key:<br>
 \${product.licenseKey}<br>
 <br>
-Please see how you can apply the license key here:<br>
-<a href='https://jsreport.net/learn/faq#how-to-apply-license-key'>https://jsreport.net/learn/faq#how-to-apply-license-key</a><br>
-<br>
-The invoice can be downloaded from your customer portal<br>
-<a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
+You can find the information on how to apply it in the <a href='https://jsreport.net/learn/faq#how-to-apply-license-key'>FAQ</a>.<br>
+The invoice download as well as the product management can be found <a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}'>here</a>.<br>
 <br>
 Having a technical question? Please ask on our <a href='https://forum.jsreport.net'>forum</a>.<br>
 Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.<br>
 <br>
-Please download and read the end user license agreement:<br>
-<a href='http://jsreport.net/terms-of-use-commercial.txt'>http://jsreport.net/terms-of-use-commercial.txt</a><br>
+Please download and read the <a href='http://jsreport.net/terms-of-use-commercial.txt'>End user license agreement</a><br>
 <br>
 Thank you<br>
 jsreport team
@@ -46,8 +42,7 @@ You can also use email support@jsreport.net for support questions and incidents.
 However, the support portal is the preferred way to contact us.<br>
 Please always mention your're support subscriber in case you decide to use the email.<br>
 <br>
-The invoice can be downloaded from your customer portal<br>
-<a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
+The invoice download as well as the product management can be found <a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}'>here</a>.<br>
 <br>
 Thank you<br>
 jsreport team
@@ -66,8 +61,7 @@ thank you for purchasing \${product.name}.<br>
 <br>
 Please wait until our support team process your purchase. We will contact you shortly.
 <br>
-The invoice can be downloaded from your customer portal<br>
-<a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
+The invoice download as well as the product management can be found <a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}'>here</a>.<br>
 Thank you<br>
 jsreport team
 `,
@@ -116,8 +110,7 @@ jsreport team
       content: `Hi,<br>
 your \${product.name} was successfuly renewed.<br>
 <br>
-The invoice can be downloaded from your customer portal <br>
-<a href='https://jsreport.net/payments/customer/\${customer.uuid}'>https://jsreport.net/payments/customer/\${customer.uuid}</a><br>
+The invoice download as well as the product management can be found <a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}'>here</a>.<br>
 <br>
 Thank you for using jsreport<br>
 jsreport team`,
@@ -134,7 +127,7 @@ jsreport team`,
 we weren't able to charge your bank card for \${product.name} renewal.<br>
 <br>
 Please verify your bank credentials.<br>
-<a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}'>https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}</a><br>
+<a href='https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}/\${product.id}'>https://jsreport.net/payments/customer/\${customer.uuid}/product/\${product.id}</a><br>
 <br>
 
 jsreport team`,

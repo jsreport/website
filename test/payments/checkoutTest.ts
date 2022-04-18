@@ -101,6 +101,7 @@ databaseTest((getDb) => {
       emails[0].to.should.be.eql(customer.email)
       emails[0].subject.should.containEql('enterprise subscription')
       emails[0].content.should.containEql(product.licenseKey)
+      emails[0].content.should.containEql(`https://jsreport.net/payments/customer/${customer.uuid}/product/${product.id}`)
     })
   })
 })

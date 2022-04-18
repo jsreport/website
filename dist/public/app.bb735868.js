@@ -41024,7 +41024,7 @@ var _default = {
     name: 'jsreport enterprise upgrade',
     infoLine: 'Upgrade an existing jsreport enterprise license key to be eligible to the current the latest version and another 6 months of free updates.',
     price: {
-      usd: 495
+      usd: 445
     },
     hasLicenseKey: false,
     permalink: 'NCCKu'
@@ -44952,11 +44952,15 @@ function Product(_ref) {
     onClick: onClick
   }, _react.default.createElement("div", {
     className: "list-content"
-  }, _react.default.createElement("h3", null, _products.default[product.code].name, " ", product.isSubscription && product.subscription.status === 'canceled' ? '( canceled )' : '', _react.default.createElement("div", null, _react.default.createElement("small", null, "Purchased on ", new Date(product.sales[0].purchaseDate).toLocaleDateString()))), product.licenseKey ? _react.default.createElement("div", null, _react.default.createElement("div", {
-    className: "padding5"
-  }, _react.default.createElement("div", null, _react.default.createElement("span", null, "License key"))), _react.default.createElement(_licenseKey.default, {
+  }, _react.default.createElement("h3", null, _products.default[product.code].name, " ", product.isSubscription && product.subscription.status === 'canceled' ? '( canceled )' : '', _react.default.createElement("div", null, _react.default.createElement("small", null, "Purchased on ", new Date(product.sales[0].purchaseDate).toLocaleDateString()))), product.licenseKey ? _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement("div", null, _react.default.createElement("span", null, "License key"))), _react.default.createElement(_licenseKey.default, {
     licenseKey: product.licenseKey
-  })) : _react.default.createElement("div", null)));
+  })) : _react.default.createElement("div", null), _react.default.createElement("button", {
+    style: {
+      marginTop: '1rem',
+      marginBottom: '1rem'
+    },
+    className: "button info"
+  }, "invoices and management")));
 }
 
 var Customer =
@@ -51598,7 +51602,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61787" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49368" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

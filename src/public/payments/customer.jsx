@@ -22,7 +22,7 @@ function Product({ product, onClick }) {
 
         {product.licenseKey ? (
           <div>
-            <div className="padding5">
+            <div>
               <div>
                 <span>License key</span>
               </div>
@@ -32,6 +32,7 @@ function Product({ product, onClick }) {
         ) : (
           <div />
         )}
+        <button style={{marginTop: '1rem', marginBottom: '1rem'}} className="button info">invoices and management</button>
       </div>
     </div>
   )

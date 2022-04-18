@@ -15,7 +15,7 @@ export let init = (loggly = null) => {
 
   _logger.add(new winston.transports.Console());
 
-  if (loggly) {
+  if (loggly && loggly.subdomain) {
     _logger.add(
       new Loggly({
         level: loggly.level,

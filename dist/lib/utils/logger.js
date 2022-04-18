@@ -13,7 +13,7 @@ let init = (loggly = null) => {
         format: winston_1.default.format.simple(),
     });
     _logger.add(new winston_1.default.transports.Console());
-    if (loggly) {
+    if (loggly && loggly.subdomain) {
         _logger.add(new winston_loggly_bulk_1.Loggly({
             level: loggly.level,
             token: loggly.token,
