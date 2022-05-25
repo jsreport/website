@@ -1,7 +1,7 @@
 ﻿
 
 {{{
-    "title": "New config trustUserCode in 3-6-0",
+    "title": "New config trustUserCode in 3.6.0",
     "date": "25-05-2022 21:04"
 }}}
 
