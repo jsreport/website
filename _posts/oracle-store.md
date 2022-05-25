@@ -5,11 +5,11 @@
 
 **I'm excited to announce jsreport now supports storing report templates in the [Oracle database](https://www.oracle.com/database/).** This was possible only because of the contribution done by [@jorisdebock](https://github.com/jorisdebock). Thank you!
 
-You can find the documentation [here](https://github.com/jsreport/jsreport-oracle-store), but the installation is pretty much standard to other jsreport template stores.
+You can find the documentation [here](https://github.com/jsreport/jsreport/tree/master/packages/jsreport-oracle-store), but the installation is pretty much standard to other jsreport template stores.
 
 Installation...
 ```
-npm i jsreport-oracle-store
+npm i @jsreport/jsreport-oracle-store
 ```
 Configuration...
 ```js
@@ -31,9 +31,9 @@ For completeness, this is the table of the currently supported [template store](
 | Documentation | Technology |
 | ------------- | ---------- |
 | [jsreport-fs-store](/learn/fs-store) | file system + Azure Storage + AWS S3 |
-| [jsreport-mssql-store](https://github.com/jsreport/jsreport-mssql-store)| Microsoft SQL Server |
-| [jsreport-postgres-store](https://github.com/jsreport/jsreport-postgres-store) | PostgreSQL|
-| [jsreport-mongodb-store](https://github.com/jsreport/jsreport-mongodb-store) | MongoDB
-| [jsreport-oracle-store](https://github.com/jsreport/jsreport-oracle-store) | Oracle
+| [jsreport-mssql-store](https://github.com/jsreport/jsreport/tree/master/packages/jsreport-mssql-store)| Microsoft SQL Server |
+| [jsreport-postgres-store](https://github.com/jsreport/jsreport/tree/master/packages/jsreport-postgres-store) | PostgreSQL|
+| [jsreport-mongodb-store](https://github.com/jsreport/jsreport/tree/master/packages/jsreport-mongodb-store) | MongoDB
+| [jsreport-oracle-store](https://github.com/jsreport/jsreport/tree/master/packages/jsreport-oracle-store) | Oracle
 
 What's next? We will soon ship jsreport v3 and include also [blob storage](https://jsreport.net/learn/blob-storages) implementation to the oracle store. Actually, every sql based store will by default include the blob storage implementation for the most convenient use. And next? Would you like us to add [mysql](https://www.mysql.com/) store?
