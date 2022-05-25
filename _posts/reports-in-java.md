@@ -11,7 +11,7 @@ We are happy to announce **jsreport has the [java client](https://github.com/hed
 
 The first you need to install jsreport server.  This can be as easy as this:
 ```sh
-npm install jsreport-cli -g  
+npm install @jsreport/jsreport-cli -g  
 mkdir jsreportapp  
 cd jsreportapp  
 jsreport init  
