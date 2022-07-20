@@ -79,7 +79,7 @@ export default class Product extends React.Component {
   }
 
   async cancel() {
-    if (!window.confirm('Are you sure you want to cancel this subscription?')) {
+    if (!window.confirm('Are you sure you want to cancel the next renewal?')) {
       return
     }
 
@@ -158,7 +158,7 @@ export default class Product extends React.Component {
                   Update payment
                 </button>
                 <button className="button danger" onClick={() => this.cancel()}>
-                  Cancel
+                  Cancel renewal
                 </button>
               </>
             ) : (
