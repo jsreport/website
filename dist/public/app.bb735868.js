@@ -45170,7 +45170,7 @@ function (_React$Component) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (window.confirm('Are you sure you want to cancel this subscription?')) {
+                if (window.confirm('Are you sure you want to cancel the next renewal?')) {
                   _context.next = 2;
                   break;
                 }
@@ -45311,7 +45311,7 @@ function (_React$Component) {
         onClick: function onClick() {
           return _this3.cancel();
         }
-      }, "Cancel")) : _react.default.createElement(_react.default.Fragment, null), this.state.updating ? _react.default.createElement(_stripeForm.default, {
+      }, "Cancel renewal")) : _react.default.createElement(_react.default.Fragment, null), this.state.updating ? _react.default.createElement(_stripeForm.default, {
         email: this.state.customer.email,
         onSubmit: function onSubmit(i) {
           return _this3.updatePaymentMethod(i);
@@ -51602,7 +51602,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49368" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54906" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
