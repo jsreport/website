@@ -1,5 +1,6 @@
 ﻿
 
+
 {{{
     "title": "jsreportonline gets major update with v3",
     "date": "07-26-2022 15:04"
@@ -15,4 +16,21 @@
 🏎 The jsreportonline service also gets a HW upgrade which you can notice by significantly improved performance.
 
 📆 The migration is planned for 20.9.2022. We've prepared the environment which you can use to test your workspace and raise a complaint during the next two months. The environment is reachable at https://jsreportonline-test.net and contains a copy of the production data. Feel free to modify templates and test the new features. **Please pay attention to careful testing of your current templates.**
+
+## Potential problems
+*This section will be updated through the time...*
+
+#### Helpers declaration
+Helpers declared as variables aren't working in v3.
+```js
+// helper not found
+var aHelper = () => 'foo'
+```
+Such declareation needs to be replaced with function
+
+```js
+function aHelper() {
+  return 'foo'
+}
+```
 
