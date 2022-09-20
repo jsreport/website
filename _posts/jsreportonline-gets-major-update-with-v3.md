@@ -6,6 +6,8 @@
     "date": "07-26-2022 15:04"
 }}}
 
+**UPDATE - The release is postponed by one week to 27.9.2022**
+
 
 📢 [jsreport v3](https://jsreport.net/blog/jsreport-300-released) was released almost a year ago, but finally, now it's time to ship it also to the jsreportonline.
 
