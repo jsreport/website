@@ -97,7 +97,7 @@ export default class Product extends React.Component {
       this.setState({
         subscription: {
           ...this.state.subscription,
-          status: 'canceled',
+          state: 'canceled',
         },
       })
     } catch (e) {
