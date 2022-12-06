@@ -12,9 +12,9 @@ function AppRouter () {
     <Router>
       <Switch>
         <Route
-          path='/payments/customer/:customer/checkout/:product'
+          path='/payments/customer/:customer/checkout/:product/:plan?'
           component={CustomerCheckout}
-        />
+        />       
         <Route path='/payments/checkout/:product' component={Checkout} />
         <Route
           path='/payments/customer/:customer/product/:product'

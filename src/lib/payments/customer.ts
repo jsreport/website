@@ -57,11 +57,14 @@ export type Product = {
   isSubscription: boolean
   isSupport: boolean
   code: string
-  permalink: string
+  permalink?: string
   name: string
   sales: Array<Sale>
   accountingData: AccountingData
-  subscription: Subscription
+  subscription: Subscription,
+  webhook?: string,
+  paymentCycle?: string,
+  planCode?: string
 }
 
 export type Customer = {

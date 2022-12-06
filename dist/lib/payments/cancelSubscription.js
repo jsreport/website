@@ -13,6 +13,9 @@ const cancelSubscription = (services) => async (customerId, productId) => {
     Object.assign(customer.products.find((p) => p.id === productId), product);
     await services.customerRepository.update(customer);
     const mail = product.licenseKey ? emails_1.Emails.cancel.enterprise : emails_1.Emails.cancel.custom;
+    if (product.webhook) {
+        await services.notifyWebhook(customer, product, 'canceled');
+    }
     await services.sendEmail({
         to: customer.email,
         content: utils_1.interpolate(mail.customer.content, { customer, product }),

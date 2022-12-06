@@ -96,6 +96,9 @@ class SubscriptionRenewal {
         product.subscription.retryPlannedPayment = null;
         product.subscription.plannedCancelation = moment_1.default(product.subscription.nextPayment).add(1, 'months').toDate();
         await this.services.customerRepository.update(customer);
+        if (product.webhook) {
+            await this.services.notifyWebhook(customer, product, 'cancel-planned');
+        }
         await this.services.sendEmail({
             to: customer.email,
             content: utils_1.interpolate(emails_1.Emails.recurringFail.customer.content, { customer, product }),
@@ -112,7 +115,10 @@ class SubscriptionRenewal {
         product.subscription.retryPlannedPayment = null;
         product.subscription.plannedCancelation = null;
         product.subscription.state = 'canceled';
-        return this.services.customerRepository.update(customer);
+        await this.services.customerRepository.update(customer);
+        if (product.webhook) {
+            await this.services.notifyWebhook(customer, product, 'canceled');
+        }
     }
     async processSucesfullPayment(customer, product, paymentIntent) {
         const sale = await this.services.customerRepository.createSale(product.accountingData, {
@@ -121,11 +127,16 @@ class SubscriptionRenewal {
         await this.services.renderInvoice(sale);
         product.sales.push(sale);
         product.subscription.plannedCancelation = null;
-        product.subscription.nextPayment = moment_1.default(product.subscription.nextPayment).add(1, 'years').toDate();
+        product.subscription.nextPayment = product.paymentCycle === 'monthly' ?
+            moment_1.default(product.subscription.nextPayment).add(1, 'months').toDate()
+            : moment_1.default(product.subscription.nextPayment).add(1, 'years').toDate();
         product.subscription.state = 'active';
         product.subscription.retryPlannedPayment = null;
         await this.services.customerRepository.update(customer);
         await this.services.notifyLicensingServer(customer, product, sale);
+        if (product.webhook) {
+            await this.services.notifyWebhook(customer, product, 'renewed');
+        }
         await this.services.sendEmail({
             to: customer.email,
             content: utils_1.interpolate(emails_1.Emails.recurring.customer.content, { customer, product }),

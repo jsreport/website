@@ -1,18 +1,13 @@
 import '@babel/polyfill'
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { load, cancelSubscription } from './customer.js'
+import { load } from './customer.js'
 import LicenseKey from './licenseKey'
-import products from './products'
+import products from '../../shared/products'
 
-function currencyChar(currency) {
-  return currency === 'usd' ? '$' : '€'
-}
-
-function Product({ product, onClick }) {
+function Product ({ product, onClick }) {
   return (
-    <div className="list marked" onClick={onClick}>
-      <div className="list-content">
+    <div className='list marked' onClick={onClick}>
+      <div className='list-content'>
         <h3>
           {products[product.code].name} {product.isSubscription && product.subscription.status === 'canceled' ? '( canceled )' : ''}
           <div>
@@ -20,60 +15,62 @@ function Product({ product, onClick }) {
           </div>
         </h3>
 
-        {product.licenseKey ? (
-          <div>
+        {product.licenseKey
+          ? (
             <div>
               <div>
-                <span>License key</span>
+                <div>
+                  <span>License key</span>
+                </div>
               </div>
+              <LicenseKey licenseKey={product.licenseKey} />
             </div>
-            <LicenseKey licenseKey={product.licenseKey} />
-          </div>
-        ) : (
-          <div />
-        )}
-        <button style={{marginTop: '1rem', marginBottom: '1rem'}} className="button info">invoices and management</button>
+            )
+          : (
+            <div />
+            )}
+        <button style={{ marginTop: '1rem', marginBottom: '1rem' }} className='button info'>invoices and management</button>
       </div>
     </div>
   )
 }
 
 class Customer extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-      products: [],
+      products: []
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     load(this.props.match.params.customer).then((c) => this.setState({ ...c }))
   }
 
-  openProductDetail(p) {
+  openProductDetail (p) {
     this.props.history.push(`/payments/customer/${this.state.uuid}/product/${p.id}`)
   }
 
-  render() {
+  render () {
     const { products } = this.state
     products.reverse()
 
     return (
-      <div className="fg-gray">
-        <div className="section bg-darkCyan">
-          <div className="text-center">
-            <h2 className="fg-white buy-title">{this.state.email}</h2>
-            <small className="fg-grayLighter">Created on {new Date(this.state.creationDate).toLocaleDateString()}</small>
+      <div className='fg-gray'>
+        <div className='section bg-darkCyan'>
+          <div className='text-center'>
+            <h2 className='fg-white buy-title'>{this.state.email}</h2>
+            <small className='fg-grayLighter'>Created on {new Date(this.state.creationDate).toLocaleDateString()}</small>
           </div>
         </div>
-        <div className="grid container small section">
-          <div className="row text-center">
+        <div className='grid container small section'>
+          <div className='row text-center'>
             <div>
               <h3>PRODUCTS</h3>
             </div>
           </div>
-          <div className="row">
-            <div className="listview-outlook">
+          <div className='row'>
+            <div className='listview-outlook'>
               {products.map((p) => (
                 <Product key={p.id} product={p} onClick={() => this.openProductDetail(p)} />
               ))}

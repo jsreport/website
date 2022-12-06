@@ -29,6 +29,7 @@ const customer_1 = require("./customer");
 const validateVat_1 = __importDefault(require("./validateVat"));
 const checkout_1 = require("./checkout");
 const notifyLicensingServer_1 = require("./notifyLicensingServer");
+const notifyWebhook_1 = require("./notifyWebhook");
 const updatePaymentMethod_1 = require("./updatePaymentMethod");
 const cancelSubscription_1 = require("./cancelSubscription");
 const renderInvoice_1 = require("./renderInvoice");
@@ -45,6 +46,7 @@ class Payments {
             stripe: new stripe_1.default(),
             sendEmail: mailer_1.sendEmail,
             notifyLicensingServer: notifyLicensingServer_1.notifyLicensingServer,
+            notifyWebhook: notifyWebhook_1.notifyWebhook,
             renderInvoice: renderInvoice_1.renderInvoice,
             readInvoice: renderInvoice_1.readInvoice
         };
@@ -93,7 +95,7 @@ class Payments {
         logger.info('Request customer link ' + email);
         return sendCustomerLink_1.sendCustomerLink(this.services)(email);
     }
-    stripeHook() {
+    async stripeHook() {
         // nothing for now
     }
     emailVerification(email, productCode) {

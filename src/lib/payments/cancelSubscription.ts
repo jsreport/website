@@ -18,6 +18,10 @@ export const cancelSubscription = (services: Services) => async (customerId, pro
 
   const mail = product.licenseKey ? Emails.cancel.enterprise : Emails.cancel.custom
 
+  if (product.webhook) {
+    await services.notifyWebhook(customer, product, 'canceled')
+  }
+
   await services.sendEmail({
     to: customer.email,
     content: interpolate(mail.customer.content, { customer, product }),

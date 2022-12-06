@@ -32,15 +32,15 @@ const promise = window
   .then((c) => loadStripe(c))
   .catch(console.error)
 
-export default function StripeForm({ amount, onSubmit, customerId, product, setupIntent }) {
+export default function StripeForm({ amount, onSubmit, customerId, setupIntent }) {
   return (
     <Elements stripe={promise}>
-      <CardForm amount={amount} onSubmit={onSubmit} customerId={customerId} product={product} setupIntent={setupIntent} />
+      <CardForm amount={amount} onSubmit={onSubmit} customerId={customerId} setupIntent={setupIntent} />
     </Elements>
   )
 }
 
-function CardForm({ amount, onSubmit, customerId, product, setupIntent }) {  
+function CardForm({ amount, onSubmit, customerId, setupIntent }) {  
   const [succeeded, setSucceeded] = useState(false)
   const [error, setError] = useState(null)
   const [loadError, setLoadError] = useState(null)

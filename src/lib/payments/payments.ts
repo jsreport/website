@@ -6,6 +6,7 @@ import { CustomerRepository } from './customer'
 import validateVat from './validateVat'
 import { checkout, CheckoutRequest } from './checkout'
 import { notifyLicensingServer } from './notifyLicensingServer'
+import { notifyWebhook } from './notifyWebhook'
 import { updatePaymentMethod } from './updatePaymentMethod'
 import { cancelSubscription } from './cancelSubscription'
 import { Services } from './services'
@@ -30,6 +31,7 @@ export default class Payments {
       stripe: new StripeFacade(),
       sendEmail,
       notifyLicensingServer,
+      notifyWebhook,
       renderInvoice,
       readInvoice
     }
@@ -90,7 +92,7 @@ export default class Payments {
     return sendCustomerLink(this.services)(email)
   }
 
-  stripeHook() {
+  async stripeHook() {
     // nothing for now
   }
 

@@ -2,15 +2,17 @@
     "compilerOptions": {
         "module": "commonjs",
         "moduleResolution": "node",
-        "outDir": "dist/lib",
+        "outDir": "dist",
         "target": "es2019",
         "sourceMap": true,
         "esModuleInterop": true,
+        "allowJs": true,
         "lib": [
             "es2019"
         ]
     },
     "include": [
-        "src/lib"
+        "src/lib",
+        "src/shared"  
     ]
 }

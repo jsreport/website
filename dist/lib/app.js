@@ -190,6 +190,7 @@ client.connect((err) => {
     });
     app.get('/payments/taxes', [limiter, auth], router.taxes);
     app.post('/api/payments/taxes', [limiter, auth, body_parser_1.default.json()], router.createTaxes);
+    app.get('/payments/checkout/email/:email/:product/:plan?', limiter, router.checkoutWithEmail);
     app.get('/payments/customer/:customerId/invoice/:invoiceId', limiter, router.invoice);
     app.get('/payments/*', limiter, router.payments);
     app.post('/api/payments/checkout', [limiter, body_parser_1.default.json()], router.checkoutSubmit);

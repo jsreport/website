@@ -93,6 +93,10 @@ export default class SubscriptionRenewal {
     product.subscription.plannedCancelation = moment(product.subscription.nextPayment).add(1, 'months').toDate()
     await this.services.customerRepository.update(customer)
 
+    if (product.webhook) {
+      await this.services.notifyWebhook(customer, product, 'cancel-planned')
+    }
+
     await this.services.sendEmail({
       to: customer.email,
       content: interpolate(Emails.recurringFail.customer.content, { customer, product }),
@@ -110,10 +114,13 @@ export default class SubscriptionRenewal {
     product.subscription.retryPlannedPayment = null
     product.subscription.plannedCancelation = null
     product.subscription.state = 'canceled'
-    return this.services.customerRepository.update(customer)
+    await this.services.customerRepository.update(customer)
+    if (product.webhook) {
+      await this.services.notifyWebhook(customer, product, 'canceled')
+    }
   }
 
-  async processSucesfullPayment(customer, product, paymentIntent) {
+  async processSucesfullPayment(customer, product: Product, paymentIntent) {
     const sale = await this.services.customerRepository.createSale(product.accountingData, {
       paymentIntentId: paymentIntent.id,
     })
@@ -122,12 +129,17 @@ export default class SubscriptionRenewal {
     product.sales.push(sale)
 
     product.subscription.plannedCancelation = null
-    product.subscription.nextPayment = moment(product.subscription.nextPayment).add(1, 'years').toDate()
+    product.subscription.nextPayment = product.paymentCycle === 'monthly' ? 
+      moment(product.subscription.nextPayment).add(1, 'months').toDate() 
+    : moment(product.subscription.nextPayment).add(1, 'years').toDate()
     product.subscription.state = 'active'
     product.subscription.retryPlannedPayment = null
     await this.services.customerRepository.update(customer)
 
     await this.services.notifyLicensingServer(customer, product, sale)
+    if (product.webhook) {
+      await this.services.notifyWebhook(customer, product, 'renewed')
+    }
 
     await this.services.sendEmail({
       to: customer.email,

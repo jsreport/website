@@ -4,18 +4,18 @@
 /* eslint no-unused-vars: "off" */
 
 import countries from './countries'
-import products from './products'
+import products from '../../shared/products'
 
-export async function getUserCountry() {
+export async function getUserCountry () {
   const res = await window.fetch('https://geoip-db.com/json/')
   const data = await res.json()
   return data.country_code
 }
 
-export async function validateVAT(vatNumber) {
+export async function validateVAT (vatNumber) {
   if (vatNumber == null) {
     return {
-      isValid: false,
+      isValid: false
     }
   }
 
@@ -24,41 +24,50 @@ export async function validateVAT(vatNumber) {
       method: 'POST',
       body: JSON.stringify({ vatNumber }),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
 
     const data = await r.json()
 
     if (data.error || data.valid === false) {
       return {
-        isValid: false,
+        isValid: false
       }
     } else {
       return {
         isValid: true,
-        value: data,
+        value: data
       }
     }
   } catch (e) {
     return {
-      isValid: false,
+      isValid: false
     }
   }
 }
 
-export const productCode = () => window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1)
-export const product = () => products[productCode()]
+export const product = (productCode) => products[productCode]
+export const plan = (productCode, planCode) => (products[productCode].plans || {})[planCode]
+export const planOrProduct = (productCode, planCode) => plan(productCode, planCode) || product(productCode, planCode)
+
 export const currency = 'usd'
 export const currencyChar = '$'
-export const price = () => product().price[currency]
+export const price = (productCode, planCode, paymentCycle) => {
+  const p = planOrProduct(productCode, planCode)
+  if (!p.paymentCycles) {
+    return p.price[currency]
+  }
 
-export function calculatePrice({ country, isVATValid }) {
-  function round(value) {
+  return p.paymentCycles[paymentCycle].price[currency]
+}
+
+export function calculatePrice ({ product, plan, country, isVATValid, paymentCycle }) {
+  function round (value) {
     return Number(Math.round(value + 'e' + 2) + 'e-' + 2)
   }
 
-  function getVatRate() {
+  function getVatRate () {
     if (country === 'CZ') {
       return 21
     }
@@ -67,10 +76,10 @@ export function calculatePrice({ country, isVATValid }) {
   }
 
   const vatRate = getVatRate()
-  const vatAmount = round(vatRate * 0.01 * price())
+  const vatAmount = round(vatRate * 0.01 * price(product, plan, paymentCycle))
   return {
     vatRate,
     vatAmount,
-    amount: vatAmount + price(),
+    amount: vatAmount + price(product, plan, paymentCycle)
   }
 }
