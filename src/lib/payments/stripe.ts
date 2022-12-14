@@ -11,7 +11,7 @@ export default class StripeFacade {
   }
 
   async createPaymentIntent({ amount, email }) {
-    if (amount > 2500) {
+    if (amount > 4000) {
       throw new Error('Something went wrong')
     }
 

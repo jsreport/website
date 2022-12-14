@@ -38,6 +38,7 @@ databaseTest((getDb) => {
         },
       })('a@a.com')
 
+      require('fs').writeFileSync('email.html', emails[0].content)   
       emails.should.have.length(1)
       emails[0].to.should.be.eql('a@a.com')
       emails[0].content.should.containEql(customer.uuid)

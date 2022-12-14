@@ -1,8 +1,8 @@
 import { Services } from "./services";
-import { Emails } from "./emails";
+import emailProcessor from "./emailProcessor";
 import { interpolate } from "../utils/utils";
 
-export const sendCustomerLink = (services: Services) => async (email: string) => {
+export const sendCustomerLink = (services: Services) => async (email: string) => {    
     let customer
     try {
         customer = await services.customerRepository.findByEmail(email)
@@ -10,9 +10,5 @@ export const sendCustomerLink = (services: Services) => async (email: string) =>
         return
     }
 
-    services.sendEmail({
-        to: customer.email,
-        subject: Emails.customerLink.subject,
-        content: interpolate(Emails.customerLink.content, { customer })
-    })
+    await emailProcessor(services.sendEmail, 'customerLink', customer, {})
 }

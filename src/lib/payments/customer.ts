@@ -48,7 +48,8 @@ export type Subscription = {
   retryPlannedPayment?: Date
   plannedCancelation?: Date
   card: Card
-  stripe: SubscriptionStripe
+  stripe: SubscriptionStripe,
+  paymentCycle?: string
 }
 
 export type Product = {
@@ -62,8 +63,7 @@ export type Product = {
   sales: Array<Sale>
   accountingData: AccountingData
   subscription: Subscription,
-  webhook?: string,
-  paymentCycle?: string,
+  webhook?: string,  
   planCode?: string
 }
 

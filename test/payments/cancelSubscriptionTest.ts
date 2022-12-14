@@ -38,7 +38,7 @@ databaseTest((getDb) => {
       should(updatedCustomer.products[0].subscription.plannedCancelation).be.null()
       should(updatedCustomer.products[0].subscription.retryPlannedPayment).be.null()
 
-      emails[0].to.should.be.eql(customer.email)
+      emails[0].to.should.be.eql(customer.email)      
       emails[0].content.should.containEql('canceled')
     })
   })

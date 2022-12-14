@@ -75,6 +75,8 @@ databaseTest((getDb) => {
         .startOf('day')
         .toDate()
         .should.be.eql(moment(originalNextPayment).add(1, 'years').startOf('day').toDate())
+      
+      require('fs').writeFileSync('email.html', emails[0].content)   
 
       emails[0].to.should.be.eql(customer.email)
       emails[0].content.should.containEql('renewed')
@@ -83,14 +85,14 @@ databaseTest((getDb) => {
       customer.products[0].sales[1].accountingData?.email?.should.be.eql(customer.products[0].accountingData.email)
       customer.products[0].sales[1].accountingData?.vatNumber?.should.be.eql(customer.products[0].accountingData.vatNumber)
 
-      licensingServerNotifications[0].customer.email.should.be.eql(customer.email)
+      licensingServerNotifications[0].customer.email.should.be.eql(customer.email)      
     })
 
     it('should renew monthly if payment successfull', async () => {
       let customer = await customerRepository.findOrCreate('a@a.com')
       const product = createProduct()
       const originalNextPayment = product.subscription.nextPayment = moment().add('-1', 'days').toDate()      
-      product.paymentCycle = 'monthly'
+      product.subscription.paymentCycle = 'monthly'
       product.webhook = 'http://xx.com'
       customer.products = [product]
       await customerRepository.update(customer)
@@ -156,6 +158,7 @@ databaseTest((getDb) => {
         .toDate()
         .should.be.eql(moment(originalNexyPayment).add(1, 'month').startOf('day').toDate())
 
+      require('fs').writeFileSync('email.html', emails[0].content)   
       emails[0].to.should.be.eql(customer.email)
       emails[0].content.should.containEql('bank credentials')
     })

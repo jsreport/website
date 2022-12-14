@@ -9,7 +9,11 @@ exports.default = {
             usd: 645
         },
         permalink: 'XOxVq',
-        emailType: 'enterprise'
+        email: {
+            checkoutText: `
+        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
+      `
+        }
     },
     enterpriseScale: {
         code: 'enterpriseScale',
@@ -19,7 +23,11 @@ exports.default = {
             usd: 1995
         },
         permalink: 'onQk',
-        emailType: 'enterprise'
+        email: {
+            checkoutText: `
+        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
+      `
+        }
     },
     enterpriseSubscription: {
         code: 'enterpriseSubscription',
@@ -30,7 +38,16 @@ exports.default = {
         },
         isSubscription: true,
         permalink: 'SBwu',
-        emailType: 'enterprise'
+        email: {
+            checkoutText: `
+        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
+      `,
+            cancelText: `          
+          The license key will be active until \${moment(product.subscription.nextPayment).format('MM/DD/YYYY')}.
+          Since then the license key becomes invalid and server instances using it won't start. <br /><br />
+          You can also reactive the license in the future using the link/button bellow.
+      `
+        }
     },
     enterpriseScaleSubscription: {
         code: 'enterpriseScaleSubscription',
@@ -41,7 +58,16 @@ exports.default = {
         },
         isSubscription: true,
         permalink: 'SrfG',
-        emailType: 'enterprise'
+        email: {
+            checkoutText: `
+        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
+      `,
+            cancelText: `          
+          The license key will be active until \${moment(product.subscription.nextPayment).format('MM/DD/YYYY')}.
+          Since then the license key becomes invalid and server instances using it won't start. <br /><br />
+          You can also reactive the license in the future using the link/button bellow.
+      `
+        }
     },
     supportSubscription: {
         code: 'supportSubscription',
@@ -54,7 +80,14 @@ exports.default = {
         isSupport: true,
         isSubscription: true,
         permalink: 'SVEKk',
-        emailType: 'support'
+        emailType: 'support',
+        email: {
+            checkoutText: `Please register to the support portal <a href='https://support.jsreport.net'>https://support.jsreport.net</a> and follow the instructions.<br>
+      <br>
+      You can also use email support@jsreport.net for support questions and incidents.
+      However, the support portal is the preferred way to contact us.
+      Please always mention your're support subscriber in case you decide to use the email.`
+        }
     },
     supportStarter: {
         code: 'supportStarter',
@@ -66,7 +99,13 @@ exports.default = {
         hasLicenseKey: false,
         isSupport: true,
         permalink: 'DUeSe',
-        emailType: 'support'
+        email: {
+            checkoutText: `Please register to the support portal <a href='https://support.jsreport.net'>https://support.jsreport.net</a> and follow the instructions.<br>
+      <br>
+      You can also use email support@jsreport.net for support questions and incidents.
+      However, the support portal is the preferred way to contact us.
+      Please always mention your're support subscriber in case you decide to use the email.`
+        }
     },
     enterpriseDiscounted: {
         code: 'enterpriseDiscounted',
@@ -119,7 +158,12 @@ exports.default = {
         monthly: true,
         webhook: 'http://local.net/payments-hook',
         hasLicenseKey: false,
-        emailType: 'custom',
+        email: {
+            checkoutText: `Your plan change was propagated and you can now get back to the jsreportonline and use the new credits limit.
+      You will be automatically charged \${product.subscription.paymentCycle} at this date.
+      `,
+            cancelText: 'Your plan was changed to the free. You can continue using the jsreportonline service with limited credits.'
+        },
         plans: {
             bronze: {
                 name: 'bronze',

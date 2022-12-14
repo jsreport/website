@@ -2,12 +2,11 @@ import * as logger from '../utils/logger'
 import Uuid from 'uuid/v4'
 import { AccountingData, Product, Subscription } from './customer'
 import nanoid from 'nanoid'
-import { Emails } from './emails'
 import { Services } from './services'
-import { interpolate } from '../utils/utils'
 import moment from 'moment'
 import Stripe from 'stripe'
 import products from '../../shared/products'
+import emailProcessor from './emailProcessor'
 
 const uuid = () => Uuid().toUpperCase()
 
@@ -37,10 +36,10 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
   const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId)
   const stripePaymentMethod: Stripe.PaymentMethod = <Stripe.PaymentMethod>stripePaymentIntent.payment_method
 
-  const productFromCheckout = products[checkoutData.productCode]  
-
+  const productDefinition = products[checkoutData.productCode]  
+  
   let subscription: Subscription
-  if (productFromCheckout.isSubscription) {
+  if (productDefinition.isSubscription) {
     subscription = {
       state: 'active',
       nextPayment: checkoutData.paymentCycle === 'monthly' ? moment().add(1, 'months').toDate() : moment().add(1, 'years').toDate(),
@@ -52,6 +51,7 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
       stripe: {
         paymentMethodId: (<any>stripePaymentIntent.payment_method).id,
       },
+      paymentCycle: checkoutData.paymentCycle
     }
   }
 
@@ -66,23 +66,22 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
     vatAmount: checkoutData.vatAmount,
     vatNumber: checkoutData.vatNumber,
     vatRate: checkoutData.vatRate,
-    item: productFromCheckout.name,
+    item: productDefinition.name,
     email: customer.email
   }
   
   let product: Product = {
-    code: productFromCheckout.code,
-    permalink: productFromCheckout.permalink,
-    isSubscription: productFromCheckout.isSubscription,
-    name: productFromCheckout.name,
-    isSupport: productFromCheckout.isSupport,
+    code: productDefinition.code,
+    permalink: productDefinition.permalink,
+    isSubscription: productDefinition.isSubscription,
+    name: productDefinition.name,
+    isSupport: productDefinition.isSupport,
     id: nanoid(4),
     sales: [],
     accountingData,
-    licenseKey: (productFromCheckout.hasLicenseKey === false) ? null : uuid(),
-    subscription,
-    paymentCycle: checkoutData.paymentCycle,    
-    webhook: productFromCheckout.webhook,
+    licenseKey: (productDefinition.hasLicenseKey === false) ? null : uuid(),
+    subscription,    
+    webhook: productDefinition.webhook,
     planCode: checkoutData.planCode
   }
 
@@ -112,30 +111,14 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
   } 
   
   await services.customerRepository.update(customer)
-  
-  const mail = Emails.checkout[productFromCheckout.emailType]
 
-  await services.sendEmail({
-    to: customer.email,
-    content: interpolate(mail.customer.content, {
-      customer,
-      product,
-      sale: product.sales[0],
-    }),
-    subject: interpolate(mail.customer.subject, {
-      customer,
-      product,
-      sale: product.sales[0],
-    }),
-  })
-
-  await services.sendEmail({
-    to: 'jan.blaha@jsreport.net',
-    content: interpolate(mail.us.content, { customer, product }),
-    subject: interpolate(mail.us.subject, { customer, product }),
-  })
+  await emailProcessor(services.sendEmail, `checkout${product.licenseKey ? '-license' : ''}`, customer, {
+    sale: product.sales[0],
+    product,
+    productDefinition
+  }) 
   
-  if (productFromCheckout.webhook) {
+  if (productDefinition.webhook) {
     await services.notifyWebhook(customer, product, 'checkouted')
   }
   

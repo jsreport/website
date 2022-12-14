@@ -200,8 +200,7 @@ export default function (payments: Payments, db) {
         .catch(next)
     },
 
-    checkoutWithEmail (req, res, next) {
-      console.log('checkoutWithEmail')
+    checkoutWithEmail (req, res, next) {     
       return payments.customerRepository.findOrCreate(decodeURIComponent(req.params.email))
         .then((c) => {
           res.redirect(`/payments/customer/${c.uuid}/checkout/${req.params.product}/${req.params.plan}`)

@@ -28,7 +28,7 @@ const logger = __importStar(require("../utils/logger"));
 const notifyWebhook = async function (customer, product, event) {
     logger.info(`Processing webhook ${product.webhook} with customer.uuid: ${customer.uuid}, product.id: ${product.id}, product.planCode: ${product.planCode}`);
     const r = await axios_1.default.post(product.webhook, {
-        verification: process.env.webhookVerification,
+        secret: process.env.PAYMENT_WEBHOOK_SECRET,
         event,
         customer: {
             email: customer.email,

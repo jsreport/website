@@ -107,11 +107,12 @@ export default class Product extends React.Component {
   }
 
   async updatePaymentMethod (i) {
+    const shouldSendSetupIntend = this.state.subscription.state !== 'canceled' && !this.state.subscription.plannedCancelation
     const res = await window.fetch(`/api/payments/customer/${this.props.match.params.customer}/subscription/${this.state.id}`, {
       method: 'PUT',
       body: JSON.stringify({
-        paymentIntentId: this.state.subscription.plannedCancelation ? i.id : null,
-        setupIntentId: this.state.subscription.plannedCancelation ? null : i.id
+        paymentIntentId: shouldSendSetupIntend ? null : i.id,
+        setupIntentId: shouldSendSetupIntend ? i.id : null
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -148,19 +149,18 @@ export default class Product extends React.Component {
         </div>
         {this.state.subscription.state !== 'canceled'
           ? (
-            <div>
+            <>
               <p>
-                The next payment is planned on {new Date(this.state.subscription.nextPayment).toLocaleDateString()}
-                <br />
+                {this.state.subscription.plannedCancelation
+                  ? <span style={{ color: 'red' }}>The renewal payment wasn't successful and the subscription will be canceled on {new Date(this.state.subscription.nextPayment).toLocaleDateString()}. <br /> Please update the payment in order to renew the subscription. <br /><br /></span>
+                  : <span>The next payment is planned on {new Date(this.state.subscription.nextPayment).toLocaleDateString()} <br /></span>}
+
                 {this.renderBankCard()}
               </p>
               {!this.state.updating
                 ? (
                   <>
-                    <button className='button info' style={{ marginRight: '10px' }} onClick={() => this.setState({ updating: true })}>
-                      Update payment
-                    </button>
-                    <button className='button danger' onClick={() => this.cancel()}>
+                    <button className='button danger' onClick={() => this.cancel()} style={{ marginRight: '10px' }}>
                       Cancel renewal
                     </button>
                   </>
@@ -168,28 +168,38 @@ export default class Product extends React.Component {
                 : (
                   <></>
                   )}
-              {this.state.updating
-                ? (
-                  <StripeForm
-                    email={this.state.customer.email}
-                    onSubmit={(i) => this.updatePaymentMethod(i)}
-                    setupIntent={!this.state.subscription.plannedCancelation}
-                    customerId={this.props.match.params.customer}
-                    amount={this.state.sales[this.state.sales.length - 1].accountingData.amount}
-                  />
-                  )
-                : (
-                  <></>
-                  )}
-            </div>
+            </>
             )
           : (
-            <div>
-              <span className='bg-red fg-white' style={{ padding: '3px' }}>
+            <>
+              <button className='button danger' style={{ marginRight: '10px' }}>
                 Canceled
-              </span>
-            </div>
+              </button>
+            </>
             )}
+        <>
+          {!this.state.updating
+            ? (
+              <button className='button info' onClick={() => this.setState({ updating: true })}>
+                {this.state.subscription.state === 'canceled' ? 'Reactivate' : 'Update payment'}
+              </button>)
+            : (<></>)}
+        </>
+        <div>
+          {this.state.updating
+            ? (
+              <StripeForm
+                email={this.state.customer.email}
+                onSubmit={(i) => this.updatePaymentMethod(i)}
+                setupIntent={this.state.subscription.state !== 'canceled' && !this.state.subscription.plannedCancelation}
+                customerId={this.props.match.params.customer}
+                amount={this.state.sales[this.state.sales.length - 1].accountingData.amount}
+              />
+              )
+            : (
+              <></>
+              )}
+        </div>
       </>
     )
   }

@@ -1,0 +1,48 @@
+<mjml>
+  <mj-head>
+    <mj-include path="./components/core.mjml" />
+    <mj-preview>${product.name} purchased</mj-preview>
+  </mj-head>
+  <mj-body>
+    <mj-section padding-bottom="0px">
+      <mj-include path="./components/logo.mjml" />
+      <mj-column>
+        <mj-include path="./components/invoiceLink.mjml" />                
+      </mj-column>
+    </mj-section>
+    </mj-section>
+    <mj-include path="./components/divider.mjml" />
+    <mj-section>
+      <mj-column>
+        <mj-text padding-bottom="0px">thank you for purchasing</mj-text>
+        <mj-text padding-bottom="0px" font-weight="bold"  color="#00779e">${product.name}</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text padding-bottom="0px">your license key</mj-text>
+        <mj-text>${product.licenseKey}</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>        
+        <mj-text padding-bottom="0px" >${productDefinition.email?.checkoutText || ''}</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-button href="https://jsreport.net/learn/faq#how-to-apply-license-key">Apply license key</mj-button>
+      </mj-column>
+      <mj-include path="./components/managePayments.mjml" />
+      <mj-column>
+        <mj-button href="https://forum.jsreport.net">Get help</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-include path="./components/thankyou.mjml" />
+    <mj-section>
+      <mj-column>
+        <mj-text align="center">Please download and read the <a href='http://jsreport.net/terms-of-use-commercial.txt'>End user license agreement</a><br></mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

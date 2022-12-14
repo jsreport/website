@@ -40203,6 +40203,7 @@ var runtime = (function (exports) {
 
   var Op = Object.prototype;
   var hasOwn = Op.hasOwnProperty;
+  var defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; };
   var undefined; // More compressible than void 0.
   var $Symbol = typeof Symbol === "function" ? Symbol : {};
   var iteratorSymbol = $Symbol.iterator || "@@iterator";
@@ -40235,7 +40236,7 @@ var runtime = (function (exports) {
 
     // The ._invoke method unifies the implementations of the .next,
     // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
+    defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) });
 
     return generator;
   }
@@ -40296,8 +40297,12 @@ var runtime = (function (exports) {
   var Gp = GeneratorFunctionPrototype.prototype =
     Generator.prototype = Object.create(IteratorPrototype);
   GeneratorFunction.prototype = GeneratorFunctionPrototype;
-  define(Gp, "constructor", GeneratorFunctionPrototype);
-  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+  defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: true });
+  defineProperty(
+    GeneratorFunctionPrototype,
+    "constructor",
+    { value: GeneratorFunction, configurable: true }
+  );
   GeneratorFunction.displayName = define(
     GeneratorFunctionPrototype,
     toStringTagSymbol,
@@ -40407,7 +40412,7 @@ var runtime = (function (exports) {
 
     // Define the unified helper method that is used to implement .next,
     // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
+    defineProperty(this, "_invoke", { value: enqueue });
   }
 
   defineIteratorMethods(AsyncIterator.prototype);
@@ -40517,31 +40522,32 @@ var runtime = (function (exports) {
   // delegate iterator, or by modifying context.method and context.arg,
   // setting context.delegate to null, and returning the ContinueSentinel.
   function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
+    var methodName = context.method;
+    var method = delegate.iterator[methodName];
     if (method === undefined) {
       // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
+      // method, or a missing .next mehtod, always terminate the
+      // yield* loop.
       context.delegate = null;
 
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
+      // Note: ["return"] must be used for ES3 parsing compatibility.
+      if (methodName === "throw" && delegate.iterator["return"]) {
+        // If the delegate iterator has a return method, give it a
+        // chance to clean up.
+        context.method = "return";
+        context.arg = undefined;
+        maybeInvokeDelegate(delegate, context);
 
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
+        if (context.method === "throw") {
+          // If maybeInvokeDelegate(context) changed context.method from
+          // "return" to "throw", let that override the TypeError below.
+          return ContinueSentinel;
         }
-
+      }
+      if (methodName !== "return") {
         context.method = "throw";
         context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
+          "The iterator does not provide a '" + methodName + "' method");
       }
 
       return ContinueSentinel;
@@ -40645,7 +40651,8 @@ var runtime = (function (exports) {
     this.reset(true);
   }
 
-  exports.keys = function(object) {
+  exports.keys = function(val) {
+    var object = Object(val);
     var keys = [];
     for (var key in object) {
       keys.push(key);
@@ -40962,7 +40969,9 @@ var _default = {
       usd: 645
     },
     permalink: 'XOxVq',
-    emailType: 'enterprise'
+    email: {
+      checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      "
+    }
   },
   enterpriseScale: {
     code: 'enterpriseScale',
@@ -40972,7 +40981,9 @@ var _default = {
       usd: 1995
     },
     permalink: 'onQk',
-    emailType: 'enterprise'
+    email: {
+      checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      "
+    }
   },
   enterpriseSubscription: {
     code: 'enterpriseSubscription',
@@ -40983,7 +40994,10 @@ var _default = {
     },
     isSubscription: true,
     permalink: 'SBwu',
-    emailType: 'enterprise'
+    email: {
+      checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      ",
+      cancelText: "          \n          The license key will be active until ${moment(product.subscription.nextPayment).format('MM/DD/YYYY')}.\n          Since then the license key becomes invalid and server instances using it won't start. <br /><br />\n          You can also reactive the license in the future using the link/button bellow.\n      "
+    }
   },
   enterpriseScaleSubscription: {
     code: 'enterpriseScaleSubscription',
@@ -40994,7 +41008,10 @@ var _default = {
     },
     isSubscription: true,
     permalink: 'SrfG',
-    emailType: 'enterprise'
+    email: {
+      checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      ",
+      cancelText: "          \n          The license key will be active until ${moment(product.subscription.nextPayment).format('MM/DD/YYYY')}.\n          Since then the license key becomes invalid and server instances using it won't start. <br /><br />\n          You can also reactive the license in the future using the link/button bellow.\n      "
+    }
   },
   supportSubscription: {
     code: 'supportSubscription',
@@ -41007,7 +41024,10 @@ var _default = {
     isSupport: true,
     isSubscription: true,
     permalink: 'SVEKk',
-    emailType: 'support'
+    emailType: 'support',
+    email: {
+      checkoutText: "Please register to the support portal <a href='https://support.jsreport.net'>https://support.jsreport.net</a> and follow the instructions.<br>\n      <br>\n      You can also use email support@jsreport.net for support questions and incidents.\n      However, the support portal is the preferred way to contact us.\n      Please always mention your're support subscriber in case you decide to use the email."
+    }
   },
   supportStarter: {
     code: 'supportStarter',
@@ -41019,7 +41039,9 @@ var _default = {
     hasLicenseKey: false,
     isSupport: true,
     permalink: 'DUeSe',
-    emailType: 'support'
+    email: {
+      checkoutText: "Please register to the support portal <a href='https://support.jsreport.net'>https://support.jsreport.net</a> and follow the instructions.<br>\n      <br>\n      You can also use email support@jsreport.net for support questions and incidents.\n      However, the support portal is the preferred way to contact us.\n      Please always mention your're support subscriber in case you decide to use the email."
+    }
   },
   enterpriseDiscounted: {
     code: 'enterpriseDiscounted',
@@ -41072,7 +41094,10 @@ var _default = {
     monthly: true,
     webhook: 'http://local.net/payments-hook',
     hasLicenseKey: false,
-    emailType: 'custom',
+    email: {
+      checkoutText: "Your plan change was propagated and you can now get back to the jsreportonline and use the new credits limit.\n      You will be automatically charged ${product.subscription.paymentCycle} at this date.\n      ",
+      cancelText: 'Your plan was changed to the free. You can continue using the jsreportonline service with limited credits.'
+    },
     plans: {
       bronze: {
         name: 'bronze',
@@ -44277,7 +44302,8 @@ function (_React$Component) {
                     vatNumber: this.state.vatNumber,
                     currency: _customerCheckout.currency,
                     isEU: country.eu,
-                    paymentIntentId: paymentIntent.id
+                    paymentIntentId: paymentIntent.id,
+                    paymentCycle: this.state.paymentCycle
                   }),
                   headers: {
                     'Content-Type': 'application/json'
@@ -45470,29 +45496,30 @@ function (_React$Component) {
       var _updatePaymentMethod = _asyncToGenerator(
       /*#__PURE__*/
       _regeneratorRuntime().mark(function _callee2(i) {
-        var res, resJson;
+        var shouldSendSetupIntend, res, resJson;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                shouldSendSetupIntend = this.state.subscription.state !== 'canceled' && !this.state.subscription.plannedCancelation;
+                _context2.next = 3;
                 return window.fetch("/api/payments/customer/".concat(this.props.match.params.customer, "/subscription/").concat(this.state.id), {
                   method: 'PUT',
                   body: JSON.stringify({
-                    paymentIntentId: this.state.subscription.plannedCancelation ? i.id : null,
-                    setupIntentId: this.state.subscription.plannedCancelation ? null : i.id
+                    paymentIntentId: shouldSendSetupIntend ? null : i.id,
+                    setupIntentId: shouldSendSetupIntend ? i.id : null
                   }),
                   headers: {
                     'Content-Type': 'application/json'
                   }
                 });
 
-              case 2:
+              case 3:
                 res = _context2.sent;
-                _context2.next = 5;
+                _context2.next = 6;
                 return res.json();
 
-              case 5:
+              case 6:
                 resJson = _context2.sent;
 
                 if (this.state.subscription.plannedCancelation) {
@@ -45500,16 +45527,16 @@ function (_React$Component) {
                 }
 
                 if (res.ok) {
-                  _context2.next = 9;
+                  _context2.next = 10;
                   break;
                 }
 
                 throw new Error(resJson && resJson.error ? resJson.error : res.statusText);
 
-              case 9:
+              case 10:
                 this.load();
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -45533,35 +45560,39 @@ function (_React$Component) {
     value: function renderSubscrption() {
       var _this3 = this;
 
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.subscription.state !== 'canceled' ? _react.default.createElement("div", null, _react.default.createElement("p", null, "The next payment is planned on ", new Date(this.state.subscription.nextPayment).toLocaleDateString(), _react.default.createElement("br", null), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
-        className: "button info",
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", null, _react.default.createElement("h3", null, "SUBSCRIPTION")), this.state.subscription.state !== 'canceled' ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("p", null, this.state.subscription.plannedCancelation ? _react.default.createElement("span", {
+        style: {
+          color: 'red'
+        }
+      }, "The renewal payment wasn't successful and the subscription will be canceled on ", new Date(this.state.subscription.nextPayment).toLocaleDateString(), ". ", _react.default.createElement("br", null), " Please update the payment in order to renew the subscription. ", _react.default.createElement("br", null), _react.default.createElement("br", null)) : _react.default.createElement("span", null, "The next payment is planned on ", new Date(this.state.subscription.nextPayment).toLocaleDateString(), " ", _react.default.createElement("br", null)), this.renderBankCard()), !this.state.updating ? _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
+        className: "button danger",
+        onClick: function onClick() {
+          return _this3.cancel();
+        },
         style: {
           marginRight: '10px'
-        },
+        }
+      }, "Cancel renewal")) : _react.default.createElement(_react.default.Fragment, null)) : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("button", {
+        className: "button danger",
+        style: {
+          marginRight: '10px'
+        }
+      }, "Canceled")), _react.default.createElement(_react.default.Fragment, null, !this.state.updating ? _react.default.createElement("button", {
+        className: "button info",
         onClick: function onClick() {
           return _this3.setState({
             updating: true
           });
         }
-      }, "Update payment"), _react.default.createElement("button", {
-        className: "button danger",
-        onClick: function onClick() {
-          return _this3.cancel();
-        }
-      }, "Cancel renewal")) : _react.default.createElement(_react.default.Fragment, null), this.state.updating ? _react.default.createElement(_stripeForm.default, {
+      }, this.state.subscription.state === 'canceled' ? 'Reactivate' : 'Update payment') : _react.default.createElement(_react.default.Fragment, null)), _react.default.createElement("div", null, this.state.updating ? _react.default.createElement(_stripeForm.default, {
         email: this.state.customer.email,
         onSubmit: function onSubmit(i) {
           return _this3.updatePaymentMethod(i);
         },
-        setupIntent: !this.state.subscription.plannedCancelation,
+        setupIntent: this.state.subscription.state !== 'canceled' && !this.state.subscription.plannedCancelation,
         customerId: this.props.match.params.customer,
         amount: this.state.sales[this.state.sales.length - 1].accountingData.amount
-      }) : _react.default.createElement(_react.default.Fragment, null)) : _react.default.createElement("div", null, _react.default.createElement("span", {
-        className: "bg-red fg-white",
-        style: {
-          padding: '3px'
-        }
-      }, "Canceled")));
+      }) : _react.default.createElement(_react.default.Fragment, null)));
     }
   }, {
     key: "renderOneTime",
@@ -51891,7 +51922,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54593" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64568" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

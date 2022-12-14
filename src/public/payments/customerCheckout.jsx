@@ -128,7 +128,8 @@ class CustomerCheckout extends React.Component {
         vatNumber: this.state.vatNumber,
         currency,
         isEU: country.eu,
-        paymentIntentId: paymentIntent.id
+        paymentIntentId: paymentIntent.id,
+        paymentCycle: this.state.paymentCycle
       }),
       headers: {
         'Content-Type': 'application/json'

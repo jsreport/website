@@ -24,8 +24,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const logger = __importStar(require("../utils/logger"));
 const moment_1 = __importDefault(require("moment"));
-const utils_1 = require("../utils/utils");
-const emails_1 = require("./emails");
+const products_1 = __importDefault(require("../../shared/products"));
+const emailProcessor_1 = __importDefault(require("./emailProcessor"));
 class SubscriptionRenewal {
     constructor(services, interval) {
         this.services = services;
@@ -99,15 +99,9 @@ class SubscriptionRenewal {
         if (product.webhook) {
             await this.services.notifyWebhook(customer, product, 'cancel-planned');
         }
-        await this.services.sendEmail({
-            to: customer.email,
-            content: utils_1.interpolate(emails_1.Emails.recurringFail.customer.content, { customer, product }),
-            subject: utils_1.interpolate(emails_1.Emails.recurringFail.customer.subject, { customer, product }),
-        });
-        await this.services.sendEmail({
-            to: 'jan.blaha@jsreport.net',
-            content: utils_1.interpolate(emails_1.Emails.recurringFail.us.content, { customer, product }),
-            subject: utils_1.interpolate(emails_1.Emails.recurringFail.us.subject, { customer, product }),
+        await emailProcessor_1.default(this.services.sendEmail, 'recurringFail', customer, {
+            product,
+            productDefinition: products_1.default[product.code]
         });
     }
     async _processCancellation(customer, product) {
@@ -126,10 +120,11 @@ class SubscriptionRenewal {
         });
         await this.services.renderInvoice(sale);
         product.sales.push(sale);
+        const nextPayment = product.subscription.state === 'canceled' ? new Date() : product.subscription.nextPayment;
         product.subscription.plannedCancelation = null;
-        product.subscription.nextPayment = product.paymentCycle === 'monthly' ?
-            moment_1.default(product.subscription.nextPayment).add(1, 'months').toDate()
-            : moment_1.default(product.subscription.nextPayment).add(1, 'years').toDate();
+        product.subscription.nextPayment = product.subscription.paymentCycle === 'monthly' ?
+            moment_1.default(nextPayment).add(1, 'months').toDate()
+            : moment_1.default(nextPayment).add(1, 'years').toDate();
         product.subscription.state = 'active';
         product.subscription.retryPlannedPayment = null;
         await this.services.customerRepository.update(customer);
@@ -137,15 +132,10 @@ class SubscriptionRenewal {
         if (product.webhook) {
             await this.services.notifyWebhook(customer, product, 'renewed');
         }
-        await this.services.sendEmail({
-            to: customer.email,
-            content: utils_1.interpolate(emails_1.Emails.recurring.customer.content, { customer, product }),
-            subject: utils_1.interpolate(emails_1.Emails.recurring.customer.subject, { customer, product }),
-        });
-        await this.services.sendEmail({
-            to: 'jan.blaha@jsreport.net',
-            content: utils_1.interpolate(emails_1.Emails.recurring.us.content, { customer, product }),
-            subject: utils_1.interpolate(emails_1.Emails.recurring.us.subject, { customer, product }),
+        await emailProcessor_1.default(this.services.sendEmail, 'recurring', customer, {
+            product,
+            sale,
+            productDefinition: products_1.default[product.code]
         });
         logger.info(`Processing subscription renewal of ${product.name} for ${customer.email} completed`);
     }

@@ -26,19 +26,18 @@ exports.checkout = void 0;
 const logger = __importStar(require("../utils/logger"));
 const v4_1 = __importDefault(require("uuid/v4"));
 const nanoid_1 = __importDefault(require("nanoid"));
-const emails_1 = require("./emails");
-const utils_1 = require("../utils/utils");
 const moment_1 = __importDefault(require("moment"));
 const products_1 = __importDefault(require("../../shared/products"));
+const emailProcessor_1 = __importDefault(require("./emailProcessor"));
 const uuid = () => v4_1.default().toUpperCase();
 const checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
     const customer = await services.customerRepository.find(checkoutData.customerId);
     const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId);
     const stripePaymentMethod = stripePaymentIntent.payment_method;
-    const productFromCheckout = products_1.default[checkoutData.productCode];
+    const productDefinition = products_1.default[checkoutData.productCode];
     let subscription;
-    if (productFromCheckout.isSubscription) {
+    if (productDefinition.isSubscription) {
         subscription = {
             state: 'active',
             nextPayment: checkoutData.paymentCycle === 'monthly' ? moment_1.default().add(1, 'months').toDate() : moment_1.default().add(1, 'years').toDate(),
@@ -50,6 +49,7 @@ const checkout = (services) => async (checkoutData) => {
             stripe: {
                 paymentMethodId: stripePaymentIntent.payment_method.id,
             },
+            paymentCycle: checkoutData.paymentCycle
         };
     }
     const accountingData = {
@@ -63,22 +63,21 @@ const checkout = (services) => async (checkoutData) => {
         vatAmount: checkoutData.vatAmount,
         vatNumber: checkoutData.vatNumber,
         vatRate: checkoutData.vatRate,
-        item: productFromCheckout.name,
+        item: productDefinition.name,
         email: customer.email
     };
     let product = {
-        code: productFromCheckout.code,
-        permalink: productFromCheckout.permalink,
-        isSubscription: productFromCheckout.isSubscription,
-        name: productFromCheckout.name,
-        isSupport: productFromCheckout.isSupport,
+        code: productDefinition.code,
+        permalink: productDefinition.permalink,
+        isSubscription: productDefinition.isSubscription,
+        name: productDefinition.name,
+        isSupport: productDefinition.isSupport,
         id: nanoid_1.default(4),
         sales: [],
         accountingData,
-        licenseKey: (productFromCheckout.hasLicenseKey === false) ? null : uuid(),
+        licenseKey: (productDefinition.hasLicenseKey === false) ? null : uuid(),
         subscription,
-        paymentCycle: checkoutData.paymentCycle,
-        webhook: productFromCheckout.webhook,
+        webhook: productDefinition.webhook,
         planCode: checkoutData.planCode
     };
     const sale = await services.customerRepository.createSale(accountingData, {
@@ -105,26 +104,12 @@ const checkout = (services) => async (checkoutData) => {
         customer.products.push(product);
     }
     await services.customerRepository.update(customer);
-    const mail = emails_1.Emails.checkout[productFromCheckout.emailType];
-    await services.sendEmail({
-        to: customer.email,
-        content: utils_1.interpolate(mail.customer.content, {
-            customer,
-            product,
-            sale: product.sales[0],
-        }),
-        subject: utils_1.interpolate(mail.customer.subject, {
-            customer,
-            product,
-            sale: product.sales[0],
-        }),
+    await emailProcessor_1.default(services.sendEmail, `checkout${product.licenseKey ? '-license' : ''}`, customer, {
+        sale: product.sales[0],
+        product,
+        productDefinition
     });
-    await services.sendEmail({
-        to: 'jan.blaha@jsreport.net',
-        content: utils_1.interpolate(mail.us.content, { customer, product }),
-        subject: utils_1.interpolate(mail.us.subject, { customer, product }),
-    });
-    if (productFromCheckout.webhook) {
+    if (productDefinition.webhook) {
         await services.notifyWebhook(customer, product, 'checkouted');
     }
     return product;
