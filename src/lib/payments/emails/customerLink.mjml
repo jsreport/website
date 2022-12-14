@@ -1,0 +1,23 @@
+<mjml>
+  <mj-head>
+    <mj-include path="./components/core.mjml" />
+    <mj-preview>jsreport dashboard link</mj-preview>
+  </mj-head>
+  <mj-body>
+    <mj-section padding-bottom="0px">
+       <mj-include path="./components/logo.mjml" />
+    </mj-section>
+    <mj-include path="./components/divider.mjml" />
+    <mj-section>
+      <mj-column>
+        <mj-text>You requested link to your jsreport customer dashboard. You can access it using the link/button below.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-button href="https://jsreport.net/payments/customer/${customer.uuid}">Open dashboard</mj-button>
+      </mj-column>
+    </mj-section>
+    <mj-include path="./components/thankyou.mjml" />
+  </mj-body>
+</mjml>

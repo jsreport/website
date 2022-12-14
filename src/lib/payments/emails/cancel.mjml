@@ -1,0 +1,25 @@
+<mjml>
+  <mj-head>
+    <mj-include path="./components/core.mjml" />
+    <mj-preview>${product.name} canceled</mj-preview>
+  </mj-head>
+  <mj-body>
+    <mj-section padding-bottom="0px">
+      <mj-include path="./components/logo.mjml" />
+      <mj-column>
+        <mj-text align="left">❌ subscription canceled</mj-text>        
+      </mj-column>
+    </mj-section>
+    <mj-include path="./components/divider.mjml" />
+    <mj-section>
+      <mj-column>
+        <mj-text>Your <span style='color:#00779e'>${productDefinition.name}</span> has been canceled and you no longer be charged.</mj-text>
+        <mj-text>${productDefinition.email?.cancelText || ''}</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-include path="./components/managePayments.mjml" />    
+    </mj-section>
+    <mj-include path="./components/thankyou.mjml" />
+  </mj-body>
+</mjml>

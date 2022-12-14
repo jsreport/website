@@ -1,14 +1,12 @@
 import { Services } from './services'
 import { interpolate } from '../utils/utils'
-import { Emails } from './emails'
+import emailProcessor from './emailProcessor'
+import { Product } from './customer'
 
-export const emailVerification = (services: Services) => async (email: string, productCode) => {
-  const stripeCustomer = await services.stripe.findOrCreateCustomer(email.toLowerCase())
+export const emailVerification = (services: Services) => async (email: string, product: Product) => {  
   const customer = await services.customerRepository.findOrCreate(email.toLocaleLowerCase())
 
-  await services.sendEmail({
-    to: customer.email,
-    content: interpolate(Emails.emailVerification.content, { customer, productCode }),
-    subject: interpolate(Emails.emailVerification.subject, { customer, productCode }),
+  await emailProcessor(services.sendEmail, 'emailVerification', customer, {
+    product
   })
 }

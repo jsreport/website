@@ -1,0 +1,5 @@
+<mj-attributes>
+  <mj-text font-size="15px" color="#2f2f2f" />
+  <mj-button background-color="#00779e" width="180px" inner-padding="7px 14px" />  
+  <mj-section padding-top="5px" />
+</mj-attributes>

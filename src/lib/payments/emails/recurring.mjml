@@ -1,0 +1,26 @@
+<mjml>
+  <mj-head>
+    <mj-include path="./components/core.mjml" />
+    <mj-preview>✔ renewal successful</mj-preview>
+  </mj-head>
+  <mj-body>
+    <mj-section padding-bottom="0px">
+      <mj-include path="./components/logo.mjml" />
+      <mj-column>
+        <mj-text align="left">✔ renewal successfull</mj-text>
+        <mj-include path="./components/invoiceLink.mjml" />                
+      </mj-column>
+    </mj-section>
+    </mj-section>
+    <mj-include path="./components/divider.mjml" />
+    <mj-section>
+      <mj-column>
+        <mj-text>The <span style='color:#00779e'>${product.name}</span> was successfully renewed.</mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-include path="./components/managePayments.mjml" />
+    </mj-section>
+    <mj-include path="./components/thankyou.mjml" />
+  </mj-body>
+</mjml>

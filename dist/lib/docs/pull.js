@@ -34,8 +34,10 @@ const logger = __importStar(require("../utils/logger"));
 const tmpRepoDir = path_1.default.join(os_1.default.tmpdir(), 'jsreport', 'temp', 'docsRepo');
 async function pull(docsPath = 'views/learn/docs') {
     // return ['latest', '2.11.0']
-    fs_1.default.rmdirSync(tmpRepoDir, { recursive: true });
-    fs_1.default.mkdirSync(tmpRepoDir, { recursive: true });
+    if (fs_1.default.existsSync(tmpRepoDir)) {
+        fs_1.default.rmdirSync(tmpRepoDir, { recursive: true });
+        fs_1.default.mkdirSync(tmpRepoDir, { recursive: true });
+    }
     const fullDocsPath = path_1.default.isAbsolute(docsPath) ? docsPath : path_1.default.join(process_1.default.cwd(), docsPath);
     fs_1.default.rmdirSync(fullDocsPath, { recursive: true });
     fs_1.default.mkdirSync(fullDocsPath, { recursive: true });

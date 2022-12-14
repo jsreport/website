@@ -1,0 +1,29 @@
+<mjml>
+  <mj-head> 
+    <mj-include path="./components/core.mjml" />
+    <mj-preview>❗ unsuccessful renewal</mj-preview>
+  </mj-head>
+  <mj-body>
+    <mj-section padding-bottom="0px">
+      <mj-include path="./components/logo.mjml" />
+      <mj-column>
+        <mj-text align="left">❌ renewal failed</mj-text>        
+      </mj-column>
+    </mj-section>
+    </mj-section>
+    <mj-include path="./components/divider.mjml" />
+    <mj-section>
+      <mj-column>
+        <mj-text>The renewal of your <span style='color:#00779e'>${product.name}</span> wasn't successful, 
+        because your bank rejected the payment. Please verify your bank credentials using 
+        the below link.<br><br>
+        The renewal needs to be successfully processed within one month, otherwise, the subscription will be automatically canceled.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-include path="./components/managePayments.mjml" />
+    </mj-section>
+    <mj-include path="./components/thankyou.mjml" />
+  </mj-body>
+</mjml>

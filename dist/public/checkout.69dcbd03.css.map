@@ -1,1 +1,0 @@
-{"version":3,"sources":["checkout.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA","file":"checkout.69dcbd03.css","sourceRoot":"..\\..\\src\\public\\payments","sourcesContent":["@keyframes spin {\r\n    100% {  \r\n        -webkit-transform: rotate(360deg);\r\n        transform: rotate(360deg);\r\n    }\r\n}"]}

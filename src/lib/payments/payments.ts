@@ -6,6 +6,7 @@ import { CustomerRepository } from './customer'
 import validateVat from './validateVat'
 import { checkout, CheckoutRequest } from './checkout'
 import { notifyLicensingServer } from './notifyLicensingServer'
+import { notifyWebhook } from './notifyWebhook'
 import { updatePaymentMethod } from './updatePaymentMethod'
 import { cancelSubscription } from './cancelSubscription'
 import { Services } from './services'
@@ -14,6 +15,7 @@ import { sendCustomerLink } from './sendCustomerLink'
 import SubscriptionRenewal from './subscriptionRenewal'
 import { emailVerification } from './emailVerification'
 import { createTaxes } from './taxes/taxes.js'
+import products from '../../shared/products'
 
 export default class Payments {
   db: Db
@@ -30,6 +32,7 @@ export default class Payments {
       stripe: new StripeFacade(),
       sendEmail,
       notifyLicensingServer,
+      notifyWebhook,
       renderInvoice,
       readInvoice
     }
@@ -67,7 +70,8 @@ export default class Payments {
   }
 
   async updatePaymentMethod(customerId, productId, si) {
-    return updatePaymentMethod(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))(customerId, productId, si)
+    return updatePaymentMethod(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))
+      (customerId, productId, si)
   }
 
   async customer(id) {
@@ -90,12 +94,12 @@ export default class Payments {
     return sendCustomerLink(this.services)(email)
   }
 
-  stripeHook() {
+  async stripeHook() {
     // nothing for now
   }
 
   emailVerification(email, productCode) {
-    return emailVerification(this.services)(email, productCode)
+    return emailVerification(this.services)(email, products[productCode])
   }
 
   createTaxes(data) {

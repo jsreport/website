@@ -13,11 +13,7 @@
     "test": "set DEBUG=jsreport&&mocha -r ts-node/register test/**/*.ts --timeout 10000"
   },
   "standard": {
-    "parser": "babel-eslint",
-    "env": {
-      "node": true,
-      "browser": true
-    }
+    "envs": ["browser", "node", "mocha"]   
   },
   "devDependencies": {
     "@babel/core": "7.5.5",
@@ -27,29 +23,25 @@
     "@types/braintree": "2.20.0",
     "@types/express": "4.17.1",
     "@types/mocha": "5.2.7",
-    "@types/mongodb": "3.3.6",
-    "@types/node": "12.11.7",
-    "@typescript-eslint/eslint-plugin": "^3.9.0",
-    "@typescript-eslint/parser": "^3.9.0",
-    "babel-eslint": "^10.1.0",
+    "@types/mongodb": "3.3.6", 
+    "@types/node": "12.11.7",    
     "concurrently": "5.0.0",
     "decompress": "^4.2.1",
-    "eslint": "6.2.2",
-    "eslint-config-standard-jsx": "8.0.1",
-    "eslint-plugin-babel": "5.3.0",
+    "eslint": "8.27.0",   
     "grunt": "1.1.0",
     "grunt-contrib-cssmin": "3.0.0",
     "grunt-contrib-uglify": "4.0.1",
-    "mocha": "6.2.1",
-    "parcel-bundler": "1.12.3",
-    "prettier": "2.0.5",
+    "mocha": "6.2.1",       
+    "parcel-bundler": "1.12.3",    
     "react": "16.9.0",
     "react-copy-to-clipboard": "5.0.1",
     "react-dom": "16.9.0",
     "react-router-dom": "5.0.1",
+    "standard": "17.0.0",
     "should": "13.2.3",
     "stream-to-array": "2.3.0",
     "ts-node": "10.0.0",
+    "ts-standard": "12.0.1",
     "typescript": "4.3.4"
   },
   "dependencies": {
@@ -70,6 +62,7 @@
     "isomorphic-git": "1.8.3",
     "jsreport-client": "1.0.2",
     "marked": "0.3.1",
+    "mjml": "4.13.0",
     "moment": "2.24.0",
     "mongodb": "3.3.1",
     "multer": "0.1.6",

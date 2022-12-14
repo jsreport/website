@@ -12,8 +12,10 @@ const tmpRepoDir = path.join(os.tmpdir(), 'jsreport', 'temp', 'docsRepo')
 
 export default async function pull(docsPath = 'views/learn/docs') {
     // return ['latest', '2.11.0']
-    fs.rmdirSync(tmpRepoDir, { recursive: true })
-    fs.mkdirSync(tmpRepoDir, { recursive: true })
+    if (fs.existsSync(tmpRepoDir)) {
+        fs.rmdirSync(tmpRepoDir, { recursive: true })
+        fs.mkdirSync(tmpRepoDir, { recursive: true })
+    }
 
     const fullDocsPath = path.isAbsolute(docsPath) ? docsPath : path.join(process.cwd(), docsPath)
     fs.rmdirSync(fullDocsPath, { recursive: true })

@@ -1,1 +1,0 @@
-{"version":3,"sources":["payments.css"],"names":[],"mappings":"AAAA,gBACI,GACI,+BAAiC,CACjC,uBACJ,CACJ","file":"payments.4e878f4b.css","sourceRoot":"..\\..\\src\\public\\payments","sourcesContent":["@keyframes spin {\r\n    100% {  \r\n        -webkit-transform: rotate(360deg);\r\n        transform: rotate(360deg);\r\n    }\r\n}"]}

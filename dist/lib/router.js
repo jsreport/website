@@ -159,7 +159,7 @@ function default_1(payments, db) {
         },
         stripeHook(req, res, next) {
             return payments
-                .stripeHook(req.headers['stripe-signature'], req.body)
+                .stripeHook()
                 .then(() => res.send('ok'))
                 .catch(next);
         },
@@ -173,6 +173,13 @@ function default_1(payments, db) {
             return payments
                 .emailVerification(req.body.email, req.body.productCode)
                 .then(() => res.send('ok'))
+                .catch(next);
+        },
+        checkoutWithEmail(req, res, next) {
+            return payments.customerRepository.findOrCreate(decodeURIComponent(req.params.email))
+                .then((c) => {
+                res.redirect(`/payments/customer/${c.uuid}/checkout/${req.params.product}/${req.params.plan}`);
+            })
                 .catch(next);
         },
         stripeClientSecret(req, res, next) {

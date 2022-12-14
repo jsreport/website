@@ -1,0 +1,1 @@
+<mj-text padding-bottom="0px" align="left">invoice: <a href='https://jsreport.net/payments/customer/${customer.uuid}/invoice/${sale.id}'>${sale.id}</a></mj-text>

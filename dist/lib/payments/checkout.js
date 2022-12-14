@@ -26,20 +26,21 @@ exports.checkout = void 0;
 const logger = __importStar(require("../utils/logger"));
 const v4_1 = __importDefault(require("uuid/v4"));
 const nanoid_1 = __importDefault(require("nanoid"));
-const emails_1 = require("./emails");
-const utils_1 = require("../utils/utils");
 const moment_1 = __importDefault(require("moment"));
+const products_1 = __importDefault(require("../../shared/products"));
+const emailProcessor_1 = __importDefault(require("./emailProcessor"));
 const uuid = () => v4_1.default().toUpperCase();
 const checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
     const customer = await services.customerRepository.find(checkoutData.customerId);
     const stripePaymentIntent = await services.stripe.findPaymentIntent(checkoutData.paymentIntentId);
     const stripePaymentMethod = stripePaymentIntent.payment_method;
+    const productDefinition = products_1.default[checkoutData.productCode];
     let subscription;
-    if (checkoutData.product.isSubscription) {
+    if (productDefinition.isSubscription) {
         subscription = {
             state: 'active',
-            nextPayment: moment_1.default().add(1, 'years').toDate(),
+            nextPayment: checkoutData.paymentCycle === 'monthly' ? moment_1.default().add(1, 'months').toDate() : moment_1.default().add(1, 'years').toDate(),
             card: {
                 last4: stripePaymentMethod.card.last4,
                 expMonth: stripePaymentMethod.card.exp_month,
@@ -48,6 +49,7 @@ const checkout = (services) => async (checkoutData) => {
             stripe: {
                 paymentMethodId: stripePaymentIntent.payment_method.id,
             },
+            paymentCycle: checkoutData.paymentCycle
         };
     }
     const accountingData = {
@@ -61,20 +63,22 @@ const checkout = (services) => async (checkoutData) => {
         vatAmount: checkoutData.vatAmount,
         vatNumber: checkoutData.vatNumber,
         vatRate: checkoutData.vatRate,
-        item: checkoutData.product.name,
+        item: productDefinition.name,
         email: customer.email
     };
-    const product = {
-        code: checkoutData.product.code,
-        permalink: checkoutData.product.permalink,
-        isSubscription: checkoutData.product.isSubscription,
-        name: checkoutData.product.name,
-        isSupport: checkoutData.product.isSupport,
+    let product = {
+        code: productDefinition.code,
+        permalink: productDefinition.permalink,
+        isSubscription: productDefinition.isSubscription,
+        name: productDefinition.name,
+        isSupport: productDefinition.isSupport,
         id: nanoid_1.default(4),
         sales: [],
         accountingData,
-        licenseKey: (checkoutData.product.isSupport || checkoutData.product.hasLicenseKey === false) ? null : uuid(),
+        licenseKey: (productDefinition.hasLicenseKey === false) ? null : uuid(),
         subscription,
+        webhook: productDefinition.webhook,
+        planCode: checkoutData.planCode
     };
     const sale = await services.customerRepository.createSale(accountingData, {
         paymentIntentId: stripePaymentIntent.id,
@@ -83,34 +87,32 @@ const checkout = (services) => async (checkoutData) => {
     product.sales.push(sale);
     await services.notifyLicensingServer(customer, product, product.sales[0]);
     customer.products = customer.products || [];
-    customer.products.push(product);
+    if (product.planCode) {
+        const existingProduct = customer.products.find(p => p.code == product.code);
+        if (existingProduct) {
+            existingProduct.planCode = product.planCode;
+            existingProduct.sales.push(sale);
+            existingProduct.accountingData = accountingData;
+            existingProduct.subscription = product.subscription;
+            product = existingProduct;
+        }
+        else {
+            customer.products.push(product);
+        }
+    }
+    else {
+        customer.products.push(product);
+    }
     await services.customerRepository.update(customer);
-    let mail = emails_1.Emails.checkout.custom;
-    if (product.isSupport) {
-        mail = emails_1.Emails.checkout.support;
-    }
-    if (product.licenseKey) {
-        mail = emails_1.Emails.checkout.enterprise;
-    }
-    await services.sendEmail({
-        to: customer.email,
-        content: utils_1.interpolate(mail.customer.content, {
-            customer,
-            product,
-            sale: product.sales[0],
-        }),
-        subject: utils_1.interpolate(mail.customer.subject, {
-            customer,
-            product,
-            sale: product.sales[0],
-        }),
+    await emailProcessor_1.default(services.sendEmail, `checkout${product.licenseKey ? '-license' : ''}`, customer, {
+        sale: product.sales[0],
+        product,
+        productDefinition
     });
-    await services.sendEmail({
-        to: 'jan.blaha@jsreport.net',
-        content: utils_1.interpolate(mail.us.content, { customer, product }),
-        subject: utils_1.interpolate(mail.us.subject, { customer, product }),
-    });
-    return customer;
+    if (productDefinition.webhook) {
+        await services.notifyWebhook(customer, product, 'checkouted');
+    }
+    return product;
 };
 exports.checkout = checkout;
 //# sourceMappingURL=checkout.js.map

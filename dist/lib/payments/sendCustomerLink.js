@@ -1,8 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendCustomerLink = void 0;
-const emails_1 = require("./emails");
-const utils_1 = require("../utils/utils");
+const emailProcessor_1 = __importDefault(require("./emailProcessor"));
 const sendCustomerLink = (services) => async (email) => {
     let customer;
     try {
@@ -11,11 +13,7 @@ const sendCustomerLink = (services) => async (email) => {
     catch (e) {
         return;
     }
-    services.sendEmail({
-        to: customer.email,
-        subject: emails_1.Emails.customerLink.subject,
-        content: utils_1.interpolate(emails_1.Emails.customerLink.content, { customer })
-    });
+    await emailProcessor_1.default(services.sendEmail, 'customerLink', customer, {});
 };
 exports.sendCustomerLink = sendCustomerLink;
 //# sourceMappingURL=sendCustomerLink.js.map
