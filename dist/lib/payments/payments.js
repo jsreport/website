@@ -37,6 +37,7 @@ const sendCustomerLink_1 = require("./sendCustomerLink");
 const subscriptionRenewal_1 = __importDefault(require("./subscriptionRenewal"));
 const emailVerification_1 = require("./emailVerification");
 const taxes_js_1 = require("./taxes/taxes.js");
+const products_1 = __importDefault(require("../../shared/products"));
 class Payments {
     constructor(db) {
         this.db = db;
@@ -99,7 +100,7 @@ class Payments {
         // nothing for now
     }
     emailVerification(email, productCode) {
-        return emailVerification_1.emailVerification(this.services)(email, productCode);
+        return emailVerification_1.emailVerification(this.services)(email, products_1.default[productCode]);
     }
     createTaxes(data) {
         return taxes_js_1.createTaxes(this.services)(data);
