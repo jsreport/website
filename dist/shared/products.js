@@ -138,6 +138,17 @@ exports.default = {
         permalink: 'NCCKu',
         emailType: 'custom'
     },
+    enterpriseToScaleUpgrade: {
+        code: 'enterpriseToScaleUpgrade',
+        name: 'jsreport enterprise to scale upgrade',
+        infoLine: 'Upgrade an existing jsreport enterprise license key eligible to the single instance to the scale license eligible for infinite amount of licenses.',
+        price: {
+            usd: 1350
+        },
+        hasLicenseKey: false,
+        permalink: 'YYYYy',
+        emailType: 'custom'
+    },
     supportSubscriptionWithScaleUpdates: {
         code: 'supportSubscriptionWithScaleUpdates',
         name: 'enterprise support subscription including updates',
