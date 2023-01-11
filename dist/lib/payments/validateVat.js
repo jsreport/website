@@ -27,22 +27,30 @@ const util_1 = require("util");
 const validate_vat_1 = __importDefault(require("validate-vat"));
 const unescape_1 = __importDefault(require("unescape"));
 const validateVatUtil = util_1.promisify(validate_vat_1.default);
+async function test(vatNumber) {
+    const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2));
+    if (r.valid !== true) {
+        throw new Error('Invalid VAT: ' + r);
+    }
+    return {
+        country: r.countryCode,
+        name: unescape_1.default(r.name),
+        address: unescape_1.default(r.address)
+    };
+}
 async function default_1(vatNumber = '') {
     logger.debug('validating vat ' + vatNumber);
-    try {
-        const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2));
-        if (r.valid !== true) {
-            throw new Error('Invalid VAT');
+    let lastE;
+    for (let i = 0; i < 5; i++) {
+        try {
+            return await test(vatNumber);
         }
-        return {
-            country: r.countryCode,
-            name: unescape_1.default(r.name),
-            address: unescape_1.default(r.address)
-        };
+        catch (e) {
+            lastE = e;
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
     }
-    finally {
-        logger.debug('vat validation finished');
-    }
+    throw lastE;
 }
 exports.default = default_1;
 //# sourceMappingURL=validateVat.js.map

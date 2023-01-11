@@ -1,6 +1,6 @@
 import validateVat from '../../src/lib/payments/validateVat'
 
-describe.skip('validate vat', () => {
+describe.only('validate vat', () => {
   it('validateVat should verify correct VAT', async () => {
     const res = await validateVat('CZ05821916')
     res.country.should.be.eql('CZ')
