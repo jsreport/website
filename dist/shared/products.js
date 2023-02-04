@@ -167,7 +167,7 @@ exports.default = {
         name: 'jsreportonline subscription',
         isSubscription: true,
         monthly: true,
-        webhook: 'http://local.net/payments-hook',
+        webhook: 'https://jsreportonline.net/payments-hook',
         hasLicenseKey: false,
         email: {
             checkoutText: `Your plan change was propagated and you can now get back to the jsreportonline and use the new credits limit.
