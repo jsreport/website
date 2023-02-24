@@ -152,7 +152,7 @@ export default class Product extends React.Component {
             <>
               <p>
                 {this.state.subscription.plannedCancelation
-                  ? <span style={{ color: 'red' }}>The renewal payment wasn't successful and the subscription will be canceled on {new Date(this.state.subscription.nextPayment).toLocaleDateString()}. <br /> Please update the payment in order to renew the subscription. <br /><br /></span>
+                  ? <span style={{ color: 'red' }}>The renewal payment wasn't successful and the subscription will be canceled on {new Date(this.state.subscription.plannedCancelation).toLocaleDateString()}. <br /> Please update the payment in order to renew the subscription. <br /><br /></span>
                   : <span>The next payment is planned on {new Date(this.state.subscription.nextPayment).toLocaleDateString()} <br /></span>}
 
                 {this.renderBankCard()}

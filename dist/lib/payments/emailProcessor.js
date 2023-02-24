@@ -22,7 +22,8 @@ const config = {
         sendUs: true
     },
     'recurringFail': {
-        subject: '${product.name} renewal failed'
+        subject: '${product.name} renewal failed',
+        sendUs: true
     },
     'customerLink': {
         subject: 'jsreport customer dashboard link'
