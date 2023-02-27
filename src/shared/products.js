@@ -11,7 +11,8 @@ export default {
       checkoutText: `
         Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
       `
-    }
+    },
+    promoteSupport: true
   },
   enterpriseScale: {
     code: 'enterpriseScale',
@@ -25,7 +26,8 @@ export default {
       checkoutText: `
         Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
       `
-    }
+    },
+    promoteSupport: true
   },
   enterpriseSubscription: {
     code: 'enterpriseSubscription',
@@ -45,7 +47,8 @@ export default {
           Since then the license key becomes invalid and server instances using it won't start. <br /><br />
           You can also reactive the license in the future using the link/button bellow.
       `
-    }
+    },
+    promoteSupport: true
   },
   enterpriseScaleSubscription: {
     code: 'enterpriseScaleSubscription',
@@ -65,7 +68,8 @@ export default {
           Since then the license key becomes invalid and server instances using it won't start. <br /><br />
           You can also reactive the license in the future using the link/button bellow.
       `
-    }
+    },
+    promoteSupport: true
   },
   supportSubscription: {
     code: 'supportSubscription',

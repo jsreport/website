@@ -263,6 +263,28 @@ export default class Product extends React.Component {
     )
   }
 
+  renderSupportPromotion () {
+    const product = products[this.state.code]
+    console.log('product', product)
+    if (!product.promoteSupport || this.state.customer.products.find(p => p.isSupport)) {
+      return <></>
+    }
+
+    return (
+      <div className='row'>
+        <div>
+          <h3>Support</h3>
+        </div>
+        <p>
+          Commercial support isn't part of the license, you can purchase it here:
+        </p>
+        <button className='button info' onClick={() => (location.href = `/payments/customer/${this.props.match.params.customer}/checkout/supportSubscription`)}>
+          Purchase support
+        </button>
+      </div>
+    )
+  }
+
   renderProduct () {
     return (
       <div className='fg-gray'>
@@ -288,6 +310,7 @@ export default class Product extends React.Component {
           {this.renderProductInner()}
           <div className='row'>{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>
           {this.state.planCode ? <div className='row'>{this.renderPlan()}</div> : <></>}
+          {this.renderSupportPromotion()}
           <div className='row'>
             <div>
               <h3>Invoices</h3>

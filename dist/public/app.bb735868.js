@@ -40971,7 +40971,8 @@ var _default = {
     permalink: 'XOxVq',
     email: {
       checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      "
-    }
+    },
+    promoteSupport: true
   },
   enterpriseScale: {
     code: 'enterpriseScale',
@@ -40983,7 +40984,8 @@ var _default = {
     permalink: 'onQk',
     email: {
       checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      "
-    }
+    },
+    promoteSupport: true
   },
   enterpriseSubscription: {
     code: 'enterpriseSubscription',
@@ -40997,7 +40999,8 @@ var _default = {
     email: {
       checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      ",
       cancelText: "          \n          The license key will be active until ${moment(product.subscription.nextPayment).format('MM/DD/YYYY')}.\n          Since then the license key becomes invalid and server instances using it won't start. <br /><br />\n          You can also reactive the license in the future using the link/button bellow.\n      "
-    }
+    },
+    promoteSupport: true
   },
   enterpriseScaleSubscription: {
     code: 'enterpriseScaleSubscription',
@@ -41011,7 +41014,8 @@ var _default = {
     email: {
       checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      ",
       cancelText: "          \n          The license key will be active until ${moment(product.subscription.nextPayment).format('MM/DD/YYYY')}.\n          Since then the license key becomes invalid and server instances using it won't start. <br /><br />\n          You can also reactive the license in the future using the link/button bellow.\n      "
-    }
+    },
+    promoteSupport: true
   },
   supportSubscription: {
     code: 'supportSubscription',
@@ -47832,9 +47836,32 @@ function (_React$Component) {
       }))));
     }
   }, {
+    key: "renderSupportPromotion",
+    value: function renderSupportPromotion() {
+      var _this5 = this;
+
+      var product = _products.default[this.state.code];
+      console.log('product', product);
+
+      if (!product.promoteSupport || this.state.customer.products.find(function (p) {
+        return p.isSupport;
+      })) {
+        return _react.default.createElement(_react.default.Fragment, null);
+      }
+
+      return _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "Support")), _react.default.createElement("p", null, "Commercial support isn't part of the license, you can purchase it here:"), _react.default.createElement("button", {
+        className: "button info",
+        onClick: function onClick() {
+          return location.href = "/payments/customer/".concat(_this5.props.match.params.customer, "/checkout/supportSubscription");
+        }
+      }, "Purchase support"));
+    }
+  }, {
     key: "renderProduct",
     value: function renderProduct() {
-      var _this5 = this;
+      var _this6 = this;
 
       return _react.default.createElement("div", {
         className: "fg-gray"
@@ -47864,12 +47891,12 @@ function (_React$Component) {
         className: "row"
       }, this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()), this.state.planCode ? _react.default.createElement("div", {
         className: "row"
-      }, this.renderPlan()) : _react.default.createElement(_react.default.Fragment, null), _react.default.createElement("div", {
+      }, this.renderPlan()) : _react.default.createElement(_react.default.Fragment, null), this.renderSupportPromotion(), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "Invoices")), this.state.sales.map(function (s) {
         return _react.default.createElement(Invoice, {
           sale: s,
-          customerId: _this5.props.match.params.customer,
+          customerId: _this6.props.match.params.customer,
           key: s.id
         });
       }))));
@@ -54100,7 +54127,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57963" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63726" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
