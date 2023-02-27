@@ -33,7 +33,7 @@
       <mj-column>
         <mj-button href="https://jsreport.net/learn/faq#how-to-apply-license-key">Apply license key</mj-button>
       </mj-column>
-      <mj-include path="./components/managePayments.mjml" />
+      <mj-include path="./components/manage.mjml" />
       <mj-column>
         <mj-button href="https://forum.jsreport.net">Get help</mj-button>
       </mj-column>

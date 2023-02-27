@@ -17,7 +17,7 @@ export type AccountingData = {
   currencyRate?: number,
   isExpense?: boolean,
   countryCode?: string,
-  email: string
+  email: string  
 }
 
 export type Sale = {
@@ -70,6 +70,7 @@ export type Product = {
 export type Customer = {
   _id: string
   email: string
+  notificationEmail?: string
   uuid: string
   creationDate: Date
   products: Array<Product>

@@ -185,6 +185,12 @@ function default_1(payments, db) {
         stripeClientSecret(req, res, next) {
             return res.send(process.env['STRIPE_CLIENT_SECRET_KEY']);
         },
+        updateCustomerEmail(req, res, next) {
+            return payments
+                .updateCustomer(req.params.customerId, req.body)
+                .then(() => res.send('ok'))
+                .catch((next));
+        },
         createTaxes(req, res, next) {
             if (req.query.secret !== process.env.TAXES_SECRET) {
                 return next(new Error('Wrong secret'));

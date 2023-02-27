@@ -105,6 +105,18 @@ class Payments {
     createTaxes(data) {
         return taxes_js_1.createTaxes(this.services)(data);
     }
+    async updateCustomer(uuid, update) {
+        logger.info(`Updating customer ${uuid}`);
+        try {
+            const customer = await this.customerRepository.find(uuid);
+            Object.assign(customer, update);
+            return this.customerRepository.update(customer);
+        }
+        catch (e) {
+            logger.error(`Updating customer failed`, e);
+            throw e;
+        }
+    }
 }
 exports.default = Payments;
 //# sourceMappingURL=payments.js.map

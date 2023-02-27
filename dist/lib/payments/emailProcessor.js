@@ -42,7 +42,7 @@ async function default_1(sendEmail, type, customer, data) {
     data = { ...data, customer, moment: moment_1.default };
     await sendEmail({
         subject: utils_1.interpolate(config[type].subject, data),
-        to: customer.email,
+        to: [customer.email, customer.notificationEmail].filter(e => e).join(','),
         content: utils_1.interpolate(mjml_1.default(content.toString(), {
             filePath: emailFolder
         }).html, data)

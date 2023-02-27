@@ -1,7 +1,6 @@
 
-import sendgrid from 'sendgrid'
+import sendgrid from '@sendgrid/mail'
 import * as logger from './logger.js'
-const helper = sendgrid.mail
 
 export type Email = {
   to: string,
@@ -9,27 +8,22 @@ export type Email = {
   content: string
 }
 
-export const sendEmail = (Mail: Email) => {
-  const sg = sendgrid(process.env.SENDGRID)
-
+export const sendEmail = async (Mail: Email) => {
+  sendgrid.setApiKey(process.env.SENDGRID)
+  
   logger.info(`Sending email (${Mail.subject}) to ${Mail.to}`)
 
-  const fromEmail = new helper.Email('sales@jsreport.net')
-  const toEmail = new helper.Email(Mail.to)
-  const contentEmail = new helper.Content('text/html', Mail.content)
-  const mail = new helper.Mail(fromEmail, Mail.subject, toEmail, contentEmail)
+  const msg = {
+    from: 'sales@jsreport.net',
+    to: Mail.to.split(','),
+    subject: Mail.subject,
+    html: Mail.content
+  }
 
-  const request = sg.emptyRequest({
-    method: 'POST',
-    path: '/v3/mail/send',
-    body: mail.toJSON()
-  })
-
-  return sg.API(request, (err, response) => {
-    if (err) {
-      logger.error('Error while sending mail:', err)
-    } else {
-      logger.info('sent succesfully')
-    }
-  })
+  try {
+    await sendgrid.send(msg)
+    logger.info('sent succesfully')
+  } catch (e) {
+    logger.error('Error while sending mail:', e)
+  }  
 }

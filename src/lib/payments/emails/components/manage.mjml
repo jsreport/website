@@ -1,0 +1,3 @@
+<mj-column>
+    <mj-button href="https://jsreport.net/payments/customer/${customer.uuid}">Manage</mj-button>
+</mj-column>

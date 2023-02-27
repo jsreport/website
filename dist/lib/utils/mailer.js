@@ -23,29 +23,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendEmail = void 0;
-const sendgrid_1 = __importDefault(require("sendgrid"));
+const mail_1 = __importDefault(require("@sendgrid/mail"));
 const logger = __importStar(require("./logger.js"));
-const helper = sendgrid_1.default.mail;
-const sendEmail = (Mail) => {
-    const sg = sendgrid_1.default(process.env.SENDGRID);
+const sendEmail = async (Mail) => {
+    mail_1.default.setApiKey(process.env.SENDGRID);
     logger.info(`Sending email (${Mail.subject}) to ${Mail.to}`);
-    const fromEmail = new helper.Email('sales@jsreport.net');
-    const toEmail = new helper.Email(Mail.to);
-    const contentEmail = new helper.Content('text/html', Mail.content);
-    const mail = new helper.Mail(fromEmail, Mail.subject, toEmail, contentEmail);
-    const request = sg.emptyRequest({
-        method: 'POST',
-        path: '/v3/mail/send',
-        body: mail.toJSON()
-    });
-    return sg.API(request, (err, response) => {
-        if (err) {
-            logger.error('Error while sending mail:', err);
-        }
-        else {
-            logger.info('sent succesfully');
-        }
-    });
+    const msg = {
+        from: 'sales@jsreport.net',
+        to: Mail.to.split(','),
+        subject: Mail.subject,
+        html: Mail.content
+    };
+    try {
+        await mail_1.default.send(msg);
+        logger.info('sent succesfully');
+    }
+    catch (e) {
+        logger.error('Error while sending mail:', e);
+    }
 };
 exports.sendEmail = sendEmail;
 //# sourceMappingURL=mailer.js.map

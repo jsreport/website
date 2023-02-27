@@ -42,7 +42,7 @@ export default async function (sendEmail: (Mail: any) => void, type: string, cus
 
     await sendEmail({
         subject: interpolate(config[type].subject, data),
-        to: customer.email,
+        to: [customer.email, customer.notificationEmail].filter(e => e).join(','),
         content: interpolate(mjml2html(content.toString(), {
             filePath: emailFolder
         }).html, data)

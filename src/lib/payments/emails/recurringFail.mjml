@@ -22,7 +22,7 @@
       </mj-column>
     </mj-section>
     <mj-section>
-      <mj-include path="./components/managePayments.mjml" />
+      <mj-include path="./components/manage.mjml" />
     </mj-section>
     <mj-include path="./components/thankyou.mjml" />
   </mj-body>

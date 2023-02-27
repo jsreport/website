@@ -41,12 +41,13 @@ databaseTest((getDb) => {
     })
 
     it('should renew if payment successfull', async () => {
-      let customer = await customerRepository.findOrCreate('a@a.com')
+      let customer = await customerRepository.findOrCreate('a@a.com')      
       const product = createProduct()
       const originalNextPayment = (product.subscription.nextPayment = moment().add('-1', 'days').toDate())
       product.accountingData.email = 'different@email.com'
       product.accountingData.vatNumber = 'DIFERENT'
       customer.products = [product]
+      customer.notificationEmail = 'notification@email.com'
       await customerRepository.update(customer)
 
       stripe.findOrCreateCustomer = () => ({
@@ -78,7 +79,7 @@ databaseTest((getDb) => {
       
       require('fs').writeFileSync('email.html', emails[0].content)   
 
-      emails[0].to.should.be.eql(customer.email)
+      emails[0].to.should.be.eql(`${customer.email},${customer.notificationEmail}`)
       emails[0].content.should.containEql('renewed')
 
       customer.products[0].sales[1].accountingData?.amount?.should.be.eql(customer.products[0].accountingData.amount)

@@ -3,6 +3,7 @@ import React from 'react'
 import { load } from './customer.js'
 import LicenseKey from './licenseKey'
 import products from '../../shared/products'
+import ReactModal from 'react-modal'
 
 function Product ({ product, onClick }) {
   return (
@@ -51,8 +52,39 @@ class Customer extends React.Component {
     this.props.history.push(`/payments/customer/${this.state.uuid}/product/${p.id}`)
   }
 
+  handleCloseModal () {
+    this.setState({ modal: null })
+  }
+
+  async changeEmail (v) {
+    try {
+      const body = {}
+      if (this.state.modal.type === 'notificationEmail') {
+        body.notificationEmail = v === '' ? null : v
+      } else {
+        body.email = v
+      }
+
+      const res = await window.fetch(`/api/payments/customer/${this.state.uuid}`, {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!res.ok) {
+        const resJson = await res.json()
+        throw new Error(resJson && resJson.error ? resJson.error : res.statusText)
+      }
+      this.handleCloseModal()
+    } catch (e) {
+      alert('Failed to update email ' + e.message)
+    }
+  }
+
   render () {
-    const { products } = this.state
+    const { products, email, notificationEmail } = this.state
     products.reverse()
 
     return (
@@ -64,6 +96,30 @@ class Customer extends React.Component {
           </div>
         </div>
         <div className='grid container small section'>
+          <div className='row text-center'>
+            <button
+              className='button warning' style={{ marginRight: '10px' }} onClick={() => this.setState({
+                modal: {
+                  title: 'Change administration email',
+                  email,
+                  type: 'email'
+                }
+              })}
+            >
+              Change admin email
+            </button>
+            <button
+              className='button info' onClick={() => this.setState({
+                modal: {
+                  title: 'Change additional email for notifications about subscriptions renewals and cancelations',
+                  email: notificationEmail,
+                  type: 'notificationEmail'
+                }
+              })}
+            >
+              Change notification email {notificationEmail != null ? `(${notificationEmail})` : ''}
+            </button>
+          </div>
           <div className='row text-center'>
             <div>
               <h3>PRODUCTS</h3>
@@ -77,8 +133,61 @@ class Customer extends React.Component {
             </div>
           </div>
         </div>
+        <ReactModal
+          isOpen={this.state.modal != null}
+          onRequestClose={() => this.handleCloseModal()}
+          style={customStyles}
+        >
+          <ChangeEmailModalContent
+            close={() => this.handleCloseModal()}
+            changeEmail={(v) => this.changeEmail(v)}
+            email={this.state.email}
+            {...this.state.modal}
+          />
+        </ReactModal>
       </div>
     )
+  }
+}
+
+const ChangeEmailModalContent = (props) => {
+  const ref = React.useRef(null)
+  return (
+    <form onSubmit={() => props.changeEmail(ref.current.value)}>
+      <div className='grid fg-gray'>
+        <div className='row text-center'>
+          <span>{props.title}</span>
+        </div>
+        <div className='row text-center'>
+          <label>email:</label>
+          <input type='email' ref={ref} size='40' required={props.type !== 'notificationEmail'} defaultValue={props.email} />
+        </div>
+        <div className='row text-center'>
+          <button style={{ marginRight: '10px' }} className='button warning' onClick={() => props.close()}>Cancel</button>
+          <button type='submit' className='button info'>Confirm</button>
+        </div>
+      </div>
+    </form>
+  )
+}
+
+const customStyles = {
+  content: {
+    top: '40%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    minWidth: '500px',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
+  },
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.65)'
   }
 }
 
