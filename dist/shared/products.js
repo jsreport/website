@@ -6,7 +6,7 @@ exports.default = {
         name: 'jsreport enterprise perpetual',
         infoLine: 'perpetual license - fully featured single server instance with no limitations',
         price: {
-            usd: 645
+            usd: 895
         },
         permalink: 'XOxVq',
         email: {
@@ -21,7 +21,7 @@ exports.default = {
         name: 'jsreport enterprise scale perpetual',
         infoLine: 'perpetual license - fully featured infinite amount of server instances with no limitations',
         price: {
-            usd: 1995
+            usd: 2495
         },
         permalink: 'onQk',
         email: {
@@ -36,7 +36,7 @@ exports.default = {
         name: 'jsreport enterprise subscription',
         infoLine: 'subscription - fully featured single server instance with no limitations',
         price: {
-            usd: 295
+            usd: 395
         },
         isSubscription: true,
         permalink: 'SBwu',
@@ -57,7 +57,7 @@ exports.default = {
         name: 'jsreport enterprise scale subscription',
         infoLine: 'subscription - fully featured infinite amount of server instances with no limitations',
         price: {
-            usd: 995
+            usd: 1295
         },
         isSubscription: true,
         permalink: 'SrfG',
