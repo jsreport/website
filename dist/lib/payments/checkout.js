@@ -29,6 +29,7 @@ const nanoid_1 = __importDefault(require("nanoid"));
 const moment_1 = __importDefault(require("moment"));
 const products_1 = __importDefault(require("../../shared/products"));
 const emailProcessor_1 = __importDefault(require("./emailProcessor"));
+const processUpgrade_1 = require("./processUpgrade");
 const uuid = () => v4_1.default().toUpperCase();
 const checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
@@ -86,6 +87,9 @@ const checkout = (services) => async (checkoutData) => {
     await services.renderInvoice(sale);
     product.sales.push(sale);
     await services.notifyLicensingServer(customer, product, product.sales[0]);
+    if (productDefinition.isUpgrade) {
+        await processUpgrade_1.processUpgrade(services)(customer, product, sale);
+    }
     customer.products = customer.products || [];
     if (product.planCode) {
         const existingProduct = customer.products.find(p => p.code == product.code);

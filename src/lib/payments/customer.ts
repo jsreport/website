@@ -64,7 +64,8 @@ export type Product = {
   accountingData: AccountingData
   subscription: Subscription,
   webhook?: string,  
-  planCode?: string
+  planCode?: string,
+  upgradeDate?: Date
 }
 
 export type Customer = {

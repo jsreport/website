@@ -7,6 +7,7 @@ import moment from 'moment'
 import Stripe from 'stripe'
 import products from '../../shared/products'
 import emailProcessor from './emailProcessor'
+import { processUpgrade } from './processUpgrade'
 
 const uuid = () => Uuid().toUpperCase()
 
@@ -93,6 +94,11 @@ export const checkout = (services: Services) => async (checkoutData: CheckoutReq
   product.sales.push(sale)
 
   await services.notifyLicensingServer(customer, product, product.sales[0])
+
+  if (productDefinition.isUpgrade) {
+    await processUpgrade(services)(customer, product, sale);
+  } 
+  
 
   customer.products = customer.products || []
   if (product.planCode) {

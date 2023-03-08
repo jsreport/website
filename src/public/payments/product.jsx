@@ -233,6 +233,16 @@ export default class Product extends React.Component {
       return this.renderLicenseKey()
     }
 
+    const product = products[this.state.code]
+
+    if (product.description) {
+      return (
+        <div className='row'>
+          {product.description}
+        </div>
+      )
+    }
+
     return <></>
   }
 
@@ -263,9 +273,38 @@ export default class Product extends React.Component {
     )
   }
 
+  renderUpgradePromotion () {
+    const product = products[this.state.code]
+    if (!product.upgrade) {
+      return <></>
+    }
+
+    const upgradeProduct = products[product.upgrade.code]
+
+    const purchaseDate = new Date(this.state.upgradeDate || this.state.sales[this.state.sales.length - 1].purchaseDate)
+    const expiration = new Date(purchaseDate.setMonth(purchaseDate.getMonth() + 6))
+
+    return (
+      <div className='row'>
+        <div>
+          <h3>Upgrade</h3>
+        </div>
+        <div>
+          <p>
+            This license key is elligible for jsreport versions released until {expiration.toLocaleDateString()}.<br />
+            You can find the list of jsreport versions with release dates at <a target='_blank' href='https://github.com/jsreport/jsreport/releases' rel='noreferrer'>github here</a>.<br />
+            If you need to use a newer version, you can purchase a discounted upgrade for {upgradeProduct.price.usd}$ and obtain another 6 months of updates.
+          </p>
+          <button className='button info' onClick={() => (location.href = `/payments/customer/${this.props.match.params.customer}/checkout/${product.upgrade.code}`)}>
+            Purchase upgrade
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   renderSupportPromotion () {
     const product = products[this.state.code]
-    console.log('product', product)
     if (!product.promoteSupport || this.state.customer.products.find(p => p.isSupport)) {
       return <></>
     }
@@ -311,6 +350,7 @@ export default class Product extends React.Component {
           <div className='row'>{this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()}</div>
           {this.state.planCode ? <div className='row'>{this.renderPlan()}</div> : <></>}
           {this.renderSupportPromotion()}
+          {this.renderUpgradePromotion()}
           <div className='row'>
             <div>
               <h3>Invoices</h3>

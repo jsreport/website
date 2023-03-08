@@ -14,7 +14,10 @@ exports.default = {
         Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
       `
         },
-        promoteSupport: true
+        promoteSupport: true,
+        upgrade: {
+            code: 'enterpriseUpgrade'
+        }
     },
     enterpriseScale: {
         code: 'enterpriseScale',
@@ -29,7 +32,10 @@ exports.default = {
         Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.
       `
         },
-        promoteSupport: true
+        promoteSupport: true,
+        upgrade: {
+            code: 'enterpriseScaleUpgrade'
+        }
     },
     enterpriseSubscription: {
         code: 'enterpriseSubscription',
@@ -136,11 +142,38 @@ exports.default = {
         name: 'jsreport enterprise upgrade',
         infoLine: 'Upgrade an existing jsreport enterprise license key to be eligible to the current the latest version and another 6 months of free updates.',
         price: {
-            usd: 445
+            usd: 495
         },
         hasLicenseKey: false,
         permalink: 'NCCKu',
-        emailType: 'custom'
+        emailType: 'custom',
+        isUpgrade: true,
+        description: 'Your license was upgraded and you may update to the latest jsreport released during the next 6 months.',
+        email: {
+            checkoutText: `
+        Your license key is updated now and you should be able to use the latest jsreport and the updates released during the next 6 months.
+        Please contact us if have any issues with the update.
+      `
+        }
+    },
+    enterpriseScaleUpgrade: {
+        code: 'enterpriseScaleUpgrade',
+        name: 'jsreport enterprise scale upgrade',
+        infoLine: 'Upgrade an existing jsreport enterprise scale license key to be eligible to the current the latest version and another 6 months of free updates.',
+        price: {
+            usd: 1395
+        },
+        hasLicenseKey: false,
+        permalink: 'NCCKA',
+        emailType: 'custom',
+        isUpgrade: true,
+        description: 'Your license was upgraded and you may update to the latest jsreport released during the next 6 months.',
+        email: {
+            checkoutText: `
+        Your license key is updated now and you should be able to use the latest jsreport and the updates released during the next 6 months.
+        Please contact us if have any issues with the update.
+      `
+        }
     },
     enterpriseToScaleUpgrade: {
         code: 'enterpriseToScaleUpgrade',

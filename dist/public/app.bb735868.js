@@ -40972,7 +40972,10 @@ var _default = {
     email: {
       checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      "
     },
-    promoteSupport: true
+    promoteSupport: true,
+    upgrade: {
+      code: 'enterpriseUpgrade'
+    }
   },
   enterpriseScale: {
     code: 'enterpriseScale',
@@ -40985,7 +40988,10 @@ var _default = {
     email: {
       checkoutText: "\n        Do you need commercial support with SLA? Please check our support products <a href='https://jsreport.net/buy/support'>here</a>.\n      "
     },
-    promoteSupport: true
+    promoteSupport: true,
+    upgrade: {
+      code: 'enterpriseScaleUpgrade'
+    }
   },
   enterpriseSubscription: {
     code: 'enterpriseSubscription',
@@ -41072,11 +41078,32 @@ var _default = {
     name: 'jsreport enterprise upgrade',
     infoLine: 'Upgrade an existing jsreport enterprise license key to be eligible to the current the latest version and another 6 months of free updates.',
     price: {
-      usd: 445
+      usd: 495
     },
     hasLicenseKey: false,
     permalink: 'NCCKu',
-    emailType: 'custom'
+    emailType: 'custom',
+    isUpgrade: true,
+    description: 'Your license was upgraded and you may update to the latest jsreport released during the next 6 months.',
+    email: {
+      checkoutText: "\n        Your license key is updated now and you should be able to use the latest jsreport and the updates released during the next 6 months.\n        Please contact us if have any issues with the update.\n      "
+    }
+  },
+  enterpriseScaleUpgrade: {
+    code: 'enterpriseScaleUpgrade',
+    name: 'jsreport enterprise scale upgrade',
+    infoLine: 'Upgrade an existing jsreport enterprise scale license key to be eligible to the current the latest version and another 6 months of free updates.',
+    price: {
+      usd: 1395
+    },
+    hasLicenseKey: false,
+    permalink: 'NCCKA',
+    emailType: 'custom',
+    isUpgrade: true,
+    description: 'Your license was upgraded and you may update to the latest jsreport released during the next 6 months.',
+    email: {
+      checkoutText: "\n        Your license key is updated now and you should be able to use the latest jsreport and the updates released during the next 6 months.\n        Please contact us if have any issues with the update.\n      "
+    }
   },
   enterpriseToScaleUpgrade: {
     code: 'enterpriseToScaleUpgrade',
@@ -47803,6 +47830,14 @@ function (_React$Component) {
         return this.renderLicenseKey();
       }
 
+      var product = _products.default[this.state.code];
+
+      if (product.description) {
+        return _react.default.createElement("div", {
+          className: "row"
+        }, product.description);
+      }
+
       return _react.default.createElement(_react.default.Fragment, null);
     }
   }, {
@@ -47836,12 +47871,38 @@ function (_React$Component) {
       }))));
     }
   }, {
-    key: "renderSupportPromotion",
-    value: function renderSupportPromotion() {
+    key: "renderUpgradePromotion",
+    value: function renderUpgradePromotion() {
       var _this5 = this;
 
       var product = _products.default[this.state.code];
-      console.log('product', product);
+
+      if (!product.upgrade) {
+        return _react.default.createElement(_react.default.Fragment, null);
+      }
+
+      var upgradeProduct = _products.default[product.upgrade.code];
+      var purchaseDate = new Date(this.state.upgradeDate || this.state.sales[this.state.sales.length - 1].purchaseDate);
+      var expiration = new Date(purchaseDate.setMonth(purchaseDate.getMonth() + 6));
+      return _react.default.createElement("div", {
+        className: "row"
+      }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "Upgrade")), _react.default.createElement("div", null, _react.default.createElement("p", null, "This license key is elligible for jsreport versions released until ", expiration.toLocaleDateString(), ".", _react.default.createElement("br", null), "You can find the list of jsreport versions with release dates at ", _react.default.createElement("a", {
+        target: "_blank",
+        href: "https://github.com/jsreport/jsreport/releases",
+        rel: "noreferrer"
+      }, "github here"), ".", _react.default.createElement("br", null), "If you need to use a newer version, you can purchase a discounted upgrade for ", upgradeProduct.price.usd, "$ and obtain another 6 months of updates."), _react.default.createElement("button", {
+        className: "button info",
+        onClick: function onClick() {
+          return location.href = "/payments/customer/".concat(_this5.props.match.params.customer, "/checkout/").concat(product.upgrade.code);
+        }
+      }, "Purchase upgrade")));
+    }
+  }, {
+    key: "renderSupportPromotion",
+    value: function renderSupportPromotion() {
+      var _this6 = this;
+
+      var product = _products.default[this.state.code];
 
       if (!product.promoteSupport || this.state.customer.products.find(function (p) {
         return p.isSupport;
@@ -47854,14 +47915,14 @@ function (_React$Component) {
       }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "Support")), _react.default.createElement("p", null, "Commercial support isn't part of the license, you can purchase it here:"), _react.default.createElement("button", {
         className: "button info",
         onClick: function onClick() {
-          return location.href = "/payments/customer/".concat(_this5.props.match.params.customer, "/checkout/supportSubscription");
+          return location.href = "/payments/customer/".concat(_this6.props.match.params.customer, "/checkout/supportSubscription");
         }
       }, "Purchase support"));
     }
   }, {
     key: "renderProduct",
     value: function renderProduct() {
-      var _this6 = this;
+      var _this7 = this;
 
       return _react.default.createElement("div", {
         className: "fg-gray"
@@ -47891,12 +47952,12 @@ function (_React$Component) {
         className: "row"
       }, this.state.isSubscription ? this.renderSubscrption() : this.renderOneTime()), this.state.planCode ? _react.default.createElement("div", {
         className: "row"
-      }, this.renderPlan()) : _react.default.createElement(_react.default.Fragment, null), this.renderSupportPromotion(), _react.default.createElement("div", {
+      }, this.renderPlan()) : _react.default.createElement(_react.default.Fragment, null), this.renderSupportPromotion(), this.renderUpgradePromotion(), _react.default.createElement("div", {
         className: "row"
       }, _react.default.createElement("div", null, _react.default.createElement("h3", null, "Invoices")), this.state.sales.map(function (s) {
         return _react.default.createElement(Invoice, {
           sale: s,
-          customerId: _this6.props.match.params.customer,
+          customerId: _this7.props.match.params.customer,
           key: s.id
         });
       }))));
@@ -54127,7 +54188,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50269" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49847" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
