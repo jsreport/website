@@ -31,7 +31,7 @@ const notifyWebhook = async function (customer, product, event) {
         secret: process.env.PAYMENT_WEBHOOK_SECRET,
         event,
         customer: {
-            email: customer.originalEmail || customer.email,
+            email: customer.email,
             uuid: customer.uuid,
             product: {
                 id: product.id,

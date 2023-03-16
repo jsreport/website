@@ -4,12 +4,13 @@ import * as logger from '../utils/logger'
 
 
 export const notifyWebhook = async function (customer: Customer, product: Product, event: string) {
-    logger.info(`Processing webhook ${product.webhook} with customer.uuid: ${customer.uuid}, product.id: ${product.id}, product.planCode: ${product.planCode}`)
+    logger.info(`Processing webhook ${product.webhook} with customer.uuid: ${customer.uuid}, product.id: ${product.id}, product.planCode: ${product.planCode}`)  
+
     const r = await axios.post(product.webhook, {        
         secret: process.env.PAYMENT_WEBHOOK_SECRET,
         event,
         customer: {
-            email: customer.originalEmail || customer.email,
+            email: customer.email,
             uuid: customer.uuid,
             product: {
                 id: product.id,
