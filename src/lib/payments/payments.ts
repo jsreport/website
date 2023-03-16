@@ -16,6 +16,7 @@ import SubscriptionRenewal from './subscriptionRenewal'
 import { emailVerification } from './emailVerification'
 import { createTaxes } from './taxes/taxes.js'
 import products from '../../shared/products'
+import { updateCustomer } from './updateCustomer'
 
 export default class Payments {
   db: Db
@@ -107,15 +108,6 @@ export default class Payments {
   }
 
   async updateCustomer(uuid, update) {
-    logger.info(`Updating customer ${uuid}`)
-    try {    
-      const customer = await this.customerRepository.find(uuid)
-      Object.assign(customer, update)   
-      
-      return this.customerRepository.update(customer)
-    } catch (e) {
-      logger.error(`Updating customer failed`, e)
-      throw e
-    }
+    return updateCustomer(this.customerRepository)(uuid, update)    
   }
 }

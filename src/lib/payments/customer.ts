@@ -75,6 +75,7 @@ export type Customer = {
   uuid: string
   creationDate: Date
   products: Array<Product>
+  originalEmail?: string
 }
 
 export class CustomerRepository {
@@ -198,5 +199,15 @@ export class CustomerRepository {
         },
       })
       .toArray()
+  }
+
+  async updateEmail(uuid, update) {    
+      const customer = await this.find(uuid)
+      if (update.email && update.email !== customer.email) {
+        update.originalEmail = customer.email
+      }
+      Object.assign(customer, update)   
+      
+      return this.update(customer)   
   }
 }

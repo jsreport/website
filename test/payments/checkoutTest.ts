@@ -104,7 +104,7 @@ databaseTest((getDb) => {
     it('subscription monthly', async () => {
       let notifyWebhookCalled = false
       const checkoutData = createCheckoutData()
-      let customer = await customerRepository.findOrCreate('a@a.com')
+      let customer = await customerRepository.findOrCreate('a@a.com')      
       checkoutData.customerId = customer.uuid
       checkoutData.paymentCycle = 'monthly'      
       checkoutData.productCode = 'jsreportonline'
@@ -121,7 +121,7 @@ databaseTest((getDb) => {
         customerRepository,        
         notifyLicensingServer: async () => {},
         notifyWebhook: async (customer, product, data) => {
-          notifyWebhookCalled = true
+          notifyWebhookCalled = true          
         },
         renderInvoice: async () => {},
         sendEmail: async () => {}

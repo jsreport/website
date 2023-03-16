@@ -18,29 +18,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.notifyWebhook = void 0;
-const axios_1 = __importDefault(require("axios"));
+exports.updateCustomer = void 0;
 const logger = __importStar(require("../utils/logger"));
-const notifyWebhook = async function (customer, product, event) {
-    logger.info(`Processing webhook ${product.webhook} with customer.uuid: ${customer.uuid}, product.id: ${product.id}, product.planCode: ${product.planCode}`);
-    const r = await axios_1.default.post(product.webhook, {
-        secret: process.env.PAYMENT_WEBHOOK_SECRET,
-        event,
-        customer: {
-            email: customer.originalEmail || customer.email,
-            uuid: customer.uuid,
-            product: {
-                id: product.id,
-                planCode: product.planCode,
-                subscription: product.subscription
-            }
+const updateCustomer = (customerRepository) => async (uuid, update) => {
+    logger.info(`Updating customer ${uuid}`);
+    try {
+        const customer = await customerRepository.find(uuid);
+        if (!customer.originalEmail && update.email && customer.email !== update.email) {
+            update.originalEmail = customer.email;
         }
-    });
-    logger.info(`Webhook response ${r.status}, ${r.data}`);
+        Object.assign(customer, update);
+        return customerRepository.update(customer);
+    }
+    catch (e) {
+        logger.error('Updating customer failed', e);
+        throw e;
+    }
 };
-exports.notifyWebhook = notifyWebhook;
-//# sourceMappingURL=notifyWebhook.js.map
+exports.updateCustomer = updateCustomer;
+//# sourceMappingURL=updateCustomer.js.map

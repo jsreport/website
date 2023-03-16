@@ -101,6 +101,14 @@ class CustomerRepository {
         })
             .toArray();
     }
+    async updateEmail(uuid, update) {
+        const customer = await this.find(uuid);
+        if (update.email && update.email !== customer.email) {
+            update.originalEmail = customer.email;
+        }
+        Object.assign(customer, update);
+        return this.update(customer);
+    }
 }
 exports.CustomerRepository = CustomerRepository;
 //# sourceMappingURL=customer.js.map

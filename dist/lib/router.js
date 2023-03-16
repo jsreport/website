@@ -185,7 +185,7 @@ function default_1(payments, db) {
         stripeClientSecret(req, res, next) {
             return res.send(process.env['STRIPE_CLIENT_SECRET_KEY']);
         },
-        updateCustomerEmail(req, res, next) {
+        updateCustomer(req, res, next) {
             return payments
                 .updateCustomer(req.params.customerId, req.body)
                 .then(() => res.send('ok'))

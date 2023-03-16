@@ -9,7 +9,7 @@ export const notifyWebhook = async function (customer: Customer, product: Produc
         secret: process.env.PAYMENT_WEBHOOK_SECRET,
         event,
         customer: {
-            email: customer.email,
+            email: customer.originalEmail || customer.email,
             uuid: customer.uuid,
             product: {
                 id: product.id,

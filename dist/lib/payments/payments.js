@@ -38,6 +38,7 @@ const subscriptionRenewal_1 = __importDefault(require("./subscriptionRenewal"));
 const emailVerification_1 = require("./emailVerification");
 const taxes_js_1 = require("./taxes/taxes.js");
 const products_1 = __importDefault(require("../../shared/products"));
+const updateCustomer_1 = require("./updateCustomer");
 class Payments {
     constructor(db) {
         this.db = db;
@@ -106,16 +107,7 @@ class Payments {
         return taxes_js_1.createTaxes(this.services)(data);
     }
     async updateCustomer(uuid, update) {
-        logger.info(`Updating customer ${uuid}`);
-        try {
-            const customer = await this.customerRepository.find(uuid);
-            Object.assign(customer, update);
-            return this.customerRepository.update(customer);
-        }
-        catch (e) {
-            logger.error(`Updating customer failed`, e);
-            throw e;
-        }
+        return updateCustomer_1.updateCustomer(this.customerRepository)(uuid, update);
     }
 }
 exports.default = Payments;
