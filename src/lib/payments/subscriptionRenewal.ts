@@ -16,7 +16,7 @@ export default class SubscriptionRenewal {
   }
 
   start() {
-    if (process.env.SUBSCRIPTIN_RENEWAL_ENABLED) {
+    if (process.env.SUBSCRIPTION_RENEWAL_ENABLED === 'true') {
       logger.info(`Initializing subscriptions timer to ${this.interval.asMinutes()}min`)
       this.intervalRef = setInterval(() => this.process(), this.interval.asMilliseconds())
     } else {
@@ -100,7 +100,7 @@ export default class SubscriptionRenewal {
     await emailProcessor(this.services.sendEmail, 'recurringFail', customer, {
       product,
       productDefinition: products[product.code]
-    })   
+    })
   }
 
   async _processCancellation(customer, product) {
@@ -114,19 +114,19 @@ export default class SubscriptionRenewal {
     }
   }
 
-  async processSucesfullPayment(customer, product: Product, paymentIntent) {    
+  async processSucesfullPayment(customer, product: Product, paymentIntent) {
     const sale = await this.services.customerRepository.createSale(product.accountingData, {
       paymentIntentId: paymentIntent.id,
     })
 
     await this.services.renderInvoice(sale)
     product.sales.push(sale)
-    
-    const nextPayment = product.subscription.state === 'canceled' ? new Date() : product.subscription.nextPayment    
+
+    const nextPayment = product.subscription.state === 'canceled' ? new Date() : product.subscription.nextPayment
     product.subscription.plannedCancelation = null
-    product.subscription.nextPayment = product.subscription.paymentCycle === 'monthly' ? 
-      moment(nextPayment).add(1, 'months').toDate() 
-    : moment(nextPayment).add(1, 'years').toDate()
+    product.subscription.nextPayment = product.subscription.paymentCycle === 'monthly' ?
+      moment(nextPayment).add(1, 'months').toDate()
+      : moment(nextPayment).add(1, 'years').toDate()
     product.subscription.state = 'active'
     product.subscription.retryPlannedPayment = null
     await this.services.customerRepository.update(customer)
@@ -140,7 +140,7 @@ export default class SubscriptionRenewal {
       product,
       sale,
       productDefinition: products[product.code]
-    })   
+    })
 
     logger.info(`Processing subscription renewal of ${product.name} for ${customer.email} completed`)
   }

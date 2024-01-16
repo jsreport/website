@@ -32,7 +32,7 @@ class SubscriptionRenewal {
         this.interval = interval || moment_1.default.duration(10, 'minute');
     }
     start() {
-        if (process.env.SUBSCRIPTIN_RENEWAL_ENABLED) {
+        if (process.env.SUBSCRIPTION_RENEWAL_ENABLED === 'true') {
             logger.info(`Initializing subscriptions timer to ${this.interval.asMinutes()}min`);
             this.intervalRef = setInterval(() => this.process(), this.interval.asMilliseconds());
         }
