@@ -38,6 +38,7 @@ export default [
   { name: 'Cambodia', code: 'KH' },
   { name: 'Cameroon', code: 'CM' },
   { name: 'Canada', code: 'CA' },
+  { name: 'Canary Islands (Spain)', code: 'IC' },
   { name: 'Cape Verde', code: 'CV' },
   { name: 'Cayman Islands', code: 'KY' },
   { name: 'Central African Republic', code: 'CF' },
