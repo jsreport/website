@@ -17,7 +17,7 @@ export type AccountingData = {
   currencyRate?: number,
   isExpense?: boolean,
   countryCode?: string,
-  email: string  
+  email: string
 }
 
 export type Sale = {

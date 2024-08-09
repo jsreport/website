@@ -66,7 +66,7 @@ class StripeFacade {
     }
     async findPaymentIntent(paymentIntentId) {
         return this.stripe.paymentIntents.retrieve(paymentIntentId, {
-            expand: ['payment_method.card'],
+            expand: ['payment_method.card', 'charges.data.balance_transaction'],
         });
     }
 }

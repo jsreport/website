@@ -48,9 +48,7 @@ async function calculateFees(stripeSales, gumroadInvoices) {
     for (const gumroadInvoice of gumroadInvoices) {
         incomes += gumroadInvoice.amount;
     }
-    const rate = await quotation_1.default(moment_1.default().format('DD.MM.YYYY'), 'USD');
-    const fee = utils_1.round(utils_1.round(incomes * rate) * 0.23);
-    return fee;
+    return utils_1.round(incomes * 0.23);
 }
 async function findStripeSales(services) {
     const customers = await services.customerRepository.findCustomersWithInvoicesLastMonth();
@@ -74,13 +72,21 @@ async function downloadStripeInvoices(services, stripeSales) {
         fs.writeFileSync(path.join(tmpPath, 'data', sale.blobName), invoiceBuffer);
     }
 }
-async function renderInvoicesXml(services, sales) {
+async function renderPohodaXml(services, sales) {
+    var _a, _b, _c;
     const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'POHODA';
     for (const s of sales) {
         const countryEnum = countries_1.default.find(c => c.name === s.accountingData.country);
         s.accountingData.countryCode = countryEnum ? countryEnum.code : s.accountingData.country;
         if (s.accountingData.currency === 'usd') {
             s.accountingData.currencyRate = await quotation_1.default(moment_1.default(s.purchaseDate).format('DD.MM.YYYY'), 'USD');
+        }
+        if (s.stripe) {
+            const pi = await services.stripe.findPaymentIntent(s.stripe.paymentIntentId);
+            if (((_a = pi.charges) === null || _a === void 0 ? void 0 : _a.data) && ((_c = (_b = pi.charges) === null || _b === void 0 ? void 0 : _b.data[0]) === null || _c === void 0 ? void 0 : _c.balance_transaction)) {
+                const feeInCents = pi.charges.data[0].balance_transaction.fee;
+                Object.assign(s.accountingData, { fee: utils_1.round(feeInCents / 100) });
+            }
         }
     }
     await services.renderInvoice({
@@ -131,7 +137,7 @@ function convertPeruInvoiceToSale(invoice) {
         }
     };
 }
-function createFeeSale(price) {
+async function createFeeSale(price) {
     const vatAmount = utils_1.round(price * 0.21);
     const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'F';
     return {
@@ -144,7 +150,8 @@ function createFeeSale(price) {
             country: 'Czech Republic',
             isEU: true,
             vatRate: 21,
-            currency: 'czk',
+            currencyRate: await quotation_1.default(moment_1.default(new Date()).format('DD.MM.YYYY'), 'USD'),
+            currency: 'usd',
             price: price,
             amount: utils_1.round(price + vatAmount),
             vatAmount,
@@ -165,10 +172,10 @@ const createTaxes = (services) => async (data) => {
     }
     const stripeSales = await findStripeSales(services);
     const feesAmount = await calculateFees(stripeSales, data.gumroadInvoices);
-    const feeSale = createFeeSale(feesAmount);
+    const feeSale = await createFeeSale(feesAmount);
     await renderSale(services, feeSale, '/payments/invoice fee');
     await downloadStripeInvoices(services, stripeSales);
-    await renderInvoicesXml(services, [peruSale, ...gumroadSales, ...stripeSales, feeSale]);
+    await renderPohodaXml(services, [peruSale, ...gumroadSales, ...stripeSales, feeSale]);
     const archive = archiver_1.default('zip');
     const output = fs.createWriteStream(path.join(tmpPath, 'taxes.zip'));
     archive.pipe(output);
