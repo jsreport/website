@@ -109,7 +109,7 @@ const checkout = (services) => async (checkoutData) => {
     }
     await services.customerRepository.update(customer);
     await emailProcessor_1.default(services.sendEmail, `checkout${product.licenseKey ? '-license' : ''}`, customer, {
-        sale: product.sales[0],
+        sale: product.sales[product.sales.length - 1],
         product,
         productDefinition
     });

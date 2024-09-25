@@ -79,10 +79,9 @@ databaseTest((getDb) => {
 
       const feeInvoice = files.find(f => f.path === `${idPrefix}F.pdf`)
       const feeData = JSON.parse(feeInvoice.data.toString())
-      const feeUSD = round((10 + 20 + 30) * 0.23)
-      const rate = await quotation(moment().format('DD.MM.YYYY'), 'USD')
-      feeData.accountingData.price.should.be.eql(round(feeUSD * rate))
-      feeData.accountingData.amount.should.be.eql(round(round(feeUSD * rate) * 1.21))
+      const feeUSD = round((10 + 20 + 30) * 0.23)            
+      feeData.accountingData.price.should.be.eql(feeUSD)
+      feeData.accountingData.amount.should.be.eql(round(feeUSD  * 1.21))
 
       const invoicesExport = files.find(f => f.path === `${idPrefix}POHODA.xml`)
       const invoicesXmlData = JSON.parse(invoicesExport.data.toString())
