@@ -46,7 +46,7 @@ async function calculateFees(stripeSales, gumroadInvoices) {
         incomes += stripeSale.accountingData.price;
     }
     for (const gumroadInvoice of gumroadInvoices) {
-        incomes += gumroadInvoice.amount;
+        incomes += (await quotation_1.default(moment_1.default(gumroadInvoice.date).format('DD.MM.YYYY'), 'USD')) / gumroadInvoice.amount;
     }
     return utils_1.round(incomes * 0.23);
 }
@@ -107,7 +107,7 @@ function convertGumroadInvoiceToSale(invoice) {
             country: 'United States',
             isEU: false,
             vatRate: 0,
-            currency: 'usd',
+            currency: 'czk',
             price: invoice.amount,
             amount: invoice.amount,
             item: 'Fees for the sold jsreport licenses',

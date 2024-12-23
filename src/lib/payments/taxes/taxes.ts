@@ -38,7 +38,7 @@ async function calculateFees(stripeSales: Array<Sale>, gumroadInvoices: Array<In
     }
 
     for (const gumroadInvoice of gumroadInvoices) {
-        incomes += gumroadInvoice.amount
+        incomes += (await quotation(moment(gumroadInvoice.date).format('DD.MM.YYYY'), 'USD')) / gumroadInvoice.amount
     }
 
     return round(incomes * 0.23)  
@@ -110,7 +110,7 @@ function convertGumroadInvoiceToSale(invoice: Invoice): Sale {
             country: 'United States',
             isEU: false,
             vatRate: 0,
-            currency: 'usd',
+            currency: 'czk',
             price: invoice.amount,
             amount: invoice.amount,
             item: 'Fees for the sold jsreport licenses',

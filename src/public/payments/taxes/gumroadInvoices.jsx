@@ -6,7 +6,7 @@ function createInitialInvoices () {
   const initialDate = moment.utc('7.7.2017', 'DD.MM.YYYY')
 
   const invoices = {}
-  let accountingMonthStart = moment()
+  const accountingMonthStart = moment()
     .add(-1, 'M')
     .startOf('month')
 
@@ -42,10 +42,9 @@ function gumroadInvoice ({ id, date, amount }, change) {
         type='text'
         defaultValue={moment(date).format('DD.MM.YYYY')}
         onChange={ev =>
-          change(amount, moment.utc(ev.target.value, 'DD.MM.YYYY').toDate())
-        }
+          change(amount, moment.utc(ev.target.value, 'DD.MM.YYYY').toDate())}
       />
-      <span style={{ color: 'red' }}>USD</span>
+      <span style={{ color: 'red' }}>CZK</span>
       <input
         type='text'
         onChange={ev => change(parseFloat(ev.target.value), date)}
