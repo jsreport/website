@@ -37,8 +37,9 @@ async function calculateFees(stripeSales: Array<Sale>, gumroadInvoices: Array<In
         incomes += stripeSale.accountingData.price
     }
 
-    for (const gumroadInvoice of gumroadInvoices) {
-        incomes += (await quotation(moment(gumroadInvoice.date).format('DD.MM.YYYY'), 'USD')) / gumroadInvoice.amount
+    for (const gumroadInvoice of gumroadInvoices) {        
+        const q =  await quotation(moment(gumroadInvoice.date).format('DD.MM.YYYY'), 'USD')        
+        incomes += gumroadInvoice.amount / q
     }
 
     return round(incomes * 0.23)  
