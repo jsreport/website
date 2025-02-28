@@ -1,6 +1,6 @@
 ﻿{{{
     "title": "Release 4.8.0 and improvements in office recipes",
-    "date": "02-27-2022 19:04"
+    "date": "02-28-2022 18:04"
 }}}
 
 **Release 4.8.0 and improvements in office recipes**
@@ -36,7 +36,8 @@ Just look at the features we've added to the office recipes in the last months.
 - xlsx add vertical loop support
 
 **html-to-xlsx**
-???
+- support for vertical text (transform: rotate() to rotate text at certain angles, using together writing-mode and text-orientation)
+- border styles normalization according to html table border collapsing rules
 
 We will continue to improve office recipes and focus more on the `html-to-xlsx` which didn't get enough attention in the past, but now it's clear that a simple html to xlsx table conversion still makes sense in many cases.
 
