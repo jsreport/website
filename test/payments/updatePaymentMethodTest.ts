@@ -20,7 +20,7 @@ databaseTest((getDb) => {
       successfullyPaymentProcessing = []
     })
 
-    it('should process subscription renew when passed payment intent', async () => {
+    it('should process subscription renew when passed payment intent and update the payment method', async () => {
       let customer = await customerRepository.findOrCreate('a@a.com')
       const product = createProduct()
       customer.products = [product]
@@ -29,6 +29,7 @@ databaseTest((getDb) => {
       stripe.findPaymentIntent = async (id) => ({
         id,
         payment_method: {
+          id: 'paymentMethodId',
           card: {
             last4: 'UPDA',
             expMonth: 1,
@@ -45,7 +46,9 @@ databaseTest((getDb) => {
         })
       })(customer.uuid, product.id, { paymentIntentId: 'paymentIntentId' })
 
-      successfullyPaymentProcessing[0].customer.uuid.should.be.eql(customer.uuid)
+      successfullyPaymentProcessing[0].customer.uuid.should.be.eql(customer.uuid)      
+      successfullyPaymentProcessing[0].product.subscription.card.last4.should.be.eql('UPDA')
+      successfullyPaymentProcessing[0].product.subscription.stripe.paymentMethodId.should.be.eql('paymentMethodId')
     })
 
     it('should update payment method when a setup intent is passed', async () => {

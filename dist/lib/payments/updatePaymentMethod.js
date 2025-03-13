@@ -46,6 +46,7 @@ const updatePaymentMethod = (services, processSuccessfullPayment) => async (cust
             expMonth: stripePaymentMethod.card.exp_month,
             expYear: stripePaymentMethod.card.exp_year,
         };
+        product.subscription.stripe.paymentMethodId = stripePaymentMethod.id;
         return processSuccessfullPayment(customer, product, stripePaymentIntent);
     }
 };

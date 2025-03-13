@@ -69,17 +69,22 @@ databaseTest((getDb) => {
       JSON.parse(stripeInvoice.data.toString()).accountingData.amount.should.be.eql(30)
 
       const gumroadInvoice1 = files.find(f => f.path === 'G1.pdf')
-      JSON.parse(gumroadInvoice1.data.toString()).accountingData.amount.should.be.eql(10)
+      const g1Data = JSON.parse(gumroadInvoice1.data.toString())
+      g1Data.accountingData.amount.should.be.eql(10)
 
       const gumroadInvoice2 = files.find(f => f.path === 'G2.pdf')
-      JSON.parse(gumroadInvoice2.data.toString()).accountingData.amount.should.be.eql(20)
+      const g2Data = JSON.parse(gumroadInvoice2.data.toString())
+      g2Data.accountingData.amount.should.be.eql(20)
 
       const peruInvoice = files.find(f => f.path === 'P1.pdf')
       JSON.parse(peruInvoice.data.toString()).accountingData.amount.should.be.eql(40)
 
       const feeInvoice = files.find(f => f.path === `${idPrefix}F.pdf`)
       const feeData = JSON.parse(feeInvoice.data.toString())
-      const feeUSD = round((10 + 20 + 30) * 0.23)            
+      const g1USD = 10 / (await quotation(moment(g1Data.purchaseDate).format('DD.MM.YYYY'), 'USD'))
+      const g2USD = 20 / (await quotation(moment(g2Data.purchaseDate).format('DD.MM.YYYY'), 'USD'))
+      const feeUSD = round((g1USD + g2USD + 30) * 0.23)     
+      
       feeData.accountingData.price.should.be.eql(feeUSD)
       feeData.accountingData.amount.should.be.eql(round(feeUSD  * 1.21))
 

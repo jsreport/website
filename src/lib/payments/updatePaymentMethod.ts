@@ -39,7 +39,9 @@ export const updatePaymentMethod = (
       expMonth: stripePaymentMethod.card.exp_month,
       expYear: stripePaymentMethod.card.exp_year,
     }
-
+    product.subscription.stripe.paymentMethodId = stripePaymentMethod.id 
+    console.log('product', product)   
+    
     return processSuccessfullPayment(customer, product, stripePaymentIntent)
   }
 }
