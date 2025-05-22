@@ -4,9 +4,7 @@
 }}}
 
 
-**Release 4.9.0 and LibreOffice extension**
-
-[jsreport 4.9.0](https://github.com/jsreport/jsreport/releases/tag/4.9.0) is here and brings new LibreOffice recipe and other improvements.
+[jsreport 4.9.0](https://github.com/jsreport/jsreport/releases/tag/4.9.0) is here and brings a new LibreOffice extension and other improvements.
 
 ## LibreOffice extension
 The [LibreOffice](https://www.libreoffice.org/) command line API provides great capabilities for converting or printing Office documents. This API is now wrapped in the custom extension [jsreport-libreOffice](https://jsreport.net/learn/libreoffice), which can be additionally installed from npm or used with the [jsreport full docker image](https://jsreport.net/learn/docker).
