@@ -76,7 +76,8 @@ class SubscriptionRenewal {
         try {
             logger.info(`Initiating charge for ${product.name} for ${customer.email} of ${product.accountingData.amount} USD`);
             const stripeCustomer = await this.services.stripe.findOrCreateCustomer(customer.email);
-            paymentIntent = await this.services.stripe.createConfirmedPaymentIntent(stripeCustomer.id, product.subscription.stripe.paymentMethodId, product.accountingData.amount);
+            const pm = await this.services.stripe.findPaymentMethod(product.subscription.stripe.paymentMethodId);
+            paymentIntent = await this.services.stripe.createConfirmedPaymentIntent(pm.customer || stripeCustomer.id, product.subscription.stripe.paymentMethodId, product.accountingData.amount);
         }
         catch (e) {
             if (product.subscription.retryPlannedPayment) {

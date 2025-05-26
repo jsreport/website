@@ -67,9 +67,11 @@ export default class SubscriptionRenewal {
     let paymentIntent
     try {
       logger.info(`Initiating charge for ${product.name} for ${customer.email} of ${product.accountingData.amount} USD`)
-      const stripeCustomer = await this.services.stripe.findOrCreateCustomer(customer.email)
+      const stripeCustomer = await this.services.stripe.findOrCreateCustomer(customer.email) 
+      const pm = await this.services.stripe.findPaymentMethod(product.subscription.stripe.paymentMethodId)      
+      
       paymentIntent = await this.services.stripe.createConfirmedPaymentIntent(
-        stripeCustomer.id,
+        <string>pm.customer || stripeCustomer.id,
         product.subscription.stripe.paymentMethodId,
         product.accountingData.amount
       )

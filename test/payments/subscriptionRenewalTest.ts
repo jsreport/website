@@ -55,7 +55,7 @@ databaseTest((getDb) => {
       })
 
       stripe.createConfirmedPaymentIntent = (id, paymentMethodId, amount) => {
-        id.should.be.eql('customerId')
+        id.should.be.eql('customerFromPmId')
         paymentMethodId.should.be.eql(product.subscription.stripe.paymentMethodId)
         amount.should.be.eql(product.sales[0].accountingData.amount)
 
@@ -63,6 +63,11 @@ databaseTest((getDb) => {
           id: 'paymentIntentId',
         }
       }
+
+      stripe.findPaymentMethod = () => ({
+        id: 'pm',
+        customer: 'customerFromPmId'
+      })
 
       await subscriptionRenewal.process()
       customer = await customerRepository.findOrCreate('a@a.com')
@@ -98,6 +103,7 @@ databaseTest((getDb) => {
       customer.products = [product]
       await customerRepository.update(customer)
       
+      stripe.findPaymentMethod = () => ({ id: 'pm' })
       stripe.findOrCreateCustomer = () => ({ id: 'customerId' })
       stripe.createConfirmedPaymentIntent = () => ({ id: 'paymentIntentId' })
 
