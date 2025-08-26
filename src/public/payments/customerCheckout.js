@@ -7,9 +7,9 @@ import countries from './countries'
 import products from '../../shared/products'
 
 export async function getUserCountry () {
-  const res = await window.fetch('https://geoip-db.com/json/')
+  const res = await window.fetch('https://ipinfo.io/json')
   const data = await res.json()
-  return data.country_code
+  return data.country
 }
 
 export async function validateVAT (vatNumber) {

@@ -87,7 +87,13 @@ class CustomerCheckout extends React.Component {
 
   componentDidMount () {
     getUserCountry()
-      .then((r) => this.setState({ country: r }))
+      .then((r) => {
+        if (countries.find((c) => c.code === r) == null) {
+          console.error('Could not find user country in the countries list', r)
+        } else {
+          this.setState({ country: r })
+        }
+      })
       .catch(console.error.bind(console))
   }
 
