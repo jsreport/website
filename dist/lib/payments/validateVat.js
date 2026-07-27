@@ -33,7 +33,7 @@ async function test(vatNumber) {
         throw new Error('Invalid VAT: ' + r);
     }
     return {
-        country: r.countryCode,
+        country: r.countryCode === 'EL' ? 'GR' : r.countryCode,
         name: unescape_1.default(r.name),
         address: unescape_1.default(r.address)
     };

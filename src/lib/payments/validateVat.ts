@@ -12,7 +12,7 @@ async function test (vatNumber) {
   }
 
   return {
-    country: r.countryCode,
+    country: r.countryCode === 'EL' ? 'GR' : r.countryCode,
     name: decodeXML(r.name),
     address: decodeXML(r.address)
   }
