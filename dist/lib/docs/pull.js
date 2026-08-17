@@ -39,11 +39,11 @@ const tmpRepoDir = path_1.default.join(os_1.default.tmpdir(), 'jsreport', 'temp'
 async function pull(docsPath = 'views/learn/docs') {
     // return ['latest', '2.11.0']
     if (fs_1.default.existsSync(tmpRepoDir)) {
-        fs_1.default.rmdirSync(tmpRepoDir, { recursive: true });
+        fs_1.default.rmSync(tmpRepoDir, { recursive: true, force: true });
         fs_1.default.mkdirSync(tmpRepoDir, { recursive: true });
     }
     const fullDocsPath = path_1.default.isAbsolute(docsPath) ? docsPath : path_1.default.join(process_1.default.cwd(), docsPath);
-    fs_1.default.rmdirSync(fullDocsPath, { recursive: true });
+    fs_1.default.rmSync(fullDocsPath, { recursive: true, force: true });
     fs_1.default.mkdirSync(fullDocsPath, { recursive: true });
     logger.info('git clone docs');
     await isomorphic_git_1.default.clone({ fs: fs_1.default, http: node_1.default, dir: tmpRepoDir, url: 'https://github.com/jsreport/docs' });

@@ -13,12 +13,12 @@ const tmpRepoDir = path.join(os.tmpdir(), 'jsreport', 'temp', 'docsRepo')
 export default async function pull(docsPath = 'views/learn/docs') {
     // return ['latest', '2.11.0']
     if (fs.existsSync(tmpRepoDir)) {
-        fs.rmdirSync(tmpRepoDir, { recursive: true })
+        fs.rmSync(tmpRepoDir, { recursive: true, force: true })
         fs.mkdirSync(tmpRepoDir, { recursive: true })
     }
 
     const fullDocsPath = path.isAbsolute(docsPath) ? docsPath : path.join(process.cwd(), docsPath)
-    fs.rmdirSync(fullDocsPath, { recursive: true })
+    fs.rmSync(fullDocsPath, { recursive: true, force: true })
     fs.mkdirSync(fullDocsPath, { recursive: true })
 
     logger.info('git clone docs')
