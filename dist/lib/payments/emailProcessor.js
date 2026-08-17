@@ -41,18 +41,18 @@ async function default_1(sendEmail, type, customer, data) {
     const content = await fs_1.promises.readFile(path_1.default.join(emailFolder, `${type}.mjml`));
     data = { ...data, customer, moment: moment_1.default };
     await sendEmail({
-        subject: utils_1.interpolate(config[type].subject, data),
+        subject: (0, utils_1.interpolate)(config[type].subject, data),
         to: [customer.email, customer.notificationEmail].filter(e => e).join(','),
-        content: utils_1.interpolate(mjml_1.default(content.toString(), {
+        content: (0, utils_1.interpolate)((0, mjml_1.default)(content.toString(), {
             filePath: emailFolder
         }).html, data)
     });
     if (config[type].sendUs) {
         await sendEmail({
-            subject: utils_1.interpolate(config[type].subject, data),
+            subject: (0, utils_1.interpolate)(config[type].subject, data),
             to: 'jan.blaha@jsreport.net',
             content: `${customer.email}<br><a href='https://jsreport.net/payments/customer/${customer.uuid}'>https://jsreport.net/payments/customer/${customer.uuid}</a><br>`
-                + utils_1.interpolate(mjml_1.default(content.toString(), {
+                + (0, utils_1.interpolate)((0, mjml_1.default)(content.toString(), {
                     filePath: emailFolder
                 }).html, data)
         });

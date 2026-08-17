@@ -13,7 +13,7 @@ const sendCustomerLink = (services) => async (email) => {
     catch (e) {
         return;
     }
-    await emailProcessor_1.default(services.sendEmail, 'customerLink', customer, {});
+    await (0, emailProcessor_1.default)(services.sendEmail, 'customerLink', customer, {});
 };
 exports.sendCustomerLink = sendCustomerLink;
 //# sourceMappingURL=sendCustomerLink.js.map

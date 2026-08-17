@@ -1,7 +1,6 @@
 import { Services } from "../services"
 import archiver from 'archiver'
 const rimraf = require('util').promisify(require('rimraf'))
-import * as mkdirp from 'mkdirp'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as os from 'os'
@@ -170,7 +169,7 @@ async function createFeeSale(price): Promise<Sale> {
 
 export const createTaxes = (services: Services) => async (data: TaxesRequest) => {
     await rimraf(tmpPath)
-    mkdirp.sync(path.join(tmpPath, 'data'))
+    await fs.promises.mkdir(path.join(tmpPath, 'data'), { recursive: true })
 
     const peruSale = convertPeruInvoiceToSale(data.peru)
     const gumroadSales = data.gumroadInvoices.map(convertGumroadInvoiceToSale)
@@ -194,8 +193,8 @@ export const createTaxes = (services: Services) => async (data: TaxesRequest) =>
     archive.pipe(output)
     archive.directory(path.join(tmpPath, 'data'), false)
 
-    await new Promise((resolve, reject) => {
-        output.on('close', resolve)
+    await new Promise<void>((resolve, reject) => {
+        output.on('close', () => resolve())
         archive.on('error', reject)
         archive.finalize()
     })

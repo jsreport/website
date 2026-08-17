@@ -9,7 +9,7 @@ const products_1 = __importDefault(require("../../shared/products"));
 const cancelSubscription = (services) => async (customerId, productId) => {
     const customer = await services.customerRepository.find(customerId);
     const product = customer.products.find((p) => p.id === productId);
-    await emailProcessor_1.default(services.sendEmail, 'cancel', customer, {
+    await (0, emailProcessor_1.default)(services.sendEmail, 'cancel', customer, {
         product,
         productDefinition: products_1.default[product.code]
     });

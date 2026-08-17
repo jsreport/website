@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -26,7 +30,7 @@ const logger = __importStar(require("../utils/logger"));
 const util_1 = require("util");
 const validate_vat_1 = __importDefault(require("validate-vat"));
 const unescape_1 = __importDefault(require("unescape"));
-const validateVatUtil = util_1.promisify(validate_vat_1.default);
+const validateVatUtil = (0, util_1.promisify)(validate_vat_1.default);
 async function test(vatNumber) {
     const r = await validateVatUtil(vatNumber.slice(0, 2), vatNumber.substring(2));
     if (r.valid !== true) {
@@ -34,8 +38,8 @@ async function test(vatNumber) {
     }
     return {
         country: r.countryCode === 'EL' ? 'GR' : r.countryCode,
-        name: unescape_1.default(r.name),
-        address: unescape_1.default(r.address)
+        name: (0, unescape_1.default)(r.name),
+        address: (0, unescape_1.default)(r.address)
     };
 }
 async function default_1(vatNumber = '') {

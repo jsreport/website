@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -73,13 +77,13 @@ class Payments {
         };
     }
     async validateVat(vatNumber = '') {
-        return validateVat_1.default(vatNumber);
+        return (0, validateVat_1.default)(vatNumber);
     }
     async checkout(checkoutData) {
-        return checkout_1.checkout(this.services)(checkoutData);
+        return (0, checkout_1.checkout)(this.services)(checkoutData);
     }
     async updatePaymentMethod(customerId, productId, si) {
-        return updatePaymentMethod_1.updatePaymentMethod(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))(customerId, productId, si);
+        return (0, updatePaymentMethod_1.updatePaymentMethod)(this.services, this.subscriptionRenewal.processSucesfullPayment.bind(this.subscriptionRenewal))(customerId, productId, si);
     }
     async customer(id) {
         return this.customerRepository.find(id);
@@ -87,27 +91,27 @@ class Payments {
     async invoice(customerId, saleId) {
         logger.info('Downloading invoice ' + saleId);
         const sale = await this.customerRepository.findSale(customerId, saleId);
-        return renderInvoice_1.readInvoice(sale.blobName);
+        return (0, renderInvoice_1.readInvoice)(sale.blobName);
     }
     async cancelSubscription(customerId, productId) {
         logger.info('Canceling subscription customerId:' + customerId + ' productId:' + productId);
-        return cancelSubscription_1.cancelSubscription(this.services)(customerId, productId);
+        return (0, cancelSubscription_1.cancelSubscription)(this.services)(customerId, productId);
     }
     customerLink(email) {
         logger.info('Request customer link ' + email);
-        return sendCustomerLink_1.sendCustomerLink(this.services)(email);
+        return (0, sendCustomerLink_1.sendCustomerLink)(this.services)(email);
     }
     async stripeHook() {
         // nothing for now
     }
     emailVerification(email, productCode) {
-        return emailVerification_1.emailVerification(this.services)(email, products_1.default[productCode]);
+        return (0, emailVerification_1.emailVerification)(this.services)(email, products_1.default[productCode]);
     }
     createTaxes(data) {
-        return taxes_js_1.createTaxes(this.services)(data);
+        return (0, taxes_js_1.createTaxes)(this.services)(data);
     }
     async updateCustomer(uuid, update) {
-        return updateCustomer_1.updateCustomer(this.customerRepository)(uuid, update);
+        return (0, updateCustomer_1.updateCustomer)(this.customerRepository)(uuid, update);
     }
 }
 exports.default = Payments;

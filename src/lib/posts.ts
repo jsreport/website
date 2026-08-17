@@ -23,8 +23,8 @@ export default async function (app) {
 
     poet.addTemplate({
         ext: 'md',
-        fn: function (s, cb) {
-            marked(s, function (err, content) {
+        fn: function (s, cb) {           
+            marked(s.source, function (err, content) {
                 if (err) return cb(err);
                 cb(null, content);
             });

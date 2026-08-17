@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -29,7 +33,7 @@ const fs = __importStar(require("fs"));
 const bluebird_1 = __importDefault(require("bluebird"));
 const path = __importStar(require("path"));
 bluebird_1.default.promisifyAll(fs);
-const jsreportClient = jsreport_client_1.default(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD);
+const jsreportClient = (0, jsreport_client_1.default)(process.env.JO_URL, process.env.JO_USER, process.env.JO_PASSWORD);
 if (!fs.existsSync(path.join(process.cwd(), 'data'))) {
     fs.mkdirSync(path.join(process.cwd(), 'data'));
 }

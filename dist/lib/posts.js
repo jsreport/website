@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -27,7 +31,7 @@ const languages = __importStar(require("prism-languages"));
 const poet_1 = __importDefault(require("poet"));
 const marked_1 = __importDefault(require("marked"));
 async function default_1(app) {
-    var poet = poet_1.default(app, {
+    var poet = (0, poet_1.default)(app, {
         postsPerPage: 300
     });
     var cache = {};
@@ -44,7 +48,7 @@ async function default_1(app) {
     poet.addTemplate({
         ext: 'md',
         fn: function (s, cb) {
-            marked_1.default(s, function (err, content) {
+            (0, marked_1.default)(s.source, function (err, content) {
                 if (err)
                     return cb(err);
                 cb(null, content);

@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -30,7 +34,7 @@ const moment_1 = __importDefault(require("moment"));
 const products_1 = __importDefault(require("../../shared/products"));
 const emailProcessor_1 = __importDefault(require("./emailProcessor"));
 const processUpgrade_1 = require("./processUpgrade");
-const uuid = () => v4_1.default().toUpperCase();
+const uuid = () => (0, v4_1.default)().toUpperCase();
 const checkout = (services) => async (checkoutData) => {
     logger.info('Processing checkout ' + JSON.stringify(checkoutData));
     const customer = await services.customerRepository.find(checkoutData.customerId);
@@ -41,7 +45,7 @@ const checkout = (services) => async (checkoutData) => {
     if (productDefinition.isSubscription) {
         subscription = {
             state: 'active',
-            nextPayment: checkoutData.paymentCycle === 'monthly' ? moment_1.default().add(1, 'months').toDate() : moment_1.default().add(1, 'years').toDate(),
+            nextPayment: checkoutData.paymentCycle === 'monthly' ? (0, moment_1.default)().add(1, 'months').toDate() : (0, moment_1.default)().add(1, 'years').toDate(),
             card: {
                 last4: stripePaymentMethod.card.last4,
                 expMonth: stripePaymentMethod.card.exp_month,
@@ -73,7 +77,7 @@ const checkout = (services) => async (checkoutData) => {
         isSubscription: productDefinition.isSubscription,
         name: productDefinition.name,
         isSupport: productDefinition.isSupport,
-        id: nanoid_1.default(4),
+        id: (0, nanoid_1.default)(4),
         sales: [],
         accountingData,
         licenseKey: (productDefinition.hasLicenseKey === false) ? null : uuid(),
@@ -88,7 +92,7 @@ const checkout = (services) => async (checkoutData) => {
     product.sales.push(sale);
     await services.notifyLicensingServer(customer, product, product.sales[0]);
     if (productDefinition.isUpgrade) {
-        await processUpgrade_1.processUpgrade(services)(customer, product, sale);
+        await (0, processUpgrade_1.processUpgrade)(services)(customer, product, sale);
     }
     customer.products = customer.products || [];
     if (product.planCode) {
@@ -108,7 +112,7 @@ const checkout = (services) => async (checkoutData) => {
         customer.products.push(product);
     }
     await services.customerRepository.update(customer);
-    await emailProcessor_1.default(services.sendEmail, `checkout${product.licenseKey ? '-license' : ''}`, customer, {
+    await (0, emailProcessor_1.default)(services.sendEmail, `checkout${product.licenseKey ? '-license' : ''}`, customer, {
         sale: product.sales[product.sales.length - 1],
         product,
         productDefinition

@@ -31,7 +31,7 @@ class CustomerRepository {
         }
         customer = {
             email,
-            uuid: nanoid_1.default(16),
+            uuid: (0, nanoid_1.default)(16),
             creationDate: new Date(),
         };
         await this.db.collection('customers').insertOne(customer);
@@ -85,8 +85,8 @@ class CustomerRepository {
             .toArray();
     }
     async findCustomersWithInvoicesLastMonth() {
-        const startOfMonth = moment_1.default().add(-1, 'M').startOf('month').toDate();
-        const endOfMonth = moment_1.default().add(-1, 'M').endOf('month').toDate();
+        const startOfMonth = (0, moment_1.default)().add(-1, 'M').startOf('month').toDate();
+        const endOfMonth = (0, moment_1.default)().add(-1, 'M').endOf('month').toDate();
         return this.db
             .collection('customers')
             .find({

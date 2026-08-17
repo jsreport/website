@@ -1,4 +1,4 @@
-FROM node:14.17.4-alpine3.14
+FROM node:24-alpine
 EXPOSE 5488
 
 RUN addgroup -S jsreport && adduser -S -G jsreport jsreport 
@@ -9,8 +9,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
   git \
   # so user can docker exec -it test /bin/bash
   bash \
+  ca-certificates \
   && rm -rf /var/cache/apk/* /tmp/*
-
+  
 RUN mkdir -p /app
 WORKDIR /app
 

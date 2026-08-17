@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -25,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /*eslint-disable */
 require('dotenv').config();
 const express_1 = __importDefault(require("express"));
-const express3_handlebars_1 = __importDefault(require("express3-handlebars"));
+const express_handlebars_1 = require("express-handlebars");
 const router_1 = __importDefault(require("./router"));
 const docs = __importStar(require("./docs/routes"));
 const multer_1 = __importDefault(require("multer"));
@@ -40,7 +44,7 @@ const posts_1 = __importDefault(require("./posts"));
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const express_basic_auth_1 = __importDefault(require("express-basic-auth"));
 /* eslint-enable */
-const app = express_1.default();
+const app = (0, express_1.default)();
 logger.init({
     level: process.env.LOGGLY_LEVEL,
     token: process.env.LOGGLY_TOKEN,
@@ -69,7 +73,7 @@ client.connect((err) => {
     logger.info('jsreport website sucessfully connected to the mongo');
     db = client.db('website');
     const payments = new payments_1.default(db);
-    const router = router_1.default(payments, db);
+    const router = (0, router_1.default)(payments, db);
     var reaper = new reap2_1.default({ threshold: 300000 });
     reaper.watch(path.join(__dirname, '../../', 'public', 'temp'));
     setInterval(() => {
@@ -79,7 +83,7 @@ client.connect((err) => {
             }
         });
     }, 10000).unref();
-    var hbs = express3_handlebars_1.default.create({
+    var hbs = (0, express_handlebars_1.create)({
         defaultLayout: 'main',
         extname: '.html',
         helpers: {
@@ -112,17 +116,16 @@ client.connect((err) => {
     app.set('view engine', '.html');
     app.use(express_1.default.static('public/'));
     app.use(express_1.default.static('dist/public'));
-    app.use(multer_1.default({ dest: 'public/temp' }));
+    const upload = (0, multer_1.default)({
+        dest: 'public/temp'
+    });
     app.post('/gumroad', body_parser_1.default.urlencoded({ extended: true, limit: '2mb' }), (req, res) => res.send('Ok'));
-    app.post('/temp', function (req, res) {
-        function findFirstFile() {
-            for (var f in req.files) {
-                if (req.files[f]) {
-                    return req.files[f];
-                }
-            }
+    app.post('/temp', upload.any(), function (req, res) {
+        const files = req.files;
+        if (!files || files.length === 0) {
+            return res.status(400).send('No file uploaded');
         }
-        return res.send(require('path').basename(findFirstFile().path));
+        return res.send(path.basename(files[0].path));
     });
     app.get('/', function (req, res) {
         res.render('home', {
@@ -155,7 +158,7 @@ client.connect((err) => {
     let learnDocs;
     payments
         .init()
-        .then(() => posts_1.default(app))
+        .then(() => (0, posts_1.default)(app))
         .then((poet) => {
         app.get('/sitemap*', function (req, res) {
             if (!learnDocs) {
@@ -180,11 +183,11 @@ client.connect((err) => {
         logger.error('Failed to start server', e);
         process.exit();
     });
-    const limiter = express_rate_limit_1.default({
+    const limiter = (0, express_rate_limit_1.default)({
         windowMs: 5000,
         max: 20,
     });
-    const auth = express_basic_auth_1.default({
+    const auth = (0, express_basic_auth_1.default)({
         users: { [process.env.USER]: process.env.PASSWORD },
         challenge: true,
     });

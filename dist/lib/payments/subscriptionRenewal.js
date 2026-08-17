@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -85,7 +89,7 @@ class SubscriptionRenewal {
             }
             else {
                 logger.warn(`Processing subscription renewal of ${product.name} for ${customer.email} errored but will retry`, e);
-                product.subscription.retryPlannedPayment = moment_1.default().add(1, 'days').toDate();
+                product.subscription.retryPlannedPayment = (0, moment_1.default)().add(1, 'days').toDate();
                 await this.services.customerRepository.update(customer);
             }
             return;
@@ -95,12 +99,12 @@ class SubscriptionRenewal {
     async _processSecondFailedPayment(customer, product, e) {
         logger.warn(`Processing subscription renewal of ${product.name} for ${customer.email} errored and waiting for user`, e);
         product.subscription.retryPlannedPayment = null;
-        product.subscription.plannedCancelation = moment_1.default(product.subscription.nextPayment).add(1, 'months').toDate();
+        product.subscription.plannedCancelation = (0, moment_1.default)(product.subscription.nextPayment).add(1, 'months').toDate();
         await this.services.customerRepository.update(customer);
         if (product.webhook) {
             await this.services.notifyWebhook(customer, product, 'cancel-planned');
         }
-        await emailProcessor_1.default(this.services.sendEmail, 'recurringFail', customer, {
+        await (0, emailProcessor_1.default)(this.services.sendEmail, 'recurringFail', customer, {
             product,
             productDefinition: products_1.default[product.code]
         });
@@ -124,8 +128,8 @@ class SubscriptionRenewal {
         const nextPayment = product.subscription.state === 'canceled' ? new Date() : product.subscription.nextPayment;
         product.subscription.plannedCancelation = null;
         product.subscription.nextPayment = product.subscription.paymentCycle === 'monthly' ?
-            moment_1.default(nextPayment).add(1, 'months').toDate()
-            : moment_1.default(nextPayment).add(1, 'years').toDate();
+            (0, moment_1.default)(nextPayment).add(1, 'months').toDate()
+            : (0, moment_1.default)(nextPayment).add(1, 'years').toDate();
         product.subscription.state = 'active';
         product.subscription.retryPlannedPayment = null;
         await this.services.customerRepository.update(customer);
@@ -133,7 +137,7 @@ class SubscriptionRenewal {
         if (product.webhook) {
             await this.services.notifyWebhook(customer, product, 'renewed');
         }
-        await emailProcessor_1.default(this.services.sendEmail, 'recurring', customer, {
+        await (0, emailProcessor_1.default)(this.services.sendEmail, 'recurring', customer, {
             product,
             sale,
             productDefinition: products_1.default[product.code]

@@ -50,7 +50,7 @@ export default class Vat extends React.Component {
           ) : (
             <small>
               <b id="errorVAT" style={{ color: 'red' }}>
-                The VAT number isn't valid and won't be used
+                The VAT number is invalid and will not be used. If your company is established in the EU and has a valid VAT number, please contact us before making your purchase so we can resolve the issue.
               </b>
             </small>
           )}

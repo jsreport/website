@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -25,7 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createTaxes = void 0;
 const archiver_1 = __importDefault(require("archiver"));
 const rimraf = require('util').promisify(require('rimraf'));
-const mkdirp = __importStar(require("mkdirp"));
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const os = __importStar(require("os"));
@@ -46,15 +49,15 @@ async function calculateFees(stripeSales, gumroadInvoices) {
         incomes += stripeSale.accountingData.price;
     }
     for (const gumroadInvoice of gumroadInvoices) {
-        const q = await quotation_1.default(moment_1.default(gumroadInvoice.date).format('DD.MM.YYYY'), 'USD');
+        const q = await (0, quotation_1.default)((0, moment_1.default)(gumroadInvoice.date).format('DD.MM.YYYY'), 'USD');
         incomes += gumroadInvoice.amount / q;
     }
-    return utils_1.round(incomes * 0.23);
+    return (0, utils_1.round)(incomes * 0.23);
 }
 async function findStripeSales(services) {
     const customers = await services.customerRepository.findCustomersWithInvoicesLastMonth();
-    const startOfMonth = moment_1.default().add(-1, 'M').startOf('month').toDate();
-    const endOfMonth = moment_1.default().add(-1, 'M').endOf('month').toDate();
+    const startOfMonth = (0, moment_1.default)().add(-1, 'M').startOf('month').toDate();
+    const endOfMonth = (0, moment_1.default)().add(-1, 'M').endOf('month').toDate();
     const sales = [];
     for (const customer of customers) {
         for (const product of customer.products) {
@@ -80,13 +83,13 @@ async function renderPohodaXml(services, sales) {
         const countryEnum = countries_1.default.find(c => c.name === s.accountingData.country);
         s.accountingData.countryCode = countryEnum ? countryEnum.code : s.accountingData.country;
         if (s.accountingData.currency === 'usd') {
-            s.accountingData.currencyRate = await quotation_1.default(moment_1.default(s.purchaseDate).format('DD.MM.YYYY'), 'USD');
+            s.accountingData.currencyRate = await (0, quotation_1.default)((0, moment_1.default)(s.purchaseDate).format('DD.MM.YYYY'), 'USD');
         }
         if (s.stripe) {
             const pi = await services.stripe.findPaymentIntent(s.stripe.paymentIntentId);
             if (((_a = pi.charges) === null || _a === void 0 ? void 0 : _a.data) && ((_c = (_b = pi.charges) === null || _b === void 0 ? void 0 : _b.data[0]) === null || _c === void 0 ? void 0 : _c.balance_transaction)) {
                 const feeInCents = pi.charges.data[0].balance_transaction.fee;
-                Object.assign(s.accountingData, { fee: utils_1.round(feeInCents / 100) });
+                Object.assign(s.accountingData, { fee: (0, utils_1.round)(feeInCents / 100) });
             }
         }
     }
@@ -139,7 +142,7 @@ function convertPeruInvoiceToSale(invoice) {
     };
 }
 async function createFeeSale(price) {
-    const vatAmount = utils_1.round(price * 0.21);
+    const vatAmount = (0, utils_1.round)(price * 0.21);
     const id = new Date().getFullYear() + '-' + new Date().getMonth() + 'F';
     return {
         purchaseDate: new Date(),
@@ -151,10 +154,10 @@ async function createFeeSale(price) {
             country: 'Czech Republic',
             isEU: true,
             vatRate: 21,
-            currencyRate: await quotation_1.default(moment_1.default(new Date()).format('DD.MM.YYYY'), 'USD'),
+            currencyRate: await (0, quotation_1.default)((0, moment_1.default)(new Date()).format('DD.MM.YYYY'), 'USD'),
             currency: 'usd',
             price: price,
-            amount: utils_1.round(price + vatAmount),
+            amount: (0, utils_1.round)(price + vatAmount),
             vatAmount,
             item: 'Fees for the sold jsreport licenses',
             vatNumber: 'CZ8501274529',
@@ -164,7 +167,7 @@ async function createFeeSale(price) {
 }
 const createTaxes = (services) => async (data) => {
     await rimraf(tmpPath);
-    mkdirp.sync(path.join(tmpPath, 'data'));
+    await fs.promises.mkdir(path.join(tmpPath, 'data'), { recursive: true });
     const peruSale = convertPeruInvoiceToSale(data.peru);
     const gumroadSales = data.gumroadInvoices.map(convertGumroadInvoiceToSale);
     await renderSale(services, peruSale, '/payments/invoice peru');
@@ -177,12 +180,12 @@ const createTaxes = (services) => async (data) => {
     await renderSale(services, feeSale, '/payments/invoice fee');
     await downloadStripeInvoices(services, stripeSales);
     await renderPohodaXml(services, [peruSale, ...gumroadSales, ...stripeSales, feeSale]);
-    const archive = archiver_1.default('zip');
+    const archive = (0, archiver_1.default)('zip');
     const output = fs.createWriteStream(path.join(tmpPath, 'taxes.zip'));
     archive.pipe(output);
     archive.directory(path.join(tmpPath, 'data'), false);
     await new Promise((resolve, reject) => {
-        output.on('close', resolve);
+        output.on('close', () => resolve());
         archive.on('error', reject);
         archive.finalize();
     });

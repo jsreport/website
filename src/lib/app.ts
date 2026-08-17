@@ -1,7 +1,7 @@
 /*eslint-disable */
 require('dotenv').config()
 import express from 'express'
-import exphbs from 'express3-handlebars'
+import { create }  from 'express-handlebars'
 import Router from './router'
 import * as docs from './docs/routes'
 import multer from 'multer'
@@ -63,7 +63,7 @@ client.connect((err) => {
     })
   }, 10000).unref()
 
-  var hbs = exphbs.create({
+  var hbs = create({
     defaultLayout: 'main',
     extname: '.html',
     helpers: {
@@ -98,20 +98,21 @@ client.connect((err) => {
 
   app.use(express.static('public/'))
   app.use(express.static('dist/public'))
-  app.use(multer({ dest: 'public/temp' }))
+
+  const upload = multer({
+    dest: 'public/temp'
+  })
 
   app.post('/gumroad', bodyParser.urlencoded({ extended: true, limit: '2mb' }), (req, res) => res.send('Ok'))
 
-  app.post('/temp', function (req: any, res) {
-    function findFirstFile() {
-      for (var f in req.files) {
-        if (req.files[f]) {
-          return req.files[f]
-        }
-      }
+  app.post('/temp', upload.any(), function (req: any, res) {
+    const files = req.files as Express.Multer.File[]
+
+    if (!files || files.length === 0) {
+      return res.status(400).send('No file uploaded')
     }
 
-    return res.send(require('path').basename(findFirstFile().path))
+    return res.send(path.basename(files[0].path))
   })
 
   app.get('/', function (req, res) {

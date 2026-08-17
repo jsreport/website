@@ -1,7 +1,11 @@
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
 }) : (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     o[k2] = m[k];
@@ -63,7 +67,7 @@ let cache = {};
 let versions = ['latest'];
 setTimeout(() => {
     logger.info('pulling logs');
-    pull_1.default().then((vs) => {
+    (0, pull_1.default)().then((vs) => {
         logger.info('docs pulled');
         versions = vs;
     }).catch(e => {
@@ -154,7 +158,7 @@ exports.staticResources = staticResources;
 ;
 async function pull(req, res, next) {
     try {
-        versions = await pull_1.default();
+        versions = await (0, pull_1.default)();
         cache = {};
         res.send('done');
     }
@@ -175,7 +179,7 @@ function doc(req, res, next) {
     if (!fs.existsSync(filePath) || !docs[req.params.doc]) {
         return res.status(404).render("404");
     }
-    fs.readFile(filePath, 'UTF-8', function (err, content) {
+    fs.readFile(filePath, 'utf8', function (err, content) {
         if (content.charAt(0) === '\uFEFF')
             content = content.substr(1);
         var renderer = new marked_1.default.Renderer();
@@ -201,7 +205,7 @@ function doc(req, res, next) {
             };
             return renderer;
         })();
-        marked_1.default(content, { renderer: renderer, highlight: highlight }, function (err, html) {
+        (0, marked_1.default)(content, { renderer: renderer, highlight: highlight }, function (err, html) {
             html = fixDocsVersion(html, req);
             var tocHTML = `<div class='toc'>`;
             if (toc.length > 3 && req.params.doc !== 'faq' && req.params.doc !== 'online-faq') {

@@ -155,7 +155,7 @@ export function doc(req, res, next) {
         return res.status(404).render("404");
     }
 
-    fs.readFile(filePath, 'UTF-8', function (err, content) {
+    fs.readFile(filePath, 'utf8', function (err, content) {
         if (content.charAt(0) === '\uFEFF')
             content = content.substr(1);
         var renderer = new marked.Renderer();
