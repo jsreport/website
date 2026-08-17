@@ -1,6 +1,7 @@
 /*eslint-disable */
 require('dotenv').config()
 import express from 'express'
+import crypto from 'crypto'
 import { create }  from 'express-handlebars'
 import Router from './router'
 import * as docs from './docs/routes'
@@ -99,20 +100,26 @@ client.connect((err) => {
   app.use(express.static('public/'))
   app.use(express.static('dist/public'))
 
-  const upload = multer({
-    dest: 'public/temp'
+  const storage = multer.diskStorage({
+    destination: 'public/temp',
+    filename: (req, file, cb) => {
+      const name = crypto.randomBytes(16).toString('hex')
+      cb(null, name + path.extname(file.originalname))
+    }
   })
+
+  const upload = multer({ storage })
 
   app.post('/gumroad', bodyParser.urlencoded({ extended: true, limit: '2mb' }), (req, res) => res.send('Ok'))
 
   app.post('/temp', upload.any(), function (req: any, res) {
-    const files = req.files as Express.Multer.File[]
+    const files = req.files as any[]
 
     if (!files || files.length === 0) {
       return res.status(400).send('No file uploaded')
     }
 
-    return res.send(path.basename(files[0].path))
+    return res.send(files[0].filename)
   })
 
   app.get('/', function (req, res) {

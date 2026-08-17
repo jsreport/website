@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /*eslint-disable */
 require('dotenv').config();
 const express_1 = __importDefault(require("express"));
+const crypto_1 = __importDefault(require("crypto"));
 const express_handlebars_1 = require("express-handlebars");
 const router_1 = __importDefault(require("./router"));
 const docs = __importStar(require("./docs/routes"));
@@ -116,16 +117,21 @@ client.connect((err) => {
     app.set('view engine', '.html');
     app.use(express_1.default.static('public/'));
     app.use(express_1.default.static('dist/public'));
-    const upload = (0, multer_1.default)({
-        dest: 'public/temp'
+    const storage = multer_1.default.diskStorage({
+        destination: 'public/temp',
+        filename: (req, file, cb) => {
+            const name = crypto_1.default.randomBytes(16).toString('hex');
+            cb(null, name + path.extname(file.originalname));
+        }
     });
+    const upload = (0, multer_1.default)({ storage });
     app.post('/gumroad', body_parser_1.default.urlencoded({ extended: true, limit: '2mb' }), (req, res) => res.send('Ok'));
     app.post('/temp', upload.any(), function (req, res) {
         const files = req.files;
         if (!files || files.length === 0) {
             return res.status(400).send('No file uploaded');
         }
-        return res.send(path.basename(files[0].path));
+        return res.send(files[0].filename);
     });
     app.get('/', function (req, res) {
         res.render('home', {
