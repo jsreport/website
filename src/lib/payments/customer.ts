@@ -18,6 +18,7 @@ export type AccountingData = {
   isExpense?: boolean,
   countryCode?: string,
   email: string
+  note?: string
 }
 
 export type Sale = {
